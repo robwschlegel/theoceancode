@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on The Ocean Code</title>
+    <link>https://theoceancode.netlify.com/tags/r/</link>
+    <description>Recent content in R on The Ocean Code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Tue, 17 Oct 2017 00:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://theoceancode.netlify.com/tags/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
+      <link>https://theoceancode.netlify.com/publication/predominant/</link>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nearshore and offshore co-occurrence of marine heatwaves and cold-spells</title>
+      <link>https://theoceancode.netlify.com/publication/cooccurrence/</link>
+      <pubDate>Tue, 10 Jan 2017 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/publication/cooccurrence/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Climate Change in Coastal Waters: Time Series Properties Affecting Trend Estimation</title>
+      <link>https://theoceancode.netlify.com/publication/trend-analysis/</link>
+      <pubDate>Thu, 15 Dec 2016 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/publication/trend-analysis/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

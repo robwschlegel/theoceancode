@@ -4,16 +4,32 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/publication/trend-analysis/</loc>
-      <lastmod>2018-08-27T00:00:00+02:00</lastmod>
+      <loc>https://theoceancode.netlify.com/privacy/</loc>
+      <lastmod>2018-06-28T00:00:00+02:00</lastmod>
     </url>
     
   
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/privacy/</loc>
-      <lastmod>2018-06-28T00:00:00+02:00</lastmod>
+      <loc>https://theoceancode.netlify.com/publication/predominant/</loc>
+      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.com/post/odv_figures/</loc>
+      <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.com/publication/cooccurrence/</loc>
+      <lastmod>2017-01-10T00:00:00+02:00</lastmod>
     </url>
     
   
@@ -52,6 +68,14 @@
     
     <url>
     
+      <loc>https://theoceancode.netlify.com/publication/trend-analysis/</loc>
+      <lastmod>2016-12-15T00:00:00+02:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://theoceancode.netlify.com/project/deep-learning/</loc>
       <lastmod>2016-04-27T00:00:00+02:00</lastmod>
     </url>
@@ -68,49 +92,8 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/post/getting-started/</loc>
-      <lastmod>2018-01-13T00:00:00+02:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.com/publication/person-re-identification/</loc>
-      <lastmod>2015-09-01T00:00:00+02:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.com/post/2015-07-23-r-rmarkdown/</loc>
-      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.com/publication/clothing-search/</loc>
-      <lastmod>2013-07-01T00:00:00+02:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.com/publication_types/1/</loc>
-      <lastmod>2013-07-01T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>https://theoceancode.netlify.com/publication_types/2/</loc>
-      <lastmod>2018-08-27T00:00:00+02:00</lastmod>
+      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -118,8 +101,8 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/academic/</loc>
-      <lastmod>2018-01-13T00:00:00+02:00</lastmod>
+      <loc>https://theoceancode.netlify.com/tags/atmosphere/</loc>
+      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -128,6 +111,15 @@
     <url>
     
       <loc>https://theoceancode.netlify.com/categories/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.com/tags/coastal/</loc>
+      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -153,8 +145,26 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/plot/</loc>
-      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+      <loc>https://theoceancode.netlify.com/tags/interpolation/</loc>
+      <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.com/tags/odv/</loc>
+      <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.com/tags/ocean/</loc>
+      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -172,7 +182,7 @@
     <url>
     
       <loc>https://theoceancode.netlify.com/publication_types/</loc>
-      <lastmod>2013-07-01T00:00:00+02:00</lastmod>
+      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -181,7 +191,7 @@
     <url>
     
       <loc>https://theoceancode.netlify.com/categories/r/</loc>
-      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+      <lastmod>2017-06-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -189,17 +199,8 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/r-markdown/</loc>
-      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.com/tags/regression/</loc>
-      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+      <loc>https://theoceancode.netlify.com/tags/r/</loc>
+      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -208,7 +209,7 @@
     <url>
     
       <loc>https://theoceancode.netlify.com/tags/</loc>
-      <lastmod>2018-01-13T00:00:00+02:00</lastmod>
+      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -226,7 +227,16 @@
     <url>
     
       <loc>https://theoceancode.netlify.com/tags/time-series-analysis/</loc>
-      <lastmod>2018-08-27T00:00:00+02:00</lastmod>
+      <lastmod>2016-12-15T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.com/tags/visuals/</loc>
+      <lastmod>2017-06-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

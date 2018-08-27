@@ -7,20 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 26 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Hello R Markdown</title>
-      <link>https://theoceancode.netlify.com/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <title>ODV figures in R</title>
+      <link>https://theoceancode.netlify.com/post/odv_figures/</link>
+      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/2015-07-23-r-rmarkdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <guid>https://theoceancode.netlify.com/post/odv_figures/</guid>
+      <description>Objective With more and more scientists moving to open source software (i.e. R or Python) to perform their numerical analyses the opportunities for collaboration increase and we may all benefit from this enhanced productivity. At the risk of sounding sycophantic, the future of scientific research truly is in multi-disciplinary work. What then could be inhibiting this slow march towards progress? We tend to like to stick to what is comfortable. Oceanographers in South Africa have been using MATLAB and ODV (Ocean Data View) since about the time that Jesus was lacing up his sandals for his first trip to Palestine.</description>
     </item>
     
   </channel>

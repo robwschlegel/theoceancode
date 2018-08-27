@@ -40,11 +40,11 @@
     </item>
     
     <item>
-      <title>Selected Publications</title>
-      <link>https://theoceancode.netlify.com/home/publications_selected/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
+      <title>Blog Posts</title>
+      <link>https://theoceancode.netlify.com/home/posts/</link>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/publications_selected/</guid>
+      <guid>https://theoceancode.netlify.com/home/posts/</guid>
       <description></description>
     </item>
     
@@ -58,11 +58,11 @@
     </item>
     
     <item>
-      <title>Recent Publications</title>
-      <link>https://theoceancode.netlify.com/home/publications/</link>
+      <title>Projects</title>
+      <link>https://theoceancode.netlify.com/home/projects/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/publications/</guid>
+      <guid>https://theoceancode.netlify.com/home/projects/</guid>
       <description></description>
     </item>
     
@@ -76,29 +76,20 @@
     </item>
     
     <item>
-      <title>Recent &amp; Upcoming Talks</title>
-      <link>https://theoceancode.netlify.com/home/talks/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/home/talks/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Blog Posts</title>
-      <link>https://theoceancode.netlify.com/home/posts/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/home/posts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Projects</title>
-      <link>https://theoceancode.netlify.com/home/projects/</link>
+      <title>Selected Publications</title>
+      <link>https://theoceancode.netlify.com/home/publications_selected/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/projects/</guid>
+      <guid>https://theoceancode.netlify.com/home/publications_selected/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Publications</title>
+      <link>https://theoceancode.netlify.com/home/publications/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/home/publications/</guid>
       <description></description>
     </item>
     
@@ -108,8 +99,8 @@
       <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/teaching/</guid>
-      <description>I have co-taught for the following courses at UWC:
- Introduction to R Applied bio-stats  </description>
+      <description>Courses I am currently teaching at the University of Limbo:
+ Advanced waiting 301 Wasting time 322  </description>
     </item>
     
     <item>
@@ -120,6 +111,24 @@
       <guid>https://theoceancode.netlify.com/home/workshops/</guid>
       <description>Below please find links to workshops I run:
  Introduction to R  </description>
+    </item>
+    
+    <item>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>https://theoceancode.netlify.com/home/talks/</link>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/home/talks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://theoceancode.netlify.com/home/contact/</link>
+      <pubDate>Wed, 22 Aug 2018 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/home/contact/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -137,15 +146,6 @@
       <pubDate>Mon, 23 Jul 2018 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/search/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Contact</title>
-      <link>https://theoceancode.netlify.com/home/contact/</link>
-      <pubDate>Wed, 22 Aug 2018 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/home/contact/</guid>
       <description></description>
     </item>
     

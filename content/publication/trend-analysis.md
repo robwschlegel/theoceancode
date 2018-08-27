@@ -1,10 +1,10 @@
 +++
 title = "Climate Change in Coastal Waters: Time Series Properties Affecting Trend Estimation"
-date = 2018-08-27T00:00:00
+date = 2016-12-15T00:00:00
 draft = false
 
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
-authors = ["RW Schlegel, AJ Smit"]
+authors = ["RW Schlegel", "AJ Smit"]
 
 # Publication type.
 # Legend:
@@ -40,12 +40,12 @@ projects = []
 
 # Tags (optional).
 #   Set `tags = []` for no tags, or use the form `tags = ["A Tag", "Another Tag"]` for one or more tags.
-tags = ["Time Series Analysis"]
+tags = ["time series analysis", "R"]
 
 # Links (optional).
 url_pdf = "https://journals.ametsoc.org/doi/10.1175/JCLI-D-16-0014.1"
 url_preprint = ""
-url_code = ""
+url_code = "https://github.com/robwschlegel/Trend_Analysis"
 url_dataset = ""
 url_project = ""
 url_slides = ""
@@ -67,7 +67,7 @@ highlight = true
 # Place your image in the `static/img/` folder and reference its filename below, e.g. `image = "example.jpg"`.
 [header]
 image = ""
-caption = "The relationship between time series length and trend estimation."
+caption = ""
 
 +++
 

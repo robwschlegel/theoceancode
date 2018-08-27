@@ -74,8 +74,8 @@ enableGitInfo = false
   avatar = "Robert_profile_1.JPG"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
   email = "robwschlegel@gmail.com"
   address = "Limbo, Johannesburg, South Africa"
-  office_hours = "Monday 10:00 to 13:00 or email for appointment"
-  phone = "+27 02 813 7113"
+  office_hours = "Monday - Friday 11:00 to 16:00 or email for appointment"
+  phone = "+27 82 813 7113"
   skype = "robert.william.schlegel"
   telegram = ""
   twitter = "wiederweiter"
@@ -199,7 +199,7 @@ enableGitInfo = false
   [params.publications]
     # Date format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )
     #   Examples: "Mon, Jan 2, 2006" or "2006-01-02"
-    date_format = "January, 2006"
+    date_format = "2006-01-02"
 
   # Configuration of project pages.
   [params.projects]
@@ -266,35 +266,45 @@ enableGitInfo = false
   # Align the main menu to the right of the page? (true/false)
   align_right = true
 
-[[menu.main]]
-  name = "Home"
-  url = "#about"
-  weight = 1
+#[[menu.main]]
+#  name = "Home"
+#  url = "#about"
+#  weight = 1
 
 [[menu.main]]
-  name = "Publications"
-  url = "#publications"
-  weight = 2
-
-[[menu.main]]
-  name = "Posts"
+  name = "Blog"
   url = "#posts"
-  weight = 3
+  weight = 1
 
 [[menu.main]]
   name = "Projects"
   url = "#projects"
-  weight = 4
+  weight = 2
+
+[[menu.main]]
+  name = "Publications"
+  url = "#publications"
+  weight = 3
 
 [[menu.main]]
   name = "Teaching"
   url = "#teaching"
+  weight = 4
+  
+[[menu.main]]
+  name = "Workshops"
+  url = "#workshops"
   weight = 5
+  
+[[menu.main]]
+  name = "Talks"
+  url = "#talks"
+  weight = 6
 
 [[menu.main]]
   name = "Contact"
   url = "#contact"
-  weight = 6
+  weight = 7
 
 # Link to a PDF of your resume/CV from the menu.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
