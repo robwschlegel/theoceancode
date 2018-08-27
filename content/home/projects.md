@@ -34,12 +34,12 @@ filter_default = 0
   tag = "*"
 
 [[filter]]
-  name = "Deep Learning"
-  tag = "Deep Learning"
+  name = "Marine Heatwaves"
+  tag = "Marine Heatwaves"
 
 [[filter]]
-  name = "Other"
-  tag = "Demo"
+  name = "R"
+  tag = "R"
 
 +++
 

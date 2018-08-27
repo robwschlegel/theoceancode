@@ -3,9 +3,9 @@
 # This widget displays recent posts from `content/post/`.
 widget = "posts"
 active = true
-date = 2016-04-20T00:00:00
+date = 2018-08-27T00:00:00
 
-title = "Recent Posts"
+title = "Blog Posts"
 subtitle = ""
 
 # Order that this section will appear in.

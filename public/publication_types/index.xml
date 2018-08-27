@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Publication_types on Academic</title>
+    <title>Publication_types on The Ocean Code</title>
     <link>https://theoceancode.netlify.com/publication_types/</link>
-    <description>Recent content in Publication_types on Academic</description>
+    <description>Recent content in Publication_types on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -24,7 +24,7 @@
     <item>
       <title>2</title>
       <link>https://theoceancode.netlify.com/publication_types/2/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication_types/2/</guid>
       <description></description>
