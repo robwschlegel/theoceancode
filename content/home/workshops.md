@@ -7,14 +7,14 @@ active = true
 date = 2018-08-27T00:00:00
 
 # Note: a full width section format can be enabled by commenting out the `title` and `subtitle` with a `#`.
-title = "Teaching"
+title = "Workshops"
 subtitle = ""
 
 # Order that this section will appear in.
-weight = 60
+weight = 61
+
 +++
 
-I have co-taught for the following courses at UWC:
+Below please find links to workshops I run:
 
-- Introduction to R
-- Applied bio-stats
+- [Introduction to R](https://robwschlegel.github.io/Intro_R_Workshop/)
