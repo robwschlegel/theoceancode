@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Academic on Academic</title>
-    <link>/</link>
+    <link>https://theoceancode.netlify.com/</link>
     <description>Recent content in Academic on Academic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
@@ -12,30 +12,30 @@
     
     <item>
       <title>Privacy Policy</title>
-      <link>/privacy/</link>
+      <link>https://theoceancode.netlify.com/privacy/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>/privacy/</guid>
+      <guid>https://theoceancode.netlify.com/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
+      <link>https://theoceancode.netlify.com/talk/example-talk/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
       
-      <guid>/talk/example-talk/</guid>
+      <guid>https://theoceancode.netlify.com/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Deep Learning</title>
-      <link>/project/deep-learning/</link>
+      <link>https://theoceancode.netlify.com/project/deep-learning/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>/project/deep-learning/</guid>
+      <guid>https://theoceancode.netlify.com/project/deep-learning/</guid>
       <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
 
 &lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
@@ -50,19 +50,19 @@
     
     <item>
       <title>External Project</title>
-      <link>/project/example-external-project/</link>
+      <link>https://theoceancode.netlify.com/project/example-external-project/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>/project/example-external-project/</guid>
+      <guid>https://theoceancode.netlify.com/project/example-external-project/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Academic: the website designer for Hugo</title>
-      <link>/post/getting-started/</link>
+      <link>https://theoceancode.netlify.com/post/getting-started/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>/post/getting-started/</guid>
+      <guid>https://theoceancode.netlify.com/post/getting-started/</guid>
       <description>
 
 &lt;p&gt;&lt;strong&gt;Academic&lt;/strong&gt; is a framework to help you create a beautiful website quickly. Perfect for personal sites, blogs, or business/project sites. &lt;a href=&#34;https://themes.gohugo.io/theme/academic/&#34; target=&#34;_blank&#34;&gt;Check out the latest demo&lt;/a&gt; of what you&amp;rsquo;ll get in less than 10 minutes. Then head on over to the &lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Quick Start guide&lt;/a&gt; or take a look at the &lt;a href=&#34;https://sourcethemes.com/academic/updates/&#34; target=&#34;_blank&#34;&gt;Release Notes&lt;/a&gt;.&lt;/p&gt;
@@ -247,20 +247,20 @@ git submodule update --init --recursive
     
     <item>
       <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>/publication/person-re-identification/</link>
+      <link>https://theoceancode.netlify.com/publication/person-re-identification/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0200</pubDate>
       
-      <guid>/publication/person-re-identification/</guid>
+      <guid>https://theoceancode.netlify.com/publication/person-re-identification/</guid>
       <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Hello R Markdown</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <link>https://theoceancode.netlify.com/post/2015-07-23-r-rmarkdown/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <guid>https://theoceancode.netlify.com/post/2015-07-23-r-rmarkdown/</guid>
       <description>&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;R Markdown&lt;/h1&gt;
 &lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
@@ -294,7 +294,7 @@ pie(
   init.angle = -50, border = NA
 )&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
+&lt;img src=&#34;https://theoceancode.netlify.com/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 1: A fancy pie chart.
 &lt;/p&gt;
@@ -305,10 +305,10 @@ Figure 1: A fancy pie chart.
     
     <item>
       <title>Mobile visual clothing search</title>
-      <link>/publication/clothing-search/</link>
+      <link>https://theoceancode.netlify.com/publication/clothing-search/</link>
       <pubDate>Mon, 01 Jul 2013 00:00:00 +0200</pubDate>
       
-      <guid>/publication/clothing-search/</guid>
+      <guid>https://theoceancode.netlify.com/publication/clothing-search/</guid>
       <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
