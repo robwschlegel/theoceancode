@@ -14,7 +14,7 @@ subtitle = ""
 weight = 60
 +++
 
-I have co-taught for the following courses at UWC:
+Courses I am currently teaching at the University of Limbo:
 
-- Introduction to R
-- Applied bio-stats
+- Advanced waiting 301
+- Wasting time 322
