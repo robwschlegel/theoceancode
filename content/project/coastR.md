@@ -1,25 +1,29 @@
 +++
 # Date this page was created.
-date = 2016-04-27T00:00:00
+date = 2017-08-28T00:00:00
 
 # Project title.
-title = "External Project"
+title = "coastR package"
 
 # Project summary to display on homepage.
-summary = "An example of linking directly to an external project website using `external_link`."
+summary = "An R package with useful functions for coastal oceanography."
 
 # Optional image to display on homepage (relative to `static/img/` folder).
-image_preview = "boards.jpg"
+image_preview = "coastR.png"
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["machine-learning", "deep-learning"]`
-tags = ["Demo"]
+tags = ["coastal", "R"]
 
 # Optional external URL for project (replaces project detail page).
-external_link = "http://example.org"
+external_link = "https://github.com/robwschlegel/coastR"
 
 # Does the project detail page use math formatting?
 math = false
 
-+++
+# Optional featured image (relative to `static/img/` folder).
+[header]
+image = ""
+caption = ""
 
++++

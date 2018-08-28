@@ -16,5 +16,6 @@ weight = 60
 
 Courses I am currently teaching at the University of Limbo:
 
+- Wasting time 122
+- Faffing about 217
 - Advanced waiting 301
-- Wasting time 322
