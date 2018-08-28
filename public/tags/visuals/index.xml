@@ -2,23 +2,50 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Visuals on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/visuals/</link>
+    <link>/tags/visuals/</link>
     <description>Recent content in Visuals on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Mon, 26 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 23 Aug 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/visuals/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/visuals/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Polar plot climatologies</title>
+      <link>/post/polar_plot_clims/</link>
+      <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/polar_plot_clims/</guid>
+      <description>Objective Whilst cruising about on Imgur I found a post about science stuff. Not uncommon, which is nice. These sorts of grab-bag posts about nothing in particular often include some mention of climate science, almost exclusively some sort of clever visualisation of a warming planet. That seems to be what people are most interested in. I’m not complaining though, it keeps me employed. The aforementioned post caught my attention more than usual because it included a GIF, and not just a static picture of some sort of blue thing that is becoming alarmingly red (that was not meant to be a political metaphor).</description>
+    </item>
+    
+    <item>
+      <title>Mapping with ggplot2</title>
+      <link>/post/mapping_with_ggplot2/</link>
+      <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/mapping_with_ggplot2/</guid>
+      <description>Objective There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always “Figure 1”. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area.</description>
+    </item>
+    
+    <item>
       <title>ODV figures in R</title>
-      <link>https://theoceancode.netlify.com/post/odv_figures/</link>
+      <link>/post/odv_figures/</link>
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/odv_figures/</guid>
+      <guid>/post/odv_figures/</guid>
       <description>Objective With more and more scientists moving to open source software (i.e. R or Python) to perform their numerical analyses the opportunities for collaboration increase and we may all benefit from this enhanced productivity. At the risk of sounding sycophantic, the future of scientific research truly is in multi-disciplinary work. What then could be inhibiting this slow march towards progress? We tend to like to stick to what is comfortable. Oceanographers in South Africa have been using MATLAB and ODV (Ocean Data View) since about the time that Jesus was lacing up his sandals for his first trip to Palestine.</description>
+    </item>
+    
+    <item>
+      <title>Wind Vector Time Series</title>
+      <link>/post/wind_vectors/</link>
+      <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/wind_vectors/</guid>
+      <description>Objective As more and more physical scientists (e.g. oceanographers) move to R from other object oriented command line programming languages, such as Matlab, there will be more and more demand for the code that is needed to do some basic things that they may already know how to do in their previous languages that they don’t yet know how to do in R. Surprisingly, there are many things that should be very easy to find how to do in R that are not.</description>
     </item>
     
   </channel>

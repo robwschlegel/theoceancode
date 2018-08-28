@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>The Ocean Code on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/</link>
+    <link>/</link>
     <description>Recent content in The Ocean Code on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
@@ -11,35 +11,1208 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
+      <link>/publication/heatwaver/</link>
+      <pubDate>Fri, 31 Aug 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/publication/heatwaver/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Detecting marine heatwaves</title>
+      <link>/project/detecting_mhws/</link>
+      <pubDate>Tue, 28 Aug 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/project/detecting_mhws/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m currently working on a paper to be submitted to the upcoming &lt;a href=&#34;https://www.frontiersin.org/research-topics/7980/advances-in-understanding-marine-heatwaves-and-their-impacts#overview&#34; target=&#34;_blank&#34;&gt;special issue&lt;/a&gt; of Frontiers in Marine Science on marine heatwaves. Click the &amp;lsquo;Go to Project Site&amp;rsquo; button below to go to the website containing the up-to-date progress on this project.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>heatwaveR package</title>
+      <link>/project/heatwaver/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/project/heatwaver/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>South Africa time survey</title>
+      <link>/post/sa_time_survey/</link>
+      <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/sa_time_survey/</guid>
+      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Objective&lt;/h2&gt;
+&lt;p&gt;In South Africa there are a range of idioms for different time frames in which someone may (or may not) do something. The most common of these are: ‘now’, ‘just now’, and ‘now now’. If one were to Google these sayings one would find that there is general agreements on how long these time frames are, but that agreement is not absolute.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/img/just_now.jpeg&#34; alt=&#34;Advice from the internet.&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Advice from the internet.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;This got me to wondering just how much disagreement there may be around the country. And more specifically I wanted to know how these times changed between specific locations. If one is interested in contributing to the survey, it may be taken &lt;a href=&#34;https://docs.google.com/forms/d/e/1FAIpQLSeNyF8XJeLXLoPCfE9VdEMc_SOHkX84KF82OOudVKq6K15YTg/viewform?usp=sf_link&#34;&gt;here&lt;/a&gt;. To avoid too much confusion with the answers that could be given, specific times were provided to the participants in a multiple choice format. These times (minutes) were: 5, 15, 30, 60, 120, 300.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data-prep&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Data prep&lt;/h2&gt;
+&lt;p&gt;The survey data are downloaded from &lt;a href=&#34;https://www.google.com/forms/about/&#34;&gt;Google Forms&lt;/a&gt; rather easily as a .csv file, so that’s nice. Unfortunately, the way in which one sets up the survey for humans is difficult for R to understand so we need quite a bit of processing after we load the data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(ggpubr)
+library(broom)
+
+survey &amp;lt;- read_csv(&amp;quot;../../static/data/SA Time Survey.csv&amp;quot;, skip = 1, col_types = &amp;quot;cccccc&amp;quot;,
+                   col_names = c(&amp;quot;time&amp;quot;, &amp;quot;just now&amp;quot;, &amp;quot;now now&amp;quot;, &amp;quot;now&amp;quot;, &amp;quot;province&amp;quot;, &amp;quot;city&amp;quot;)) %&amp;gt;% 
+  select(-time) %&amp;gt;%
+  mutate(`just now` = as.numeric(sapply(strsplit(`just now`, &amp;quot; &amp;quot;), &amp;quot;[[&amp;quot;, 1)),
+         `now now` = as.numeric(sapply(strsplit(`now now`, &amp;quot; &amp;quot;), &amp;quot;[[&amp;quot;, 1)),
+         `now` = as.numeric(sapply(strsplit(`now`, &amp;quot; &amp;quot;), &amp;quot;[[&amp;quot;, 1)),
+         province = gsub(&amp;quot;Kzn&amp;quot;, &amp;quot;KZN&amp;quot;, province),
+         province = gsub(&amp;quot;GP&amp;quot;, &amp;quot;Gauteng&amp;quot;, province),
+         province = as.factor(province),
+         city = as.factor(city))
+
+# Check that city and province names are all lekker
+# levels(survey$province)
+# levels(survey$city)
+
+# Create a long version for easier stats
+survey_long &amp;lt;- survey %&amp;gt;% 
+  gather(key = &amp;quot;saying&amp;quot;, value = &amp;quot;minutes&amp;quot;, -province, -city) %&amp;gt;% 
+  na.omit()&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;participant-locations&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Participant locations&lt;/h2&gt;
+&lt;p&gt;With our data prepared, I first wanted to see from where the surveys were taken. I’ve done this by splitting them up into province or city. This is also one of the few situations in which a bar plot is an appropriate visualisation. The columns below that show ‘NA’ are for participants that declined to share their location.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;province_plot &amp;lt;- ggplot(data = survey, aes(x = province)) +
+  geom_bar(aes(fill = province), show.legend = F) +
+  ggtitle(&amp;quot;Provinces of participants&amp;quot;) +
+  labs(x = &amp;quot;&amp;quot;)
+# province_plot
+city_plot &amp;lt;- ggplot(data = survey, aes(x = city)) +
+  geom_bar(aes(fill = city), show.legend = F) +
+  ggtitle(&amp;quot;Cities of participants&amp;quot;) +
+  labs(x = &amp;quot;&amp;quot;) +
+  theme(axis.text.x = element_text(angle = 15))
+# city_plot
+ggarrange(province_plot, city_plot, ncol = 1, nrow = 2)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:location-bar&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/SA_time_survey_files/figure-html/location-bar-1.png&#34; alt=&#34;Bar plots showing the total pariticpants by province or city.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Bar plots showing the total pariticpants by province or city.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;participant-time-frames&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Participant time frames&lt;/h2&gt;
+&lt;p&gt;With the locations of of our participants visualised we now want to see what sort of time frames people around the country attribute to the three most common idioms.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data = survey_long, aes(x = saying, y = minutes, fill = saying)) +
+  geom_boxplot(show.legend = FALSE, outlier.colour = NA) +
+  geom_jitter(shape = 21, alpha = 0.6, width = 0.3, height = 0.0, show.legend = FALSE) +
+  scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
+  scale_fill_brewer(palette = &amp;quot;Accent&amp;quot;) +
+  labs(x = &amp;quot;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:basic-plot&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/SA_time_survey_files/figure-html/basic-plot-1.png&#34; alt=&#34;Boxplots showing the distribution of times (minutes) survey participants gave for the three most common time frame idioms in South Africa.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 2: Boxplots showing the distribution of times (minutes) survey participants gave for the three most common time frame idioms in South Africa.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;As we may see in Figure &lt;a href=&#34;#fig:basic-plot&#34;&gt;2&lt;/a&gt;, ‘just now’ and ‘now now’ appear to have similar distributions, whereas ‘now’ is markedly different. Participants answered the maximum score of 300 minutes for all idioms, but for ‘just now’ and ‘now now’ this was infrequent enough that the large scores are considered to be outliers. For ‘now’, enough participants answered with longer times that the distribution appears much larger than for the other two idioms. Even though these distributions appear different, let’s run the stats on them to make sure. Because we want to compare distributions of scores for three different categories we will be using an ANOVA if the data meet a few basic assumptions.&lt;/p&gt;
+&lt;p&gt;Just as a quick recap, these assumptions are: homoscedasticity (homogeneity of variance), normality of distribution, random &amp;amp; independently sampled. It is also a good idea to have at least a sample size of ten for each category. Seeing as how this was an Internet survey, we were not able to ensure that the participants are a random representation of the South African populace, nor can we be certain that they submitted their answers independent of one another. I am however just going to go ahead and assume that they did. As for the assumptions of homoscedasticity and the normality of the distributions, we can directly test these. In R, the normality of a distribution is tested with &lt;code&gt;shapiro.test()&lt;/code&gt;. Any non-significant result (&lt;em&gt;p&lt;/em&gt; &amp;gt; 0.05) means that the data are normally distributed. To test for homoscedasticity we will use &lt;code&gt;bartlett.test()&lt;/code&gt;. A non-significant result (&lt;em&gt;p&lt;/em&gt; &amp;gt; 0.05) from this test indicates that the variances between the categories are equivalent.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# test for normality
+survey_long %&amp;gt;% 
+  group_by(saying) %&amp;gt;% 
+  summarise(noramlity = as.numeric(shapiro.test(minutes)[1]))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 3 x 2
+##   saying   noramlity
+##   &amp;lt;chr&amp;gt;        &amp;lt;dbl&amp;gt;
+## 1 just now     0.565
+## 2 now          0.713
+## 3 now now      0.671&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Test for homoscedasticity
+survey_long %&amp;gt;% 
+  bartlett.test(minutes ~ saying, data = .)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  minutes by saying
+## Bartlett&amp;#39;s K-squared = 5.227, df = 2, p-value = 0.07328&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Surprisingly these data meet all of our assumptions so we may perform a simple one-way ANOVA on them to detect any significant differences.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;glance(aov(minutes ~ saying, data = survey_long))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    r.squared adj.r.squared    sigma statistic   p.value df    logLik
+## 1 0.06145571    0.04407526 102.9133   3.53591 0.0325505  3 -670.3429
+##        AIC      BIC deviance df.residual
+## 1 1348.686 1359.524  1143843         108&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Less surprisingly, there is a significant difference in the times given for these three idioms. But let’s dive just a bit deeper with a post-hoc Tukey (not Turkey) test to see which categories specifically are different from which.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TukeyHSD(aov(minutes ~ saying, data = survey_long))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = minutes ~ saying, data = survey_long)
+## 
+## $saying
+##                       diff         lwr       upr     p adj
+## now-just now      60.81081    3.949653 117.67197 0.0330869
+## now now-just now  14.18919  -42.671969  71.05035 0.8241544
+## now now-now      -46.62162 -103.482779  10.23954 0.1302148&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Looking at the names given in the ‘saying’ column, and the values given in the ‘p adj’ column we may see which individual idioms are different from which. Unsurprisingly, judging from Figure &lt;a href=&#34;#fig:basic-plot&#34;&gt;2&lt;/a&gt;, ‘now now’ and ‘just now’ are not different. Interesting though is that ‘now’ is significantly different from ‘just now’, but not ‘now now’. The initial results made it look as though ‘now’ would have been significantly different from both.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;province-time-frames&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Province time frames&lt;/h2&gt;
+&lt;p&gt;Preferably, many more people would have taken the survey so that we could draw more conclusive results. I’m rather certain that should more people take the survey the distributions of the scores for the three idioms would even out more until there were no significant differences between any of them. Enough participants have taken the test however that we may compare the results for a few different provinces.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Remove provinces with fewer than nine entries
+# Ten would be preferable, but at nine we allow the inclusion of KZN
+survey_province &amp;lt;- survey_long %&amp;gt;% 
+  group_by(province) %&amp;gt;% 
+  filter(n() &amp;gt;= 9) %&amp;gt;% 
+  ungroup()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And now with the provinces that have only a few answers filtered out, let’s see what the data look like as boxplots.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data = survey_province, aes(x = saying, y = minutes, fill = province)) +
+  geom_boxplot(outlier.colour = NA) +
+  geom_point(shape = 21, position = position_jitterdodge()) +
+  scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
+  scale_fill_brewer(palette = &amp;quot;Set2&amp;quot;) +
+  labs(x = &amp;quot;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:province-plot&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/SA_time_survey_files/figure-html/province-plot-1.png&#34; alt=&#34;Boxplots showing the distribution of times by province.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 3: Boxplots showing the distribution of times by province.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Right away for me it appears that the time frames for the Eastern Cape are shorter than for the other three provinces. KZN appears to be the longest, with Gauteng and the Western Cape seeming similar. Because we have multiple independent variables (saying and province) we want a two-way ANOVA. But before we do that, let’s again check for normality and homoscedasticity.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# test for normality
+survey_province %&amp;gt;% 
+  group_by(saying, province) %&amp;gt;% 
+  summarise(normality = as.numeric(shapiro.test(minutes)[1]))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 12 x 3
+## # Groups:   saying [?]
+##    saying   province     normality
+##    &amp;lt;chr&amp;gt;    &amp;lt;fct&amp;gt;            &amp;lt;dbl&amp;gt;
+##  1 just now Eastern Cape     0.640
+##  2 just now Gauteng          0.867
+##  3 just now KZN              0.865
+##  4 just now Western Cape     0.537
+##  5 now      Eastern Cape     0.766
+##  6 now      Gauteng          0.721
+##  7 now      KZN              0.75 
+##  8 now      Western Cape     0.729
+##  9 now now  Eastern Cape     0.684
+## 10 now now  Gauteng          0.689
+## 11 now now  KZN              0.813
+## 12 now now  Western Cape     0.718&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Test for homoscedasticity
+survey_province %&amp;gt;% 
+  bartlett.test(minutes ~ interaction(saying, province), data = .)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  minutes by interaction(saying, province)
+## Bartlett&amp;#39;s K-squared = 69.523, df = 11, p-value = 1.505e-10&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The different groups of time are all normally distributed, but the variances differ. Regardless, we are going to stick to a normal two-way ANOVA as there are no good alternatives to this for non-parametric data and transforming these data is a bother.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;glance(aov(minutes ~ saying + province, data = survey_province))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   r.squared adj.r.squared    sigma statistic      p.value df    logLik
+## 1 0.2035543     0.1633297 94.37113  5.060451 0.0003582302  6 -623.3591
+##        AIC      BIC deviance df.residual
+## 1 1260.718 1279.296 881685.1          99&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Significant differences are to be had here. So let’s break it down and see which groups specifically differ.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TukeyHSD(aov(minutes ~ saying + province, data = survey_province))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = minutes ~ saying + province, data = survey_province)
+## 
+## $saying
+##                       diff        lwr        upr     p adj
+## now-just now      70.14286   16.46427 123.821448 0.0068600
+## now now-just now  15.42857  -38.25002  69.107162 0.7734013
+## now now-now      -54.71429 -108.39288  -1.035695 0.0447008
+## 
+## $province
+##                                 diff         lwr       upr     p adj
+## Gauteng-Eastern Cape       63.452381  -15.761193 142.66595 0.1624466
+## KZN-Eastern Cape          139.722222   39.043527 240.40092 0.0025348
+## Western Cape-Eastern Cape  73.289474    6.613379 139.96557 0.0252743
+## KZN-Gauteng                76.269841  -21.982505 174.52219 0.1845631
+## Western Cape-Gauteng        9.837093  -53.115472  72.78966 0.9768852
+## Western Cape-KZN          -66.432749 -154.888584  22.02309 0.2092492&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We may see that by removing some of the answers from the less represented provinces there is now a significant difference between the scores for ‘now’ and ‘now now’ as well as ‘just now’. Additionally we may see that the scores for Eastern Cape differ significantly from KZN and the Western Cape. One could also look at the interactions between the two independent variables but I’m not quite interested in that level of depth here.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;city-time-frames&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;City time frames&lt;/h2&gt;
+&lt;p&gt;With the breakdown for the province time frames out of the way, we are going to wrap up this analysis by looking at the difference between cities.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Remove provinces with fewer than five entries
+# Ten is preferable, but at five we may include Mthatha
+survey_city &amp;lt;- survey_long %&amp;gt;% 
+  group_by(saying, city) %&amp;gt;% 
+  filter(n() &amp;gt;= 5) %&amp;gt;% 
+  ungroup()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data = survey_city, aes(x = saying, y = minutes, fill = city)) +
+  geom_boxplot(outlier.colour = NA) +
+  geom_point(shape = 21, position = position_jitterdodge()) +
+  scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
+  scale_fill_brewer(palette = &amp;quot;Set3&amp;quot;) +
+  labs(x = &amp;quot;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:city-plot&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/SA_time_survey_files/figure-html/city-plot-1.png&#34; alt=&#34;Boxplots showing the distribution of times by city.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 4: Boxplots showing the distribution of times by city.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Again with the assumptions…&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# test for normality
+survey_city %&amp;gt;% 
+  group_by(saying, city) %&amp;gt;% 
+  summarise(normality = as.numeric(shapiro.test(minutes)[1]))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 9 x 3
+## # Groups:   saying [?]
+##   saying   city         normality
+##   &amp;lt;chr&amp;gt;    &amp;lt;fct&amp;gt;            &amp;lt;dbl&amp;gt;
+## 1 just now Cape Town        0.577
+## 2 just now Johannesburg     0.912
+## 3 just now Mthatha          0.552
+## 4 now      Cape Town        0.739
+## 5 now      Johannesburg     0.757
+## 6 now      Mthatha          0.754
+## 7 now now  Cape Town        0.739
+## 8 now now  Johannesburg     0.741
+## 9 now now  Mthatha          0.552&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Test for homoscedasticity
+survey_city %&amp;gt;% 
+  bartlett.test(minutes ~ interaction(saying, city), data = .)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  minutes by interaction(saying, city)
+## Bartlett&amp;#39;s K-squared = 55.177, df = 8, p-value = 4.078e-09&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;… and again we see that while normally distributed, the variance of our sample sets differ significantly from one another. Regardless, we’ll stick to the two-way ANOVA.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;glance(aov(minutes ~ saying + city, data = survey_city))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   r.squared adj.r.squared    sigma statistic     p.value df    logLik
+## 1 0.2054307     0.1636113 94.23743  4.912326 0.001411901  5 -480.5647
+##        AIC      BIC deviance df.residual
+## 1 973.1295 987.4962 674932.7          76&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As one likely would have deduced from Figure &lt;a href=&#34;#fig:city-plot&#34;&gt;4&lt;/a&gt;, the scores are significantly different from one another.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TukeyHSD(aov(minutes ~ saying + city, data = survey_city))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = minutes ~ saying + city, data = survey_city)
+## 
+## $saying
+##                       diff        lwr         upr     p adj
+## now-just now      77.96296   16.65151 139.2744119 0.0090081
+## now now-just now  16.85185  -44.45960  78.1633008 0.7889537
+## now now-now      -61.11111 -122.42256   0.2003379 0.0509401
+## 
+## $city
+##                             diff        lwr        upr     p adj
+## Johannesburg-Cape Town -10.72917  -72.99124  51.532904 0.9108240
+## Mthatha-Cape Town      -84.89583 -151.53238 -18.259285 0.0088590
+## Mthatha-Johannesburg   -74.16667 -152.92265   4.589316 0.0691761&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From the post-hoc test we may see that ‘now’ differs significantly from ‘just now in these three cities, and if we’re feeling generous we may say that ’now’ also differs significantly from ‘now now’. But like with the rest of the country, ‘now now’ and ‘just now’ are not significantly different time frames. Looking at the city breakdown we see that the only significant difference is between Mthatha and Cape Town. Johannesburg and Cape Town do not differ.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The general conclusion I’ve drawn from the analysis of the South Africa time survey results is that the understanding people in the Eastern Cape have of the time frames for these idioms is significantly faster than in the other major provinces in South Africa. The numbers don’t lie!&lt;/p&gt;
+&lt;p&gt;Speaking to people about this survey (before the results were out), the general consensus was that Johannesburg people would give significantly faster scores than people in other parts of the country, particularly Cape Town. That does not however appear to be the case. Also surprising from these results was that ‘now’ tended to be considered to be a significantly longer time frame than ‘just now’ and ‘now now’. Most people I’ve talked to about these idioms agree that ‘now’ is meant to be the fastest… so I’m not sure how that worked out. Unsurprising to me, but perhaps to some South Africans, was that there is no difference between ‘just now’ and ‘now now’. I was not surprised by this because talking with people around the country I very infrequently heard people, even while in the same room, agree on the time frames for these idioms.&lt;/p&gt;
+&lt;p&gt;There are of course a host of issues with this study. One thing I’m wondering about the Eastern Cape scores being significantly faster than the other provinces is if perhaps people in the Eastern Cape have a wider range of idioms for giving someone a time frame? Meaning, perhaps ‘now’, ‘just now’, and ‘now now’ are all much faster than other provinces because there is some other popular idiom people use there that denotes a longer time frame. It’s also possible that people in other provinces misunderstood the survey. Though I did make it very clear that the answers were in minutes and not seconds, specifically to attempt to prevent people from making that mistake. Lastly, this analysis suffers from a regrettably small sample size. I would have preferred at least 100 responses, rather than 40. It is still wonderful to be able to get some numbers in the game and get a glimpse of the fact that there is little agreement about these time frames.&lt;/p&gt;
+&lt;p&gt;Hopefully posting these results will snare a few more people into taking the survey and in another couple of months I can make a follow up post with the additional feedback.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Privacy Policy</title>
-      <link>https://theoceancode.netlify.com/privacy/</link>
+      <link>/privacy/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/privacy/</guid>
+      <guid>/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
     <item>
+      <title>Transects</title>
+      <link>/post/transects/</link>
+      <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/transects/</guid>
+      <description>&lt;div id=&#34;preface&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Preface&lt;/h2&gt;
+&lt;p&gt;This week I have expanded the &lt;code&gt;coastR&lt;/code&gt; package with the inclusion of a function that calculates the angle of the heading for alongshore or shore-normal transects. The rest of this blog post is the vignette that I’ve written detailing the set of this function. Next week I’ll likely be taking a break from &lt;code&gt;coastR&lt;/code&gt; development to finally create a package for the SACTN dataset. That is a project that has been in the works for a loooong time and it will be good to finally see a development release available to the public.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;overview&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;There are a number of reasons why one would want to calculate transects along or away from a coastline. Examples include: finding the fetch across an embayment, finding the coordinates of a point 200 km from the coast, finding the appropriate series of SST pixels along/away from the coast, (or if one is feeling particular feisty) the creation of shape files for a given area away from the coast. The function that we will be introducing here does none of these things. What the &lt;code&gt;transects()&lt;/code&gt; function does do is calculate the angle of the heading along or away from the coast against true North, which is then the basis for all of the other fancy things one may want to do. Baby steps people. Baby steps.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# devtools::install_github(&amp;quot;robwschlegel/coastR&amp;quot;) # Install coastR
+library(coastR)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(geosphere)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sample-locations&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Sample locations&lt;/h2&gt;
+&lt;p&gt;For this vignette we will re-use the same coastlines as those created for the sequential sites vignette. The ordering of the sites remains jumbled up to demonstrate that &lt;code&gt;transects()&lt;/code&gt; does not require orderly data. Should one want to order ones site list before calculating transect headings it is possible to do so with &lt;code&gt;seq_sites()&lt;/code&gt;. This is of course a recommended step in any workflow.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Cape Point, South Africa
+cape_point &amp;lt;- SACTN_site_list %&amp;gt;% 
+  slice(c(31, 22, 26, 17, 19, 21, 30)) %&amp;gt;% 
+  mutate(order = 1:n())
+
+# South Africa
+south_africa &amp;lt;- SACTN_site_list %&amp;gt;% 
+  slice(c(1,34, 10, 20, 50, 130, 90)) %&amp;gt;% 
+  mutate(order = 1:n())
+
+# Baja Peninsula, Mexico
+baja_pen &amp;lt;- data.frame(
+  order = 1:7,
+  lon = c(-116.4435, -114.6800, -109.6574, -111.9503, -112.2537, -113.7918, -114.1881),
+  lat = c(30.9639, 30.7431, 22.9685, 26.9003, 25.0391, 29.4619, 28.0929)
+)
+
+# Bohai Sea, China
+bohai_sea &amp;lt;- data.frame(
+  order = 1:7,
+  lon = c(122.0963, 121.2723, 121.0687, 121.8742, 120.2962, 117.6650, 122.6380),
+  lat = c(39.0807, 39.0086, 37.7842, 40.7793, 40.0691, 38.4572, 37.4494)
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;transects&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Transects&lt;/h2&gt;
+&lt;p&gt;With our site lists created we now want to see what the correct headings for alongshore and shore-normal transects are for our sites. We will also demonstrate what happens when we increase the &lt;code&gt;spread&lt;/code&gt; used in the calculation and also how the inclusion of island masks affects the angle of the headings.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Cape Point, South Africa
+cape_point_along &amp;lt;- transects(cape_point, alongshore = T)
+cape_point_away &amp;lt;- transects(cape_point)
+
+# South Africa
+south_africa_along &amp;lt;- transects(south_africa, alongshore = T)
+south_africa_away &amp;lt;- transects(south_africa)
+  # NB: Note here the use of the `spread` argument
+south_africa_along_wide &amp;lt;- transects(south_africa, alongshore = T, spread = 30)
+south_africa_away_wide &amp;lt;- transects(south_africa, spread = 30)
+
+# Baja Peninsula, Mexico
+baja_pen_along &amp;lt;- transects(baja_pen, alongshore = T)
+baja_pen_away &amp;lt;- transects(baja_pen)
+  # NB: Note here the use of the `coast` argument
+baja_pen_island &amp;lt;- transects(baja_pen, coast = FALSE)
+
+# Bohai sea, China
+bohai_sea_along &amp;lt;- transects(bohai_sea, alongshore = T)
+bohai_sea_away &amp;lt;- transects(bohai_sea)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;visualise&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Visualise&lt;/h2&gt;
+&lt;p&gt;Now that the correct headings have been calculated for our alongshore and shore-normal transects let’s visualise them with ggplot. First we will create a function that does this in order to keep the length of this vignette down.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Create base map
+world_map &amp;lt;- ggplot() + 
+  borders(fill = &amp;quot;grey40&amp;quot;, colour = &amp;quot;black&amp;quot;)
+
+# Create titles
+titles &amp;lt;- c(&amp;quot;Alongshore&amp;quot;, &amp;quot;Shore-normal&amp;quot;, &amp;quot;Islands&amp;quot;)
+
+# Plotting function
+plot_sites &amp;lt;- function(site_list, buffer, title_choice, dist){
+  
+  # Find the point 200 km from the site manually to pass to ggplot
+  heading2 &amp;lt;- data.frame(geosphere::destPoint(p = select(site_list, lon, lat),  
+                                              b = site_list$heading, d = dist))
+  
+  # Add the new coordinates tot he site list
+  site_list &amp;lt;- site_list %&amp;gt;% 
+    mutate(lon_dest = heading2$lon,
+           lat_dest = heading2$lat)
+  
+  # Visualise
+  world_map +
+    geom_segment(data = site_list, colour = &amp;quot;red4&amp;quot;, 
+                 aes(x = lon, y = lat, xend = lon_dest, yend = lat_dest)) +
+    geom_point(data = site_list, size = 3, colour = &amp;quot;black&amp;quot;, aes(x = lon, y = lat)) +
+    geom_point(data = site_list, size = 3, colour = &amp;quot;red&amp;quot;, aes(x = lon_dest, y = lat_dest)) +
+    coord_cartesian(xlim = c(min(site_list$lon - buffer), 
+                             max(site_list$lon + buffer)),
+                    ylim = c(min(site_list$lat - buffer), 
+                             max(site_list$lat + buffer))) +
+    labs(x = &amp;quot;&amp;quot;, y = &amp;quot;&amp;quot;, colour = &amp;quot;Site\norder&amp;quot;) +
+    ggtitle(titles[title_choice])
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;cape-point-south-africa&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Cape Point, South Africa&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;transect()&lt;/code&gt; function is designed to work well at small scales by default. We may see this here with the effortlessness of plotting transects around a peninsula and then across an embayment in one go.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cape_point_along_map &amp;lt;- plot_sites(cape_point_along, 0.5, 1, 10000)
+cape_point_away_map &amp;lt;- plot_sites(cape_point_away, 0.5, 2, 10000)
+grid.arrange(cape_point_along_map, cape_point_away_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/transects_files/figure-html/cape_point_trans-1.png&#34; alt=&#34;Alongshore and shore-normal transects around Cape Point and False Bay, South Africa.&#34; width=&#34;960&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+(#fig:cape_point_trans)Alongshore and shore-normal transects around Cape Point and False Bay, South Africa.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;south-africa&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;South Africa&lt;/h3&gt;
+&lt;p&gt;The intentions one may have for calculating shore-normal transects will differ depending on ones research question. If one is interested in visualising the convolutions of a coastline at a sub-meso-scale then the default &lt;code&gt;spread&lt;/code&gt; of the &lt;code&gt;transect()&lt;/code&gt; function is probably the way to go, as shown above. If however one is interested in seeing the shore-normal transects broadly for the coastline of an entire country it is likely that one will want to greatly expand the &lt;code&gt;spread&lt;/code&gt; of coastline used to calculate said transects. In the figure below we may see how changing the &lt;code&gt;spread&lt;/code&gt; of the coastline considered for the transects changes the results. The top row shows the transects resulting from the narrow default &lt;code&gt;spread&lt;/code&gt;, while the bottom row shows the results of using a much wider &lt;code&gt;spread&lt;/code&gt; for the calculation. Note particularly how the transect changes at St. Helena Bay and Gansbaai (second and fourth sites from the top left), as well as a general smoothing of all of the other transects. This is due to the sensitivity of the function. The St. Helena Bay and Gansbaai sites lay within embayments; therefore, the shore-normal transects that would come out directly from these sites will not follow the general contour of the coastline of South Africa. Should we be interested in the “bigger picture” we must increase the &lt;code&gt;spread&lt;/code&gt; argument in &lt;code&gt;transects()&lt;/code&gt;. This may require some trial and error for particularly difficult coastlines before a satisfactory result is produced, but it is certainly still faster than running the calculations by hand. Should small scale accuracy along part of the coast, and broader accuracy elsewhere be required, one must simply divide the site list into the different sections and run &lt;code&gt;transects()&lt;/code&gt; on each subset with the desired &lt;code&gt;spread&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;south_africa_along_map &amp;lt;- plot_sites(south_africa_along, 1, 1, 100000)
+south_africa_away_map &amp;lt;- plot_sites(south_africa_away, 1, 2, 100000)
+south_africa_along_wide_map &amp;lt;- plot_sites(south_africa_along_wide, 1, 1, 100000)
+south_africa_away_wide_map &amp;lt;- plot_sites(south_africa_away_wide, 1, 2, 100000)
+grid.arrange(south_africa_along_map, south_africa_away_map, 
+             south_africa_along_wide_map, south_africa_away_wide_map, nrow = 2)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/transects_files/figure-html/south_africa_trans-1.png&#34; alt=&#34;Alongshore and shore-normal transects around all of South Africa.&#34; width=&#34;864&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+(#fig:south_africa_trans)Alongshore and shore-normal transects around all of South Africa.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;baja-peninsula-mexico&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Baja Peninsula, Mexico&lt;/h3&gt;
+&lt;p&gt;In the following figure we see how the inclusion of islands affects the results of our transects. The first site up from the tip of the peninsula on the left-hand side is on an island. Note the minor adjustment to the transect when the island mask is used for the calculation. In this case it’s not large, but in other instances it may be massive. By default island masks are removed and it is our advice that they not be used unless extreme caution is observed.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;baja_pen_along_map &amp;lt;- plot_sites(baja_pen_along, 1, 1, 100000)
+baja_pen_away_map &amp;lt;- plot_sites(baja_pen_away, 1, 2, 100000)
+baja_pen_island_map &amp;lt;- plot_sites(baja_pen_island, 1, 3, 100000)
+grid.arrange(baja_pen_along_map, baja_pen_away_map, baja_pen_island_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/transects_files/figure-html/baja_pen_trans-1.png&#34; alt=&#34;Alongshore and shore-normal transects around the Baja Peninsula.&#34; width=&#34;960&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+(#fig:baja_pen_trans)Alongshore and shore-normal transects around the Baja Peninsula.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bohai-sea-china&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Bohai Sea, China&lt;/h3&gt;
+&lt;p&gt;This figure serves as a good visualisation for just how localised the coastline is that is used to calculate the shore-normal transects. Note how the alongshore transects look a little dodgy, but when shown as shore-normal transects everything works out. This is something to consider if one is interested in calculating alongshore transects rather than shore-normal transects. For alongshore transects that show more fidelity for coastal direction it is advisable to increase the &lt;code&gt;spread&lt;/code&gt; argument.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bohai_sea_along_map &amp;lt;- plot_sites(bohai_sea_along, 1, 1, 70000)
+bohai_sea_away_map &amp;lt;- plot_sites(bohai_sea_away, 1, 2, 70000)
+grid.arrange(bohai_sea_along_map, bohai_sea_away_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/transects_files/figure-html/bohai_sea_trans-1.png&#34; alt=&#34;Alongshore and shore-normal transects within the Bohai Sea.&#34; width=&#34;960&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+(#fig:bohai_sea_trans)Alongshore and shore-normal transects within the Bohai Sea.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;As we may see in the previous example figures, the &lt;code&gt;transect()&lt;/code&gt; function tends to work better by default at smaller scales. This was an intentional decision as it is much more accurate when scaling the function up for larger coastal features than when scaling it down for smaller ones.&lt;/p&gt;
+&lt;p&gt;The calculation of the heading for alongshore and shore-normal transects is rarely the end goal itself. One then generally wants to find specific points from the coastline along the transects that have been determined. This is done in the code above within the &lt;code&gt;plot_sites()&lt;/code&gt; function created within this vignette, but the process is not detailed specifically. How to do more elaborate things with transects will be explained with the following functions to be added to &lt;code&gt;coastR&lt;/code&gt;. This will include how to draw coastal polygons based on distance and bathymetry.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
-      <link>https://theoceancode.netlify.com/publication/predominant/</link>
+      <link>/publication/predominant/</link>
       <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
+      <guid>/publication/predominant/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>coastR package</title>
+      <link>/project/coastr/</link>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 +0200</pubDate>
+      
+      <guid>/project/coastr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Polar plot climatologies</title>
+      <link>/post/polar_plot_clims/</link>
+      <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/polar_plot_clims/</guid>
+      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Objective&lt;/h2&gt;
+&lt;p&gt;Whilst cruising about on &lt;a href=&#34;http://imgur.com&#34;&gt;Imgur&lt;/a&gt; I found a post about science stuff. Not uncommon, which is nice. These sorts of grab-bag posts about nothing in particular often include some mention of climate science, almost exclusively some sort of clever visualisation of a warming planet. That seems to be what people are most interested in. I’m not complaining though, it keeps me employed. The aforementioned post caught my attention more than usual because it included a GIF, and not just a static picture of some sort of blue thing that is becoming alarmingly red (that was not meant to be a political metaphor). I’m referring to the now famous GIF by climate scientist Ed Hawkins (&lt;span class=&#34;citation&#34;&gt;@ed_hawkins&lt;/span&gt;) whose blog may be found &lt;a href=&#34;https://www.climate-lab-book.ac.uk/&#34;&gt;here&lt;/a&gt;, and the specific post in question &lt;a href=&#34;https://www.climate-lab-book.ac.uk/2016/spiralling-global-temperatures/&#34;&gt;here&lt;/a&gt;. A quick bit of research on this animation revealed that it has likely been viewed by millions of people, was featured in the opening ceremony of the Rio Olympics, and was created in MATLAB. Those three key points made me decide to do a post on how to re-create this exact figure in R via a bit of reverse engineering. The original GIF in question is below.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/img/polar_temp.gif&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;: The ever broadening spiral of global temperatures created by &lt;a href=&#34;https://www.climate-lab-book.ac.uk/&#34;&gt;Ed Hawkins&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Data&lt;/h2&gt;
+&lt;p&gt;Figure 1 above uses the global mean temperature anomalies taken from &lt;a href=&#34;http://www.metoffice.gov.uk/hadobs/hadcrut4/&#34;&gt;HadCRUT4&lt;/a&gt;. These data have an impressive range of collection, going back to 1850. Very few datasets match this length of collection, and I’m not going to attempt to do so here. What I am going to do is use the data that I work with on a daily basis. These are the &lt;a href=&#34;https://github.com/ajsmit/SACTN&#34;&gt;SACTN&lt;/a&gt; data that may also be downloaded &lt;a href=&#34;https://robert-schlegel.shinyapps.io/SACTN/&#34;&gt;here&lt;/a&gt; via a GUI. As a coastal oceanographer I am mostly interested in changing climates in the near shore. While not publish explicitly, a &lt;a href=&#34;http://journals.ametsoc.org/doi/abs/10.1175/JCLI-D-16-0014.1&#34;&gt;paper&lt;/a&gt; about the appropriate methodology one should use does exist, and this methodology has been applied to all of the time series in the SACTN dataset accordingly. It is therefore known what the rates of decadal change along the coast of South Africa are, and we may rely on this in order to cherry pick the more dramatic time series in order to make prettier visuals.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;code&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Code&lt;/h2&gt;
+&lt;p&gt;With our end goal established (Figure 1), and our dataset chosen (SACTN), we may now get busy with the actual code necessary. As one may have inferred from the title of this post, Figure 1 is what we call a “polar plot”. This may appear complex to some, but is actually a very simple visualisation, as we shall see below. But first we need to prep our data. For consistency in the creation of the anomaly values below I will use 1981 – 2010 for the climatology of each time series.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Libraries
+library(tidyverse)
+library(viridis)
+library(lubridate)
+library(zoo)
+library(gridExtra)
+library(animation)
+
+## Data
+# SACTN
+load(&amp;quot;../../static/data/SACTN_monthly_v4.2.RData&amp;quot;)
+
+## Subset
+# Subseting function
+ts.sub &amp;lt;- function(site){
+  ts &amp;lt;- SACTN_monthly_v4.2 %&amp;gt;% 
+    filter(index == site) %&amp;gt;%
+    mutate(year = year(as.yearmon(date)),
+           month = month(as.yearmon(date), label = T),
+           clim = mean(temp[year %in% seq(1981,2010)], na.rm = T),
+           anom = temp-clim,
+           index = as.character(index)) %&amp;gt;%
+    rename(site = index) %&amp;gt;% 
+    select(site, year, month, anom)
+  return(ts)
+}
+
+# Warming site
+PN &amp;lt;- ts.sub(&amp;quot;Port Nolloth/SAWS&amp;quot;)
+
+# Cooling site
+SP &amp;lt;- ts.sub(&amp;quot;Sea Point/SAWS&amp;quot;)
+
+# Neutral site
+KB &amp;lt;- ts.sub(&amp;quot;Kent Bay/KZNSB&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With our data prepared we may now create the series of functions that will make a spiralling polar plot of temperatures for any time series we feed into it. I prefer to use the &lt;a href=&#34;https://cran.r-project.org/web/packages/animation/index.html&#34;&gt;animation&lt;/a&gt; package to create animations in R. This requires that one also installs &lt;a href=&#34;http://www.imagemagick.org/script/index.php&#34;&gt;image magick&lt;/a&gt; beforehand. This is a free software that is available for all major operating systems. There are a few ways to create animations in R, but I won’t go into that now. The method I employ to create the animations below may seem odd at first, but as far as I have seen it is the most efficient way to do so. The philosophy employed here is that we want to have one final function that simply counts forward one step at a time, creating each frame of the GIF. This function calls on other functions that are calculating the necessary stats and creating the visuals from them in the background. By creating animations in this way, our up front prep and calculation time is almost non-existent. It does mean that the animations take longer to compile, but they are also much more dynamic and we may feed any number of different dataframes into them to get different outputs. I have found over the years that the more automated ones code can be the better.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Function that creates a polar plot
+polar.plot &amp;lt;- function(df, i){
+  # Add bridges for polar coordinates
+  years &amp;lt;- unique(df$year)[1:i]
+  df2 &amp;lt;- filter(df, year %in% years)
+  bridges &amp;lt;- df2[df2$month == &amp;#39;Jan&amp;#39;,]
+  bridges$year &amp;lt;- bridges$year - 1
+  if(nrow(bridges) == 0){
+    bridges &amp;lt;- data.frame(site = df2$site[1], year = min(df2$year), month = NA, anom = NA)
+  } else {
+    bridges$month &amp;lt;- NA
+  }
+  blanks &amp;lt;- data.frame(site = df2$site[1], expand.grid(year = min(df2$year)-1, month = month.abb), anom = NA)
+  # Polar plot
+  pp &amp;lt;- ggplot(data = rbind(blanks, df2, bridges), aes(x = month, y = anom, group = year)) +
+    # Circular black background
+    geom_rect(colour = &amp;quot;black&amp;quot;, fill = &amp;quot;black&amp;quot;, aes(xmin = &amp;quot;Jan&amp;quot;, xmax = NA,
+                  ymin = min(df$anom, na.rm = T), ymax = max(df$anom, na.rm = T))) +
+                  # ymin = min(df$anom, na.rm = T), ymax = 3)) +
+    # Anomaly threshold labels
+    geom_hline(aes(yintercept = 1.0), colour = &amp;quot;red&amp;quot;) +
+    geom_label(aes(x = &amp;quot;Jan&amp;quot;, y = 1.0, label = &amp;quot;1.0°C&amp;quot;),
+               colour = &amp;quot;red&amp;quot;, fill = &amp;quot;black&amp;quot;, size = 3) +
+    geom_hline(aes(yintercept = 2.0), colour = &amp;quot;red&amp;quot;) +
+    geom_label(aes(x = &amp;quot;Jan&amp;quot;, y = 2.0, label = &amp;quot;2.0°C&amp;quot;),
+               colour = &amp;quot;red&amp;quot;, fill = &amp;quot;black&amp;quot;, size = 3) +
+    geom_hline(aes(yintercept = 3.0), colour = &amp;quot;red&amp;quot;) +
+    geom_label(aes(x = &amp;quot;Jan&amp;quot;, y = 3.0, label = &amp;quot;3.0°C&amp;quot;),
+               colour = &amp;quot;red&amp;quot;, fill = &amp;quot;black&amp;quot;, size = 3) +
+    geom_hline(aes(yintercept = 4.0), colour = &amp;quot;red&amp;quot;) +
+    geom_label(aes(x = &amp;quot;Jan&amp;quot;, y = 4.0, label = &amp;quot;4.0°C&amp;quot;),
+               colour = &amp;quot;red&amp;quot;, fill = &amp;quot;black&amp;quot;, size = 3) +
+    # Temperature spiral
+    geom_path(aes(colour = anom), show.legend = F) +
+    # Scale corrections
+    scale_colour_viridis(limits = c(min(df$anom, na.rm = T), max(df$anom, na.rm = T))) +
+    scale_x_discrete(expand = c(0,0), breaks = month.abb) +
+    scale_y_continuous(expand = c(0,0),
+                       limits = c(min(df$anom, na.rm = T), max(df$anom, na.rm = T))) +
+    # Year label
+    geom_text(aes(x = &amp;quot;Jan&amp;quot;, y = min(df$anom, na.rm = T), label = max(df2$year, na.rm = T)),
+              colour = &amp;quot;ivory&amp;quot;, size = 8) +
+    # Additional tweaks
+    ggtitle(paste0(df$site[1],&amp;quot; temperature change (&amp;quot;,min(df$year),&amp;quot;-&amp;quot;,max(df$year),&amp;quot;)&amp;quot;)) +
+    coord_polar() +
+    theme(panel.background = element_rect(fill = &amp;quot;grey20&amp;quot;),
+          plot.background = element_rect(fill = &amp;quot;grey20&amp;quot;),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          # axis.text.x = element_text(colour = &amp;quot;ivory&amp;quot;),
+          axis.text.x = element_text(colour = &amp;quot;ivory&amp;quot;, angle =
+            (360/(2*pi)*rev(seq(pi/12, 2*pi-pi/12, len = 12)))+15,
+            size = 12),
+          axis.text.y = element_blank(),
+          axis.title = element_blank(),
+          axis.ticks = element_blank(),
+          axis.ticks.length = unit(0, &amp;quot;cm&amp;quot;),
+          plot.title = element_text(hjust = 0.5, colour = &amp;quot;ivory&amp;quot;, size = 15))
+  print(pp)
+}
+
+## Create animation of polar plots
+animate.polar.plot &amp;lt;- function(df) {
+  lapply(seq(1,length(unique(df$year))), function(i) {
+    polar.plot(df = df, i = i)
+  })
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With the above two functions created, we may now call them nested within one another via the &lt;code&gt;saveGIF&lt;/code&gt; function below.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# By default &amp;#39;saveGIF()&amp;#39; outputs to the same folder 
+# the script where the code is being run from is located.
+# For that reason one may want to manually change the
+# working directory beforehand.
+# setwd(&amp;quot;somewhere else&amp;quot;)
+system.time(saveGIF(animate.polar.plot(df = PN), interval = 0.4, ani.width = 457, 
+                    movie.name = &amp;quot;polar_plot_PN.gif&amp;quot;)) ## 262 seconds
+system.time(saveGIF(animate.polar.plot(df = SP), interval = 0.4, ani.width = 457, 
+                    movie.name = &amp;quot;polar_plot_SP.gif&amp;quot;)) ## 221 seconds
+system.time(saveGIF(animate.polar.plot(df = KB), interval = 0.4, ani.width = 457, 
+                    movie.name = &amp;quot;polar_plot_KB.gif&amp;quot;)) ## 183 seconds
+# setwd(&amp;quot;back to where you were&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;As one may see in the following GIFs, local extremes often outpace global averages. This should not be terribly surprising. In order to better illustrate this I have expanded the anomaly labels along the y-axes more so than seen in Figure 1. The increasing patterns are not as clear in these following GIFs as in the original that they are based on. This is because the original is based on a global average, which provides for a much smoother trend. I hope people enjoy these and feel free to plop your own temperature time series into the code to create your own polar plot figures!&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/img/polar_plot_PN.gif&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Figure 2&lt;/strong&gt;: The polar plot for Port Nolloth, where temperatures have been increasing.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/img/polar_plot_SP.gif&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Figure 3&lt;/strong&gt;: The polar plot for Sea Point, where temperatures have been decreasing.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/img/polar_plot_KB.gif&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Figure 4&lt;/strong&gt;: The polar plot for Kent Bay, where temperatures have been holding level.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sequential sites</title>
+      <link>/post/seq_sites/</link>
+      <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/seq_sites/</guid>
+      <description>&lt;div id=&#34;preface&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Preface&lt;/h2&gt;
+&lt;p&gt;The rest of the blog post after this preface section is a copy of the vignette I’ve written for the first function in the new package I am developing: &lt;code&gt;coastR&lt;/code&gt;. This package aims to provide functions that are useful for coastal oceanography but that do not yet exist in the R language. It is not my intention to provide algorithms for physical oceanography as these may already be found elsewhere. This post covers how one may determine the correct sequence of sites along a convoluted coastline.&lt;/p&gt;
+&lt;p&gt;Now that I’ve handed in my PhD I am a little less pressed as far as deadlines go and I would like to return to my habit of creating a new blog post every Friday. I’ve written quite a bit of code over the last three years and much of it needs to find it’s way into the &lt;code&gt;coastR&lt;/code&gt;. Next week I am planning on uploading a function for calculating shore normal transects. Until then, please enjoy the spectacle of sequential ordering. Woo.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;overview&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;The human mind prefers to see patterns in whatever it encounters. To this end we try to provide ourselves with data that are stored in a way that will appeal to that disposition. For a time series this usually means that the data are saved sequentially through time. For spatial data this means that the data are saved in some sort of sequential state, too. But what might that be? For 2D, 3D, or 4D data this can get tricky rather quickly and one tends to default to netcdf files. But with 1D data we are able to decide how we want the data to be structured as they will fit within a simple dataframe. But how can spatial data be 1D? Nothing in nature truly is, but I use 1D here as an expedient way of describing data that are constrained to some physical (usually continuous) barrier. Specifically for use with &lt;code&gt;seq_sites()&lt;/code&gt; we will be looking at sites along a coastline.&lt;/p&gt;
+&lt;p&gt;If one has meta-data for a number of sampling sites they should be saved in the order they may be found along the coastline. Some would perhaps prefer to order sites alphabetically, I am not one of them for a number of reasons. Not least of which being that this is too simple a way of organising. One could also choose to organise ones coastal sites in numerical order of either longitude or latitude. This quickly becomes problematic for most stretches of coastline as natural formations such as peninsulas and embayments will prevent the correct ordering of sites based on only latitude or longitude. It is therefore necessary to query the longitude and latitude of each site in a list against a land mask in order to determine the correct order along the coastline. This is what will be demonstrated below.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# devtools::install_github(&amp;quot;robwschlegel/coastR&amp;quot;) # Install coastR
+library(coastR)
+library(tidyverse)
+library(gridExtra)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sample-locations&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Sample locations&lt;/h2&gt;
+&lt;p&gt;For the purpose of this vignette we will manually create a few dataframes for different coastlines around the world of varying degrees of complexity and length. The first two dataframes are taken from the SACTN site list included in the &lt;code&gt;coastR&lt;/code&gt; package. The rest have their lon/lat values grabbed from Google maps. Note that the order of the sites is intentionally entered incorrectly so as to be able to demonstrate the efficacy of &lt;code&gt;seq_sites()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Cape Point, South Africa
+cape_point &amp;lt;- SACTN_site_list %&amp;gt;% 
+  slice(c(31, 22, 26, 17, 19, 21, 30)) %&amp;gt;% 
+  mutate(order = 1:n())
+
+# South Africa
+south_africa &amp;lt;- SACTN_site_list %&amp;gt;% 
+  slice(c(1,34, 10, 20, 50, 130, 90)) %&amp;gt;% 
+  mutate(order = 1:n())
+
+# Baja Peninsula, Mexico
+baja_pen &amp;lt;- data.frame(
+  order = 1:7,
+  lon = c(-116.4435, -114.6800, -109.6574, -111.9503, -112.2537, -113.7918, -114.1881),
+  lat = c(30.9639, 30.7431, 22.9685, 26.9003, 25.0391, 29.4619, 28.0929)
+)
+
+# Bohai Sea, China
+bohai_sea &amp;lt;- data.frame(
+  order = 1:7,
+  lon = c(122.0963, 121.2723, 121.0687, 121.8742, 120.2962, 117.6650, 122.6380),
+  lat = c(39.0807, 39.0086, 37.7842, 40.7793, 40.0691, 38.4572, 37.4494)
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;sequential-sites&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Sequential sites&lt;/h2&gt;
+&lt;p&gt;Now that we have our sample sites it is time to order them correctly along the coast sequentially. Should one prefer the opposite order to what &lt;code&gt;seq_sites()&lt;/code&gt; produces, this may be changed by using the &lt;code&gt;reverse&lt;/code&gt; argument found within the function. Additionally, if one has sites located on islands just off the coast, one may choose to allow the algorithm to take these islands into account. Note that this then will force the algorithm to calculate the sequential order of these sites as though they were part of a different sequence because they will no longer be on the same 1D plain. Generally this would not be desirable and one would rather order sites on coastal islands in line with the rest of the coast. This is the default setting, but we may see how this changes with the Baja Peninsula site list.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# NB: This code will produce warnings
+  # This is fine as it is stating that the
+  # &amp;#39;order&amp;#39; column has been re-written,
+  # which is the intended result of this function.
+
+# Cape Point, South Africa
+cape_point_seq &amp;lt;- seq_sites(cape_point)
+
+# South Africa
+south_africa_seq &amp;lt;- seq_sites(south_africa)
+
+# Baja Peninsula, Mexico
+baja_pen_seq &amp;lt;- seq_sites(baja_pen)
+baja_pen_island_seq &amp;lt;- seq_sites(baja_pen, coast = FALSE)
+
+# Bohai sea, China
+bohai_sea_seq &amp;lt;- seq_sites(bohai_sea)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;comparison&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Comparison&lt;/h2&gt;
+&lt;p&gt;With the sites correctly ordered sequentially along the coast we may now compare the before and after products. To do so in a tidy way we will first create a function that plots our sites for us on a global map.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Create base map
+world_map &amp;lt;- ggplot() + 
+  borders(fill = &amp;quot;grey40&amp;quot;, colour = &amp;quot;black&amp;quot;)
+
+# Create titles
+titles &amp;lt;- c(&amp;quot;Deurmekaar&amp;quot;, &amp;quot;Sequential&amp;quot;, &amp;quot;Islands&amp;quot;)
+
+# Plotting function
+plot_sites &amp;lt;- function(site_list, buffer, title_choice){
+  world_map +
+  geom_point(data = site_list, size = 6,
+             aes(x = lon, y = lat, colour = as.factor(order))) +
+  coord_cartesian(xlim = c(min(site_list$lon - buffer), 
+                           max(site_list$lon + buffer)),
+                  ylim = c(min(site_list$lat - buffer), 
+                           max(site_list$lat + buffer))) +
+  labs(x = &amp;quot;&amp;quot;, y = &amp;quot;&amp;quot;, colour = &amp;quot;Site\norder&amp;quot;) +
+  ggtitle(titles[title_choice])
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;cape-point-south-africa&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Cape Point, South Africa&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cape_point_map &amp;lt;- plot_sites(cape_point, 0.5, 1)
+cape_point_seq_map &amp;lt;- plot_sites(cape_point_seq, 0.5, 2)
+grid.arrange(cape_point_map, cape_point_seq_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/seq_sites_files/figure-html/cape_point_comp-1.png&#34; alt=&#34;Comparison of site ordering around Cape Point, South Africa.&#34; width=&#34;960&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+(#fig:cape_point_comp)Comparison of site ordering around Cape Point, South Africa.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;south-africa&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;South Africa&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;south_africa_map &amp;lt;- plot_sites(south_africa, 1, 1)
+south_africa_seq_map &amp;lt;- plot_sites(south_africa_seq, 1, 2)
+grid.arrange(south_africa_map, south_africa_seq_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/seq_sites_files/figure-html/south_africa_comp-1.png&#34; alt=&#34;Comparison of site ordering around South Africa.&#34; width=&#34;960&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+(#fig:south_africa_comp)Comparison of site ordering around South Africa.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;baja-peninsula-mexico&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Baja Peninsula, Mexico&lt;/h3&gt;
+&lt;p&gt;Note in the image below that site seven in the ‘Islands’ panel appears to be ordered incorrectly. This is because we have asked the function to first look for sites along the coast, and then order sites around nearby islands by setting the argument &lt;code&gt;coast&lt;/code&gt; to TRUE. This is because the algorithm only works on one continuous line. When islands are introduced this then represents a second set of 1D coordinates and so the algorithm plans accordingly. This feature has been added so that if one chooses to have islands be apart from the initial ordering of the coastal sites it may be done. The default however is to remove islands from the coastal land mask so that they are ordered according to their nearest location to the coast.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;baja_pen_map &amp;lt;- plot_sites(baja_pen, 1, 1)
+baja_pen_seq_map &amp;lt;- plot_sites(baja_pen_seq, 1, 2)
+baja_pen_island_seq_map &amp;lt;- plot_sites(baja_pen_island_seq, 1, 3)
+grid.arrange(baja_pen_map, baja_pen_seq_map, baja_pen_island_seq_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/seq_sites_files/figure-html/baja_pen_comp-1.png&#34; alt=&#34;Comparison of site ordering around the Baja Peninsula, Mexico.&#34; width=&#34;960&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+(#fig:baja_pen_comp)Comparison of site ordering around the Baja Peninsula, Mexico.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bohai-sea-china&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Bohai Sea, China&lt;/h3&gt;
+&lt;p&gt;Below in the ‘Sequential’ panel we see the result of having set the &lt;code&gt;reverse&lt;/code&gt; argument to TRUE. Hardly noticeable, but potentially useful.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bohai_sea_map &amp;lt;- plot_sites(bohai_sea, 1, 1)
+bohai_sea_seq_map &amp;lt;- plot_sites(bohai_sea_seq, 1, 2)
+grid.arrange(bohai_sea_map, bohai_sea_seq_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/seq_sites_files/figure-html/bohai_sea_comp-1.png&#34; alt=&#34;Comparison of site ordering around the Bohai Sea, China.&#34; width=&#34;960&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+(#fig:bohai_sea_comp)Comparison of site ordering around the Bohai Sea, China.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The usefulness of the &lt;code&gt;seq_sites()&lt;/code&gt; function is demonstrated above on a number of different scales and coastal features. This is in no way an exhaustive test of this function and I welcome any input from anyone that uses it for their own work. The premise on which this function operates is very basic and so theoretically it should be very adaptive. The only thing to look out for is if one has a very convoluted coastline with a long stretch without any sites as the algorithm may think this is two separate coastlines.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mapping with ggplot2</title>
+      <link>/post/mapping_with_ggplot2/</link>
+      <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/mapping_with_ggplot2/</guid>
+      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Objective&lt;/h2&gt;
+&lt;p&gt;There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always “Figure 1”. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area. Being a happy convert to the &lt;a href=&#34;https://cran.r-project.org/web/packages/tidyverse/&#34;&gt;tidyverse&lt;/a&gt; I only teach the graphics of &lt;a href=&#34;https://cran.r-project.org/web/packages/ggplot2/&#34;&gt;ggplot2&lt;/a&gt;. I have found that people often prefer to use the &lt;a href=&#34;https://cran.r-project.org/web/packages/ggmap/&#34;&gt;ggmap&lt;/a&gt; extension to create ggplot quality figures with Google map backgrounds, but I personally think that a more traditional monotone background for maps looks more professional. What I’ve decided to showcase this week is the data and code required to create a publication quality map. Indeed, the following code will create the aforementioned obligatory “Figure 1” in a paper I am currently preparing for submission.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Data&lt;/h2&gt;
+&lt;p&gt;There are heaps of packages etc. that one may use to create maps. And there is a never ending source of blogs, books and tutorials that illustrate many of the different ways to visualise spatial data. For my international and geographic borders I prefer to use data I’ve downloaded from &lt;a href=&#34;https://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html&#34;&gt;GSHHSG&lt;/a&gt; and then converted to dataframes using functions found in the &lt;a href=&#34;https://cran.r-project.org/web/packages/PBSmapping/&#34;&gt;PBSmapping&lt;/a&gt; package. I then save these converted dataframes as .Rdata objects on my computer for ease of use with all of my projects. For the domestic borders of a country, which I won’t use in this post, one may go &lt;a href=&#34;http://gadm.org/&#34;&gt;here&lt;/a&gt;. Note however that for some strange reason this website still has the pre-1994 borders for South Africa. For the correct SA borders one must go &lt;a href=&#34;http://www.demarcation.org.za/index.php/downloads/boundary-data/boundary-data-main-files/province&#34;&gt;here&lt;/a&gt;. The current SA borders may actually be download in the .Rdata format, which is neat.&lt;/p&gt;
+&lt;p&gt;Once one has the borders to be used in the map, the next step is to think about what one actually wants to show. The main purpose of this map is to show where several in situ coastal seawater temperature time series were collected. This could be done quite simply but a plain black and white map is offensively boring so we want to make sure there is a good amount of (but not too much!) colour in order to entice the reader. I personally find pictures of meso-scale oceanic phenomena particularly beautiful so try to include them whenever I can. Luckily that is also what I study so it is not strange that I include such things in my work. Now if only I studied panda’s, too…&lt;/p&gt;
+&lt;p&gt;Panda’s aside, the current work I am engaged in also requires that the atmospheric processes around southern Africa be considered in addition to the oceanography. To visualise both air and sea concurrently would be a mess so we will want to create separate panels for each. Because I have been working with reanalysis data lately, and not satellite data, I am also able to include the wind/ current vectors in order to really help the temperature patterns pop. The oceanic data are from the &lt;a href=&#34;wp.csiro.au/bluelink&#34;&gt;BRAN2016&lt;/a&gt; product and the atmospheric data are from &lt;a href=&#34;http://www.ecmwf.int/en/research/climate-reanalysis/era-interim&#34;&gt;ERA-Interim&lt;/a&gt;. Both of which are available for download for free for scientific pursuits. I’ve chosen here to use the mean values for January 1st as the summer months provide the most clear example of the thermal differences between the Agulhas and Benguela currents. The code used to create the scale bar in the maps may be found &lt;a href=&#34;http://editerna.free.fr/wp/?p=76&#34;&gt;here&lt;/a&gt;. It’s not a proper ggplot geom function but works well enough. I’ve also decided to add the 200 m isobath to the sea panel. These data come from NOAA.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Libraries
+library(tidyverse)
+library(viridis)
+library(gridExtra)
+
+## Data
+# South Africa map data
+load(&amp;quot;../../static/data/southern_africa_coast.Rdata&amp;quot;) # Lowres
+names(southern_africa_coast)[1] &amp;lt;- &amp;quot;lon&amp;quot;
+load(&amp;quot;../../static/data/sa_shore.Rdata&amp;quot;) # Hires
+names(sa_shore)[4:5] &amp;lt;- c(&amp;quot;lon&amp;quot;,&amp;quot;lat&amp;quot;)
+
+# International borders
+load(&amp;quot;../../static/data/africa_borders.Rdata&amp;quot;)
+
+# Reanalysis data
+load(&amp;quot;../../static/data/all_jan1_0.5.Rdata&amp;quot;)
+names(all_jan1_0.5)[1:2] &amp;lt;- c(&amp;quot;lon&amp;quot;,&amp;quot;lat&amp;quot;)
+
+# In situ time series locations
+site_list &amp;lt;- read_csv(&amp;quot;../../static/data/mg_site_list.csv&amp;quot;)
+site_list$order &amp;lt;- 1:nrow(site_list)
+
+# Bathymetry data
+load(&amp;quot;../../static/data/sa_bathy.Rdata&amp;quot;)
+
+## Scale bar function
+source(&amp;quot;../../static/func/scale.bar.func.R&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mapping&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Mapping&lt;/h2&gt;
+&lt;p&gt;I find that it is easier to keep track of the different aspects of a map when they are stored as different dataframes. One should however avoid having too many loose dataframes running about in the global environment. It is a balancing act and requires one to find a happy middle ground. Here I am going to cut the &lt;code&gt;all_jan1_0.5&lt;/code&gt; dataframe into 4. One each for air and sea temperatures and vectors. I am also going to reduce the resolution of the wind so that the vectors will plot more nicely.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Devide the reanalysis data
+sea_temp &amp;lt;- filter(all_jan1_0.5, variable == &amp;quot;BRAN/temp&amp;quot;)
+air_temp &amp;lt;- filter(all_jan1_0.5, variable == &amp;quot;ERA/temp&amp;quot;)
+currents &amp;lt;- filter(all_jan1_0.5, variable == &amp;quot;BRAN/u&amp;quot; | variable == &amp;quot;BRAN/v&amp;quot;) %&amp;gt;% 
+  select(-date, -index) %&amp;gt;% 
+  spread(key = variable, value = value) %&amp;gt;% 
+  rename(u = &amp;quot;BRAN/u&amp;quot;, v = &amp;quot;BRAN/v&amp;quot;)
+winds &amp;lt;- filter(all_jan1_0.5, variable == &amp;quot;ERA/u&amp;quot; | variable == &amp;quot;ERA/v&amp;quot;) %&amp;gt;% 
+  select(-date, -index) %&amp;gt;% 
+  spread(key = variable, value = value) %&amp;gt;% 
+  rename(u = &amp;quot;ERA/u&amp;quot;, v = &amp;quot;ERA/v&amp;quot;)
+
+# Reduce wind/ current vectors
+lon_sub &amp;lt;- seq(10, 40, by = 1)
+lat_sub &amp;lt;- seq(-40, -15, by = 1)
+# currents &amp;lt;- currents[(currents$lon %in% lon_sub &amp;amp; currents$lat %in% lat_sub),]
+winds &amp;lt;- winds[(winds$lon %in% lon_sub &amp;amp; winds$lat %in% lat_sub),]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With just a few alterations to our nicely divided up dataframes we are ready to create a map. We will look at the code required to create each map and then put it all together in the end.&lt;/p&gt;
+&lt;p&gt;First up is the most busy. The following code chunk will create the top panel of our map, the sea state. It is necessary to label all of the locations mentioned in the text and so they are thrown on here. In order to make the site label easier to read I’ve made them red. This is particularly jarring but I think I like it.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Establish the vector scalar for the currents
+current_uv_scalar &amp;lt;- 2
+
+# The top figure (sea)
+mg_top &amp;lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) +
+  # The ocean temperature
+    geom_raster(data = sea_temp, aes(fill = value)) +
+  # The bathymetry
+    stat_contour(data = sa_bathy[sa_bathy$depth &amp;lt; -200 &amp;amp; sa_bathy$depth &amp;gt; -2000,], 
+                 aes(x = lon, y = lat, z = depth, alpha = ..level..),
+                 colour = &amp;quot;ivory&amp;quot;, size = 0.5, binwidth = 1000, na.rm = TRUE, show.legend = FALSE) +
+  # The current vectors
+    geom_segment(data = currents, aes(xend = lon + u * current_uv_scalar, yend = lat + v * current_uv_scalar),
+                 arrow = arrow(angle = 15, length = unit(0.02, &amp;quot;inches&amp;quot;), type = &amp;quot;closed&amp;quot;), alpha = 0.4) +
+  # The land mass
+    geom_polygon(aes(group = group), fill = &amp;quot;grey70&amp;quot;, colour = &amp;quot;black&amp;quot;, size = 0.5, show.legend = FALSE) +
+    geom_path(data = africa_borders, aes(group = group)) +
+  # The legend for the vector length
+    geom_label(aes(x = 36, y = -37, label = &amp;quot;1.0 m/s\n&amp;quot;), size = 3, label.padding = unit(0.5, &amp;quot;lines&amp;quot;)) +
+    geom_segment(aes(x = 35, y = -37.5, xend = 37, yend = -37.5)) +
+  # The in situ sites
+    geom_point(data = site_list, shape = 1,  size = 2.8, colour = &amp;quot;ivory&amp;quot;) +
+    geom_text(data = site_list, aes(label = order), size = 1.9, colour = &amp;quot;red&amp;quot;) +
+  # Oceans
+    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;INDIAN\nOCEAN&amp;quot;, x = 37.00, y = -34.0, size = 4.0, angle = 0, colour = &amp;quot;ivory&amp;quot;) +
+    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;ATLANTIC\nOCEAN&amp;quot;, x = 13.10, y = -34.0, size = 4.0, angle = 0, colour = &amp;quot;ivory&amp;quot;) +
+  # Benguela
+    geom_segment(aes(x = 17.2, y = -32.6, xend = 15.2, yend = -29.5),
+                arrow = arrow(length = unit(0.3, &amp;quot;cm&amp;quot;)), size = 0.5, colour = &amp;quot;ivory&amp;quot;) +
+    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;Benguela&amp;quot;, x = 16.0, y = -31.8, size = 3.5, angle = 298, colour = &amp;quot;ivory&amp;quot;) +
+  # Agulhas
+    geom_segment(aes(x = 33, y = -29.5, xend = 29.8, yend = -33.0),
+                arrow = arrow(length = unit(0.3, &amp;quot;cm&amp;quot;)), size = 0.5, colour = &amp;quot;ivory&amp;quot;) +
+    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;Agulhas&amp;quot;, x = 31.7, y = -31.7, size = 3.5, angle = 53, colour = &amp;quot;ivory&amp;quot;) +
+  # Agulhas Bank
+    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;Agulhas\nBank&amp;quot;, x = 22.5, y = -35.5, size = 3.0, angle = 0, colour = &amp;quot;ivory&amp;quot;) +
+  # Cape Peninsula
+    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;Cape\nPeninsula&amp;quot;, x = 17.2, y = -35, size = 3.0, angle = 0, colour = &amp;quot;ivory&amp;quot;) +
+  # Improve on the x and y axis labels
+    scale_x_continuous(breaks = seq(15, 35, 5),
+                       labels = scales::unit_format(&amp;quot;°E&amp;quot;, sep = &amp;quot;&amp;quot;),
+                       position = &amp;quot;top&amp;quot;) +
+    scale_y_continuous(breaks = seq(-35, -30, 5),
+                       labels = c(&amp;quot;35°S&amp;quot;, &amp;quot;30°S&amp;quot;)) +
+    labs(x = NULL, y = NULL) +
+  # Slightly shrink the plotting area
+    coord_cartesian(xlim = c(10.5, 39.5), ylim = c(-39.5, -25.5), expand = F) +
+  # Use viridis colour scheme
+    scale_fill_viridis(name = &amp;quot;Temp.\n(°C)&amp;quot;, option = &amp;quot;D&amp;quot;) +
+  # Adjust the theme
+    theme_bw() +
+    theme(panel.border = element_rect(fill = NA, colour = &amp;quot;black&amp;quot;, size = 1),
+          axis.text = element_text(colour = &amp;quot;black&amp;quot;),
+          axis.ticks = element_line(colour = &amp;quot;black&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Many of the sites that need to be plotted are laying on top of each other. This is never good, but is made worse when the sites in question are refereed to frequently in the text. For this reason we need to create a little panel inside of the larger figure that shows a zoomed in picture of False Bay. Complete with text labels.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# False Bay inset
+fb &amp;lt;- ggplot(data = sa_shore, aes(x = lon, y = lat)) +
+  # The land mass
+    geom_polygon(aes(group = PID),
+                fill = &amp;quot;grey70&amp;quot;, colour = NA, size = 0.5, show.legend = FALSE) +
+  # The in situ sites
+    geom_point(data = site_list, shape = 1,  size = 3, colour = &amp;quot;black&amp;quot;) +
+    geom_text(data = site_list, aes(label = order), size = 2.3, colour = &amp;quot;red&amp;quot;) +
+  # Text label
+    geom_text(aes(x = 18.65, y = -34.25, label = &amp;quot;False\nBay&amp;quot;), size = 2.7) +
+  # Control the x and y axes
+    coord_cartesian(xlim = c(18.2, 19), ylim = c(-34.5, -33.8), expand = F) +
+    scale_x_continuous(breaks = c(18.5), label = &amp;quot;18.5°E&amp;quot;) +
+    scale_y_continuous(breaks = c(-34.1), label = &amp;quot;34.1°S&amp;quot;) +
+    labs(x = NULL, y = NULL) +
+  # Change the theme for cleaner over-plotting
+    theme_bw() +
+    theme(plot.background = element_blank(),
+          axis.text = element_text(colour = &amp;quot;ivory&amp;quot;),
+          axis.text.y = element_text(angle = 90, hjust = 0.5),
+          axis.ticks = element_line(colour = &amp;quot;ivory&amp;quot;),
+          panel.border = element_rect(colour = &amp;quot;ivory&amp;quot;),
+          panel.grid = element_blank())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We could possibly create another inset panel for the clomp of sites around Hamburg but this figure is already getting too busy. So we’ll leave it for now. One inset panel will serve to illustrate the code necessary to create a faceted map so for the purposes of this post it will also suffice. That leaves us with only the bottom panel to create. The air state. I’ve decided to put the scale bar/ North arrow on this panel in an attempt to balance the amount of information in each panel.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Establish the vector scalar for the wind
+wind_uv_scalar &amp;lt;- 0.5
+
+# The bottom figure (air)
+mg_bottom &amp;lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) +
+  # The ocean temperature
+    geom_raster(data = air_temp, aes(fill = value)) +
+  # The land mass
+    geom_polygon(aes(group = group), fill = NA, colour = &amp;quot;black&amp;quot;, size = 0.5, show.legend = FALSE) +
+    geom_path(data = africa_borders, aes(group = group)) +
+  # The current vectors
+    geom_segment(data = winds, aes(xend = lon + u * wind_uv_scalar, yend = lat + v * wind_uv_scalar),
+                 arrow = arrow(angle = 15, length = unit(0.02, &amp;quot;inches&amp;quot;), type = &amp;quot;closed&amp;quot;), alpha = 0.4) +
+  # The legend for the vector length
+    geom_label(aes(x = 36, y = -37, label = &amp;quot;4.0 m/s\n&amp;quot;), size = 3, label.padding = unit(0.5, &amp;quot;lines&amp;quot;)) +
+    geom_segment(aes(x = 35, y = -37.5, xend = 37, yend = -37.5)) +
+  # Improve on the x and y axis labels
+    scale_x_continuous(breaks = seq(15, 35, 5),
+                       labels = scales::unit_format(&amp;quot;°E&amp;quot;, sep = &amp;quot;&amp;quot;)) +
+    scale_y_continuous(breaks = seq(-35, -30, 5),
+                       labels = c(&amp;quot;35°S&amp;quot;, &amp;quot;30°S&amp;quot;)) +
+    labs(x = NULL, y = NULL) +
+  # Scale bar
+    scaleBar(lon = 13, lat = -38.0, distanceLon = 200, distanceLat = 50, distanceLegend = 90, dist.unit = &amp;quot;km&amp;quot;,
+             arrow.length = 200, arrow.distance = 130, arrow.North.size = 4) +
+  # Slightly shrink the plotting area
+    coord_cartesian(xlim = c(10.5, 39.5), ylim = c(-39.5, -25.5), expand = F) +
+  # Use viridis colour scheme
+    scale_fill_viridis(name = &amp;quot;Temp.\n(°C)&amp;quot;, option = &amp;quot;A&amp;quot;) +
+  # Adjust the theme
+    theme_bw() +
+    theme(panel.border = element_rect(fill = NA, colour = &amp;quot;black&amp;quot;, size = 1),
+          axis.text = element_text(colour = &amp;quot;black&amp;quot;),
+          axis.ticks = element_line(colour = &amp;quot;black&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With our three pieces of the map complete, it is time to stick them together. There are many ways to do this but I have recently found that using &lt;code&gt;annotation_custom&lt;/code&gt; allows one to stick any sort of ggplot like object onto any other sort of ggplot object. This is an exciting development and opens up a lot of doors for some pretty creative stuff. Here I will just use it to demonstrate simple faceting, but combined with panel gridding. Really though the sky is the limit.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Convert the figures to grobs
+mg_top_grob &amp;lt;- ggplotGrob(mg_top)
+fb_grob &amp;lt;- ggplotGrob(fb)
+mg_bottom_grob &amp;lt;- ggplotGrob(mg_bottom)
+
+# Stick them together
+gg &amp;lt;- ggplot() +
+  # First set the x and y axis values so we know what the ranges are
+  # in order to make it easier to place our facets
+    coord_equal(xlim = c(1, 10), ylim = c(1, 10), expand = F) +
+  # Then we place our facetsover one another using the coordinates we created
+    annotation_custom(mg_top_grob,
+                      xmin = 1, xmax = 10, ymin = 5.5, ymax = 10) +
+    annotation_custom(fb_grob,
+                      xmin = 3.5, xmax = 5.5, ymin = 7.2, ymax = 8.8) +
+    annotation_custom(mg_bottom_grob,
+                      xmin = 1, xmax = 10, ymin = 1, ymax = 5.5)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;The developments in the gridding system have brought the potential for using ggplot for these more complex maps forward quite a bit. As long as one does not use a constrained mapping coordinate system (i.e. &lt;code&gt;coord_fixed&lt;/code&gt;) the grob-ification of the ggplot objects seems to allow the placing of the pieces into a common area to be performed smoothly. Displaying many different bits of information cleanly is always a challenge. This figure is particularly busy, out of necessity. I think it turned out very nicely though.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/mapping_with_ggplot2_files/figure-html/mg-final-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;: Map showing the southern tip of the African continent. The top panel shows the typical sea surface temperature and surface currents on January 1st. The bottom panel likewise shows the typical surface air temperatures and winds on any given January 1st.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Goats per capita</title>
+      <link>/post/goats_per_capita/</link>
+      <pubDate>Mon, 10 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/goats_per_capita/</guid>
+      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Objective&lt;/h2&gt;
+&lt;p&gt;A few weeks ago for a &lt;a href=&#34;http://kelpsandthings.org/robert/r/gender-and-gdp/&#34;&gt;post&lt;/a&gt; about the relationship between gender equality and GDP/ capita I found a nifty &lt;a href=&#34;https://www.clio-infra.eu/&#34;&gt;website&lt;/a&gt; that has a massive amount of census information for most countries on our planet. Much of this information could be used to answer some very interesting and/ or important questions. But some of the data can be used to answer seemingly pointless questions. And that’s what I intend to do this week. Specifically, which countries in the world have the highest rates of goats/ capita?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Data&lt;/h2&gt;
+&lt;p&gt;The goats per capita data were downloaded from the &lt;a href=&#34;https://www.clio-infra.eu/Indicators/GoatsperCapita.html&#34;&gt;clia-infra&lt;/a&gt; website. These data are already in the format we need so there is little to be done before jumping straight into the analysis. We will however remove any records from before 1900 as these are almost entirely estimates, and not real records.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Load libraries
+library(tidyverse)
+library(gridExtra)
+
+# Load data
+goats &amp;lt;- read_csv(&amp;quot;../../static/data/GoatsperCapita_Compact.csv&amp;quot;) %&amp;gt;% 
+  filter(year &amp;gt;= 1900)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;analysis&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Analysis&lt;/h2&gt;
+&lt;p&gt;First of all, I would like to know what the global trend in goats/ capita has been since 1900. To do so we need to create annual averages and apply a simple linear model to them. We will also plot boxplots to give us an idea of the spread of goats/ capita over the world.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;goats %&amp;gt;% 
+  group_by(year) %&amp;gt;% 
+  select(-ccode, -country.name) %&amp;gt;% 
+  summarise(value = mean(value)) %&amp;gt;% 
+  ggplot(aes(x = year, y = value)) +
+  geom_boxplot(data = goats, aes(group = year)) +
+  geom_smooth(method = &amp;quot;lm&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/goats_per_capita_files/figure-html/gc-box-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;: Boxplots with a fitted linear model showing the global trend in goats/ capita over the last century.&lt;/p&gt;
+&lt;p&gt;As we may see in Figure 1, the overall trend in goats/ capita in the world has been decreasing very slightly over the last century. The striking result from Figure 1 however is the massive range of values as seen by the outliers from the boxplots. So which countries are these that have so many more goats/ capita than the rest of the world?&lt;/p&gt;
+&lt;p&gt;We want to see which countries have the most goats/ capita but there are 172 unique countries in this dataset so it would look much too busy to plot them all. To that end we want only the top and bottom 10 countries from the most recent year of reporting (2010).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Top 10 goat having countries
+goats_top &amp;lt;- goats %&amp;gt;% 
+  arrange(desc(value)) %&amp;gt;% 
+  filter(ccode %in% head(unique(ccode), 10))
+
+# Bottom 10
+goats_bottom &amp;lt;- goats %&amp;gt;% 
+  arrange(value) %&amp;gt;% 
+  filter(ccode %in% head(unique(ccode), 10))
+
+# Line graphs
+gt &amp;lt;- ggplot(data = goats_top, aes(x = year, y = value)) +
+  geom_line(aes(colour = country.name)) +
+  labs(y = &amp;quot;Goats/ Capita&amp;quot;, x = NULL) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_color_brewer(name = NULL, palette = &amp;quot;Set3&amp;quot;) +
+  theme(legend.position = &amp;quot;top&amp;quot;)
+gb &amp;lt;- ggplot(data = goats_bottom, aes(x = year, y = value)) +
+  geom_line(aes(colour = country.name)) +
+  labs(y = &amp;quot;Goats/ Capita&amp;quot;, x = NULL) +
+  scale_x_continuous(expand = c(0,0)) +
+  theme(legend.position = &amp;quot;bottom&amp;quot;,
+        legend.title = element_blank())
+
+# Combine
+grid.arrange(gt, gb)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/goats_per_capita_files/figure-html/gc-line-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 2&lt;/strong&gt;: Line graphs showing the rate of goats/ capita for the top and bottom 10 goat having countries in the world over the last century.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I was a bit surprised to find that Mongolia is far and away the country with the most goats/ capita at 5.140 in 2010. Less surprising is that the other top 9 goat having countries in the world in 2010 were all in Africa and their rate of goats/ capita was between 1.634 (Mauritania) to 0.124 (South Africa). This makes for a massive spread in what is already an outlying set of countries. How is it that Mongolia has so many more goats/ capita? This is a very odd result but the data were reported annually from 2000 to 2010 and they consistently show similarly high rates for Mongolia.&lt;/p&gt;
+&lt;p&gt;The bottom 10 goat having countries in the world are a mix of European, Asian, North American and Pacific Islands. This mix is not surprising as we may see in Figure 1 that there are no outliers in the bottom of the distribution. The highest value for the bottom 10 countries in 2010 was Tonga at 0.121. This is very close to the lowest value from the top 10 countries, and shows us that most of the 172 countries in this dataset have ~0.12 goats per person. With this average in mind, we see that the other bottom nine countries in Figure 2 really are much lower than the global average with rates approaching 0 goats/ capita. It is worth mentioning that the lowest overall rate of goats/ capita in 2010 was Japan at 0.0001. Meaning that there is only one goat in Japan for every 10,000 people. As opposed to Mongolia that has more than five goats for every one person. Therefore there were 50,000 times more goats/ capita in Mongolia than Japan in 2010…&lt;/p&gt;
+&lt;p&gt;I supposes the take away message from this analysis is that if one ever wants to get away from it all and just go spend time with a lot of goats, &lt;a href=&#34;http://www.mfa.gov.mn/?lang=en&#34;&gt;Mongolia&lt;/a&gt; is the place for you!&lt;/p&gt;
+&lt;p&gt;(and definitely avoid Japan)&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Party immigration</title>
+      <link>/post/party_immigration/</link>
+      <pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/party_immigration/</guid>
+      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Objective&lt;/h2&gt;
+&lt;p&gt;As an immigrant myself, all of the talk of immigration to be found in main stream media outlets today makes me a bit nervous. Whereas most people that speak of the pro’s and con’s of immigration do so from the point of view of how it may affect the country of their birth, I view this issue as something that affects my ability to live outside the country of my birth. I immigrated into the Republic of South Africa in 2013 and have been living here since. I would do a piece on South African immigration but the numbers are difficult to get a hold of and honestly most people are less interest in South Africa than the USA.&lt;/p&gt;
+&lt;p&gt;Immigration is not a new talking point. It’s something that comes up in political and a-political circles all of the time. The current debate on the Muslim Ban in the USA may have reached a new level for this sort of rhetoric in the West, but targeted crackdowns of this sort are not new in the world. I won’t bother with citations here, but if one is interested a quick google of “xenophobia” + “border control” should yield some convincing results. As this current row of immigration debates in the USA has become so partisan, I decided that an interesting question to ask would be “Under which of the two parties have more people immigrated into the USA?” and “Under which of the two parties have more people been removed from the USA?”&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Data&lt;/h2&gt;
+&lt;p&gt;The historical data on immigration into the USA are located at the &lt;a href=&#34;https://www.dhs.gov/immigration-statistics/yearbook/2015&#34;&gt;Department of Homeland Securities&lt;/a&gt; website. In 2013 the DHS started keeping very detailed reports of all immigration by age, country, marital status, etc. These highly detailed data are very interesting but will not help us to ask our central questions. We want long time series of data so that we may compare many different administrations from each party. For ease of analysis I have chosen to classify the party in power at any point in time based on the party of the President. I understand that the Senate or Congress would perhaps be better, if not more egalitarian choices, but the current focus of this issue has the US President at it’s core, so I decided to keep that theme constant in this analysis. I’ll only start from Eisenhower and go up until Obama as the publicly available DHS data end in 2015. They begin as far back as 1892, but &lt;code&gt;ggplot2&lt;/code&gt; has built into it a US president dataframe and I am going to just use that because I’m lazy.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Libraries
+library(tidyverse)
+library(lubridate)
+library(broom)
+library(gridExtra)
+
+# President data
+data(presidential)
+presidential$start &amp;lt;- year(presidential$start)
+presidential$end &amp;lt;- year(presidential$end)-1
+
+# Create index of party years
+  # I couldn&amp;#39;t think of a clever automatic way of doing this...
+party_year &amp;lt;- data.frame(Year = seq(1953, 2016), Party = c(rep(&amp;quot;Republican&amp;quot;,8), rep(&amp;quot;Democrat&amp;quot;,8), 
+                                                           rep(&amp;quot;Republican&amp;quot;,8), rep(&amp;quot;Democrat&amp;quot;,4),
+                                                           rep(&amp;quot;Republican&amp;quot;,12), rep(&amp;quot;Democrat&amp;quot;,8),
+                                                           rep(&amp;quot;Republican&amp;quot;,8), rep(&amp;quot;Democrat&amp;quot;,8)))
+
+# Immigration data
+green_card &amp;lt;- read_csv(&amp;quot;../../static/data/Persons Obtaining Lawful Permanent Resident Status-Fiscal Years 1820 to 2015.csv&amp;quot;)
+green_card &amp;lt;- merge(green_card, party_year, by = &amp;quot;Year&amp;quot;)
+removals &amp;lt;- read_csv(&amp;quot;../../static/data/Aliens Removed Or Returned-Fiscal Years 1892 To 2015.csv&amp;quot;)
+removals &amp;lt;- merge(removals, party_year, by = &amp;quot;Year&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;immigration&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Immigration&lt;/h2&gt;
+&lt;p&gt;In this first figure we are defining immigration as the number of people actually receiving a green card in any given year. This is the most strict definition of “immigration” and I think may be best used to show whom the USA was choosing to let in.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data = green_card, aes(x = Year, y = Number)) +
+  geom_col(aes(fill = Party), colour = &amp;quot;black&amp;quot;) +
+  geom_smooth(method = &amp;quot;lm&amp;quot;, colour = &amp;quot;black&amp;quot;) +
+  labs(x = NULL, y = &amp;quot;Green Cards Granted&amp;quot;) +
+  scale_fill_manual(values = c(&amp;quot;slateblue1&amp;quot;, &amp;quot;firebrick1&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/party_immigration_files/figure-html/pi-bar-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;: Bar charts showing the number of green cards granted each year in the USA. The colour of the bars show the ruling party at the time of issuance. A linear model is imposed in black.&lt;/p&gt;
+&lt;p&gt;We may see in Figure 1 that the all time high for the granting of green cards was during the four year administration of George Bush Senior. These values are so much higher than the other administrations that it leverages the linear model drawn on these data up past where it should normally be to show the more normal trend exhibited by all of the other administrations since Eisenhower. That being said, we actually see a bit of a turn down during the Obama administration, with the largest year of green card issuance during the George Bush Junior administration larger than any year under Obama. I find that surprising. Figure 1 also shows us that we can’t really directly compare the different administrations because as populations increase, so too will the number of people that want to immigrate. In a quick pinch however we may use the residuals from the linear model to give us a slightly better visualisation of how the parties stack up against one another.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Calculate residuals
+green_card_resids &amp;lt;- augment(lm(Number~Year, data = green_card))
+green_card_resids &amp;lt;- merge(green_card_resids, party_year, by = &amp;quot;Year&amp;quot;)
+
+# Plot them
+ggplot(data = green_card_resids, aes(x = Year, y = .resid)) +
+  geom_col(aes(fill = Party), colour = &amp;quot;black&amp;quot;) +
+  geom_smooth(method = &amp;quot;lm&amp;quot;, colour = &amp;quot;black&amp;quot;) +
+  labs(x = NULL, y = &amp;quot;Green Cards Granted&amp;quot;) +
+  scale_fill_manual(values = c(&amp;quot;slateblue1&amp;quot;, &amp;quot;firebrick1&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/party_immigration_files/figure-html/pi-resid-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 2&lt;/strong&gt;: The residuals from a linear model fitted to the data shown in Figure 1.&lt;/p&gt;
+&lt;p&gt;It appears as though whenever there was a Bush in office it was much easier to get a green card. And that Democrats generally made it more difficult to do so.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;expulsion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Expulsion&lt;/h2&gt;
+&lt;p&gt;Now that we have seen that it is easier to enter the USA during a Republican presidency, let’s see under which party an illegal immigrant is most likely to be expelled. There are two different classes of expulsion: ‘Removal’ and ‘Return’. Removal means that a legal order was issued to remove the individual. Return means that the individual was likewise not legally in the states, but left of their own volition.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Returns
+return_bar &amp;lt;- ggplot(data = removals, aes(x = Year, y = Returns)) +
+  geom_col(aes(fill = Party), colour = &amp;quot;black&amp;quot;) +
+  # geom_smooth(method = &amp;quot;lm&amp;quot;, colour = &amp;quot;black&amp;quot;) +
+  labs(x = NULL, y = &amp;quot;Immigrants Returned&amp;quot;) +
+  scale_fill_manual(values = c(&amp;quot;slateblue1&amp;quot;, &amp;quot;firebrick1&amp;quot;)) +
+  ggtitle(&amp;quot;Returns&amp;quot;)
+
+# Removals
+removal_bar &amp;lt;- ggplot(data = removals, aes(x = Year, y = Removals)) +
+  geom_col(aes(fill = Party), colour = &amp;quot;black&amp;quot;) +
+  # geom_smooth(method = &amp;quot;lm&amp;quot;, colour = &amp;quot;black&amp;quot;) +
+  labs(x = NULL, y = &amp;quot;Immigrants Removed&amp;quot;) +
+  scale_fill_manual(values = c(&amp;quot;slateblue1&amp;quot;, &amp;quot;firebrick1&amp;quot;)) +
+  ggtitle(&amp;quot;Removals&amp;quot;)
+
+# Stick&amp;#39;em
+grid.arrange(return_bar, removal_bar)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/party_immigration_files/figure-html/pi-double-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 3&lt;/strong&gt;: Two bar charts showing the rates of returns and removals for immigrants from the USA.&lt;/p&gt;
+&lt;p&gt;Figure 3 tells a very interesting story. In the top panel (Returns), we see that from 1953-55 (shortly after WWII) there were massive numbers of immigrants that returned to their home countries voluntarily. Then there is a period of increase leading up to the 80’s. This then follows a somewhat normal distribution, peaking in the late 90’s near the end of the Clinton administration before the peaceful return of immigrants drops steadily through the 8 years of Bush then Obama. The bottom panel (Removals) shows the reason for this apparent relaxation on immigrants. It isn’t that immigrants were being sent away less, but rather they began to be removed more forcefully than appears to have been the policy until something changed during the Clinton Administration. The rate of immigrants being removed became greater than those being returned in 2011 under Obama. Again we see a heavy hand on immigration during years with a Democratic president in office. It is hard to compare the parties on this issue as the policy of forcefully removing immigrants in favour of having them leave peacefully has only been in practice over three administrations (Clinton, Bush Jr. and Obama). That being said, it is worth noting that the y axes on these two figures are not the same. The increase in removals does not outweigh the decrease in returns. Overall the rate of expulsion of immigrants from the states declined during the Obama administration. And perhaps also Bush Jr.&lt;/p&gt;
+&lt;p&gt;It is fair criticism to point out that a green card may take several years to acquire. This means that when one begins the process of applying for a green card it may take so long that a different party will be in power by the time it is granted… or not. I would argue however that most of these parties (with the exception of Carter) are in office for eight year stretches. This is not meant to be a definitive analysis, but I think it has proven to be a rather interesting first step. I didn’t expect the data to look like this. George Bush Senior, saviour to immigrants, who would have thought.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>ODV figures in R</title>
-      <link>https://theoceancode.netlify.com/post/odv_figures/</link>
+      <link>/post/odv_figures/</link>
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/odv_figures/</guid>
+      <guid>/post/odv_figures/</guid>
       <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Objective&lt;/h2&gt;
 &lt;p&gt;With more and more scientists moving to open source software (i.e. R or Python) to perform their numerical analyses the opportunities for collaboration increase and we may all benefit from this enhanced productivity. At the risk of sounding sycophantic, the future of scientific research truly is in multi-disciplinary work. What then could be inhibiting this slow march towards progress? We tend to like to stick to what is comfortable. Oceanographers in South Africa have been using &lt;a href=&#34;https://www.mathworks.com/products/matlab.html&#34;&gt;MATLAB&lt;/a&gt; and &lt;a href=&#34;http://odv.awi.de/&#34;&gt;ODV&lt;/a&gt; (Ocean Data View) since about the time that Jesus was lacing up his sandals for his first trip to Palestine. There has been much debate on the future of MATLAB in science, so I won’t get into that here, but I will say that the package &lt;a href=&#34;https://cran.r-project.org/web/packages/oce/index.html&#34;&gt;oce&lt;/a&gt; contains much of the code that one would need for oceanographic work in R, and the package &lt;a href=&#34;https://cran.r-project.org/web/packages/angstroms/&#34;&gt;angstroms&lt;/a&gt; helps one to work with ROMS (Regional Ocean Modeling System) output. The software that has however largely gone under the radar in these software debates has been ODV. Probably because it is free (after registration) it’s fate has not been sealed by university departments looking to cut costs. The issue with ODV however is the same with all Microsoft products; the sin of having a “pointy clicky” user interface. One cannot perform truly reproducible research with a menu driven user interface. The steps must be written out in code. And so here I will lay out those necessary steps to create an interpolated CTD time series of temperature values that looks as close to the default output of ODV as possible.&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.com/img/ODV_example.jpg&#34; alt=&#34;Figure 1: The default output of ODV when plotting temperature by depth through time at one location.&#34; /&gt;
+&lt;img src=&#34;/img/ODV_example.jpg&#34; alt=&#34;Figure 1: The default output of ODV when plotting temperature by depth through time at one location.&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;: The default output of ODV when plotting temperature by depth through time at one location.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -76,7 +1249,7 @@ ggplot(data = ctd, aes(x = date, y = depth)) +
   geom_point(aes(colour = temp)) +
   scale_colour_gradientn(colours = rev(ODV_colours)) +
   labs(y = &amp;quot;depth (m)&amp;quot;, x = NULL, colour = &amp;quot;temp. (°C)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/odv_figures_files/figure-html/of-scatter-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/odv_figures_files/figure-html/of-scatter-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Figure 2&lt;/strong&gt;: A non-interpolated scatterplot of our temperature (°C) data shown as a function of depth (m) over time.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;interpolating&#34; class=&#34;section level2&#34;&gt;
@@ -106,7 +1279,7 @@ ggplot(data = ctd_mba, aes(x = date, y = depth)) +
 ###
   labs(y = &amp;quot;depth (m)&amp;quot;, x = NULL, fill = &amp;quot;temp. (°C)&amp;quot;) +
   coord_cartesian(expand = 0)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/odv_figures_files/figure-html/of-interp-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/odv_figures_files/figure-html/of-interp-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Figure 3&lt;/strong&gt;: The same temperature (°C) profiles seen in Figure 2 with the missing values filled in with multilevel B-splines. Note the artefact created in the bottom right corner. The 20°C contour line is highlighted in black.&lt;/p&gt;
 &lt;p&gt;At first glance this now appears to be a very good approximation of the output from ODV. An astute eye will have noticed that the temperatures along the bottom right corner of this figure are not interpolating in a way that appears possible. It is very unlikely that there would be a deep mixed layer underneath the thermoclines detected during 2015. The reason the splines create this artefact is that they are based on a convex hull around the real data points and so the interpolating algorithm wants to perform a regression towards a mean value away from the central point of where the spline is being calculated from. Because the thermoclines detected are interspersed between times where the entire water column consists of a mixed layer &lt;code&gt;mba.surf()&lt;/code&gt; is filling in the areas without data as though they are a fully mixed surface layer.&lt;/p&gt;
 &lt;/div&gt;
@@ -155,7 +1328,7 @@ ggplot(data = ctd_mba_bound, aes(x = date, y = depth)) +
   geom_contour(aes(z = temp), breaks = 20, colour = &amp;quot;black&amp;quot;) +
   labs(y = &amp;quot;depth (m)&amp;quot;, x = NULL, fill = &amp;quot;temp. (°C)&amp;quot;) +
   coord_cartesian(expand = 0)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/odv_figures_files/figure-html/of-bound-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/odv_figures_files/figure-html/of-bound-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Figure 4&lt;/strong&gt;: The same temperature (°C) profiles seen in Figure 3 with a bounding box used to screen out data interpolated outside of the range of the recordings.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
@@ -167,58 +1340,239 @@ ggplot(data = ctd_mba_bound, aes(x = date, y = depth)) +
     </item>
     
     <item>
-      <title>Nearshore and offshore co-occurrence of marine heatwaves and cold-spells</title>
-      <link>https://theoceancode.netlify.com/publication/cooccurrence/</link>
-      <pubDate>Tue, 10 Jan 2017 00:00:00 +0200</pubDate>
+      <title>Gender and GDP</title>
+      <link>/post/gender_gdp/</link>
+      <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/publication/cooccurrence/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Example Talk</title>
-      <link>https://theoceancode.netlify.com/talk/example-talk/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/talk/example-talk/</guid>
-      <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+      <guid>/post/gender_gdp/</guid>
+      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Objective&lt;/h2&gt;
+&lt;p&gt;Most people living in the Western World are very quick to extol the virtues of gender equality. There are however many places where this is not so. This then inevitably leads to conflict as cultures and nations are drawn closer together on our ever shrinking earth. Perhaps not the sort of conflict that leads to sabre rattling, but certainly ideological disagreements that affect policy and have real impacts on large swathes of humanity. So what is to be done? How can say how anyone else should be. There are of course all sorts of moral back and forth’s that could be pursued cyclically &lt;em&gt;ad nauseum&lt;/em&gt;, but what if we could show quantitatively what the benefit of gender equality was to a nation and the lives of it’s people? That is the exact sort of question I like to answer here at this blog and it is a question that came up in my daily life a couple of weeks ago. Because most metrics for most countries are recorded, this is the sort of thing that can be answered. Indeed, it has been before, so here I add another take on an argument that really shouldn’t still be happening…&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Data&lt;/h2&gt;
+&lt;p&gt;In order to quantify the benefit of gender equality we are going to need global census data, as this is a conversation that needs to be had at a global level. Happily for us these data may be found at &lt;a href=&#34;www.clio-infra.eu/&#34;&gt;Clio Infra&lt;/a&gt;. This is an amazing web hosted database that contains an unexpected range of information as it aggregates data from many other sources. I’ll likely be going back to this data repository on multiple occasions in the future. But for now we’ll stick to gender equality. For this post we will be looking at a number of variables as this allows us to develop a more nuanced view of the relationships that exist between the wealth of nations and the egalitarianism their cultures engender. It is unfortunately not possible to show causality in the relationships we will model below but I think that educated readers will likely arrive at the same inferences as myself. Of course, if anyone has any objections, faults or errors to point out in the analysis that follows I would be very happy to hear them.&lt;/p&gt;
+&lt;p&gt;The data used in this blog were downloaded in “Compact” form, which comes in .xlsx format. These files were then opened and only the tab containing the data in long format were saved as a .csv file. As an aside, these data are visualised on the Clio Infra website as boxplots using what is clearly &lt;code&gt;ggplot2&lt;/code&gt; code. Also note that unless specified all values are taken as either women/ men or women-men. Meaning that proportions below 1, or negative values signify greater abundance for men than women in those populations.&lt;/p&gt;
+&lt;p&gt;I’ve chosen o use the metrics seen below as I think they represent inequality between genders as well as throughout populations as a whole.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Load libraries
+library(tidyverse)
+library(broom)
+# library(RColorBrewer)
+
+## Load data
+# Educational Inequality Gini Coefficient (after age 15)
+education_inequality &amp;lt;- read_csv(&amp;quot;../../static/data/EducationalInequalityGiniCoefficient.csv&amp;quot;) %&amp;gt;% 
+  mutate(variable = &amp;quot;education_inequality&amp;quot;)
+# GDP per Capita
+gdp_per_capita &amp;lt;- read_csv(&amp;quot;../../static/data/GDPperCapita.csv&amp;quot;) %&amp;gt;% 
+  mutate(variable = &amp;quot;gdp_per_capita&amp;quot;)
+# Gender Equality Years of Education (after age 15)
+gender_equality_education &amp;lt;- read_csv(&amp;quot;../../static/data/GenderEqualityYearsofEducation.csv&amp;quot;) %&amp;gt;% 
+  mutate(variable = &amp;quot;gender_equality_education&amp;quot;)
+# Historical Gender Equality Index
+gender_equality_index &amp;lt;- read_csv(&amp;quot;../../static/data/HistoricalGenderEqualityIndex_Compact.csv&amp;quot;) %&amp;gt;% 
+  mutate(variable = &amp;quot;gender_equality_index&amp;quot;)
+# Gender Equality of Numeracy
+gender_equality_numeracy &amp;lt;- read_csv(&amp;quot;../../static/data/GenderEqualityofNumeracy_Compact.csv&amp;quot;) %&amp;gt;% 
+  mutate(variable = &amp;quot;gender_equality_numeracy&amp;quot;)
+# Income Inequality
+income_inequality &amp;lt;- read_csv(&amp;quot;../../static/data/IncomeInequality.csv&amp;quot;) %&amp;gt;% 
+  mutate(variable = &amp;quot;income_inequality&amp;quot;)
+# Sex Ratio (ages 0 - 5)
+sex_ratio &amp;lt;- read_csv(&amp;quot;../../static/data/SexRatio_Compact.csv&amp;quot;) %&amp;gt;% 
+  mutate(variable = &amp;quot;sex_ratio&amp;quot;)
+# Total Population
+total_population &amp;lt;- read_csv(&amp;quot;../../static/data/TotalPopulation_Compact.csv&amp;quot;) %&amp;gt;% 
+  mutate(variable = &amp;quot;total_population&amp;quot;,
+         value = scale(value)) # Scale the large range
+# Average Years of Education (after age 15)
+years_of_education &amp;lt;- read_csv(&amp;quot;../../static/data/AverageYearsofEducation.csv&amp;quot;) %&amp;gt;% 
+  mutate(variable = &amp;quot;education_years&amp;quot;)
+
+## Create different dataframe
+data_long &amp;lt;- rbind(gdp_per_capita, education_inequality, gender_equality_education, 
+                   gender_equality_index, gender_equality_numeracy, income_inequality, 
+                   sex_ratio, total_population, years_of_education)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;analysis&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Analysis&lt;/h2&gt;
+&lt;p&gt;I recently learned how to use the &lt;code&gt;dplyr&lt;/code&gt; pipe (&lt;code&gt;%&amp;gt;%&lt;/code&gt;) to perform nested models and so am excited to put that to use here. Our first step is to run simple linear models for each metrics we have loaded against GDP per capita without controlling for time (year of sampling) or space (country). The GDP per capita will be correctly compared against it’s corresponding metric at that year and in that country, but we are then allowing mean values effectively to be made of these results. These models will provide us with a range of R^2 values (coefficients of determination), which is the statistic showing how much of the variance in a dependent variable is explained by the independent variable. This allows us to see which of our metrics have the strongest relationship with GDP per capita. Which we may infer as being related to the prosperity of a nation and it’s people.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Here we run linear models on all available data against GDP per capita
+  # We are not controlling for country or year
+lm_data_all &amp;lt;- data_long %&amp;gt;%
+  left_join(., gdp_per_capita[,-5], by = c(&amp;quot;ccode&amp;quot;, &amp;quot;country.name&amp;quot;, &amp;quot;year&amp;quot;)) %&amp;gt;% 
+  rename(., value = value.x, gdp = value.y) %&amp;gt;% 
+  group_by(variable) %&amp;gt;% 
+  mutate(n = sum(!is.na(gdp))) %&amp;gt;%
+  ungroup() %&amp;gt;% 
+  nest(-n, -variable) %&amp;gt;%
+  mutate(fit = map(data, ~ lm(value ~ gdp, data = .)),
+    results = map(fit, glance)) %&amp;gt;% 
+  unnest(results) %&amp;gt;%
+  select(n, variable, adj.r.squared, p.value) %&amp;gt;% 
+  arrange(-adj.r.squared) %&amp;gt;% 
+  filter(variable != &amp;quot;gdp_per_capita&amp;quot;)
+
+# These data are best represented with a table
+knitr::kable(lm_data_all, digits = 3, caption = &amp;quot;R^2 and p-values for the relationship between several metrics and GDP per capita. Years and country of sampling were not controlled for.&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-2&#34;&gt;Table 1: &lt;/span&gt;R^2 and p-values for the relationship between several metrics and GDP per capita. Years and country of sampling were not controlled for.&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;n&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;variable&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;adj.r.squared&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;p.value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1162&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;education_years&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.623&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;215&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;gender_equality_index&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.523&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;134&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;gender_equality_education&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.321&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;9779&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;education_inequality&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.318&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;656&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;income_inequality&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.106&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;348&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;gender_equality_numeracy&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.075&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;205&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;sex_ratio&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.053&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.001&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1371&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;total_population&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-0.001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.760&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;It is possible however that these relationships have not been static over time. We will also want to display the changes in the R^2 values as time series.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Or we may control for years of sampling
+  # This allows us to see if the relationship changes much over time
+lm_data_year &amp;lt;- data_long %&amp;gt;% 
+  left_join(., gdp_per_capita[,-5], by = c(&amp;quot;ccode&amp;quot;, &amp;quot;country.name&amp;quot;, &amp;quot;year&amp;quot;)) %&amp;gt;% 
+  rename(., value = value.x, gdp = value.y) %&amp;gt;% 
+  group_by(year, variable) %&amp;gt;% 
+  mutate(n = sum(!is.na(gdp))) %&amp;gt;%
+  ungroup() %&amp;gt;% 
+  filter(n &amp;gt; 10) %&amp;gt;% # Require at least 10 data points 
+  nest(-n, -year, -variable) %&amp;gt;%
+  mutate(fit = map(data, ~ lm(value ~ gdp, data = .)),
+    results = map(fit, glance)) %&amp;gt;% 
+  unnest(results) %&amp;gt;%
+  select(n, variable, year,  adj.r.squared, p.value) %&amp;gt;% 
+  arrange(-adj.r.squared) %&amp;gt;% 
+  filter(variable != &amp;quot;gdp_per_capita&amp;quot;)
+
+# And now for a time series
+ggplot(data = lm_data_year, aes(x = year, y = adj.r.squared)) +
+  geom_line(aes(colour = variable)) +
+  labs(y = &amp;quot;R^2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/gender_gdp_files/figure-html/gg-time-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Or we may control for the country of sampling
+  # This allows us to see if these relationships 
+  # differ in certain parts of the world
+lm_data_country &amp;lt;- data_long %&amp;gt;% 
+  left_join(., gdp_per_capita[,-5], by = c(&amp;quot;ccode&amp;quot;, &amp;quot;country.name&amp;quot;, &amp;quot;year&amp;quot;)) %&amp;gt;% 
+  rename(., value = value.x, gdp = value.y) %&amp;gt;% 
+  group_by(country.name, variable) %&amp;gt;% 
+  mutate(n = sum(!is.na(gdp))) %&amp;gt;%
+  ungroup() %&amp;gt;% 
+  filter(n &amp;gt; 10) %&amp;gt;% # Require at least 10 data points 
+  nest(-n, -country.name, -variable) %&amp;gt;%
+  mutate(fit = map(data, ~ lm(value ~ gdp, data = .)),
+    results = map(fit, glance)) %&amp;gt;% 
+  unnest(results) %&amp;gt;%
+  select(n, variable, country.name,  adj.r.squared, p.value) %&amp;gt;% 
+  arrange(-adj.r.squared) %&amp;gt;% 
+  filter(variable != &amp;quot;gdp_per_capita&amp;quot;)
+
+# Create labels for figure
+lm_label &amp;lt;- lm_data_country %&amp;gt;% 
+  select(n, variable) %&amp;gt;% 
+  group_by(variable) %&amp;gt;% 
+  summarise(n = sum(n))
+
+# These data allow us to display the range of R^2 values
+# for each country with boxplots
+  # Just to be cheeky let&amp;#39;s use the same themeas Clio Infra
+ggplot(data = lm_data_country, aes(x = variable, y = adj.r.squared)) +
+  geom_boxplot(outlier.colour = NA) +
+  geom_point(colour = &amp;quot;steelblue&amp;quot;, alpha = 0.6, position = &amp;quot;jitter&amp;quot;) +
+  geom_text(data = lm_label, aes(y = -0.1, label = n), 
+            colour = &amp;quot;royalblue3&amp;quot;) +
+  labs(y = &amp;quot;R^2&amp;quot;) +
+  theme(axis.text.x = element_text(angle = 15))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/gender_gdp_files/figure-html/gg-box-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Years of education of the populace is constantly coming out on top, with gender equality in education in third. These two metrics must be related in some way though so let’s look specifically at that relationship.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data_gender &amp;lt;- years_of_education[,-5] %&amp;gt;% 
+  left_join(., gender_equality_education[,-5], by = c(&amp;quot;ccode&amp;quot;, &amp;quot;country.name&amp;quot;, &amp;quot;year&amp;quot;)) %&amp;gt;% 
+  rename(., education_years = value.x, gender_equality_education = value.y)
+data_gender &amp;lt;- data_gender[complete.cases(data_gender$gender_equality_education),]
+
+lm_data_gender1 &amp;lt;- glance(lm(gender_equality_education ~ education_years, data = data_gender))
+lm_data_gender2 &amp;lt;- glance(lm(gender_equality_education ~ education_years, 
+                             data = filter(data_gender, education_years &amp;gt;= 5)))
+
+# And now for a scatterplot
+ggplot(data = data_gender, aes(x = education_years, 
+                                  y = gender_equality_education)) +
+  geom_point() +
+  geom_smooth(colour = &amp;quot;blue&amp;quot;, method = &amp;quot;lm&amp;quot;) +
+  geom_smooth(data = filter(data_gender, education_years &amp;gt;= 5), colour = &amp;quot;red&amp;quot;, method = &amp;quot;lm&amp;quot;) +
+  geom_label(aes(x = 8.5, y = 0.5, label = paste0(&amp;quot;blue line\nR^2 = &amp;quot;, 
+                                                  round(lm_data_gender1$adj.r.squared,3), 
+                                                  &amp;quot;\nred line\nR^2 = &amp;quot;, 
+                                                  round(lm_data_gender2$adj.r.squared,3))))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/gender_gdp_files/figure-html/gg-scatter-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;results&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Results&lt;/h2&gt;
+&lt;p&gt;From Table 1 we may see that the three metrics in descending order that best explain the variance occurring in GDP per capita over time and space are: education of the population as a whole, equality between the genders and the equality in education between the genders. Equality in education for the populace as a whole came in at a close fourth and is perhaps a better predictor than equality between genders due to the much higher sample size that the result is based on (this is an oddly well reported metric). The metrics of income inequality for the populace as a whole, equality in numeracy between genders, and the ratio of sex near birth showed significant relationships with GDP per capita but explained little of the variance. The total population of a country has absolutely nothing to do with the GDP per capita when time and space are not controlled for.&lt;/p&gt;
+&lt;p&gt;We see in Figure 1 that for our top four metrics (&lt;code&gt;education_years&lt;/code&gt;, &lt;code&gt;gender_equality_index&lt;/code&gt;, &lt;code&gt;gender_equality_education&lt;/code&gt; and &lt;code&gt;education_inequality&lt;/code&gt;), only &lt;code&gt;education_years&lt;/code&gt; shows any consistency over time. We also see that &lt;code&gt;education_inequality&lt;/code&gt; has become a much better test of the GDP per capita of a country since the mid 19th century.&lt;/p&gt;
+&lt;p&gt;Figure 2 shows that there is a very large range in the relationship between many of these metrics and GDP per capita when we control for country of measurement. Interestingly, the &lt;code&gt;total_population&lt;/code&gt; of the country is relevant to the GDP per capita when this information is analysed independently by each country. More important than &lt;code&gt;total_population&lt;/code&gt; we see are the metrics &lt;code&gt;education_years&lt;/code&gt; and &lt;code&gt;gender_equality_index&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;When we look at the specific relationship between &lt;code&gt;education_years&lt;/code&gt; and &lt;code&gt;gender_equality_education&lt;/code&gt; it would at first appear that at an R^2 value of 0.518 this was a strong relationship. Looking more closely at Figure 3 one will notice that this relationship is not linear and that the fit of the linear model is being affected by several scores at very low education levels and equality scores. If one were to only account for scores where the &lt;code&gt;education_years&lt;/code&gt; metric is at least 5 years the strength of the relationship falls dramatically to R^2 = 0.199.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;discussion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Discussion&lt;/h2&gt;
+&lt;p&gt;If one was satisfied to take all of the GDP data and the several metrics of equality used in this analysis and clump them together one would be led to believe that the most important thing for a prosperous society is the overall years of education for that countries citizens. This metric is clearly the most important in Table 1, Figure 1 and Figure 2. Equality in education between the genders is also of great importance, though perhaps half as much so as the overall education of the populace. It leads that a society with more equitable education levels between genders would have a greater proportion of educated people and this is generally so however, Figure 3 shows that if one removes scores from nations with particularly low levels of overall education this relationship falls apart. This is because most countries in the world have relatively even levels of education between genders. There is little pattern here because there is little variance in &lt;code&gt;gender_equality_education&lt;/code&gt; once the less educated nations have been removed from the calculation.&lt;/p&gt;
+&lt;p&gt;More important to GDP than equal education for genders appears to be the &lt;em&gt;overall&lt;/em&gt; equality between genders. This value accounts for much more than education alone and appears to better capture how an egalitarian society benefits from the equal treatment of it’s citizens. Clio Infra states that this metric represents:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The composite index aims to evaluate countries’ performances regarding the progress they made in closing the gender gap in the fields of health, socio-economic resources, politics and household since 1950&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;When I started this research I had assumed that equal education between genders would clearly be a very important metric in regards to a prosperous society. Surprisingly this appears to not be as concrete as expected. It certainly is important, more so than income inequality, for example, but is not as important as the &lt;em&gt;overall&lt;/em&gt; equality between the genders. This finding is deceiving though because the equality in education for most countries (not just rich ones) is high. It is the difference in equality between genders generally that shows a broader range, and the difference relates strongly to GDP per capita. So a potential recipe for success seems to be to first ensure that as much of a populace as possible (of all genders) receives as much education as possible. It seems likely that this would then fuel gender equality, but the data don’t show this unilaterally. So to really move a nation to the top of the GDP per capita list would also require an active effort in ensuring well rounded rights to all genders.&lt;/p&gt;
+&lt;/div&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Climate Change in Coastal Waters: Time Series Properties Affecting Trend Estimation</title>
-      <link>https://theoceancode.netlify.com/publication/trend-analysis/</link>
-      <pubDate>Thu, 15 Dec 2016 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/publication/trend-analysis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Deep Learning</title>
-      <link>https://theoceancode.netlify.com/project/deep-learning/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/project/deep-learning/</guid>
-      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>External Project</title>
-      <link>https://theoceancode.netlify.com/project/example-external-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/project/example-external-project/</guid>
-      <description></description>
     </item>
     
   </channel>

@@ -35,7 +35,7 @@ filter_default = 0
 
 [[filter]]
   name = "Marine Heatwaves"
-  tag = "Marine Heatwaves"
+  tag = "marine heatwaves"
 
 [[filter]]
   name = "R"

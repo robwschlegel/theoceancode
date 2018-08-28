@@ -4,7 +4,39 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/privacy/</loc>
+      <loc>/publication/heatwaver/</loc>
+      <lastmod>2018-08-31T00:00:00+02:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/project/detecting_mhws/</loc>
+      <lastmod>2018-08-28T00:00:00+02:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/project/heatwaver/</loc>
+      <lastmod>2018-07-28T00:00:00+02:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/sa_time_survey/</loc>
+      <lastmod>2018-07-17T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/privacy/</loc>
       <lastmod>2018-06-28T00:00:00+02:00</lastmod>
     </url>
     
@@ -12,7 +44,15 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/publication/predominant/</loc>
+      <loc>/post/transects/</loc>
+      <lastmod>2017-12-08T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/publication/predominant/</loc>
       <lastmod>2017-10-17T00:00:00+02:00</lastmod>
     </url>
     
@@ -20,7 +60,55 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/post/odv_figures/</loc>
+      <loc>/project/coastr/</loc>
+      <lastmod>2017-08-28T00:00:00+02:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/polar_plot_clims/</loc>
+      <lastmod>2017-08-23T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/seq_sites/</loc>
+      <lastmod>2017-08-23T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/mapping_with_ggplot2/</loc>
+      <lastmod>2017-07-17T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/goats_per_capita/</loc>
+      <lastmod>2017-07-10T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/party_immigration/</loc>
+      <lastmod>2017-07-03T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/odv_figures/</loc>
       <lastmod>2017-06-26T00:00:00+00:00</lastmod>
     </url>
     
@@ -28,7 +116,31 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/publication/cooccurrence/</loc>
+      <loc>/post/gender_gdp/</loc>
+      <lastmod>2017-06-12T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/wind_vectors/</loc>
+      <lastmod>2017-06-12T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/religious_sentiment/</loc>
+      <lastmod>2017-05-15T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/publication/cooccurrence/</loc>
       <lastmod>2017-01-10T00:00:00+02:00</lastmod>
     </url>
     
@@ -36,7 +148,7 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/talk/example-talk/</loc>
+      <loc>/talk/example-talk/</loc>
       <lastmod>2017-01-01T00:00:00+02:00</lastmod>
     </url>
     
@@ -44,7 +156,7 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/post/</loc>
+      <loc>/post/</loc>
       <lastmod>2017-01-01T00:00:00+02:00</lastmod>
     </url>
     
@@ -52,7 +164,7 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/publication/</loc>
+      <loc>/publication/</loc>
       <lastmod>2017-01-01T00:00:00+02:00</lastmod>
     </url>
     
@@ -60,7 +172,7 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/talk/</loc>
+      <loc>/talk/</loc>
       <lastmod>2017-01-01T00:00:00+02:00</lastmod>
     </url>
     
@@ -68,7 +180,7 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/publication/trend-analysis/</loc>
+      <loc>/publication/trend-analysis/</loc>
       <lastmod>2016-12-15T00:00:00+02:00</lastmod>
     </url>
     
@@ -76,23 +188,16 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/project/deep-learning/</loc>
-      <lastmod>2016-04-27T00:00:00+02:00</lastmod>
+      <loc>/publication_types/2/</loc>
+      <lastmod>2018-08-31T00:00:00+02:00</lastmod>
+      <priority>0</priority>
     </url>
     
   
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/project/example-external-project/</loc>
-      <lastmod>2016-04-27T00:00:00+02:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.com/publication_types/2/</loc>
+      <loc>/tags/atmosphere/</loc>
       <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
@@ -101,8 +206,7 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/atmosphere/</loc>
-      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
+      <loc>/categories/</loc>
       <priority>0</priority>
     </url>
     
@@ -110,7 +214,8 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/categories/</loc>
+      <loc>/tags/climatology/</loc>
+      <lastmod>2017-08-23T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -118,8 +223,8 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/coastal/</loc>
-      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
+      <loc>/tags/coastal/</loc>
+      <lastmod>2017-12-08T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -127,8 +232,8 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/deep-learning/</loc>
-      <lastmod>2016-04-27T00:00:00+02:00</lastmod>
+      <loc>/tags/gdp/</loc>
+      <lastmod>2017-06-12T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -136,8 +241,8 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/demo/</loc>
-      <lastmod>2016-04-27T00:00:00+02:00</lastmod>
+      <loc>/tags/gender/</loc>
+      <lastmod>2017-06-12T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -145,7 +250,16 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/interpolation/</loc>
+      <loc>/tags/goats/</loc>
+      <lastmod>2017-07-10T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/interpolation/</loc>
       <lastmod>2017-06-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -154,7 +268,25 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/odv/</loc>
+      <loc>/tags/mapping/</loc>
+      <lastmod>2017-07-17T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/marine-heatwaves/</loc>
+      <lastmod>2018-08-31T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/odv/</loc>
       <lastmod>2017-06-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -163,7 +295,7 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/ocean/</loc>
+      <loc>/tags/ocean/</loc>
       <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
@@ -172,8 +304,8 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/project/</loc>
-      <lastmod>2016-04-27T00:00:00+02:00</lastmod>
+      <loc>/tags/politics/</loc>
+      <lastmod>2017-07-03T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -181,7 +313,79 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/publication_types/</loc>
+      <loc>/project/</loc>
+      <lastmod>2018-08-28T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/publication_types/</loc>
+      <lastmod>2018-08-31T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/categories/r/</loc>
+      <lastmod>2018-07-17T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/r/</loc>
+      <lastmod>2018-08-31T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/religion/</loc>
+      <lastmod>2017-05-15T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/sentiment-analysis/</loc>
+      <lastmod>2017-05-15T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/statistics/</loc>
+      <lastmod>2018-07-17T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/survey/</loc>
+      <lastmod>2018-07-17T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/</loc>
       <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
@@ -190,8 +394,8 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/categories/r/</loc>
-      <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+      <loc>/tags/text-mining/</loc>
+      <lastmod>2017-05-15T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -199,25 +403,7 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/r/</loc>
-      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.com/tags/</loc>
-      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.com/</loc>
+      <loc>/</loc>
       <lastmod>2017-10-15T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
@@ -226,7 +412,7 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/time-series-analysis/</loc>
+      <loc>/tags/time-series-analysis/</loc>
       <lastmod>2016-12-15T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
@@ -235,8 +421,17 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.com/tags/visuals/</loc>
-      <lastmod>2017-06-26T00:00:00+00:00</lastmod>
+      <loc>/tags/visuals/</loc>
+      <lastmod>2017-08-23T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/wind/</loc>
+      <lastmod>2017-07-17T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

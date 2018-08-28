@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Marine heatwaves on The Ocean Code</title>
+    <link>/tags/marine-heatwaves/</link>
+    <description>Recent content in Marine heatwaves on The Ocean Code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Fri, 31 Aug 2018 00:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="/tags/marine-heatwaves/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
+      <link>/publication/heatwaver/</link>
+      <pubDate>Fri, 31 Aug 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/publication/heatwaver/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Detecting marine heatwaves</title>
+      <link>/project/detecting_mhws/</link>
+      <pubDate>Tue, 28 Aug 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/project/detecting_mhws/</guid>
+      <description>I&amp;rsquo;m currently working on a paper to be submitted to the upcoming special issue of Frontiers in Marine Science on marine heatwaves. Click the &amp;lsquo;Go to Project Site&amp;rsquo; button below to go to the website containing the up-to-date progress on this project.</description>
+    </item>
+    
+    <item>
+      <title>heatwaveR package</title>
+      <link>/project/heatwaver/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/project/heatwaver/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,238 @@
+ccode,country.name,year,value
+32,Argentina,1900,60
+36,Australia,1900,63
+76,Brazil,1900,61
+124,Canada,1900,63
+250,France,1900,63
+276,Germany,1900,62
+356,India,1900,50
+380,Italy,1900,57
+392,Japan,1900,61
+484,Mexico,1900,58
+528,Netherlands,1900,59
+643,Russia,1900,68
+724,Spain,1900,57
+752,Sweden,1900,61
+792,Turkey,1900,51
+826,United Kingdom,1900,66
+840,United States,1900,64
+32,Argentina,1910,60
+36,Australia,1910,63
+76,Brazil,1910,60
+124,Canada,1910,63
+818,Egypt,1910,50
+250,France,1910,66
+276,Germany,1910,62
+356,India,1910,51
+380,Italy,1910,61
+392,Japan,1910,61
+484,Mexico,1910,59
+528,Netherlands,1910,60
+643,Russia,1910,67
+724,Spain,1910,57
+752,Sweden,1910,61
+792,Turkey,1910,50
+826,United Kingdom,1910,66
+840,United States,1910,64
+32,Argentina,1920,61
+36,Australia,1920,64
+76,Brazil,1920,59
+124,Canada,1920,62
+156,China,1920,61
+818,Egypt,1920,52
+250,France,1920,63
+276,Germany,1920,62
+356,India,1920,52
+380,Italy,1920,59
+392,Japan,1920,62
+484,Mexico,1920,58
+528,Netherlands,1920,62
+616,Poland,1920,63
+710,South Africa,1920,60
+724,Spain,1920,58
+752,Sweden,1920,62
+764,Thailand,1920,63
+792,Turkey,1920,53
+826,United Kingdom,1920,66
+840,United States,1920,64
+32,Argentina,1930,61
+36,Australia,1930,65
+76,Brazil,1930,59
+124,Canada,1930,64
+156,China,1930,62
+818,Egypt,1930,50
+250,France,1930,64
+276,Germany,1930,63
+356,India,1930,51
+380,Italy,1930,59
+392,Japan,1930,62
+484,Mexico,1930,57
+528,Netherlands,1930,62
+616,Poland,1930,65
+710,South Africa,1930,62
+724,Spain,1930,61
+752,Sweden,1930,62
+764,Thailand,1930,63
+792,Turkey,1930,58
+826,United Kingdom,1930,66
+840,United States,1930,65
+32,Argentina,1940,62
+36,Australia,1940,64
+76,Brazil,1940,61
+124,Canada,1940,65
+818,Egypt,1940,52
+250,France,1940,67
+276,Germany,1940,61
+356,India,1940,52
+380,Italy,1940,63
+392,Japan,1940,64
+484,Mexico,1940,58
+528,Netherlands,1940,62
+616,Poland,1940,65
+710,South Africa,1940,63
+724,Spain,1940,60
+752,Sweden,1940,65
+764,Thailand,1940,65
+792,Turkey,1940,56
+826,United Kingdom,1940,68
+840,United States,1940,66
+32,Argentina,1950,67
+36,Australia,1950,65
+76,Brazil,1950,61
+124,Canada,1950,65
+156,China,1950,63
+818,Egypt,1950,52
+250,France,1950,66
+276,Germany,1950,68
+356,India,1950,53
+360,Indonesia,1950,59
+380,Italy,1950,64
+392,Japan,1950,65
+404,Kenya,1950,60
+484,Mexico,1950,60
+528,Netherlands,1950,65
+616,Poland,1950,69
+710,South Africa,1950,64
+724,Spain,1950,59
+752,Sweden,1950,69
+764,Thailand,1950,63
+792,Turkey,1950,57
+826,United Kingdom,1950,69
+840,United States,1950,68
+32,Argentina,1960,64
+36,Australia,1960,65
+76,Brazil,1960,62
+124,Canada,1960,66
+156,China,1960,64
+818,Egypt,1960,51
+250,France,1960,66
+276,Germany,1960,67
+356,India,1960,53
+360,Indonesia,1960,61
+380,Italy,1960,64
+392,Japan,1960,66
+404,Kenya,1960,58
+484,Mexico,1960,61
+528,Netherlands,1960,66
+616,Poland,1960,71
+710,South Africa,1960,65
+724,Spain,1960,61
+752,Sweden,1960,70
+764,Thailand,1960,65
+792,Turkey,1960,56
+826,United Kingdom,1960,68
+840,United States,1960,68
+32,Argentina,1970,66
+36,Australia,1970,65
+76,Brazil,1970,63
+124,Canada,1970,68
+156,China,1970,69
+818,Egypt,1970,53
+250,France,1970,68
+276,Germany,1970,67
+356,India,1970,54
+360,Indonesia,1970,62
+380,Italy,1970,65
+392,Japan,1970,66
+404,Kenya,1970,59
+484,Mexico,1970,63
+528,Netherlands,1970,67
+616,Poland,1970,74
+710,South Africa,1970,65
+724,Spain,1970,62
+752,Sweden,1970,74
+764,Thailand,1970,66
+792,Turkey,1970,58
+826,United Kingdom,1970,69
+840,United States,1970,70
+32,Argentina,1980,65
+36,Australia,1980,69
+76,Brazil,1980,66
+124,Canada,1980,72
+156,China,1980,72
+818,Egypt,1980,56
+250,France,1980,70
+276,Germany,1980,70
+356,India,1980,56
+360,Indonesia,1980,64
+380,Italy,1980,69
+392,Japan,1980,67
+404,Kenya,1980,62
+484,Mexico,1980,66
+528,Netherlands,1980,72
+616,Poland,1980,76
+710,South Africa,1980,65
+724,Spain,1980,65
+752,Sweden,1980,82
+764,Thailand,1980,69
+792,Turkey,1980,60
+826,United Kingdom,1980,69
+840,United States,1980,71
+32,Argentina,1990,72
+36,Australia,1990,72
+76,Brazil,1990,69
+124,Canada,1990,75
+156,China,1990,72
+818,Egypt,1990,57
+250,France,1990,72
+276,Germany,1990,76
+356,India,1990,58
+360,Indonesia,1990,66
+380,Italy,1990,70
+392,Japan,1990,68
+404,Kenya,1990,63
+484,Mexico,1990,68
+528,Netherlands,1990,78
+616,Poland,1990,74
+643,Russia,1990,74
+710,South Africa,1990,73
+724,Spain,1990,73
+752,Sweden,1990,87
+764,Thailand,1990,70
+792,Turkey,1990,59
+826,United Kingdom,1990,73
+840,United States,1990,73
+32,Argentina,2000,79
+36,Australia,2000,78
+76,Brazil,2000,70
+124,Canada,2000,77
+156,China,2000,71
+818,Egypt,2000,57
+250,France,2000,73
+276,Germany,2000,80
+356,India,2000,59
+360,Indonesia,2000,66
+380,Italy,2000,70
+392,Japan,2000,70
+404,Kenya,2000,64
+484,Mexico,2000,71
+528,Netherlands,2000,83
+616,Poland,2000,76
+643,Russia,2000,73
+710,South Africa,2000,81
+724,Spain,2000,77
+752,Sweden,2000,91
+764,Thailand,2000,71
+792,Turkey,2000,60
+826,United Kingdom,2000,76
+840,United States,2000,74

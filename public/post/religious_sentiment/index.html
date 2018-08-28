@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en-uk">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 2.4.0">
+  <meta name="generator" content="Hugo 0.45" />
+  <meta name="author" content="Robert William Schlegel">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Objective Before we begin, I would like to acknowledge that the framework for this analysis was adapted from a blogpost found on the wonderfully interesting R-bloggers website. The objective of this analysis is to use sentiment analysis on different religious texts to visualise the differences/ similarities between them. This concept is of course fraught with a host of issues. Not least of which being detractors who will likely not endeavour to engage in rational debate against the findings of this work.">
+
+  
+  <link rel="alternate" hreflang="en-uk" href="/post/religious_sentiment/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="The Ocean Code">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="The Ocean Code">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/religious_sentiment/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@wiederweiter">
+  <meta property="twitter:creator" content="@wiederweiter">
+  
+  <meta property="og:site_name" content="The Ocean Code">
+  <meta property="og:url" content="/post/religious_sentiment/">
+  <meta property="og:title" content="Religious sentiment | The Ocean Code">
+  <meta property="og:description" content="Objective Before we begin, I would like to acknowledge that the framework for this analysis was adapted from a blogpost found on the wonderfully interesting R-bloggers website. The objective of this analysis is to use sentiment analysis on different religious texts to visualise the differences/ similarities between them. This concept is of course fraught with a host of issues. Not least of which being detractors who will likely not endeavour to engage in rational debate against the findings of this work.">
+  <meta property="og:locale" content="en-uk">
+  
+  <meta property="article:published_time" content="2017-05-15T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2017-05-15T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>Religious sentiment | The Ocean Code</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">The Ocean Code</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Blog</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#publications">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#teaching">
+            
+            <span>Teaching</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#workshops">
+            
+            <span>Workshops</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Religious sentiment</h1>
+
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Robert William Schlegel">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2017-05-15 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2017-05-15 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      2017-05-15
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Robert William Schlegel">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/r/">R</a>
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Religious%20sentiment&amp;url=%2fpost%2freligious_sentiment%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2freligious_sentiment%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2freligious_sentiment%2f&amp;title=Religious%20sentiment"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2freligious_sentiment%2f&amp;title=Religious%20sentiment"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Religious%20sentiment&amp;body=%2fpost%2freligious_sentiment%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <div id="objective" class="section level2">
+<h2>Objective</h2>
+<p>Before we begin, I would like to acknowledge that the framework for this analysis was adapted from a <a href="https://www.r-bloggers.com/parsing-text-for-emotion-terms-analysis-visualization-using-r/">blogpost</a> found on the wonderfully interesting <a href="https://www.r-bloggers.com/">R-bloggers</a> website. The objective of this analysis is to use sentiment analysis on different religious texts to visualise the differences/ similarities between them. This concept is of course fraught with a host of issues. Not least of which being detractors who will likely not endeavour to engage in rational debate against the findings of this work. This is of course beyond the control of the experimental design so I rather focus here on the issue that the translations of the texts used are not modern, and none of them were written (and generally not intended to be read in) English. Therefore a sentiment analysis of these works will be given to a certain amount of inaccuracy because the sentiment database is a recent project and one must assume that the emotions attached to the words in the English language reflect modern sentiment, and not the emotive responses that were necessarily desired at the time of writing/ translation. That being said, the sentiment that these texts would elicit in a reader today (assuming that anyone actually still reads the source material for their faith) would be accurately reflected by the sentiment analysis project and so this issue is arguably a minor one. As a control group (non-religious text), we will be using <em>Pride and Prejudice</em>, by Jane Austen simply because this has already been ported into R and is readily accesible in the package <strong><code>janeaustenr</code></strong>.</p>
+<p>For more information on the sentiment analysis project one may find the home page <a href="http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm">here</a>.</p>
+</div>
+<div id="text-downloads" class="section level2">
+<h2>Text Downloads</h2>
+<p>The following links were used to download the religious texts used in this analysis:</p>
+<ul>
+<li><a href="http://www.qurandownload.com/English-Quran(Yusuf-Ali)-WB.pdf">Quran</a></li>
+<li><a href="http://www.christistheway.com/pdfs/KJVnew.pdf">Bible(New Testament)</a></li>
+<li><a href="http://www.ishwar.com/ebooks/judaism.html">Torah</a></li>
+<li><a href="http://www.dlshq.org/download/bgita.pdf">Bhagavad Gita</a></li>
+<li><a href="http://www.holybooks.com/wp-content/uploads/Egyptian-Book-of-the-Dead.pdf">Egyptian Book of the Dead</a></li>
+</ul>
+<p>I generally used the first link that DuckDuckGo provided when searching for pdf versions of these books. If anyone knows of better sources for these texts please let me know and I would be happy to update the data source.</p>
+</div>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<p>The packages required to perform the following analysis</p>
+<pre class="r"><code>library(pdftools)
+library(tidyverse)
+library(tidytext)
+library(janeaustenr)
+library(heatwaveR)</code></pre>
+</div>
+<div id="analysis" class="section level2">
+<h2>Analysis</h2>
+<p>First we convert the PDF’s to text and merge them.</p>
+<pre class="r"><code>## Load the texts
+# Pride and Prejudice
+pride &lt;- data_frame(txt = prideprejudice, 
+                    src = &quot;pride&quot;)
+# Quran
+quran &lt;- data_frame(txt = as.character(pdf_text(&quot;../../static/data/EQuran.pdf&quot;)),
+                    src = &quot;quran&quot;)
+# Bible
+bible &lt;- data_frame(txt = as.character(pdf_text(&quot;../../static/data/KJBNew.pdf&quot;)),
+                    src = &quot;bible&quot;)
+# Torah
+torah &lt;- data_frame(txt = as.character(pdf_text(&quot;../../static/data/Torah.pdf&quot;)), 
+                    src = &quot;torah&quot;)
+# Bhagavad Gita
+gita &lt;- data_frame(txt = as.character(pdf_text(&quot;../../static/data/BGita.pdf&quot;)), 
+                    src = &quot;gita&quot;)
+# Book of the dead
+dead &lt;- data_frame(txt = as.character(pdf_text(&quot;../../static/data/EBoD.pdf&quot;)),
+                   src = &quot;dead&quot;)
+# Combine
+texts &lt;- rbind(pride, quran, bible, torah, gita, dead)</code></pre>
+<p>After loading and merging the texts we want to run some quick word counts on them.</p>
+<pre class="r"><code># Total relevant words per text
+total_word_count &lt;- texts %&gt;%
+  unnest_tokens(word, txt) %&gt;%  
+  anti_join(stop_words, by = &quot;word&quot;) %&gt;%
+  filter(!grepl(&#39;[0-9]&#39;, word)) %&gt;%
+  filter(!grepl(&#39;www.christistheway.com&#39;, word)) %&gt;%
+  left_join(get_sentiments(&quot;nrc&quot;), by = &quot;word&quot;) %&gt;%
+  group_by(src) %&gt;%
+  summarise(total = n()) %&gt;%
+  ungroup()
+
+# Total emotive words per text
+emotive_word_count &lt;- texts %&gt;% 
+  unnest_tokens(word, txt) %&gt;%                           
+  anti_join(stop_words, by = &quot;word&quot;) %&gt;%                  
+  filter(!grepl(&#39;[0-9]&#39;, word)) %&gt;%
+  filter(!grepl(&#39;www.christistheway.com&#39;, word)) %&gt;%
+  left_join(get_sentiments(&quot;nrc&quot;), by = &quot;word&quot;) %&gt;%
+  filter(!(sentiment == &quot;negative&quot; | sentiment == &quot;positive&quot; | sentiment == &quot;NA&quot;)) %&gt;%
+  group_by(src) %&gt;%
+  summarise(emotions = n()) %&gt;%
+  ungroup()
+
+# Positivity proportion
+positivity_word_count &lt;- texts %&gt;% 
+  unnest_tokens(word, txt) %&gt;%                           
+  anti_join(stop_words, by = &quot;word&quot;) %&gt;%                  
+  filter(!grepl(&#39;[0-9]&#39;, word)) %&gt;%
+  filter(!grepl(&#39;www.christistheway.com&#39;, word)) %&gt;%
+  left_join(get_sentiments(&quot;nrc&quot;), by = &quot;word&quot;) %&gt;%
+  filter(sentiment == &quot;positive&quot; | sentiment == &quot;negative&quot;) %&gt;%
+  group_by(src, sentiment) %&gt;%
+  summarise(emotions = n()) %&gt;%
+  summarise(positivity = emotions[sentiment == &quot;positive&quot;]/ emotions[sentiment == &quot;negative&quot;]) %&gt;% 
+  ungroup()
+
+# Combine
+word_count &lt;- cbind(total_word_count, emotive_word_count[2], positivity_word_count[2]) %&gt;% 
+  mutate(proportion = round(emotions/total, 2))
+
+# Lolliplot
+ggplot(data = word_count, aes(x = as.factor(src), y = proportion)) +
+  geom_lolli(colour = &quot;black&quot;) +
+  geom_point(aes(colour = positivity)) +
+  geom_text(aes(y = 0.45, label = paste0(&quot;n = &quot;, total)), colour = &quot;red&quot;) +
+  scale_y_continuous(limits = c(0,0.5)) +
+  scale_color_continuous(&quot;Proportion of\nPositivity&quot;, low = &quot;steelblue&quot;, high = &quot;salmon&quot;) +
+  labs(x = &quot;Text&quot;, y = &quot;Proportion of Emotive Words&quot;)</code></pre>
+<div class="figure"><span id="fig:rs-lolli"></span>
+<img src="/post/religious_sentiment_files/figure-html/rs-lolli-1.png" alt="Proportion of emotive words in each text to their total word counts (shown in red)." width="672" />
+<p class="caption">
+Figure 1: Proportion of emotive words in each text to their total word counts (shown in red).
+</p>
+</div>
+<p>I find it somewhat surprising that The Egyptian Book of the Dead would have the highest proportion of positive sentiment to negative sentiment.</p>
+<p>But let’s take a more in depth look at the sentiment for each text.</p>
+<pre class="r"><code># Calculate emotions
+emotions &lt;- texts %&gt;% 
+  unnest_tokens(word, txt) %&gt;%                           
+  anti_join(stop_words, by = &quot;word&quot;) %&gt;%                  
+  filter(!grepl(&#39;[0-9]&#39;, word)) %&gt;%
+  filter(!grepl(&#39;King James Version of the New Testament - &#39;, word)) %&gt;%
+  filter(!grepl(&#39;www.christistheway.com&#39;, word)) %&gt;% 
+  filter(!grepl(&#39;BHAGAVAD GITA&#39;, word)) %&gt;%
+  left_join(get_sentiments(&quot;nrc&quot;), by = &quot;word&quot;) %&gt;%
+  filter(!(sentiment == &quot;negative&quot; | sentiment == &quot;positive&quot;)) %&gt;%
+  group_by(src, sentiment) %&gt;%
+  summarize(freq = n()) %&gt;%
+  mutate(proportion = round(freq/sum(freq),2)) %&gt;%
+  # select(-freq) %&gt;%
+  ungroup()</code></pre>
+<pre class="r"><code># Boxplot
+ggplot(emotions, aes(x = sentiment, y = proportion)) +
+  geom_boxplot(fill = &quot;grey70&quot;) +
+  geom_point(aes(colour = src), position = &quot;jitter&quot;, size = 2) +
+  labs(x = &quot;Sentiment&quot;, y = &quot;Proportion&quot;, colour = &quot;Text&quot;)</code></pre>
+<div class="figure"><span id="fig:rs-box"></span>
+<img src="/post/religious_sentiment_files/figure-html/rs-box-1.png" alt="Boxplots of emotion for the texts. Individual scores shown as coloured points." width="672" />
+<p class="caption">
+Figure 2: Boxplots of emotion for the texts. Individual scores shown as coloured points.
+</p>
+</div>
+<pre class="r"><code>ggplot(emotions, aes(x = sentiment, y = proportion)) +
+  geom_polygon(aes(fill = src, group = src), alpha = 0.8, show.legend = FALSE) +
+  coord_polar() +
+  scale_y_continuous(limits = c(0, 0.3)) +
+  facet_wrap(~src) +
+  labs(x = &quot;&quot;, y = &quot;&quot;)</code></pre>
+<div class="figure"><span id="fig:rs-poly"></span>
+<img src="/post/religious_sentiment_files/figure-html/rs-poly-1.png" alt="Frequency polygons of the proportion of emotions for each text shown in facets." width="672" />
+<p class="caption">
+Figure 3: Frequency polygons of the proportion of emotions for each text shown in facets.
+</p>
+</div>
+</div>
+<div id="results" class="section level2">
+<h2>Results</h2>
+<p>The frequency polygons shown here most notably outline that all of the texts emphasise trust over anything else. Another interesting pattern is the lack of surprise employed in the texts. The Bhagavad Gita seems to have the smoothest distribution of emotion, with the Quran perhaps coming in second. I found it odd that a novel, Pride and Prejudice, would employ a higher proportion of joyous sentiment than the religious texts against which it was compared. The Quran just barely nudges out the Bhagavad Gita to come out on top for angry and fearful sentiment. The Torah stands out from the other texts due to the amount of disgust expressed therein. After Pride and Prejudice, the Bible uses the largest proportion of words that elicited emotions of anticipation.</p>
+<p>There is still much more that may or may not be deduced from these cursory results. Most notably lacking from this analysis is any test for significant differences. The reason for that being that I am not interested in supporting any sort of argument for differences between these texts. With <em>n</em> values (word count) in excess of 3,000 significant differences between the different texts is almost guaranteed as well so any use of a <em>p</em>-value here would just be cheap p-hacking anyway.</p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="label label-default" href="/tags/religion/">religion</a>
+  
+  <a class="label label-default" href="/tags/text-mining/">text mining</a>
+  
+  <a class="label label-default" href="/tags/sentiment-analysis/">sentiment analysis</a>
+  
+</div>
+
+
+
+
+    
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+
+    
+    <p class="powered-by">
+      <a href="/privacy/">Privacy Policy</a>
+    </p>
+    
+
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: { linebreaks: { automatic: true } },
+        tex2jax: { inlineMath: [ ['$', '$'], ['\\(','\\)'] ], displayMath: [ ['$$','$$'], ['\\[', '\\]'] ], processEscapes: false },
+        TeX: { noUndefined: { attributes: { mathcolor: 'red', mathbackground: '#FFEEEE', mathsize: '90%' } } },
+        messageStyle: 'none'
+      });
+    </script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/search.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    <script src="/js/search.js"></script>
+    
+
+    
+    
+
+  </body>
+</html>
+
