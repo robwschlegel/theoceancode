@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on The Ocean Code</title>
-    <link>/project/</link>
+    <link>https://theoceancode.netlify.com/project/</link>
     <description>Recent content in Projects on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Tue, 28 Aug 2018 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 28 Aug 2018 00:00:00 -0300</lastBuildDate>
     
-	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.com/project/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Detecting marine heatwaves</title>
-      <link>/project/detecting_mhws/</link>
-      <pubDate>Tue, 28 Aug 2018 00:00:00 +0200</pubDate>
+      <link>https://theoceancode.netlify.com/project/detecting_mhws/</link>
+      <pubDate>Tue, 28 Aug 2018 00:00:00 -0300</pubDate>
       
-      <guid>/project/detecting_mhws/</guid>
+      <guid>https://theoceancode.netlify.com/project/detecting_mhws/</guid>
       <description>I&amp;rsquo;m currently working on a paper to be submitted to the upcoming special issue of Frontiers in Marine Science on marine heatwaves. Click the &amp;lsquo;Go to Project Site&amp;rsquo; button below to go to the website containing the up-to-date progress on this project.</description>
     </item>
     
     <item>
       <title>heatwaveR package</title>
-      <link>/project/heatwaver/</link>
-      <pubDate>Sat, 28 Jul 2018 00:00:00 +0200</pubDate>
+      <link>https://theoceancode.netlify.com/project/heatwaver/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 -0300</pubDate>
       
-      <guid>/project/heatwaver/</guid>
+      <guid>https://theoceancode.netlify.com/project/heatwaver/</guid>
       <description></description>
     </item>
     
     <item>
       <title>coastR package</title>
-      <link>/project/coastr/</link>
-      <pubDate>Mon, 28 Aug 2017 00:00:00 +0200</pubDate>
+      <link>https://theoceancode.netlify.com/project/coastr/</link>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 -0300</pubDate>
       
-      <guid>/project/coastr/</guid>
+      <guid>https://theoceancode.netlify.com/project/coastr/</guid>
       <description></description>
     </item>
     

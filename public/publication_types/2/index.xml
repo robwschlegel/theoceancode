@@ -2,49 +2,49 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>2 on The Ocean Code</title>
-    <link>/publication_types/2/</link>
+    <link>https://theoceancode.netlify.com/publication_types/2/</link>
     <description>Recent content in 2 on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Fri, 31 Aug 2018 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 31 Aug 2018 00:00:00 -0300</lastBuildDate>
     
-	<atom:link href="/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.com/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
-      <link>/publication/heatwaver/</link>
-      <pubDate>Fri, 31 Aug 2018 00:00:00 +0200</pubDate>
+      <link>https://theoceancode.netlify.com/publication/heatwaver/</link>
+      <pubDate>Fri, 31 Aug 2018 00:00:00 -0300</pubDate>
       
-      <guid>/publication/heatwaver/</guid>
+      <guid>https://theoceancode.netlify.com/publication/heatwaver/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
-      <link>/publication/predominant/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
+      <link>https://theoceancode.netlify.com/publication/predominant/</link>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
       
-      <guid>/publication/predominant/</guid>
+      <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Nearshore and offshore co-occurrence of marine heatwaves and cold-spells</title>
-      <link>/publication/cooccurrence/</link>
-      <pubDate>Tue, 10 Jan 2017 00:00:00 +0200</pubDate>
+      <link>https://theoceancode.netlify.com/publication/cooccurrence/</link>
+      <pubDate>Tue, 10 Jan 2017 00:00:00 -0400</pubDate>
       
-      <guid>/publication/cooccurrence/</guid>
+      <guid>https://theoceancode.netlify.com/publication/cooccurrence/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Climate Change in Coastal Waters: Time Series Properties Affecting Trend Estimation</title>
-      <link>/publication/trend-analysis/</link>
-      <pubDate>Thu, 15 Dec 2016 00:00:00 +0200</pubDate>
+      <link>https://theoceancode.netlify.com/publication/trend-analysis/</link>
+      <pubDate>Thu, 15 Dec 2016 00:00:00 -0400</pubDate>
       
-      <guid>/publication/trend-analysis/</guid>
+      <guid>https://theoceancode.netlify.com/publication/trend-analysis/</guid>
       <description></description>
     </item>
     

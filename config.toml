@@ -68,13 +68,13 @@ enableGitInfo = false
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-  organizations = [ { name = "Limbo", url = "" } ]
+  organizations = [ { name = "Dalhousie University", url = "https://www.dal.ca/" } ]
 
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
   avatar = "Robert_profile_1.JPG"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
   email = "robwschlegel@gmail.com"
-  address = "Limbo, Johannesburg, South Africa"
-  office_hours = "Monday - Friday 11:00 to 16:00 or email for appointment"
+  address = "LSC - Oceanography: 5608, 1355 Oxford St, Halifax, NS, B3H 4J1"
+  office_hours = "Monday - Friday 14:00 to 16:00 or email for appointment"
   phone = "+27 82 813 7113"
   skype = "robert.william.schlegel"
   telegram = ""

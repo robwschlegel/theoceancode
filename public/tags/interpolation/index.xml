@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Interpolation on The Ocean Code</title>
-    <link>/tags/interpolation/</link>
+    <link>https://theoceancode.netlify.com/tags/interpolation/</link>
     <description>Recent content in Interpolation on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Mon, 26 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/interpolation/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.com/tags/interpolation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>ODV figures in R</title>
-      <link>/post/odv_figures/</link>
+      <link>https://theoceancode.netlify.com/post/odv_figures/</link>
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/odv_figures/</guid>
+      <guid>https://theoceancode.netlify.com/post/odv_figures/</guid>
       <description>Objective With more and more scientists moving to open source software (i.e. R or Python) to perform their numerical analyses the opportunities for collaboration increase and we may all benefit from this enhanced productivity. At the risk of sounding sycophantic, the future of scientific research truly is in multi-disciplinary work. What then could be inhibiting this slow march towards progress? We tend to like to stick to what is comfortable. Oceanographers in South Africa have been using MATLAB and ODV (Ocean Data View) since about the time that Jesus was lacing up his sandals for his first trip to Palestine.</description>
     </item>
     

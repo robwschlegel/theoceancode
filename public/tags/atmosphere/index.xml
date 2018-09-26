@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Atmosphere on The Ocean Code</title>
-    <link>/tags/atmosphere/</link>
+    <link>https://theoceancode.netlify.com/tags/atmosphere/</link>
     <description>Recent content in Atmosphere on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Tue, 17 Oct 2017 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 17 Oct 2017 00:00:00 -0300</lastBuildDate>
     
-	<atom:link href="/tags/atmosphere/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.com/tags/atmosphere/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
-      <link>/publication/predominant/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
+      <link>https://theoceancode.netlify.com/publication/predominant/</link>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
       
-      <guid>/publication/predominant/</guid>
+      <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mapping with ggplot2</title>
-      <link>/post/mapping_with_ggplot2/</link>
+      <link>https://theoceancode.netlify.com/post/mapping_with_ggplot2/</link>
       <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/mapping_with_ggplot2/</guid>
+      <guid>https://theoceancode.netlify.com/post/mapping_with_ggplot2/</guid>
       <description>Objective There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always “Figure 1”. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area.</description>
     </item>
     

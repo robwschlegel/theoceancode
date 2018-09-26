@@ -35,4 +35,4 @@ weight = 5
 
 # Biography
 
-Robert Schlegel is a post-doc researcher currently living in visa limbo in Johannesburg, South Africa. His research focuses on developing the methodologies that will allow us to harness machine learning for the identification of the forces responsible for the formation of marine heatwaves.
+Robert Schlegel is a post-doc researcher in the Department of Oceanography at Dalhousie University. His research focuses on developing the methodologies that will allow us to harness machine learning for the identification of the forces responsible for the formation of marine heatwaves.
