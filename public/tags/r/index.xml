@@ -22,12 +22,21 @@
     </item>
     
     <item>
+      <title>Detecting marine heatwaves</title>
+      <link>https://theoceancode.netlify.com/project/detecting_mhws/</link>
+      <pubDate>Tue, 28 Aug 2018 00:00:00 -0300</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/project/detecting_mhws/</guid>
+      <description>A deep dive into the best practices for detecting marine heatwaves (MHWs).</description>
+    </item>
+    
+    <item>
       <title>heatwaveR package</title>
       <link>https://theoceancode.netlify.com/project/heatwaver/</link>
       <pubDate>Sat, 28 Jul 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/project/heatwaver/</guid>
-      <description></description>
+      <description>An R package for the detection of heatwaves and cold-spells.</description>
     </item>
     
     <item>
@@ -45,7 +54,7 @@
       <pubDate>Mon, 28 Aug 2017 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/project/coastr/</guid>
-      <description></description>
+      <description>An R package with useful functions for coastal oceanography.</description>
     </item>
     
     <item>

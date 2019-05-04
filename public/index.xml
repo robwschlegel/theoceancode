@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>The Ocean Code on The Ocean Code</title>
@@ -7,8 +6,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Mon, 25 Mar 2019 00:00:00 -0300</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Marine heatwave tracker</title>
+      <link>https://theoceancode.netlify.com/project/mhwtracker/</link>
+      <pubDate>Mon, 25 Mar 2019 00:00:00 -0300</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/project/mhwtracker/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
@@ -44,7 +52,10 @@
       <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/sa_time_survey/</guid>
-      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+      <description>
+
+
+&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Objective&lt;/h2&gt;
 &lt;p&gt;In South Africa there are a range of idioms for different time frames in which someone may (or may not) do something. The most common of these are: ‘now’, ‘just now’, and ‘now now’. If one were to Google these sayings one would find that there is general agreements on how long these time frames are, but that agreement is not absolute.&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
@@ -139,10 +150,11 @@ survey_long %&amp;gt;%
 ## Bartlett&amp;#39;s K-squared = 5.227, df = 2, p-value = 0.07328&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Surprisingly these data meet all of our assumptions so we may perform a simple one-way ANOVA on them to detect any significant differences.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;glance(aov(minutes ~ saying, data = survey_long))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##    r.squared adj.r.squared    sigma statistic   p.value df    logLik
-## 1 0.06145571    0.04407526 102.9133   3.53591 0.0325505  3 -670.3429
-##        AIC      BIC deviance df.residual
-## 1 1348.686 1359.524  1143843         108&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
+##       &amp;lt;dbl&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1    0.0615        0.0441  103.      3.54  0.0326     3  -670. 1349. 1360.
+## # … with 2 more variables: deviance &amp;lt;dbl&amp;gt;, df.residual &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Less surprisingly, there is a significant difference in the times given for these three idioms. But let’s dive just a bit deeper with a post-hoc Tukey (not Turkey) test to see which categories specifically are different from which.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TukeyHSD(aov(minutes ~ saying, data = survey_long))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
@@ -185,7 +197,7 @@ survey_province %&amp;gt;%
   group_by(saying, province) %&amp;gt;% 
   summarise(normality = as.numeric(shapiro.test(minutes)[1]))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 12 x 3
-## # Groups:   saying [?]
+## # Groups:   saying [3]
 ##    saying   province     normality
 ##    &amp;lt;chr&amp;gt;    &amp;lt;fct&amp;gt;            &amp;lt;dbl&amp;gt;
 ##  1 just now Eastern Cape     0.640
@@ -210,10 +222,11 @@ survey_province %&amp;gt;%
 ## Bartlett&amp;#39;s K-squared = 69.523, df = 11, p-value = 1.505e-10&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The different groups of time are all normally distributed, but the variances differ. Regardless, we are going to stick to a normal two-way ANOVA as there are no good alternatives to this for non-parametric data and transforming these data is a bother.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;glance(aov(minutes ~ saying + province, data = survey_province))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   r.squared adj.r.squared    sigma statistic      p.value df    logLik
-## 1 0.2035543     0.1633297 94.37113  5.060451 0.0003582302  6 -623.3591
-##        AIC      BIC deviance df.residual
-## 1 1260.718 1279.296 881685.1          99&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
+##       &amp;lt;dbl&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1     0.204         0.163  94.4      5.06 3.58e-4     6  -623. 1261. 1279.
+## # … with 2 more variables: deviance &amp;lt;dbl&amp;gt;, df.residual &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Significant differences are to be had here. So let’s break it down and see which groups specifically differ.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TukeyHSD(aov(minutes ~ saying + province, data = survey_province))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
@@ -264,7 +277,7 @@ survey_city %&amp;gt;%
   group_by(saying, city) %&amp;gt;% 
   summarise(normality = as.numeric(shapiro.test(minutes)[1]))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 9 x 3
-## # Groups:   saying [?]
+## # Groups:   saying [3]
 ##   saying   city         normality
 ##   &amp;lt;chr&amp;gt;    &amp;lt;fct&amp;gt;            &amp;lt;dbl&amp;gt;
 ## 1 just now Cape Town        0.577
@@ -286,10 +299,11 @@ survey_city %&amp;gt;%
 ## Bartlett&amp;#39;s K-squared = 55.177, df = 8, p-value = 4.078e-09&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;… and again we see that while normally distributed, the variance of our sample sets differ significantly from one another. Regardless, we’ll stick to the two-way ANOVA.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;glance(aov(minutes ~ saying + city, data = survey_city))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   r.squared adj.r.squared    sigma statistic     p.value df    logLik
-## 1 0.2054307     0.1636113 94.23743  4.912326 0.001411901  5 -480.5647
-##        AIC      BIC deviance df.residual
-## 1 973.1295 987.4962 674932.7          76&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
+##       &amp;lt;dbl&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1     0.205         0.164  94.2      4.91 0.00141     5  -481.  973.  987.
+## # … with 2 more variables: deviance &amp;lt;dbl&amp;gt;, df.residual &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;As one likely would have deduced from Figure &lt;a href=&#34;#fig:city-plot&#34;&gt;4&lt;/a&gt;, the scores are significantly different from one another.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TukeyHSD(aov(minutes ~ saying + city, data = survey_city))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
@@ -336,7 +350,10 @@ survey_city %&amp;gt;%
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/transects/</guid>
-      <description>&lt;div id=&#34;preface&#34; class=&#34;section level2&#34;&gt;
+      <description>
+
+
+&lt;div id=&#34;preface&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Preface&lt;/h2&gt;
 &lt;p&gt;This week I have expanded the &lt;code&gt;coastR&lt;/code&gt; package with the inclusion of a function that calculates the angle of the heading for alongshore or shore-normal transects. The rest of this blog post is the vignette that I’ve written detailing the set of this function. Next week I’ll likely be taking a break from &lt;code&gt;coastR&lt;/code&gt; development to finally create a package for the SACTN dataset. That is a project that has been in the works for a loooong time and it will be good to finally see a development release available to the public.&lt;/p&gt;
 &lt;/div&gt;
@@ -525,13 +542,13 @@ grid.arrange(bohai_sea_along_map, bohai_sea_away_map, nrow = 1)&lt;/code&gt;&lt;
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/polar_plot_clims/</guid>
-      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+      <description>
+
+
+&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Objective&lt;/h2&gt;
 &lt;p&gt;Whilst cruising about on &lt;a href=&#34;http://imgur.com&#34;&gt;Imgur&lt;/a&gt; I found a post about science stuff. Not uncommon, which is nice. These sorts of grab-bag posts about nothing in particular often include some mention of climate science, almost exclusively some sort of clever visualisation of a warming planet. That seems to be what people are most interested in. I’m not complaining though, it keeps me employed. The aforementioned post caught my attention more than usual because it included a GIF, and not just a static picture of some sort of blue thing that is becoming alarmingly red (that was not meant to be a political metaphor). I’m referring to the now famous GIF by climate scientist Ed Hawkins (&lt;span class=&#34;citation&#34;&gt;@ed_hawkins&lt;/span&gt;) whose blog may be found &lt;a href=&#34;https://www.climate-lab-book.ac.uk/&#34;&gt;here&lt;/a&gt;, and the specific post in question &lt;a href=&#34;https://www.climate-lab-book.ac.uk/2016/spiralling-global-temperatures/&#34;&gt;here&lt;/a&gt;. A quick bit of research on this animation revealed that it has likely been viewed by millions of people, was featured in the opening ceremony of the Rio Olympics, and was created in MATLAB. Those three key points made me decide to do a post on how to re-create this exact figure in R via a bit of reverse engineering. The original GIF in question is below.&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_temp.gif&#34; /&gt;
-
-&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_temp.gif&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;: The ever broadening spiral of global temperatures created by &lt;a href=&#34;https://www.climate-lab-book.ac.uk/&#34;&gt;Ed Hawkins&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;data&#34; class=&#34;section level2&#34;&gt;
@@ -661,20 +678,11 @@ system.time(saveGIF(animate.polar.plot(df = KB), interval = 0.4, ani.width = 457
 &lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Summary&lt;/h2&gt;
 &lt;p&gt;As one may see in the following GIFs, local extremes often outpace global averages. This should not be terribly surprising. In order to better illustrate this I have expanded the anomaly labels along the y-axes more so than seen in Figure 1. The increasing patterns are not as clear in these following GIFs as in the original that they are based on. This is because the original is based on a global average, which provides for a much smoother trend. I hope people enjoy these and feel free to plop your own temperature time series into the code to create your own polar plot figures!&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_plot_PN.gif&#34; /&gt;
-
-&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_plot_PN.gif&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Figure 2&lt;/strong&gt;: The polar plot for Port Nolloth, where temperatures have been increasing.&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_plot_SP.gif&#34; /&gt;
-
-&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_plot_SP.gif&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Figure 3&lt;/strong&gt;: The polar plot for Sea Point, where temperatures have been decreasing.&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_plot_KB.gif&#34; /&gt;
-
-&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_plot_KB.gif&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Figure 4&lt;/strong&gt;: The polar plot for Kent Bay, where temperatures have been holding level.&lt;/p&gt;
 &lt;/div&gt;
 </description>
@@ -686,7 +694,10 @@ system.time(saveGIF(animate.polar.plot(df = KB), interval = 0.4, ani.width = 457
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/seq_sites/</guid>
-      <description>&lt;div id=&#34;preface&#34; class=&#34;section level2&#34;&gt;
+      <description>
+
+
+&lt;div id=&#34;preface&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Preface&lt;/h2&gt;
 &lt;p&gt;The rest of the blog post after this preface section is a copy of the vignette I’ve written for the first function in the new package I am developing: &lt;code&gt;coastR&lt;/code&gt;. This package aims to provide functions that are useful for coastal oceanography but that do not yet exist in the R language. It is not my intention to provide algorithms for physical oceanography as these may already be found elsewhere. This post covers how one may determine the correct sequence of sites along a convoluted coastline.&lt;/p&gt;
 &lt;p&gt;Now that I’ve handed in my PhD I am a little less pressed as far as deadlines go and I would like to return to my habit of creating a new blog post every Friday. I’ve written quite a bit of code over the last three years and much of it needs to find it’s way into the &lt;code&gt;coastR&lt;/code&gt;. Next week I am planning on uploading a function for calculating shore normal transects. Until then, please enjoy the spectacle of sequential ordering. Woo.&lt;/p&gt;
@@ -835,7 +846,10 @@ grid.arrange(bohai_sea_map, bohai_sea_seq_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt
       <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/mapping_with_ggplot2/</guid>
-      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+      <description>
+
+
+&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Objective&lt;/h2&gt;
 &lt;p&gt;There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always “Figure 1”. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area. Being a happy convert to the &lt;a href=&#34;https://cran.r-project.org/web/packages/tidyverse/&#34;&gt;tidyverse&lt;/a&gt; I only teach the graphics of &lt;a href=&#34;https://cran.r-project.org/web/packages/ggplot2/&#34;&gt;ggplot2&lt;/a&gt;. I have found that people often prefer to use the &lt;a href=&#34;https://cran.r-project.org/web/packages/ggmap/&#34;&gt;ggmap&lt;/a&gt; extension to create ggplot quality figures with Google map backgrounds, but I personally think that a more traditional monotone background for maps looks more professional. What I’ve decided to showcase this week is the data and code required to create a publication quality map. Indeed, the following code will create the aforementioned obligatory “Figure 1” in a paper I am currently preparing for submission.&lt;/p&gt;
 &lt;/div&gt;
@@ -935,7 +949,7 @@ mg_top &amp;lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) +
     annotate(&amp;quot;text&amp;quot;, label = &amp;quot;Cape\nPeninsula&amp;quot;, x = 17.2, y = -35, size = 3.0, angle = 0, colour = &amp;quot;ivory&amp;quot;) +
   # Improve on the x and y axis labels
     scale_x_continuous(breaks = seq(15, 35, 5),
-                       labels = scales::unit_format(&amp;quot;°E&amp;quot;, sep = &amp;quot;&amp;quot;),
+                       labels = scales::unit_format(prefix = &amp;quot;°E&amp;quot;, sep = &amp;quot;&amp;quot;),
                        position = &amp;quot;top&amp;quot;) +
     scale_y_continuous(breaks = seq(-35, -30, 5),
                        labels = c(&amp;quot;35°S&amp;quot;, &amp;quot;30°S&amp;quot;)) +
@@ -992,7 +1006,7 @@ mg_bottom &amp;lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) 
     geom_segment(aes(x = 35, y = -37.5, xend = 37, yend = -37.5)) +
   # Improve on the x and y axis labels
     scale_x_continuous(breaks = seq(15, 35, 5),
-                       labels = scales::unit_format(&amp;quot;°E&amp;quot;, sep = &amp;quot;&amp;quot;)) +
+                       labels = scales::unit_format(prefix = &amp;quot;°E&amp;quot;, sep = &amp;quot;&amp;quot;)) +
     scale_y_continuous(breaks = seq(-35, -30, 5),
                        labels = c(&amp;quot;35°S&amp;quot;, &amp;quot;30°S&amp;quot;)) +
     labs(x = NULL, y = NULL) +
@@ -1042,7 +1056,10 @@ gg &amp;lt;- ggplot() +
       <pubDate>Mon, 10 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/goats_per_capita/</guid>
-      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+      <description>
+
+
+&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Objective&lt;/h2&gt;
 &lt;p&gt;A few weeks ago for a &lt;a href=&#34;http://kelpsandthings.org/robert/r/gender-and-gdp/&#34;&gt;post&lt;/a&gt; about the relationship between gender equality and GDP/ capita I found a nifty &lt;a href=&#34;https://www.clio-infra.eu/&#34;&gt;website&lt;/a&gt; that has a massive amount of census information for most countries on our planet. Much of this information could be used to answer some very interesting and/ or important questions. But some of the data can be used to answer seemingly pointless questions. And that’s what I intend to do this week. Specifically, which countries in the world have the highest rates of goats/ capita?&lt;/p&gt;
 &lt;/div&gt;
@@ -1116,7 +1133,10 @@ grid.arrange(gt, gb)&lt;/code&gt;&lt;/pre&gt;
       <pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/party_immigration/</guid>
-      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+      <description>
+
+
+&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Objective&lt;/h2&gt;
 &lt;p&gt;As an immigrant myself, all of the talk of immigration to be found in main stream media outlets today makes me a bit nervous. Whereas most people that speak of the pro’s and con’s of immigration do so from the point of view of how it may affect the country of their birth, I view this issue as something that affects my ability to live outside the country of my birth. I immigrated into the Republic of South Africa in 2013 and have been living here since. I would do a piece on South African immigration but the numbers are difficult to get a hold of and honestly most people are less interest in South Africa than the USA.&lt;/p&gt;
 &lt;p&gt;Immigration is not a new talking point. It’s something that comes up in political and a-political circles all of the time. The current debate on the Muslim Ban in the USA may have reached a new level for this sort of rhetoric in the West, but targeted crackdowns of this sort are not new in the world. I won’t bother with citations here, but if one is interested a quick google of “xenophobia” + “border control” should yield some convincing results. As this current row of immigration debates in the USA has become so partisan, I decided that an interesting question to ask would be “Under which of the two parties have more people immigrated into the USA?” and “Under which of the two parties have more people been removed from the USA?”&lt;/p&gt;
@@ -1196,7 +1216,7 @@ removal_bar &amp;lt;- ggplot(data = removals, aes(x = Year, y = Removals)) +
 grid.arrange(return_bar, removal_bar)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/party_immigration_files/figure-html/pi-double-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Figure 3&lt;/strong&gt;: Two bar charts showing the rates of returns and removals for immigrants from the USA.&lt;/p&gt;
-&lt;p&gt;Figure 3 tells a very interesting story. In the top panel (Returns), we see that from 1953-55 (shortly after WWII) there were massive numbers of immigrants that returned to their home countries voluntarily. Then there is a period of increase leading up to the 80’s. This then follows a somewhat normal distribution, peaking in the late 90’s near the end of the Clinton administration before the peaceful return of immigrants drops steadily through the 8 years of Bush then Obama. The bottom panel (Removals) shows the reason for this apparent relaxation on immigrants. It isn’t that immigrants were being sent away less, but rather they began to be removed more forcefully than appears to have been the policy until something changed during the Clinton Administration. The rate of immigrants being removed became greater than those being returned in 2011 under Obama. Again we see a heavy hand on immigration during years with a Democratic president in office. It is hard to compare the parties on this issue as the policy of forcefully removing immigrants in favour of having them leave peacefully has only been in practice over three administrations (Clinton, Bush Jr. and Obama). That being said, it is worth noting that the y axes on these two figures are not the same. The increase in removals does not outweigh the decrease in returns. Overall the rate of expulsion of immigrants from the states declined during the Obama administration. And perhaps also Bush Jr.&lt;/p&gt;
+&lt;p&gt;Figure 3 tells a very interesting story. In the top panel (Returns), we see that from 1953-55 (shortly after WWII) there were massive numbers of immigrants that returned to their home countries voluntarily. Then there is a period of increase leading up to the 80’s. This then follows a somewhat normal distribution, peaking in the late 90’s near the end of the Clinton administration before the peaceful return of immigrants drops steadily through the 8 years of Bush then Obama. The bottom panel (Removals) shows the reason for this apparent relaxation on immigrants. It isn’t that immigrants were being sent away less, but rather they began to be removed more forcefully than appears to have been the policy until something changed during the Clinton Administration. The rate of immigrants being removed became greater than those being returned in 2011 under Obama. Again we see a heavy hand on immigration during years with a Democratic president in office. It is hard to compare the parties on this issue as the policy of forcefully removing immigrants in favour of having them leave peacefully has only been in practice over three administrations (Clinton, Bush Jr. and Obama). That being said, it is worth noting that the y axes on these two figures are not the same. The increase in removals does not outweigh the decrease in returns. Overall the rate of expulsion of immigrants from the states declined during the Obama administration. And perhaps also Bush Jr.&lt;/p&gt;
 &lt;p&gt;It is fair criticism to point out that a green card may take several years to acquire. This means that when one begins the process of applying for a green card it may take so long that a different party will be in power by the time it is granted… or not. I would argue however that most of these parties (with the exception of Carter) are in office for eight year stretches. This is not meant to be a definitive analysis, but I think it has proven to be a rather interesting first step. I didn’t expect the data to look like this. George Bush Senior, saviour to immigrants, who would have thought.&lt;/p&gt;
 &lt;/div&gt;
 </description>
@@ -1208,7 +1228,10 @@ grid.arrange(return_bar, removal_bar)&lt;/code&gt;&lt;/pre&gt;
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/odv_figures/</guid>
-      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+      <description>
+
+
+&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Objective&lt;/h2&gt;
 &lt;p&gt;With more and more scientists moving to open source software (i.e. R or Python) to perform their numerical analyses the opportunities for collaboration increase and we may all benefit from this enhanced productivity. At the risk of sounding sycophantic, the future of scientific research truly is in multi-disciplinary work. What then could be inhibiting this slow march towards progress? We tend to like to stick to what is comfortable. Oceanographers in South Africa have been using &lt;a href=&#34;https://www.mathworks.com/products/matlab.html&#34;&gt;MATLAB&lt;/a&gt; and &lt;a href=&#34;http://odv.awi.de/&#34;&gt;ODV&lt;/a&gt; (Ocean Data View) since about the time that Jesus was lacing up his sandals for his first trip to Palestine. There has been much debate on the future of MATLAB in science, so I won’t get into that here, but I will say that the package &lt;a href=&#34;https://cran.r-project.org/web/packages/oce/index.html&#34;&gt;oce&lt;/a&gt; contains much of the code that one would need for oceanographic work in R, and the package &lt;a href=&#34;https://cran.r-project.org/web/packages/angstroms/&#34;&gt;angstroms&lt;/a&gt; helps one to work with ROMS (Regional Ocean Modeling System) output. The software that has however largely gone under the radar in these software debates has been ODV. Probably because it is free (after registration) it’s fate has not been sealed by university departments looking to cut costs. The issue with ODV however is the same with all Microsoft products; the sin of having a “pointy clicky” user interface. One cannot perform truly reproducible research with a menu driven user interface. The steps must be written out in code. And so here I will lay out those necessary steps to create an interpolated CTD time series of temperature values that looks as close to the default output of ODV as possible.&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
@@ -1335,242 +1358,6 @@ ggplot(data = ctd_mba_bound, aes(x = date, y = depth)) +
 &lt;h2&gt;Summary&lt;/h2&gt;
 &lt;p&gt;In this short tutorial we have seen how to create an interpolated temperature depth profile over time after a fashion very similar to the default output from ODV. We have also seen how to either fill the entire plotting area with interpolated data (Figure 3), or quickly generate a bounding box in order to remove any potential interpolation artefacts (Figure 4). I think this is a relatively straight forward work flow and would work with any tidy dataset. It is worth noting that this is not constrained to depth profiles, but would work just as well with map data. One would only need to change the &lt;code&gt;date&lt;/code&gt; and &lt;code&gt;depth&lt;/code&gt; variables to &lt;code&gt;lon&lt;/code&gt; and &lt;code&gt;lat&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;R is an amazingly flexible language with an incredible amount of support and I’ve yet to see it not be able to emulate, or improve upon, an analysis or graphical output from any other software.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Gender and GDP</title>
-      <link>https://theoceancode.netlify.com/post/gender_gdp/</link>
-      <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/post/gender_gdp/</guid>
-      <description>&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Objective&lt;/h2&gt;
-&lt;p&gt;Most people living in the Western World are very quick to extol the virtues of gender equality. There are however many places where this is not so. This then inevitably leads to conflict as cultures and nations are drawn closer together on our ever shrinking earth. Perhaps not the sort of conflict that leads to sabre rattling, but certainly ideological disagreements that affect policy and have real impacts on large swathes of humanity. So what is to be done? How can say how anyone else should be. There are of course all sorts of moral back and forth’s that could be pursued cyclically &lt;em&gt;ad nauseum&lt;/em&gt;, but what if we could show quantitatively what the benefit of gender equality was to a nation and the lives of it’s people? That is the exact sort of question I like to answer here at this blog and it is a question that came up in my daily life a couple of weeks ago. Because most metrics for most countries are recorded, this is the sort of thing that can be answered. Indeed, it has been before, so here I add another take on an argument that really shouldn’t still be happening…&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;data&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Data&lt;/h2&gt;
-&lt;p&gt;In order to quantify the benefit of gender equality we are going to need global census data, as this is a conversation that needs to be had at a global level. Happily for us these data may be found at &lt;a href=&#34;www.clio-infra.eu/&#34;&gt;Clio Infra&lt;/a&gt;. This is an amazing web hosted database that contains an unexpected range of information as it aggregates data from many other sources. I’ll likely be going back to this data repository on multiple occasions in the future. But for now we’ll stick to gender equality. For this post we will be looking at a number of variables as this allows us to develop a more nuanced view of the relationships that exist between the wealth of nations and the egalitarianism their cultures engender. It is unfortunately not possible to show causality in the relationships we will model below but I think that educated readers will likely arrive at the same inferences as myself. Of course, if anyone has any objections, faults or errors to point out in the analysis that follows I would be very happy to hear them.&lt;/p&gt;
-&lt;p&gt;The data used in this blog were downloaded in “Compact” form, which comes in .xlsx format. These files were then opened and only the tab containing the data in long format were saved as a .csv file. As an aside, these data are visualised on the Clio Infra website as boxplots using what is clearly &lt;code&gt;ggplot2&lt;/code&gt; code. Also note that unless specified all values are taken as either women/ men or women-men. Meaning that proportions below 1, or negative values signify greater abundance for men than women in those populations.&lt;/p&gt;
-&lt;p&gt;I’ve chosen o use the metrics seen below as I think they represent inequality between genders as well as throughout populations as a whole.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Load libraries
-library(tidyverse)
-library(broom)
-# library(RColorBrewer)
-
-## Load data
-# Educational Inequality Gini Coefficient (after age 15)
-education_inequality &amp;lt;- read_csv(&amp;quot;../../static/data/EducationalInequalityGiniCoefficient.csv&amp;quot;) %&amp;gt;% 
-  mutate(variable = &amp;quot;education_inequality&amp;quot;)
-# GDP per Capita
-gdp_per_capita &amp;lt;- read_csv(&amp;quot;../../static/data/GDPperCapita.csv&amp;quot;) %&amp;gt;% 
-  mutate(variable = &amp;quot;gdp_per_capita&amp;quot;)
-# Gender Equality Years of Education (after age 15)
-gender_equality_education &amp;lt;- read_csv(&amp;quot;../../static/data/GenderEqualityYearsofEducation.csv&amp;quot;) %&amp;gt;% 
-  mutate(variable = &amp;quot;gender_equality_education&amp;quot;)
-# Historical Gender Equality Index
-gender_equality_index &amp;lt;- read_csv(&amp;quot;../../static/data/HistoricalGenderEqualityIndex_Compact.csv&amp;quot;) %&amp;gt;% 
-  mutate(variable = &amp;quot;gender_equality_index&amp;quot;)
-# Gender Equality of Numeracy
-gender_equality_numeracy &amp;lt;- read_csv(&amp;quot;../../static/data/GenderEqualityofNumeracy_Compact.csv&amp;quot;) %&amp;gt;% 
-  mutate(variable = &amp;quot;gender_equality_numeracy&amp;quot;)
-# Income Inequality
-income_inequality &amp;lt;- read_csv(&amp;quot;../../static/data/IncomeInequality.csv&amp;quot;) %&amp;gt;% 
-  mutate(variable = &amp;quot;income_inequality&amp;quot;)
-# Sex Ratio (ages 0 - 5)
-sex_ratio &amp;lt;- read_csv(&amp;quot;../../static/data/SexRatio_Compact.csv&amp;quot;) %&amp;gt;% 
-  mutate(variable = &amp;quot;sex_ratio&amp;quot;)
-# Total Population
-total_population &amp;lt;- read_csv(&amp;quot;../../static/data/TotalPopulation_Compact.csv&amp;quot;) %&amp;gt;% 
-  mutate(variable = &amp;quot;total_population&amp;quot;,
-         value = scale(value)) # Scale the large range
-# Average Years of Education (after age 15)
-years_of_education &amp;lt;- read_csv(&amp;quot;../../static/data/AverageYearsofEducation.csv&amp;quot;) %&amp;gt;% 
-  mutate(variable = &amp;quot;education_years&amp;quot;)
-
-## Create different dataframe
-data_long &amp;lt;- rbind(gdp_per_capita, education_inequality, gender_equality_education, 
-                   gender_equality_index, gender_equality_numeracy, income_inequality, 
-                   sex_ratio, total_population, years_of_education)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;analysis&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Analysis&lt;/h2&gt;
-&lt;p&gt;I recently learned how to use the &lt;code&gt;dplyr&lt;/code&gt; pipe (&lt;code&gt;%&amp;gt;%&lt;/code&gt;) to perform nested models and so am excited to put that to use here. Our first step is to run simple linear models for each metrics we have loaded against GDP per capita without controlling for time (year of sampling) or space (country). The GDP per capita will be correctly compared against it’s corresponding metric at that year and in that country, but we are then allowing mean values effectively to be made of these results. These models will provide us with a range of R^2 values (coefficients of determination), which is the statistic showing how much of the variance in a dependent variable is explained by the independent variable. This allows us to see which of our metrics have the strongest relationship with GDP per capita. Which we may infer as being related to the prosperity of a nation and it’s people.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Here we run linear models on all available data against GDP per capita
-  # We are not controlling for country or year
-lm_data_all &amp;lt;- data_long %&amp;gt;%
-  left_join(., gdp_per_capita[,-5], by = c(&amp;quot;ccode&amp;quot;, &amp;quot;country.name&amp;quot;, &amp;quot;year&amp;quot;)) %&amp;gt;% 
-  rename(., value = value.x, gdp = value.y) %&amp;gt;% 
-  group_by(variable) %&amp;gt;% 
-  mutate(n = sum(!is.na(gdp))) %&amp;gt;%
-  ungroup() %&amp;gt;% 
-  nest(-n, -variable) %&amp;gt;%
-  mutate(fit = map(data, ~ lm(value ~ gdp, data = .)),
-    results = map(fit, glance)) %&amp;gt;% 
-  unnest(results) %&amp;gt;%
-  select(n, variable, adj.r.squared, p.value) %&amp;gt;% 
-  arrange(-adj.r.squared) %&amp;gt;% 
-  filter(variable != &amp;quot;gdp_per_capita&amp;quot;)
-
-# These data are best represented with a table
-knitr::kable(lm_data_all, digits = 3, caption = &amp;quot;R^2 and p-values for the relationship between several metrics and GDP per capita. Years and country of sampling were not controlled for.&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
-&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-2&#34;&gt;Table 1: &lt;/span&gt;R^2 and p-values for the relationship between several metrics and GDP per capita. Years and country of sampling were not controlled for.&lt;/caption&gt;
-&lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th align=&#34;right&#34;&gt;n&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;variable&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;adj.r.squared&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;p.value&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1162&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;education_years&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.623&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;215&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;gender_equality_index&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.523&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;134&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;gender_equality_education&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.321&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;9779&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;education_inequality&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.318&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;656&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;income_inequality&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.106&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;348&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;gender_equality_numeracy&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.075&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;205&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;sex_ratio&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.053&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.001&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1371&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;total_population&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;-0.001&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.760&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;It is possible however that these relationships have not been static over time. We will also want to display the changes in the R^2 values as time series.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Or we may control for years of sampling
-  # This allows us to see if the relationship changes much over time
-lm_data_year &amp;lt;- data_long %&amp;gt;% 
-  left_join(., gdp_per_capita[,-5], by = c(&amp;quot;ccode&amp;quot;, &amp;quot;country.name&amp;quot;, &amp;quot;year&amp;quot;)) %&amp;gt;% 
-  rename(., value = value.x, gdp = value.y) %&amp;gt;% 
-  group_by(year, variable) %&amp;gt;% 
-  mutate(n = sum(!is.na(gdp))) %&amp;gt;%
-  ungroup() %&amp;gt;% 
-  filter(n &amp;gt; 10) %&amp;gt;% # Require at least 10 data points 
-  nest(-n, -year, -variable) %&amp;gt;%
-  mutate(fit = map(data, ~ lm(value ~ gdp, data = .)),
-    results = map(fit, glance)) %&amp;gt;% 
-  unnest(results) %&amp;gt;%
-  select(n, variable, year,  adj.r.squared, p.value) %&amp;gt;% 
-  arrange(-adj.r.squared) %&amp;gt;% 
-  filter(variable != &amp;quot;gdp_per_capita&amp;quot;)
-
-# And now for a time series
-ggplot(data = lm_data_year, aes(x = year, y = adj.r.squared)) +
-  geom_line(aes(colour = variable)) +
-  labs(y = &amp;quot;R^2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/gender_gdp_files/figure-html/gg-time-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Or we may control for the country of sampling
-  # This allows us to see if these relationships 
-  # differ in certain parts of the world
-lm_data_country &amp;lt;- data_long %&amp;gt;% 
-  left_join(., gdp_per_capita[,-5], by = c(&amp;quot;ccode&amp;quot;, &amp;quot;country.name&amp;quot;, &amp;quot;year&amp;quot;)) %&amp;gt;% 
-  rename(., value = value.x, gdp = value.y) %&amp;gt;% 
-  group_by(country.name, variable) %&amp;gt;% 
-  mutate(n = sum(!is.na(gdp))) %&amp;gt;%
-  ungroup() %&amp;gt;% 
-  filter(n &amp;gt; 10) %&amp;gt;% # Require at least 10 data points 
-  nest(-n, -country.name, -variable) %&amp;gt;%
-  mutate(fit = map(data, ~ lm(value ~ gdp, data = .)),
-    results = map(fit, glance)) %&amp;gt;% 
-  unnest(results) %&amp;gt;%
-  select(n, variable, country.name,  adj.r.squared, p.value) %&amp;gt;% 
-  arrange(-adj.r.squared) %&amp;gt;% 
-  filter(variable != &amp;quot;gdp_per_capita&amp;quot;)
-
-# Create labels for figure
-lm_label &amp;lt;- lm_data_country %&amp;gt;% 
-  select(n, variable) %&amp;gt;% 
-  group_by(variable) %&amp;gt;% 
-  summarise(n = sum(n))
-
-# These data allow us to display the range of R^2 values
-# for each country with boxplots
-  # Just to be cheeky let&amp;#39;s use the same themeas Clio Infra
-ggplot(data = lm_data_country, aes(x = variable, y = adj.r.squared)) +
-  geom_boxplot(outlier.colour = NA) +
-  geom_point(colour = &amp;quot;steelblue&amp;quot;, alpha = 0.6, position = &amp;quot;jitter&amp;quot;) +
-  geom_text(data = lm_label, aes(y = -0.1, label = n), 
-            colour = &amp;quot;royalblue3&amp;quot;) +
-  labs(y = &amp;quot;R^2&amp;quot;) +
-  theme(axis.text.x = element_text(angle = 15))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/gender_gdp_files/figure-html/gg-box-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Years of education of the populace is constantly coming out on top, with gender equality in education in third. These two metrics must be related in some way though so let’s look specifically at that relationship.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data_gender &amp;lt;- years_of_education[,-5] %&amp;gt;% 
-  left_join(., gender_equality_education[,-5], by = c(&amp;quot;ccode&amp;quot;, &amp;quot;country.name&amp;quot;, &amp;quot;year&amp;quot;)) %&amp;gt;% 
-  rename(., education_years = value.x, gender_equality_education = value.y)
-data_gender &amp;lt;- data_gender[complete.cases(data_gender$gender_equality_education),]
-
-lm_data_gender1 &amp;lt;- glance(lm(gender_equality_education ~ education_years, data = data_gender))
-lm_data_gender2 &amp;lt;- glance(lm(gender_equality_education ~ education_years, 
-                             data = filter(data_gender, education_years &amp;gt;= 5)))
-
-# And now for a scatterplot
-ggplot(data = data_gender, aes(x = education_years, 
-                                  y = gender_equality_education)) +
-  geom_point() +
-  geom_smooth(colour = &amp;quot;blue&amp;quot;, method = &amp;quot;lm&amp;quot;) +
-  geom_smooth(data = filter(data_gender, education_years &amp;gt;= 5), colour = &amp;quot;red&amp;quot;, method = &amp;quot;lm&amp;quot;) +
-  geom_label(aes(x = 8.5, y = 0.5, label = paste0(&amp;quot;blue line\nR^2 = &amp;quot;, 
-                                                  round(lm_data_gender1$adj.r.squared,3), 
-                                                  &amp;quot;\nred line\nR^2 = &amp;quot;, 
-                                                  round(lm_data_gender2$adj.r.squared,3))))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/gender_gdp_files/figure-html/gg-scatter-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;results&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Results&lt;/h2&gt;
-&lt;p&gt;From Table 1 we may see that the three metrics in descending order that best explain the variance occurring in GDP per capita over time and space are: education of the population as a whole, equality between the genders and the equality in education between the genders. Equality in education for the populace as a whole came in at a close fourth and is perhaps a better predictor than equality between genders due to the much higher sample size that the result is based on (this is an oddly well reported metric). The metrics of income inequality for the populace as a whole, equality in numeracy between genders, and the ratio of sex near birth showed significant relationships with GDP per capita but explained little of the variance. The total population of a country has absolutely nothing to do with the GDP per capita when time and space are not controlled for.&lt;/p&gt;
-&lt;p&gt;We see in Figure 1 that for our top four metrics (&lt;code&gt;education_years&lt;/code&gt;, &lt;code&gt;gender_equality_index&lt;/code&gt;, &lt;code&gt;gender_equality_education&lt;/code&gt; and &lt;code&gt;education_inequality&lt;/code&gt;), only &lt;code&gt;education_years&lt;/code&gt; shows any consistency over time. We also see that &lt;code&gt;education_inequality&lt;/code&gt; has become a much better test of the GDP per capita of a country since the mid 19th century.&lt;/p&gt;
-&lt;p&gt;Figure 2 shows that there is a very large range in the relationship between many of these metrics and GDP per capita when we control for country of measurement. Interestingly, the &lt;code&gt;total_population&lt;/code&gt; of the country is relevant to the GDP per capita when this information is analysed independently by each country. More important than &lt;code&gt;total_population&lt;/code&gt; we see are the metrics &lt;code&gt;education_years&lt;/code&gt; and &lt;code&gt;gender_equality_index&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;When we look at the specific relationship between &lt;code&gt;education_years&lt;/code&gt; and &lt;code&gt;gender_equality_education&lt;/code&gt; it would at first appear that at an R^2 value of 0.518 this was a strong relationship. Looking more closely at Figure 3 one will notice that this relationship is not linear and that the fit of the linear model is being affected by several scores at very low education levels and equality scores. If one were to only account for scores where the &lt;code&gt;education_years&lt;/code&gt; metric is at least 5 years the strength of the relationship falls dramatically to R^2 = 0.199.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;discussion&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Discussion&lt;/h2&gt;
-&lt;p&gt;If one was satisfied to take all of the GDP data and the several metrics of equality used in this analysis and clump them together one would be led to believe that the most important thing for a prosperous society is the overall years of education for that countries citizens. This metric is clearly the most important in Table 1, Figure 1 and Figure 2. Equality in education between the genders is also of great importance, though perhaps half as much so as the overall education of the populace. It leads that a society with more equitable education levels between genders would have a greater proportion of educated people and this is generally so however, Figure 3 shows that if one removes scores from nations with particularly low levels of overall education this relationship falls apart. This is because most countries in the world have relatively even levels of education between genders. There is little pattern here because there is little variance in &lt;code&gt;gender_equality_education&lt;/code&gt; once the less educated nations have been removed from the calculation.&lt;/p&gt;
-&lt;p&gt;More important to GDP than equal education for genders appears to be the &lt;em&gt;overall&lt;/em&gt; equality between genders. This value accounts for much more than education alone and appears to better capture how an egalitarian society benefits from the equal treatment of it’s citizens. Clio Infra states that this metric represents:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The composite index aims to evaluate countries’ performances regarding the progress they made in closing the gender gap in the fields of health, socio-economic resources, politics and household since 1950&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;When I started this research I had assumed that equal education between genders would clearly be a very important metric in regards to a prosperous society. Surprisingly this appears to not be as concrete as expected. It certainly is important, more so than income inequality, for example, but is not as important as the &lt;em&gt;overall&lt;/em&gt; equality between the genders. This finding is deceiving though because the equality in education for most countries (not just rich ones) is high. It is the difference in equality between genders generally that shows a broader range, and the difference relates strongly to GDP per capita. So a potential recipe for success seems to be to first ensure that as much of a populace as possible (of all genders) receives as much education as possible. It seems likely that this would then fuel gender equality, but the data don’t show this unilaterally. So to really move a nation to the top of the GDP per capita list would also require an active effort in ensuring well rounded rights to all genders.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

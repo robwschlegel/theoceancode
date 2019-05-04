@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Source Themes Academic 2.4.0">
-  <meta name="generator" content="Hugo 0.45" />
+  <meta name="generator" content="Hugo 0.55.5" />
   <meta name="author" content="Robert William Schlegel">
 
   
@@ -358,13 +358,13 @@
 
 
     <div class="article-style" itemprop="articleBody">
-      <div id="objective" class="section level2">
+      
+
+
+<div id="objective" class="section level2">
 <h2>Objective</h2>
 <p>Whilst cruising about on <a href="http://imgur.com">Imgur</a> I found a post about science stuff. Not uncommon, which is nice. These sorts of grab-bag posts about nothing in particular often include some mention of climate science, almost exclusively some sort of clever visualisation of a warming planet. That seems to be what people are most interested in. I’m not complaining though, it keeps me employed. The aforementioned post caught my attention more than usual because it included a GIF, and not just a static picture of some sort of blue thing that is becoming alarmingly red (that was not meant to be a political metaphor). I’m referring to the now famous GIF by climate scientist Ed Hawkins (<span class="citation">@ed_hawkins</span>) whose blog may be found <a href="https://www.climate-lab-book.ac.uk/">here</a>, and the specific post in question <a href="https://www.climate-lab-book.ac.uk/2016/spiralling-global-temperatures/">here</a>. A quick bit of research on this animation revealed that it has likely been viewed by millions of people, was featured in the opening ceremony of the Rio Olympics, and was created in MATLAB. Those three key points made me decide to do a post on how to re-create this exact figure in R via a bit of reverse engineering. The original GIF in question is below.</p>
-<div class="figure">
-<img src="/img/polar_temp.gif" />
-
-</div>
+<p><img src="/img/polar_temp.gif" /></p>
 <p><strong>Figure 1</strong>: The ever broadening spiral of global temperatures created by <a href="https://www.climate-lab-book.ac.uk/">Ed Hawkins</a>.</p>
 </div>
 <div id="data" class="section level2">
@@ -494,20 +494,11 @@ system.time(saveGIF(animate.polar.plot(df = KB), interval = 0.4, ani.width = 457
 <div id="summary" class="section level2">
 <h2>Summary</h2>
 <p>As one may see in the following GIFs, local extremes often outpace global averages. This should not be terribly surprising. In order to better illustrate this I have expanded the anomaly labels along the y-axes more so than seen in Figure 1. The increasing patterns are not as clear in these following GIFs as in the original that they are based on. This is because the original is based on a global average, which provides for a much smoother trend. I hope people enjoy these and feel free to plop your own temperature time series into the code to create your own polar plot figures!</p>
-<div class="figure">
-<img src="/img/polar_plot_PN.gif" />
-
-</div>
+<p><img src="/img/polar_plot_PN.gif" /></p>
 <p><strong>Figure 2</strong>: The polar plot for Port Nolloth, where temperatures have been increasing.</p>
-<div class="figure">
-<img src="/img/polar_plot_SP.gif" />
-
-</div>
+<p><img src="/img/polar_plot_SP.gif" /></p>
 <p><strong>Figure 3</strong>: The polar plot for Sea Point, where temperatures have been decreasing.</p>
-<div class="figure">
-<img src="/img/polar_plot_KB.gif" />
-
-</div>
+<p><img src="/img/polar_plot_KB.gif" /></p>
 <p><strong>Figure 4</strong>: The polar plot for Kent Bay, where temperatures have been holding level.</p>
 </div>
 

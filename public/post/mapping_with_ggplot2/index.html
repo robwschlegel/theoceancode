@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Source Themes Academic 2.4.0">
-  <meta name="generator" content="Hugo 0.45" />
+  <meta name="generator" content="Hugo 0.55.5" />
   <meta name="author" content="Robert William Schlegel">
 
   
@@ -358,7 +358,10 @@
 
 
     <div class="article-style" itemprop="articleBody">
-      <div id="objective" class="section level2">
+      
+
+
+<div id="objective" class="section level2">
 <h2>Objective</h2>
 <p>There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always “Figure 1”. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area. Being a happy convert to the <a href="https://cran.r-project.org/web/packages/tidyverse/">tidyverse</a> I only teach the graphics of <a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a>. I have found that people often prefer to use the <a href="https://cran.r-project.org/web/packages/ggmap/">ggmap</a> extension to create ggplot quality figures with Google map backgrounds, but I personally think that a more traditional monotone background for maps looks more professional. What I’ve decided to showcase this week is the data and code required to create a publication quality map. Indeed, the following code will create the aforementioned obligatory “Figure 1” in a paper I am currently preparing for submission.</p>
 </div>
@@ -458,7 +461,7 @@ mg_top &lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) +
     annotate(&quot;text&quot;, label = &quot;Cape\nPeninsula&quot;, x = 17.2, y = -35, size = 3.0, angle = 0, colour = &quot;ivory&quot;) +
   # Improve on the x and y axis labels
     scale_x_continuous(breaks = seq(15, 35, 5),
-                       labels = scales::unit_format(&quot;°E&quot;, sep = &quot;&quot;),
+                       labels = scales::unit_format(prefix = &quot;°E&quot;, sep = &quot;&quot;),
                        position = &quot;top&quot;) +
     scale_y_continuous(breaks = seq(-35, -30, 5),
                        labels = c(&quot;35°S&quot;, &quot;30°S&quot;)) +
@@ -515,7 +518,7 @@ mg_bottom &lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) +
     geom_segment(aes(x = 35, y = -37.5, xend = 37, yend = -37.5)) +
   # Improve on the x and y axis labels
     scale_x_continuous(breaks = seq(15, 35, 5),
-                       labels = scales::unit_format(&quot;°E&quot;, sep = &quot;&quot;)) +
+                       labels = scales::unit_format(prefix = &quot;°E&quot;, sep = &quot;&quot;)) +
     scale_y_continuous(breaks = seq(-35, -30, 5),
                        labels = c(&quot;35°S&quot;, &quot;30°S&quot;)) +
     labs(x = NULL, y = NULL) +

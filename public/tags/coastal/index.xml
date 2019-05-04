@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Coastal on The Ocean Code</title>
+    <title>coastal on The Ocean Code</title>
     <link>https://theoceancode.netlify.com/tags/coastal/</link>
-    <description>Recent content in Coastal on The Ocean Code</description>
+    <description>Recent content in coastal on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -36,7 +36,7 @@
       <pubDate>Mon, 28 Aug 2017 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/project/coastr/</guid>
-      <description></description>
+      <description>An R package with useful functions for coastal oceanography.</description>
     </item>
     
     <item>
