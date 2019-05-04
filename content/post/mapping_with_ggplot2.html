@@ -108,7 +108,7 @@ mg_top &lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) +
     annotate(&quot;text&quot;, label = &quot;Cape\nPeninsula&quot;, x = 17.2, y = -35, size = 3.0, angle = 0, colour = &quot;ivory&quot;) +
   # Improve on the x and y axis labels
     scale_x_continuous(breaks = seq(15, 35, 5),
-                       labels = scales::unit_format(&quot;°E&quot;, sep = &quot;&quot;),
+                       labels = scales::unit_format(prefix = &quot;°E&quot;, sep = &quot;&quot;),
                        position = &quot;top&quot;) +
     scale_y_continuous(breaks = seq(-35, -30, 5),
                        labels = c(&quot;35°S&quot;, &quot;30°S&quot;)) +
@@ -165,7 +165,7 @@ mg_bottom &lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) +
     geom_segment(aes(x = 35, y = -37.5, xend = 37, yend = -37.5)) +
   # Improve on the x and y axis labels
     scale_x_continuous(breaks = seq(15, 35, 5),
-                       labels = scales::unit_format(&quot;°E&quot;, sep = &quot;&quot;)) +
+                       labels = scales::unit_format(prefix = &quot;°E&quot;, sep = &quot;&quot;)) +
     scale_y_continuous(breaks = seq(-35, -30, 5),
                        labels = c(&quot;35°S&quot;, &quot;30°S&quot;)) +
     labs(x = NULL, y = NULL) +
