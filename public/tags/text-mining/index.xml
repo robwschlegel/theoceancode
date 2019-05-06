@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>text mining on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/text-mining/</link>
+    <link>/tags/text-mining/</link>
     <description>Recent content in text mining on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Mon, 15 May 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/text-mining/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/text-mining/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Religious sentiment</title>
-      <link>https://theoceancode.netlify.com/post/religious_sentiment/</link>
+      <link>/post/religious_sentiment/</link>
       <pubDate>Mon, 15 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/religious_sentiment/</guid>
+      <guid>/post/religious_sentiment/</guid>
       <description>Objective Before we begin, I would like to acknowledge that the framework for this analysis was adapted from a blogpost found on the wonderfully interesting R-bloggers website. The objective of this analysis is to use sentiment analysis on different religious texts to visualise the differences/ similarities between them. This concept is of course fraught with a host of issues. Not least of which being detractors who will likely not endeavour to engage in rational debate against the findings of this work.</description>
     </item>
     

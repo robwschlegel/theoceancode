@@ -2,76 +2,76 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/r/</link>
+    <link>/tags/r/</link>
     <description>Recent content in R on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Fri, 31 Aug 2018 00:00:00 -0300</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
-      <link>https://theoceancode.netlify.com/publication/heatwaver/</link>
+      <link>/publication/heatwaver/</link>
       <pubDate>Fri, 31 Aug 2018 00:00:00 -0300</pubDate>
       
-      <guid>https://theoceancode.netlify.com/publication/heatwaver/</guid>
+      <guid>/publication/heatwaver/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Detecting marine heatwaves</title>
-      <link>https://theoceancode.netlify.com/project/detecting_mhws/</link>
+      <link>/project/detecting_mhws/</link>
       <pubDate>Tue, 28 Aug 2018 00:00:00 -0300</pubDate>
       
-      <guid>https://theoceancode.netlify.com/project/detecting_mhws/</guid>
+      <guid>/project/detecting_mhws/</guid>
       <description>A deep dive into the best practices for detecting marine heatwaves (MHWs).</description>
     </item>
     
     <item>
       <title>heatwaveR package</title>
-      <link>https://theoceancode.netlify.com/project/heatwaver/</link>
+      <link>/project/heatwaver/</link>
       <pubDate>Sat, 28 Jul 2018 00:00:00 -0300</pubDate>
       
-      <guid>https://theoceancode.netlify.com/project/heatwaver/</guid>
+      <guid>/project/heatwaver/</guid>
       <description>An R package for the detection of heatwaves and cold-spells.</description>
     </item>
     
     <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
-      <link>https://theoceancode.netlify.com/publication/predominant/</link>
+      <link>/publication/predominant/</link>
       <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
       
-      <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
+      <guid>/publication/predominant/</guid>
       <description></description>
     </item>
     
     <item>
       <title>coastR package</title>
-      <link>https://theoceancode.netlify.com/project/coastr/</link>
+      <link>/project/coastr/</link>
       <pubDate>Mon, 28 Aug 2017 00:00:00 -0300</pubDate>
       
-      <guid>https://theoceancode.netlify.com/project/coastr/</guid>
+      <guid>/project/coastr/</guid>
       <description>An R package with useful functions for coastal oceanography.</description>
     </item>
     
     <item>
       <title>Nearshore and offshore co-occurrence of marine heatwaves and cold-spells</title>
-      <link>https://theoceancode.netlify.com/publication/cooccurrence/</link>
+      <link>/publication/cooccurrence/</link>
       <pubDate>Tue, 10 Jan 2017 00:00:00 -0400</pubDate>
       
-      <guid>https://theoceancode.netlify.com/publication/cooccurrence/</guid>
+      <guid>/publication/cooccurrence/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Climate Change in Coastal Waters: Time Series Properties Affecting Trend Estimation</title>
-      <link>https://theoceancode.netlify.com/publication/trend-analysis/</link>
+      <link>/publication/trend-analysis/</link>
       <pubDate>Thu, 15 Dec 2016 00:00:00 -0400</pubDate>
       
-      <guid>https://theoceancode.netlify.com/publication/trend-analysis/</guid>
+      <guid>/publication/trend-analysis/</guid>
       <description></description>
     </item>
     

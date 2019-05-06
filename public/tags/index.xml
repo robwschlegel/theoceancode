@@ -2,202 +2,202 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Mon, 25 Mar 2019 00:00:00 -0300</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>marine heatwaves</title>
-      <link>https://theoceancode.netlify.com/tags/marine-heatwaves/</link>
+      <link>/tags/marine-heatwaves/</link>
       <pubDate>Mon, 25 Mar 2019 00:00:00 -0300</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/marine-heatwaves/</guid>
+      <guid>/tags/marine-heatwaves/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>https://theoceancode.netlify.com/tags/r/</link>
+      <link>/tags/r/</link>
       <pubDate>Fri, 31 Aug 2018 00:00:00 -0300</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/r/</guid>
+      <guid>/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>statistics</title>
-      <link>https://theoceancode.netlify.com/tags/statistics/</link>
+      <link>/tags/statistics/</link>
       <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/statistics/</guid>
+      <guid>/tags/statistics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>survey</title>
-      <link>https://theoceancode.netlify.com/tags/survey/</link>
+      <link>/tags/survey/</link>
       <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/survey/</guid>
+      <guid>/tags/survey/</guid>
       <description></description>
     </item>
     
     <item>
       <title>coastal</title>
-      <link>https://theoceancode.netlify.com/tags/coastal/</link>
+      <link>/tags/coastal/</link>
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/coastal/</guid>
+      <guid>/tags/coastal/</guid>
       <description></description>
     </item>
     
     <item>
       <title>atmosphere</title>
-      <link>https://theoceancode.netlify.com/tags/atmosphere/</link>
+      <link>/tags/atmosphere/</link>
       <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/atmosphere/</guid>
+      <guid>/tags/atmosphere/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ocean</title>
-      <link>https://theoceancode.netlify.com/tags/ocean/</link>
+      <link>/tags/ocean/</link>
       <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/ocean/</guid>
+      <guid>/tags/ocean/</guid>
       <description></description>
     </item>
     
     <item>
       <title>climatology</title>
-      <link>https://theoceancode.netlify.com/tags/climatology/</link>
+      <link>/tags/climatology/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/climatology/</guid>
+      <guid>/tags/climatology/</guid>
       <description></description>
     </item>
     
     <item>
       <title>visuals</title>
-      <link>https://theoceancode.netlify.com/tags/visuals/</link>
+      <link>/tags/visuals/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/visuals/</guid>
+      <guid>/tags/visuals/</guid>
       <description></description>
     </item>
     
     <item>
       <title>mapping</title>
-      <link>https://theoceancode.netlify.com/tags/mapping/</link>
+      <link>/tags/mapping/</link>
       <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/mapping/</guid>
+      <guid>/tags/mapping/</guid>
       <description></description>
     </item>
     
     <item>
       <title>wind</title>
-      <link>https://theoceancode.netlify.com/tags/wind/</link>
+      <link>/tags/wind/</link>
       <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/wind/</guid>
+      <guid>/tags/wind/</guid>
       <description></description>
     </item>
     
     <item>
       <title>goats</title>
-      <link>https://theoceancode.netlify.com/tags/goats/</link>
+      <link>/tags/goats/</link>
       <pubDate>Mon, 10 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/goats/</guid>
+      <guid>/tags/goats/</guid>
       <description></description>
     </item>
     
     <item>
       <title>politics</title>
-      <link>https://theoceancode.netlify.com/tags/politics/</link>
+      <link>/tags/politics/</link>
       <pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/politics/</guid>
+      <guid>/tags/politics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ODV</title>
-      <link>https://theoceancode.netlify.com/tags/odv/</link>
+      <link>/tags/odv/</link>
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/odv/</guid>
+      <guid>/tags/odv/</guid>
       <description></description>
     </item>
     
     <item>
       <title>interpolation</title>
-      <link>https://theoceancode.netlify.com/tags/interpolation/</link>
+      <link>/tags/interpolation/</link>
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/interpolation/</guid>
+      <guid>/tags/interpolation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gdp</title>
-      <link>https://theoceancode.netlify.com/tags/gdp/</link>
+      <link>/tags/gdp/</link>
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/gdp/</guid>
+      <guid>/tags/gdp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gender</title>
-      <link>https://theoceancode.netlify.com/tags/gender/</link>
+      <link>/tags/gender/</link>
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/gender/</guid>
+      <guid>/tags/gender/</guid>
       <description></description>
     </item>
     
     <item>
       <title>religion</title>
-      <link>https://theoceancode.netlify.com/tags/religion/</link>
+      <link>/tags/religion/</link>
       <pubDate>Mon, 15 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/religion/</guid>
+      <guid>/tags/religion/</guid>
       <description></description>
     </item>
     
     <item>
       <title>sentiment analysis</title>
-      <link>https://theoceancode.netlify.com/tags/sentiment-analysis/</link>
+      <link>/tags/sentiment-analysis/</link>
       <pubDate>Mon, 15 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/sentiment-analysis/</guid>
+      <guid>/tags/sentiment-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>text mining</title>
-      <link>https://theoceancode.netlify.com/tags/text-mining/</link>
+      <link>/tags/text-mining/</link>
       <pubDate>Mon, 15 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/text-mining/</guid>
+      <guid>/tags/text-mining/</guid>
       <description></description>
     </item>
     
     <item>
       <title>time series analysis</title>
-      <link>https://theoceancode.netlify.com/tags/time-series-analysis/</link>
+      <link>/tags/time-series-analysis/</link>
       <pubDate>Thu, 15 Dec 2016 00:00:00 -0400</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/time-series-analysis/</guid>
+      <guid>/tags/time-series-analysis/</guid>
       <description></description>
     </item>
     

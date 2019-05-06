@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>statistics on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/statistics/</link>
+    <link>/tags/statistics/</link>
     <description>Recent content in statistics on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Tue, 17 Jul 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/statistics/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/statistics/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>South Africa time survey</title>
-      <link>https://theoceancode.netlify.com/post/sa_time_survey/</link>
+      <link>/post/sa_time_survey/</link>
       <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/sa_time_survey/</guid>
+      <guid>/post/sa_time_survey/</guid>
       <description>Objective In South Africa there are a range of idioms for different time frames in which someone may (or may not) do something. The most common of these are: ‘now’, ‘just now’, and ‘now now’. If one were to Google these sayings one would find that there is general agreements on how long these time frames are, but that agreement is not absolute.
 Advice from the internet.
  This got me to wondering just how much disagreement there may be around the country.</description>

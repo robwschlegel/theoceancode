@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Publication_types on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/publication_types/</link>
+    <link>/publication_types/</link>
     <description>Recent content in Publication_types on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Fri, 31 Aug 2018 00:00:00 -0300</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/publication_types/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/publication_types/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>2</title>
-      <link>https://theoceancode.netlify.com/publication_types/2/</link>
+      <link>/publication_types/2/</link>
       <pubDate>Fri, 31 Aug 2018 00:00:00 -0300</pubDate>
       
-      <guid>https://theoceancode.netlify.com/publication_types/2/</guid>
+      <guid>/publication_types/2/</guid>
       <description></description>
     </item>
     

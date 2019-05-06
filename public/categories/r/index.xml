@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/categories/r/</link>
+    <link>/categories/r/</link>
     <description>Recent content in R on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Tue, 17 Jul 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>South Africa time survey</title>
-      <link>https://theoceancode.netlify.com/post/sa_time_survey/</link>
+      <link>/post/sa_time_survey/</link>
       <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/sa_time_survey/</guid>
+      <guid>/post/sa_time_survey/</guid>
       <description>Objective In South Africa there are a range of idioms for different time frames in which someone may (or may not) do something. The most common of these are: ‘now’, ‘just now’, and ‘now now’. If one were to Google these sayings one would find that there is general agreements on how long these time frames are, but that agreement is not absolute.
 Advice from the internet.
  This got me to wondering just how much disagreement there may be around the country.</description>
@@ -25,91 +25,91 @@ Advice from the internet.
     
     <item>
       <title>Transects</title>
-      <link>https://theoceancode.netlify.com/post/transects/</link>
+      <link>/post/transects/</link>
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/transects/</guid>
+      <guid>/post/transects/</guid>
       <description>Preface This week I have expanded the coastR package with the inclusion of a function that calculates the angle of the heading for alongshore or shore-normal transects. The rest of this blog post is the vignette that I’ve written detailing the set of this function. Next week I’ll likely be taking a break from coastR development to finally create a package for the SACTN dataset. That is a project that has been in the works for a loooong time and it will be good to finally see a development release available to the public.</description>
     </item>
     
     <item>
       <title>Polar plot climatologies</title>
-      <link>https://theoceancode.netlify.com/post/polar_plot_clims/</link>
+      <link>/post/polar_plot_clims/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/polar_plot_clims/</guid>
+      <guid>/post/polar_plot_clims/</guid>
       <description>Objective Whilst cruising about on Imgur I found a post about science stuff. Not uncommon, which is nice. These sorts of grab-bag posts about nothing in particular often include some mention of climate science, almost exclusively some sort of clever visualisation of a warming planet. That seems to be what people are most interested in. I’m not complaining though, it keeps me employed. The aforementioned post caught my attention more than usual because it included a GIF, and not just a static picture of some sort of blue thing that is becoming alarmingly red (that was not meant to be a political metaphor).</description>
     </item>
     
     <item>
       <title>Sequential sites</title>
-      <link>https://theoceancode.netlify.com/post/seq_sites/</link>
+      <link>/post/seq_sites/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/seq_sites/</guid>
+      <guid>/post/seq_sites/</guid>
       <description>Preface The rest of the blog post after this preface section is a copy of the vignette I’ve written for the first function in the new package I am developing: coastR. This package aims to provide functions that are useful for coastal oceanography but that do not yet exist in the R language. It is not my intention to provide algorithms for physical oceanography as these may already be found elsewhere.</description>
     </item>
     
     <item>
       <title>Mapping with ggplot2</title>
-      <link>https://theoceancode.netlify.com/post/mapping_with_ggplot2/</link>
+      <link>/post/mapping_with_ggplot2/</link>
       <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/mapping_with_ggplot2/</guid>
+      <guid>/post/mapping_with_ggplot2/</guid>
       <description>Objective There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always “Figure 1”. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area.</description>
     </item>
     
     <item>
       <title>Goats per capita</title>
-      <link>https://theoceancode.netlify.com/post/goats_per_capita/</link>
+      <link>/post/goats_per_capita/</link>
       <pubDate>Mon, 10 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/goats_per_capita/</guid>
+      <guid>/post/goats_per_capita/</guid>
       <description>Objective A few weeks ago for a post about the relationship between gender equality and GDP/ capita I found a nifty website that has a massive amount of census information for most countries on our planet. Much of this information could be used to answer some very interesting and/ or important questions. But some of the data can be used to answer seemingly pointless questions. And that’s what I intend to do this week.</description>
     </item>
     
     <item>
       <title>Party immigration</title>
-      <link>https://theoceancode.netlify.com/post/party_immigration/</link>
+      <link>/post/party_immigration/</link>
       <pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/party_immigration/</guid>
+      <guid>/post/party_immigration/</guid>
       <description>Objective As an immigrant myself, all of the talk of immigration to be found in main stream media outlets today makes me a bit nervous. Whereas most people that speak of the pro’s and con’s of immigration do so from the point of view of how it may affect the country of their birth, I view this issue as something that affects my ability to live outside the country of my birth.</description>
     </item>
     
     <item>
       <title>ODV figures in R</title>
-      <link>https://theoceancode.netlify.com/post/odv_figures/</link>
+      <link>/post/odv_figures/</link>
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/odv_figures/</guid>
+      <guid>/post/odv_figures/</guid>
       <description>Objective With more and more scientists moving to open source software (i.e. R or Python) to perform their numerical analyses the opportunities for collaboration increase and we may all benefit from this enhanced productivity. At the risk of sounding sycophantic, the future of scientific research truly is in multi-disciplinary work. What then could be inhibiting this slow march towards progress? We tend to like to stick to what is comfortable.</description>
     </item>
     
     <item>
       <title>Gender and GDP</title>
-      <link>https://theoceancode.netlify.com/post/gender_gdp/</link>
+      <link>/post/gender_gdp/</link>
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/gender_gdp/</guid>
+      <guid>/post/gender_gdp/</guid>
       <description>Objective Most people living in the Western World are very quick to extol the virtues of gender equality. There are however many places where this is not so. This then inevitably leads to conflict as cultures and nations are drawn closer together on our ever shrinking earth. Perhaps not the sort of conflict that leads to sabre rattling, but certainly ideological disagreements that affect policy and have real impacts on large swathes of humanity.</description>
     </item>
     
     <item>
       <title>Wind Vector Time Series</title>
-      <link>https://theoceancode.netlify.com/post/wind_vectors/</link>
+      <link>/post/wind_vectors/</link>
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/wind_vectors/</guid>
+      <guid>/post/wind_vectors/</guid>
       <description>Objective As more and more physical scientists (e.g. oceanographers) move to R from other object oriented command line programming languages, such as Matlab, there will be more and more demand for the code that is needed to do some basic things that they may already know how to do in their previous languages that they don’t yet know how to do in R. Surprisingly, there are many things that should be very easy to find how to do in R that are not.</description>
     </item>
     
     <item>
       <title>Religious sentiment</title>
-      <link>https://theoceancode.netlify.com/post/religious_sentiment/</link>
+      <link>/post/religious_sentiment/</link>
       <pubDate>Mon, 15 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/religious_sentiment/</guid>
+      <guid>/post/religious_sentiment/</guid>
       <description>Objective Before we begin, I would like to acknowledge that the framework for this analysis was adapted from a blogpost found on the wonderfully interesting R-bloggers website. The objective of this analysis is to use sentiment analysis on different religious texts to visualise the differences/ similarities between them. This concept is of course fraught with a host of issues. Not least of which being detractors who will likely not endeavour to engage in rational debate against the findings of this work.</description>
     </item>
     

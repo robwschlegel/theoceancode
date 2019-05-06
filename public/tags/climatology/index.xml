@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>climatology on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/climatology/</link>
+    <link>/tags/climatology/</link>
     <description>Recent content in climatology on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Wed, 23 Aug 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/climatology/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/climatology/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Polar plot climatologies</title>
-      <link>https://theoceancode.netlify.com/post/polar_plot_clims/</link>
+      <link>/post/polar_plot_clims/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/polar_plot_clims/</guid>
+      <guid>/post/polar_plot_clims/</guid>
       <description>Objective Whilst cruising about on Imgur I found a post about science stuff. Not uncommon, which is nice. These sorts of grab-bag posts about nothing in particular often include some mention of climate science, almost exclusively some sort of clever visualisation of a warming planet. That seems to be what people are most interested in. I’m not complaining though, it keeps me employed. The aforementioned post caught my attention more than usual because it included a GIF, and not just a static picture of some sort of blue thing that is becoming alarmingly red (that was not meant to be a political metaphor).</description>
     </item>
     
