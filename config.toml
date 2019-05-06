@@ -13,7 +13,7 @@ title = "The Ocean Code"
 
 # Your copyright notice - appears in site footer.
 # To display a copyright symbol, type `&copy;`.
-copyright = "&copy; 2018"
+copyright = "&copy; 2019"
 
 theme = "hugo-academic"
 enableEmoji = true
@@ -296,10 +296,10 @@ enableGitInfo = false
   url = "#workshops"
   weight = 5
   
-#[[menu.main]]
-#  name = "Talks"
-#  url = "#talks"
-#  weight = 6
+[[menu.main]]
+  name = "Talks"
+  url = "#talks"
+  weight = 6
 
 [[menu.main]]
   name = "Contact"
