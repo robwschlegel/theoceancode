@@ -3,6 +3,59 @@
     
     <url>
     
+      <loc>/poster/mhw_detection_poster/</loc>
+      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/poster/</loc>
+      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/r/</loc>
+      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/</loc>
+      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/</loc>
+      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/marine-heatwaves/</loc>
+      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/project/mhwtracker/</loc>
       <lastmod>2019-03-25T00:00:00-03:00</lastmod>
     </url>
@@ -12,33 +65,6 @@
     <url>
     
       <loc>/project/</loc>
-      <lastmod>2019-03-25T00:00:00-03:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/</loc>
-      <lastmod>2019-03-25T00:00:00-03:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/</loc>
-      <lastmod>2019-03-25T00:00:00-03:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/marine-heatwaves/</loc>
       <lastmod>2019-03-25T00:00:00-03:00</lastmod>
       <priority>0</priority>
     </url>
@@ -65,15 +91,6 @@
     <url>
     
       <loc>/publication_types/</loc>
-      <lastmod>2018-08-31T00:00:00-03:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/r/</loc>
       <lastmod>2018-08-31T00:00:00-03:00</lastmod>
       <priority>0</priority>
     </url>

@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Mon, 25 Mar 2019 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Mon, 06 May 2019 00:00:00 -0300</lastBuildDate>
     
 	<atom:link href="/tags/marine-heatwaves/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Detecting marine heatwaves with sub-optimal data</title>
+      <link>/poster/mhw_detection_poster/</link>
+      <pubDate>Mon, 06 May 2019 00:00:00 -0300</pubDate>
+      
+      <guid>/poster/mhw_detection_poster/</guid>
+      <description>Research conducted on how sub-optimal a time series may be and still produce comparable marine heatwaves to an optimal time series.</description>
+    </item>
     
     <item>
       <title>Marine heatwave tracker</title>

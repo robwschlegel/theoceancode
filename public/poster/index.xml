@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posters on The Ocean Code</title>
+    <link>/poster/</link>
+    <description>Recent content in Posters on The Ocean Code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>&amp;copy; 2019</copyright>
+    <lastBuildDate>Mon, 06 May 2019 00:00:00 -0300</lastBuildDate>
+    
+	<atom:link href="/poster/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Detecting marine heatwaves with sub-optimal data</title>
+      <link>/poster/mhw_detection_poster/</link>
+      <pubDate>Mon, 06 May 2019 00:00:00 -0300</pubDate>
+      
+      <guid>/poster/mhw_detection_poster/</guid>
+      <description>Research conducted on how sub-optimal a time series may be and still produce comparable marine heatwaves to an optimal time series.</description>
+    </item>
+    
+  </channel>
+</rss>

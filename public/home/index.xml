@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Mon, 27 Aug 2018 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Mon, 06 May 2019 00:00:00 -0300</lastBuildDate>
     
 	<atom:link href="/home/index.xml" rel="self" type="application/rss+xml" />
     
@@ -49,6 +49,15 @@
     </item>
     
     <item>
+      <title>Posters</title>
+      <link>/home/posters/</link>
+      <pubDate>Mon, 06 May 2019 00:00:00 -0300</pubDate>
+      
+      <guid>/home/posters/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title></title>
       <link>/home/skills/</link>
       <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
@@ -76,20 +85,20 @@
     </item>
     
     <item>
-      <title>Selected Publications</title>
-      <link>/home/publications_selected/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 -0300</pubDate>
-      
-      <guid>/home/publications_selected/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Publications</title>
       <link>/home/publications/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 -0300</pubDate>
       
       <guid>/home/publications/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Selected Publications</title>
+      <link>/home/publications_selected/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 -0300</pubDate>
+      
+      <guid>/home/publications_selected/</guid>
       <description></description>
     </item>
     
@@ -113,7 +122,7 @@
     </item>
     
     <item>
-      <title>Recent &amp; Upcoming Talks</title>
+      <title>Talks</title>
       <link>/home/talks/</link>
       <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
       
