@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Mon, 06 May 2019 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="/home/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title></title>
       <link>/home/hero_carousel/</link>
-      <pubDate>Sun, 15 Oct 2017 00:00:00 -0300</pubDate>
+      <pubDate>Sun, 15 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>/home/hero_carousel/</guid>
       <description></description>
@@ -24,7 +24,7 @@
     <item>
       <title></title>
       <link>/home/hero/</link>
-      <pubDate>Wed, 22 Aug 2018 00:00:00 -0300</pubDate>
+      <pubDate>Wed, 22 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>/home/hero/</guid>
       <description></description>
@@ -33,27 +33,36 @@
     <item>
       <title></title>
       <link>/home/about/</link>
-      <pubDate>Wed, 22 Aug 2018 00:00:00 -0300</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>/home/about/</guid>
-      <description>Biography Robert Schlegel is a post-doc researcher in the Department of Oceanography at Dalhousie University. His research focuses on developing the methodologies that will allow us to harness machine learning for the identification of the forces responsible for the formation of marine heatwaves.</description>
+      <description>Biography Robert Schlegel is an OFI postdoc fellow in the Department of Physical Oceanography at WHOI. His research focuses on developing the methodologies that will allow us to harness machine learning for the identification of the forces responsible for the formation of marine heatwaves.</description>
+    </item>
+    
+    <item>
+      <title>Publications</title>
+      <link>/home/publications/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
+      
+      <guid>/home/publications/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Packages</title>
+      <link>/home/packages/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
+      
+      <guid>/home/packages/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>Blog Posts</title>
       <link>/home/posts/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>/home/posts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Posters</title>
-      <link>/home/posters/</link>
-      <pubDate>Mon, 06 May 2019 00:00:00 -0300</pubDate>
-      
-      <guid>/home/posters/</guid>
       <description></description>
     </item>
     
@@ -67,9 +76,27 @@
     </item>
     
     <item>
+      <title>Talks</title>
+      <link>/home/talks/</link>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
+      
+      <guid>/home/talks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Posters</title>
+      <link>/home/posters/</link>
+      <pubDate>Mon, 06 May 2019 00:00:00 +0200</pubDate>
+      
+      <guid>/home/posters/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Projects</title>
       <link>/home/projects/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 -0300</pubDate>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
       <guid>/home/projects/</guid>
       <description></description>
@@ -78,25 +105,16 @@
     <item>
       <title>Selected Talks</title>
       <link>/home/talks_selected/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>/home/talks_selected/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Publications</title>
-      <link>/home/publications/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 -0300</pubDate>
-      
-      <guid>/home/publications/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Selected Publications</title>
       <link>/home/publications_selected/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 -0300</pubDate>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
       <guid>/home/publications_selected/</guid>
       <description></description>
@@ -105,7 +123,7 @@
     <item>
       <title>Teaching</title>
       <link>/home/teaching/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>/home/teaching/</guid>
       <description>I am not currently teaching.</description>
@@ -114,7 +132,7 @@
     <item>
       <title>Workshops</title>
       <link>/home/workshops/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>/home/workshops/</guid>
       <description>Below please find links to workshops I run:
@@ -122,18 +140,9 @@
     </item>
     
     <item>
-      <title>Talks</title>
-      <link>/home/talks/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
-      
-      <guid>/home/talks/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Contact</title>
       <link>/home/contact/</link>
-      <pubDate>Wed, 22 Aug 2018 00:00:00 -0300</pubDate>
+      <pubDate>Wed, 22 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>/home/contact/</guid>
       <description></description>
@@ -142,7 +151,7 @@
     <item>
       <title>Tags</title>
       <link>/home/tags/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>/home/tags/</guid>
       <description></description>
@@ -151,7 +160,7 @@
     <item>
       <title>Search</title>
       <link>/home/search/</link>
-      <pubDate>Mon, 23 Jul 2018 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 23 Jul 2018 00:00:00 +0200</pubDate>
       
       <guid>/home/search/</guid>
       <description></description>

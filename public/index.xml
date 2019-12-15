@@ -6,13 +6,40 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Mon, 06 May 2019 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0100</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Detecting Marine Heatwaves With Sub-Optimal Data</title>
+      <link>/publication/detection/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/detection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>heatwaveR</title>
+      <link>/package/heatwaver/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
+      
+      <guid>/package/heatwaver/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>coastR</title>
+      <link>/package/coastr/</link>
+      <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
+      
+      <guid>/package/coastr/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Detecting marine heatwaves with sub-optimal data</title>
       <link>/poster/mhw_detection_poster/</link>
-      <pubDate>Mon, 06 May 2019 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 06 May 2019 00:00:00 +0200</pubDate>
       
       <guid>/poster/mhw_detection_poster/</guid>
       <description></description>
@@ -21,7 +48,7 @@
     <item>
       <title>Marine heatwave tracker</title>
       <link>/project/mhwtracker/</link>
-      <pubDate>Mon, 25 Mar 2019 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 25 Mar 2019 00:00:00 +0100</pubDate>
       
       <guid>/project/mhwtracker/</guid>
       <description></description>
@@ -30,7 +57,7 @@
     <item>
       <title>Marine heatwaves: the new normal</title>
       <link>/talk/mhw_2019/</link>
-      <pubDate>Tue, 19 Mar 2019 00:00:00 -0300</pubDate>
+      <pubDate>Tue, 19 Mar 2019 00:00:00 +0100</pubDate>
       
       <guid>/talk/mhw_2019/</guid>
       <description></description>
@@ -39,28 +66,9 @@
     <item>
       <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
       <link>/publication/heatwaver/</link>
-      <pubDate>Fri, 31 Aug 2018 00:00:00 -0300</pubDate>
+      <pubDate>Fri, 31 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>/publication/heatwaver/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Detecting marine heatwaves</title>
-      <link>/project/detecting_mhws/</link>
-      <pubDate>Tue, 28 Aug 2018 00:00:00 -0300</pubDate>
-      
-      <guid>/project/detecting_mhws/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m currently working on a paper to be submitted to the upcoming &lt;a href=&#34;https://www.frontiersin.org/research-topics/7980/advances-in-understanding-marine-heatwaves-and-their-impacts#overview&#34; target=&#34;_blank&#34;&gt;special issue&lt;/a&gt; of Frontiers in Marine Science on marine heatwaves. Click the &amp;lsquo;Go to Project Site&amp;rsquo; button below to go to the website containing the up-to-date progress on this project.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>heatwaveR package</title>
-      <link>/project/heatwaver/</link>
-      <pubDate>Sat, 28 Jul 2018 00:00:00 -0300</pubDate>
-      
-      <guid>/project/heatwaver/</guid>
       <description></description>
     </item>
     
@@ -355,7 +363,7 @@ survey_city %&amp;gt;%
     <item>
       <title>Privacy Policy</title>
       <link>/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 -0300</pubDate>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
       
       <guid>/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
@@ -539,18 +547,9 @@ grid.arrange(bohai_sea_along_map, bohai_sea_away_map, nrow = 1)&lt;/code&gt;&lt;
     <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
       <link>/publication/predominant/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>/publication/predominant/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>coastR package</title>
-      <link>/project/coastr/</link>
-      <pubDate>Mon, 28 Aug 2017 00:00:00 -0300</pubDate>
-      
-      <guid>/project/coastr/</guid>
       <description></description>
     </item>
     

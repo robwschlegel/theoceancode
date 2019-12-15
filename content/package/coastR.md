@@ -1,9 +1,9 @@
 +++
 # Date this page was created.
-date = 2017-08-28T00:00:00
+date = 2019-12-14T00:00:00
 
 # Project title.
-title = "coastR package"
+title = "coastR"
 
 # Project summary to display on homepage.
 summary = "An R package with useful functions for coastal oceanography."

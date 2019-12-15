@@ -68,13 +68,12 @@ enableGitInfo = false
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-  organizations = [ { name = "Woods Hole Oceanographic Institute", url = "https://www.whoi.edu/" } ]
+  organizations = [ { name = "WHOI", url = "https://www.whoi.edu/" } ]
 
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
   avatar = "Schlegel_profile_small.JPG"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
   email = "robwschlegel@gmail.com"
   address = "Physical Oceanography: Clark 516A, 360 Woods Hole Rd, Woods Hole, MA 02543"
-  Woods Hole Oceanographic Institute
   office_hours = "Monday - Friday 14:00 to 16:00 or email for appointment"
   phone = "+1 774-244-9279"
   skype = "robert.william.schlegel"

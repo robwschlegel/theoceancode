@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Fri, 08 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 14 Dec 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="/tags/coastal/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>coastR</title>
+      <link>/package/coastr/</link>
+      <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
+      
+      <guid>/package/coastr/</guid>
+      <description>An R package with useful functions for coastal oceanography.</description>
+    </item>
     
     <item>
       <title>Transects</title>
@@ -24,19 +33,10 @@
     <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
       <link>/publication/predominant/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>/publication/predominant/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>coastR package</title>
-      <link>/project/coastr/</link>
-      <pubDate>Mon, 28 Aug 2017 00:00:00 -0300</pubDate>
-      
-      <guid>/project/coastr/</guid>
-      <description>An R package with useful functions for coastal oceanography.</description>
     </item>
     
     <item>
@@ -51,7 +51,7 @@
     <item>
       <title>Nearshore and offshore co-occurrence of marine heatwaves and cold-spells</title>
       <link>/publication/cooccurrence/</link>
-      <pubDate>Tue, 10 Jan 2017 00:00:00 -0400</pubDate>
+      <pubDate>Tue, 10 Jan 2017 00:00:00 +0100</pubDate>
       
       <guid>/publication/cooccurrence/</guid>
       <description></description>

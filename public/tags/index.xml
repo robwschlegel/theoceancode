@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Mon, 06 May 2019 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Mon, 06 May 2019 00:00:00 -0300</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
@@ -24,9 +24,18 @@
     <item>
       <title>marine heatwaves</title>
       <link>/tags/marine-heatwaves/</link>
-      <pubDate>Mon, 06 May 2019 00:00:00 -0300</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>/tags/marine-heatwaves/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>coastal</title>
+      <link>/tags/coastal/</link>
+      <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
+      
+      <guid>/tags/coastal/</guid>
       <description></description>
     </item>
     
@@ -49,18 +58,9 @@
     </item>
     
     <item>
-      <title>coastal</title>
-      <link>/tags/coastal/</link>
-      <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/coastal/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>atmosphere</title>
       <link>/tags/atmosphere/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>/tags/atmosphere/</guid>
       <description></description>
@@ -69,7 +69,7 @@
     <item>
       <title>ocean</title>
       <link>/tags/ocean/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>/tags/ocean/</guid>
       <description></description>
@@ -195,7 +195,7 @@
     <item>
       <title>time series analysis</title>
       <link>/tags/time-series-analysis/</link>
-      <pubDate>Thu, 15 Dec 2016 00:00:00 -0400</pubDate>
+      <pubDate>Thu, 15 Dec 2016 00:00:00 +0100</pubDate>
       
       <guid>/tags/time-series-analysis/</guid>
       <description></description>

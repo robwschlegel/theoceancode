@@ -4,6 +4,7 @@ author: "Robert W Schlegel"
 date: 2017-05-15
 categories: ["R"]
 tags: ["religion", "text mining", "sentiment analysis"]
+bibliography: post.bib 
 ---
 
 
@@ -39,25 +40,29 @@ library(heatwaveR)</code></pre>
 <p>First we convert the PDF’s to text and merge them.</p>
 <pre class="r"><code>## Load the texts
 # Pride and Prejudice
-pride &lt;- data_frame(txt = prideprejudice, 
-                    src = &quot;pride&quot;)
+pride &lt;- tibble(txt = prideprejudice, 
+                src = &quot;pride&quot;)
 # Quran
-quran &lt;- data_frame(txt = as.character(pdf_text(&quot;../../static/data/EQuran.pdf&quot;)),
-                    src = &quot;quran&quot;)
+quran &lt;- tibble(txt = as.character(pdf_text(&quot;../../static/data/EQuran.pdf&quot;)),
+                src = &quot;quran&quot;)
 # Bible
-bible &lt;- data_frame(txt = as.character(pdf_text(&quot;../../static/data/KJBNew.pdf&quot;)),
-                    src = &quot;bible&quot;)
+bible &lt;- tibble(txt = as.character(pdf_text(&quot;../../static/data/KJBNew.pdf&quot;)),
+                src = &quot;bible&quot;)
 # Torah
-torah &lt;- data_frame(txt = as.character(pdf_text(&quot;../../static/data/Torah.pdf&quot;)), 
-                    src = &quot;torah&quot;)
+torah &lt;- tibble(txt = as.character(pdf_text(&quot;../../static/data/Torah.pdf&quot;)), 
+                src = &quot;torah&quot;)
 # Bhagavad Gita
-gita &lt;- data_frame(txt = as.character(pdf_text(&quot;../../static/data/BGita.pdf&quot;)), 
-                    src = &quot;gita&quot;)
+gita &lt;- tibble(txt = as.character(pdf_text(&quot;../../static/data/BGita.pdf&quot;)), 
+               src = &quot;gita&quot;)
 # Book of the dead
 dead &lt;- data_frame(txt = as.character(pdf_text(&quot;../../static/data/EBoD.pdf&quot;)),
                    src = &quot;dead&quot;)
 # Combine
 texts &lt;- rbind(pride, quran, bible, torah, gita, dead)</code></pre>
+<p>Then we must download the <a href="http://saifmohammad.com/WebPages/lexicons.html">NRC Word-Emotion Association Lexicon</a><span class="citation">(Mohammad and Turney 2013)</span>.</p>
+<pre class="r"><code># Note that this will require you to agree to term of use
+nrc_sentiment &lt;- get_sentiments(&quot;nrc&quot;)</code></pre>
+<pre class="r"><code>nrc_sentiment &lt;- readRDS(&quot;../../static/data/nrc_sentiment.Rds&quot;)</code></pre>
 <p>After loading and merging the texts we want to run some quick word counts on them.</p>
 <pre class="r"><code># Total relevant words per text
 total_word_count &lt;- texts %&gt;%
@@ -65,7 +70,7 @@ total_word_count &lt;- texts %&gt;%
   anti_join(stop_words, by = &quot;word&quot;) %&gt;%
   filter(!grepl(&#39;[0-9]&#39;, word)) %&gt;%
   filter(!grepl(&#39;www.christistheway.com&#39;, word)) %&gt;%
-  left_join(get_sentiments(&quot;nrc&quot;), by = &quot;word&quot;) %&gt;%
+  left_join(nrc_sentiment, by = &quot;word&quot;) %&gt;%
   group_by(src) %&gt;%
   summarise(total = n()) %&gt;%
   ungroup()
@@ -76,7 +81,7 @@ emotive_word_count &lt;- texts %&gt;%
   anti_join(stop_words, by = &quot;word&quot;) %&gt;%                  
   filter(!grepl(&#39;[0-9]&#39;, word)) %&gt;%
   filter(!grepl(&#39;www.christistheway.com&#39;, word)) %&gt;%
-  left_join(get_sentiments(&quot;nrc&quot;), by = &quot;word&quot;) %&gt;%
+  left_join(nrc_sentiment, by = &quot;word&quot;) %&gt;%
   filter(!(sentiment == &quot;negative&quot; | sentiment == &quot;positive&quot; | sentiment == &quot;NA&quot;)) %&gt;%
   group_by(src) %&gt;%
   summarise(emotions = n()) %&gt;%
@@ -88,7 +93,7 @@ positivity_word_count &lt;- texts %&gt;%
   anti_join(stop_words, by = &quot;word&quot;) %&gt;%                  
   filter(!grepl(&#39;[0-9]&#39;, word)) %&gt;%
   filter(!grepl(&#39;www.christistheway.com&#39;, word)) %&gt;%
-  left_join(get_sentiments(&quot;nrc&quot;), by = &quot;word&quot;) %&gt;%
+  left_join(nrc_sentiment, by = &quot;word&quot;) %&gt;%
   filter(sentiment == &quot;positive&quot; | sentiment == &quot;negative&quot;) %&gt;%
   group_by(src, sentiment) %&gt;%
   summarise(emotions = n()) %&gt;%
@@ -103,9 +108,9 @@ word_count &lt;- cbind(total_word_count, emotive_word_count[2], positivity_word_
 ggplot(data = word_count, aes(x = as.factor(src), y = proportion)) +
   geom_lolli(colour = &quot;black&quot;) +
   geom_point(aes(colour = positivity)) +
-  geom_text(aes(y = 0.45, label = paste0(&quot;n = &quot;, total)), colour = &quot;red&quot;) +
-  scale_y_continuous(limits = c(0,0.5)) +
-  scale_color_continuous(&quot;Proportion of\nPositivity&quot;, low = &quot;steelblue&quot;, high = &quot;salmon&quot;) +
+  geom_text(aes(y = 0.45, label = paste0(&quot;n = &quot;, total))) +
+  scale_y_continuous(limits = c(0,0.5), expand = c(0, 0)) +
+  scale_color_continuous(&quot;Proportion of\nPositivity&quot;, low = &quot;navy&quot;, high = &quot;pink&quot;) +
   labs(x = &quot;Text&quot;, y = &quot;Proportion of Emotive Words&quot;)</code></pre>
 <div class="figure"><span id="fig:rs-lolli"></span>
 <img src="/post/religious_sentiment_files/figure-html/rs-lolli-1.png" alt="Proportion of emotive words in each text to their total word counts (shown in red)." width="672" />
@@ -123,7 +128,7 @@ emotions &lt;- texts %&gt;%
   filter(!grepl(&#39;King James Version of the New Testament - &#39;, word)) %&gt;%
   filter(!grepl(&#39;www.christistheway.com&#39;, word)) %&gt;% 
   filter(!grepl(&#39;BHAGAVAD GITA&#39;, word)) %&gt;%
-  left_join(get_sentiments(&quot;nrc&quot;), by = &quot;word&quot;) %&gt;%
+  left_join(nrc_sentiment, by = &quot;word&quot;) %&gt;%
   filter(!(sentiment == &quot;negative&quot; | sentiment == &quot;positive&quot;)) %&gt;%
   group_by(src, sentiment) %&gt;%
   summarize(freq = n()) %&gt;%
@@ -158,4 +163,12 @@ Figure 3: Frequency polygons of the proportion of emotions for each text shown i
 <h2>Results</h2>
 <p>The frequency polygons shown here most notably outline that all of the texts emphasise trust over anything else. Another interesting pattern is the lack of surprise employed in the texts. The Bhagavad Gita seems to have the smoothest distribution of emotion, with the Quran perhaps coming in second. I found it odd that a novel, Pride and Prejudice, would employ a higher proportion of joyous sentiment than the religious texts against which it was compared. The Quran just barely nudges out the Bhagavad Gita to come out on top for angry and fearful sentiment. The Torah stands out from the other texts due to the amount of disgust expressed therein. After Pride and Prejudice, the Bible uses the largest proportion of words that elicited emotions of anticipation.</p>
 <p>There is still much more that may or may not be deduced from these cursory results. Most notably lacking from this analysis is any test for significant differences. The reason for that being that I am not interested in supporting any sort of argument for differences between these texts. With <em>n</em> values (word count) in excess of 3,000 significant differences between the different texts is almost guaranteed as well so any use of a <em>p</em>-value here would just be cheap p-hacking anyway.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-mohammad2013">
+<p>Mohammad, Saif M., and Peter D. Turney. 2013. “Crowdsourcing a Word-Emotion Association Lexicon.” <em>Computational Intelligence</em> 29 (3): 436–65. <a href="https://doi.org/10.1111/j.1467-8640.2012.00460.x">https://doi.org/10.1111/j.1467-8640.2012.00460.x</a>.</p>
+</div>
+</div>
 </div>

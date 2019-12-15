@@ -3,86 +3,25 @@
     
     <url>
     
-      <loc>/poster/mhw_detection_poster/</loc>
-      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/poster/</loc>
-      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/r/</loc>
-      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/</loc>
-      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/</loc>
-      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/marine-heatwaves/</loc>
-      <lastmod>2019-05-06T00:00:00-03:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/project/mhwtracker/</loc>
-      <lastmod>2019-03-25T00:00:00-03:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/project/</loc>
-      <lastmod>2019-03-25T00:00:00-03:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/talk/mhw_2019/</loc>
-      <lastmod>2019-03-19T00:00:00-03:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/publication_types/2/</loc>
-      <lastmod>2018-08-31T00:00:00-03:00</lastmod>
+      <lastmod>2019-12-15T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/publication/detection/</loc>
+      <lastmod>2019-12-15T00:00:00+01:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/package/</loc>
+      <lastmod>2019-12-15T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -91,7 +30,7 @@
     <url>
     
       <loc>/publication_types/</loc>
-      <lastmod>2018-08-31T00:00:00-03:00</lastmod>
+      <lastmod>2019-12-15T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -99,24 +38,111 @@
     
     <url>
     
+      <loc>/tags/r/</loc>
+      <lastmod>2019-12-15T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/</loc>
+      <lastmod>2019-12-15T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/</loc>
+      <lastmod>2019-12-15T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/package/heatwaver/</loc>
+      <lastmod>2019-12-15T00:00:00+01:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/marine-heatwaves/</loc>
+      <lastmod>2019-12-15T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/package/coastr/</loc>
+      <lastmod>2019-12-14T00:00:00+01:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/coastal/</loc>
+      <lastmod>2019-12-14T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/poster/mhw_detection_poster/</loc>
+      <lastmod>2019-05-06T00:00:00+02:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/poster/</loc>
+      <lastmod>2019-05-06T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/project/mhwtracker/</loc>
+      <lastmod>2019-03-25T00:00:00+01:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/project/</loc>
+      <lastmod>2019-03-25T00:00:00+01:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/talk/mhw_2019/</loc>
+      <lastmod>2019-03-19T00:00:00+01:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/publication/heatwaver/</loc>
-      <lastmod>2018-08-31T00:00:00-03:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/project/detecting_mhws/</loc>
-      <lastmod>2018-08-28T00:00:00-03:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/project/heatwaver/</loc>
-      <lastmod>2018-07-28T00:00:00-03:00</lastmod>
+      <lastmod>2018-08-31T00:00:00+02:00</lastmod>
     </url>
     
   
@@ -168,7 +194,7 @@
     <url>
     
       <loc>/privacy/</loc>
-      <lastmod>2018-06-28T00:00:00-03:00</lastmod>
+      <lastmod>2018-06-28T00:00:00+02:00</lastmod>
     </url>
     
   
@@ -183,17 +209,8 @@
     
     <url>
     
-      <loc>/tags/coastal/</loc>
-      <lastmod>2017-12-08T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/publication/predominant/</loc>
-      <lastmod>2017-10-17T00:00:00-03:00</lastmod>
+      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
     </url>
     
   
@@ -201,7 +218,7 @@
     <url>
     
       <loc>/tags/atmosphere/</loc>
-      <lastmod>2017-10-17T00:00:00-03:00</lastmod>
+      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -210,16 +227,8 @@
     <url>
     
       <loc>/tags/ocean/</loc>
-      <lastmod>2017-10-17T00:00:00-03:00</lastmod>
+      <lastmod>2017-10-17T00:00:00+02:00</lastmod>
       <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/project/coastr/</loc>
-      <lastmod>2017-08-28T00:00:00-03:00</lastmod>
     </url>
     
   
@@ -416,7 +425,7 @@
     <url>
     
       <loc>/publication/cooccurrence/</loc>
-      <lastmod>2017-01-10T00:00:00-04:00</lastmod>
+      <lastmod>2017-01-10T00:00:00+01:00</lastmod>
     </url>
     
   
@@ -424,7 +433,7 @@
     <url>
     
       <loc>/post/</loc>
-      <lastmod>2017-01-01T00:00:00-04:00</lastmod>
+      <lastmod>2017-01-01T00:00:00+01:00</lastmod>
     </url>
     
   
@@ -432,7 +441,7 @@
     <url>
     
       <loc>/publication/</loc>
-      <lastmod>2017-01-01T00:00:00-04:00</lastmod>
+      <lastmod>2017-01-01T00:00:00+01:00</lastmod>
     </url>
     
   
@@ -440,7 +449,7 @@
     <url>
     
       <loc>/talk/</loc>
-      <lastmod>2017-01-01T00:00:00-04:00</lastmod>
+      <lastmod>2017-01-01T00:00:00+01:00</lastmod>
     </url>
     
   
@@ -448,7 +457,7 @@
     <url>
     
       <loc>/publication/trend-analysis/</loc>
-      <lastmod>2016-12-15T00:00:00-04:00</lastmod>
+      <lastmod>2016-12-15T00:00:00+01:00</lastmod>
     </url>
     
   
@@ -456,7 +465,7 @@
     <url>
     
       <loc>/tags/time-series-analysis/</loc>
-      <lastmod>2016-12-15T00:00:00-04:00</lastmod>
+      <lastmod>2016-12-15T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     

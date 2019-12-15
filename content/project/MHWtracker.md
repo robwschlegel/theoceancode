@@ -9,7 +9,7 @@ title = "Marine heatwave tracker"
 summary = "A daily updating web application for tracking the occurrence of marine heatwaves around the globe."
 
 # Optional image to display on homepage (relative to `static/img/` folder).
-image_preview = "MHW_tracker_screen.png"
+image_preview = "MHW_Tracker_2019_10_08.png"
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["machine-learning", "deep-learning"]`

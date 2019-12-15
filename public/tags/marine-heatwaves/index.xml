@@ -7,15 +7,33 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Mon, 06 May 2019 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="/tags/marine-heatwaves/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Detecting Marine Heatwaves With Sub-Optimal Data</title>
+      <link>/publication/detection/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/detection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>heatwaveR</title>
+      <link>/package/heatwaver/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
+      
+      <guid>/package/heatwaver/</guid>
+      <description>An R package for the detection of heatwaves and cold-spells.</description>
+    </item>
+    
+    <item>
       <title>Detecting marine heatwaves with sub-optimal data</title>
       <link>/poster/mhw_detection_poster/</link>
-      <pubDate>Mon, 06 May 2019 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 06 May 2019 00:00:00 +0200</pubDate>
       
       <guid>/poster/mhw_detection_poster/</guid>
       <description>Research conducted on how sub-optimal a time series may be and still produce comparable marine heatwaves to an optimal time series.</description>
@@ -24,7 +42,7 @@
     <item>
       <title>Marine heatwave tracker</title>
       <link>/project/mhwtracker/</link>
-      <pubDate>Mon, 25 Mar 2019 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 25 Mar 2019 00:00:00 +0100</pubDate>
       
       <guid>/project/mhwtracker/</guid>
       <description>A daily updating web application for tracking the occurrence of marine heatwaves around the globe.</description>
@@ -33,28 +51,10 @@
     <item>
       <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
       <link>/publication/heatwaver/</link>
-      <pubDate>Fri, 31 Aug 2018 00:00:00 -0300</pubDate>
+      <pubDate>Fri, 31 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>/publication/heatwaver/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Detecting marine heatwaves</title>
-      <link>/project/detecting_mhws/</link>
-      <pubDate>Tue, 28 Aug 2018 00:00:00 -0300</pubDate>
-      
-      <guid>/project/detecting_mhws/</guid>
-      <description>A deep dive into the best practices for detecting marine heatwaves (MHWs).</description>
-    </item>
-    
-    <item>
-      <title>heatwaveR package</title>
-      <link>/project/heatwaver/</link>
-      <pubDate>Sat, 28 Jul 2018 00:00:00 -0300</pubDate>
-      
-      <guid>/project/heatwaver/</guid>
-      <description>An R package for the detection of heatwaves and cold-spells.</description>
     </item>
     
   </channel>

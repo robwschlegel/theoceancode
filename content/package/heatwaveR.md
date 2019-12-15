@@ -1,9 +1,9 @@
 +++
 # Date this page was created.
-date = 2018-07-28T00:00:00
+date = 2019-12-15T00:00:00
 
 # Project title.
-title = "heatwaveR package"
+title = "heatwaveR"
 
 # Project summary to display on homepage.
 summary = "An R package for the detection of heatwaves and cold-spells."

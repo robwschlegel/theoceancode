@@ -4,6 +4,7 @@ author: "Robert W Schlegel"
 date: 2017-05-15
 categories: ["R"]
 tags: ["religion", "text mining", "sentiment analysis"]
+bibliography: post.bib 
 ---
 
 ```{r, echo=FALSE}
@@ -45,20 +46,20 @@ First we convert the PDF's to text and merge them.
 ```{r, warning=FALSE, message=FALSE}
 ## Load the texts
 # Pride and Prejudice
-pride <- data_frame(txt = prideprejudice, 
-                    src = "pride")
+pride <- tibble(txt = prideprejudice, 
+                src = "pride")
 # Quran
-quran <- data_frame(txt = as.character(pdf_text("../../static/data/EQuran.pdf")),
-                    src = "quran")
+quran <- tibble(txt = as.character(pdf_text("../../static/data/EQuran.pdf")),
+                src = "quran")
 # Bible
-bible <- data_frame(txt = as.character(pdf_text("../../static/data/KJBNew.pdf")),
-                    src = "bible")
+bible <- tibble(txt = as.character(pdf_text("../../static/data/KJBNew.pdf")),
+                src = "bible")
 # Torah
-torah <- data_frame(txt = as.character(pdf_text("../../static/data/Torah.pdf")), 
-                    src = "torah")
+torah <- tibble(txt = as.character(pdf_text("../../static/data/Torah.pdf")), 
+                src = "torah")
 # Bhagavad Gita
-gita <- data_frame(txt = as.character(pdf_text("../../static/data/BGita.pdf")), 
-                    src = "gita")
+gita <- tibble(txt = as.character(pdf_text("../../static/data/BGita.pdf")), 
+               src = "gita")
 # Book of the dead
 dead <- data_frame(txt = as.character(pdf_text("../../static/data/EBoD.pdf")),
                    src = "dead")
@@ -66,15 +67,26 @@ dead <- data_frame(txt = as.character(pdf_text("../../static/data/EBoD.pdf")),
 texts <- rbind(pride, quran, bible, torah, gita, dead)
 ```
 
+Then we must download the [NRC Word-Emotion Association Lexicon](http://saifmohammad.com/WebPages/lexicons.html)[@mohammad2013].
+
+```{r download-nrc-sentiment, eval=F}
+# Note that this will require you to agree to term of use
+nrc_sentiment <- get_sentiments("nrc")
+```
+```{r load-nrc-sentiment}
+nrc_sentiment <- readRDS("../../static/data/nrc_sentiment.Rds")
+```
+
 After loading and merging the texts we want to run some quick word counts on them.
 ```{r rs-lolli, fig.cap="Proportion of emotive words in each text to their total word counts (shown in red)."}
+
 # Total relevant words per text
 total_word_count <- texts %>%
   unnest_tokens(word, txt) %>%  
   anti_join(stop_words, by = "word") %>%
   filter(!grepl('[0-9]', word)) %>%
   filter(!grepl('www.christistheway.com', word)) %>%
-  left_join(get_sentiments("nrc"), by = "word") %>%
+  left_join(nrc_sentiment, by = "word") %>%
   group_by(src) %>%
   summarise(total = n()) %>%
   ungroup()
@@ -85,7 +97,7 @@ emotive_word_count <- texts %>%
   anti_join(stop_words, by = "word") %>%                  
   filter(!grepl('[0-9]', word)) %>%
   filter(!grepl('www.christistheway.com', word)) %>%
-  left_join(get_sentiments("nrc"), by = "word") %>%
+  left_join(nrc_sentiment, by = "word") %>%
   filter(!(sentiment == "negative" | sentiment == "positive" | sentiment == "NA")) %>%
   group_by(src) %>%
   summarise(emotions = n()) %>%
@@ -97,7 +109,7 @@ positivity_word_count <- texts %>%
   anti_join(stop_words, by = "word") %>%                  
   filter(!grepl('[0-9]', word)) %>%
   filter(!grepl('www.christistheway.com', word)) %>%
-  left_join(get_sentiments("nrc"), by = "word") %>%
+  left_join(nrc_sentiment, by = "word") %>%
   filter(sentiment == "positive" | sentiment == "negative") %>%
   group_by(src, sentiment) %>%
   summarise(emotions = n()) %>%
@@ -112,9 +124,9 @@ word_count <- cbind(total_word_count, emotive_word_count[2], positivity_word_cou
 ggplot(data = word_count, aes(x = as.factor(src), y = proportion)) +
   geom_lolli(colour = "black") +
   geom_point(aes(colour = positivity)) +
-  geom_text(aes(y = 0.45, label = paste0("n = ", total)), colour = "red") +
-  scale_y_continuous(limits = c(0,0.5)) +
-  scale_color_continuous("Proportion of\nPositivity", low = "steelblue", high = "salmon") +
+  geom_text(aes(y = 0.45, label = paste0("n = ", total))) +
+  scale_y_continuous(limits = c(0,0.5), expand = c(0, 0)) +
+  scale_color_continuous("Proportion of\nPositivity", low = "navy", high = "pink") +
   labs(x = "Text", y = "Proportion of Emotive Words")
 ```
 
@@ -130,7 +142,7 @@ emotions <- texts %>%
   filter(!grepl('King James Version of the New Testament - ', word)) %>%
   filter(!grepl('www.christistheway.com', word)) %>% 
   filter(!grepl('BHAGAVAD GITA', word)) %>%
-  left_join(get_sentiments("nrc"), by = "word") %>%
+  left_join(nrc_sentiment, by = "word") %>%
   filter(!(sentiment == "negative" | sentiment == "positive")) %>%
   group_by(src, sentiment) %>%
   summarize(freq = n()) %>%
@@ -161,3 +173,4 @@ The frequency polygons shown here most notably outline that all of the texts emp
 
 There is still much more that may or may not be deduced from these cursory results. Most notably lacking from this analysis is any test for significant differences. The reason for that being that I am not interested in supporting any sort of argument for differences between these texts. With _n_ values (word count) in excess of 3,000 significant differences between the different texts is almost guaranteed as well so any use of a _p_-value here would just be cheap p-hacking anyway.
 
+## References
