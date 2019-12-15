@@ -64,21 +64,22 @@ enableGitInfo = false
 
   # Your details.
   name = "Robert William Schlegel"
-  role = "Post-doc fellow"
+  role = "Postdoc fellow"
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-  organizations = [ { name = "Dalhousie University", url = "https://www.dal.ca/" } ]
+  organizations = [ { name = "Woods Hole Oceanographic Institute", url = "https://www.whoi.edu/" } ]
 
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
-  avatar = "Robert_profile_1.JPG"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
+  avatar = "Schlegel_profile_small.JPG"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
   email = "robwschlegel@gmail.com"
-  address = "LSC - Oceanography: 5608, 1355 Oxford St, Halifax, NS, B3H 4J1"
+  address = "Physical Oceanography: Clark 516A, 360 Woods Hole Rd, Woods Hole, MA 02543"
+  Woods Hole Oceanographic Institute
   office_hours = "Monday - Friday 14:00 to 16:00 or email for appointment"
-  phone = "+27 82 813 7113"
+  phone = "+1 774-244-9279"
   skype = "robert.william.schlegel"
   telegram = ""
-  twitter = "wiederweiter"
+  twitter = "robwschlegel"
 
   # Enable Keybase in Contact widget by entering your keybase.io username.
   keybase = ""
@@ -106,10 +107,10 @@ enableGitInfo = false
   #   1: Google Maps
   #   2: OpenStreetMap (Mapnik)
   #   3: OpenStreetMap (Mapbox)
-  map = 0
+  map = 2
   map_api_key = ""
-  latitude = "-31.0"
-  longitude = "25.0"
+  latitude = "-70.67"
+  longitude = "41.525"
   zoom = 12
 
   # Date and time format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )
@@ -211,7 +212,7 @@ enableGitInfo = false
     #   1 = Detailed
     #   2 = APA
     #   3 = MLA
-    publication_format = 3
+    publication_format = 2
     
   # Configuration of poster pages.
   [params.posters]
@@ -223,7 +224,19 @@ enableGitInfo = false
     #   1 = Detailed
     #   2 = APA
     #   3 = MLA
-    publication_format = 3
+    publication_format = 2
+    
+  # Configuration of package pages.
+  [params.packages]
+    # List publications and talks related to the package?
+    list_children = true
+
+    # Publication list format.
+    #   0 = Simple
+    #   1 = Detailed
+    #   2 = APA
+    #   3 = MLA
+    publication_format = 2
 
   # Social/Academic Networking
   #
@@ -251,7 +264,7 @@ enableGitInfo = false
   [[params.social]]
     icon = "twitter"
     icon_pack = "fa"
-    link = "//twitter.com/wiederweiter"
+    link = "//twitter.com/robwschlegel"
 
   [[params.social]]
     icon = "google-scholar"
@@ -284,23 +297,23 @@ enableGitInfo = false
 #  weight = 1
 
 [[menu.main]]
-  name = "Blog"
-  url = "#posts"
+  name = "Publications"
+  url = "#publications"
   weight = 1
 
 [[menu.main]]
-  name = "Posters"
-  url = "#posters"
+  name = "Packages"
+  url = "#packages"
   weight = 2
+
+[[menu.main]]
+  name = "Blog"
+  url = "#posts"
+  weight = 3
 
 [[menu.main]]
   name = "Projects"
   url = "#projects"
-  weight = 3
-
-[[menu.main]]
-  name = "Publications"
-  url = "#publications"
   weight = 4
 
 [[menu.main]]
@@ -309,9 +322,14 @@ enableGitInfo = false
   weight = 5
 
 [[menu.main]]
-  name = "Teaching"
-  url = "#teaching"
+  name = "Posters"
+  url = "#posters"
   weight = 6
+
+#[[menu.main]]
+#  name = "Teaching"
+#  url = "#teaching"
+#  weight = 6
   
 [[menu.main]]
   name = "Workshops"

@@ -2,7 +2,7 @@
 # About/Biography widget.
 widget = "about"
 active = true
-date = 2018-08-22T00:00:00
+date = 2019-12-15T00:00:00
 
 # Order that this section will appear in.
 weight = 5
@@ -12,7 +12,8 @@ weight = 5
   interests = [
     "Marine heatwaves",
     "Climate change",
-    "Machine learning"
+    "Machine learning",
+    "Data Science"
   ]
 
 # List your qualifications (such as academic degrees).
@@ -35,4 +36,4 @@ weight = 5
 
 # Biography
 
-Robert Schlegel is a post-doc researcher in the Department of Oceanography at Dalhousie University. His research focuses on developing the methodologies that will allow us to harness machine learning for the identification of the forces responsible for the formation of marine heatwaves.
+Robert Schlegel is an [OFI](https://www.oceanfrontierinstitute.com/) postdoc fellow in the Department of Physical Oceanography at WHOI. His research focuses on developing the methodologies that will allow us to harness machine learning for the identification of the forces responsible for the formation of marine heatwaves.
