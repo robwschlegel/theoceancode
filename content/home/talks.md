@@ -8,7 +8,7 @@ title = "Talks"
 subtitle = "Past and present"
 
 # Order that this section will appear in.
-weight = 62
+weight = 24
 
 # Number of talks to list.
 count = 10
