@@ -1,59 +1,59 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>coastal on The Ocean Code</title>
-    <link>/tags/coastal/</link>
+    <link>https://theoceancode.netlify.com/tags/coastal/</link>
     <description>Recent content in coastal on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Sat, 14 Dec 2019 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 14 Dec 2019 00:00:00 -0500</lastBuildDate>
     
-	<atom:link href="/tags/coastal/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.com/tags/coastal/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>coastR</title>
-      <link>/package/coastr/</link>
-      <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
+      <link>https://theoceancode.netlify.com/package/coastr/</link>
+      <pubDate>Sat, 14 Dec 2019 00:00:00 -0500</pubDate>
       
-      <guid>/package/coastr/</guid>
+      <guid>https://theoceancode.netlify.com/package/coastr/</guid>
       <description>An R package with useful functions for coastal oceanography.</description>
     </item>
     
     <item>
       <title>Transects</title>
-      <link>/post/transects/</link>
+      <link>https://theoceancode.netlify.com/post/transects/</link>
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/transects/</guid>
+      <guid>https://theoceancode.netlify.com/post/transects/</guid>
       <description>Preface This week I have expanded the coastR package with the inclusion of a function that calculates the angle of the heading for alongshore or shore-normal transects. The rest of this blog post is the vignette that I’ve written detailing the set of this function. Next week I’ll likely be taking a break from coastR development to finally create a package for the SACTN dataset. That is a project that has been in the works for a loooong time and it will be good to finally see a development release available to the public.</description>
     </item>
     
     <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
-      <link>/publication/predominant/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
+      <link>https://theoceancode.netlify.com/publication/predominant/</link>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 -0400</pubDate>
       
-      <guid>/publication/predominant/</guid>
+      <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sequential sites</title>
-      <link>/post/seq_sites/</link>
+      <link>https://theoceancode.netlify.com/post/seq_sites/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/seq_sites/</guid>
+      <guid>https://theoceancode.netlify.com/post/seq_sites/</guid>
       <description>Preface The rest of the blog post after this preface section is a copy of the vignette I’ve written for the first function in the new package I am developing: coastR. This package aims to provide functions that are useful for coastal oceanography but that do not yet exist in the R language. It is not my intention to provide algorithms for physical oceanography as these may already be found elsewhere.</description>
     </item>
     
     <item>
       <title>Nearshore and offshore co-occurrence of marine heatwaves and cold-spells</title>
-      <link>/publication/cooccurrence/</link>
-      <pubDate>Tue, 10 Jan 2017 00:00:00 +0100</pubDate>
+      <link>https://theoceancode.netlify.com/publication/cooccurrence/</link>
+      <pubDate>Tue, 10 Jan 2017 00:00:00 -0500</pubDate>
       
-      <guid>/publication/cooccurrence/</guid>
+      <guid>https://theoceancode.netlify.com/publication/cooccurrence/</guid>
       <description></description>
     </item>
     
