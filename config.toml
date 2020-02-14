@@ -26,7 +26,7 @@ paginate = 10
 disqusShortname = ""
 
 # Enable analytics by entering your Google Analytics tracking ID
-googleAnalytics = ""
+googleAnalytics = "UA-118123016-2"
 
 # Default language to use (if you setup multilingual support)
 defaultContentLanguage = "en"
@@ -73,7 +73,7 @@ enableGitInfo = false
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
   avatar = "Schlegel_profile_small.JPG"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
   email = "robwschlegel@gmail.com"
-  address = "Physical Oceanography: Clark 516A, 360 Woods Hole Rd, Woods Hole, MA 02543"
+  address = "Physical Oceanography: Clark 316A, 360 Woods Hole Rd, Woods Hole, MA 05234"
   office_hours = "Monday - Friday 14:00 to 16:00 or email for appointment"
   phone = "+1 774-244-9279"
   skype = "robert.william.schlegel"
@@ -108,8 +108,8 @@ enableGitInfo = false
   #   3: OpenStreetMap (Mapbox)
   map = 2
   map_api_key = ""
-  latitude = "-70.67"
-  longitude = "41.525"
+  latitude = "41.525"
+  longitude = "-70.67"
   zoom = 12
 
   # Date and time format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )

@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Packages on The Ocean Code</title>
-    <link>/package/</link>
+    <link>https://theoceancode.netlify.com/package/</link>
     <description>Recent content in Packages on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 -0500</lastBuildDate>
     
-	<atom:link href="/package/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.com/package/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>heatwaveR</title>
-      <link>/package/heatwaver/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
+      <link>https://theoceancode.netlify.com/package/heatwaver/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 -0500</pubDate>
       
-      <guid>/package/heatwaver/</guid>
+      <guid>https://theoceancode.netlify.com/package/heatwaver/</guid>
       <description>An R package for the detection of heatwaves and cold-spells.</description>
     </item>
     
     <item>
       <title>coastR</title>
-      <link>/package/coastr/</link>
-      <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
+      <link>https://theoceancode.netlify.com/package/coastr/</link>
+      <pubDate>Sat, 14 Dec 2019 00:00:00 -0500</pubDate>
       
-      <guid>/package/coastr/</guid>
+      <guid>https://theoceancode.netlify.com/package/coastr/</guid>
       <description>An R package with useful functions for coastal oceanography.</description>
     </item>
     
