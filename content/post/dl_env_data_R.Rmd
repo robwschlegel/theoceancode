@@ -150,8 +150,6 @@ download_CCI <- function(date_choice, CCI_URL){
 doParallel::registerDoParallel(cores = 3)
 
 # Download all old data: 1981-09-01 to 2016-12-31
-  # NB: 1985/04/10 will not download. 504 timeout every time...
-  # It won't download manually either
   # NB: Note the '[1:3]' below. This limits the downloads to only the first three files
   # Delete that to download everything.
   # But please do not download ALL of the files unless there is a need to do so.
