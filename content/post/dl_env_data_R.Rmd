@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 Having been working in environmental science for several years now, entirely using R, I've come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn't be. Most data hosting organisations do want scientists to use their data and do make it freely available. But sometimes it feels like the path to access was designed by crab people, rather than normal topside humans. I recently needed to gather several new data products and in classic 'cut your nose off to spite your face' fashion I insisted on doing all of it directly through an R script that could be run in RStudio. Besides being stubborn, one of the main reasons I felt this was necessary is that I wanted these download scripts to be able to be run operationally via a cron job. I think I came out pretty successful in the end so wanted to share the code with the rest of the internet. Enjoy.
 
 ```{r}
-# Packages not avilale via CRAN
+# Packages not available via CRAN
 remotes::install_github("skgrange/threadr")
 remotes::install_github("markpayneatwork/RCMEMS")
 
@@ -72,7 +72,7 @@ OISST_url_daily <- function(target_month){
   return(OISST_table)
 }
 
-# Here we collect the URLs for every day of data avilable from 2019 onwards
+# Here we collect the URLs for every day of data available from 2019 onwards
 OISST_filenames <- plyr::ldply(OISST_months$months, .fun = OISST_url_daily)
 
 # Just to keep things tidy in this vignette I am now going to limit this data collection even further
@@ -205,14 +205,14 @@ doParallel::registerDoParallel(cores = 3)
 # Download data from 2019-01-01 to present day
   # NB: Some files won't download when run in parallel
   # I think the FTP server may be more aware of multiple requests than an HTTPS server
-  # It may also have been due to high tikoraluk use, too
+  # It may also have been due to high server use at the time, too
 plyr::l_ply(date_range, .fun = download_OSTIA, .parallel = T, 
             user_credentials = user_credentials)
 ```
 
 ## Downloading GLORYS
 
-At this point one may be thinking "wait a second, these have all been SST only products, this isn't really a post about environmental data!". But that's where GLORYS comes in. This product has a range of variables one may be interested in. Not just SST. But yes, they are all physical variables. No bio-geochemistry in sight. Bamboozled! But if you've read this far, why stop now?! These data require a [CMEMS](http://marine.copernicus.eu/) account, same as the OSTIA data. They can also be downloaded via direct FTP access, but these files are enormous so in almost every use case this is not what one is intending to do. Rather these data are almost always subsetted in some way first. Luckily CMEMS has made this available to their user base with the introduction of the [MOTU client](https://github.com/clstoulouse/motu-client-python/releases). Unluckily they have only made this available for use in Python. I have asked the people behind this process in person if there are plans for an officially supported R version and the short and long answers were no. That's where Mark Payne and his [RCMEMS](https://github.com/markpayneatwork/RCMEMS) package enter the picture. He has wrapped the MOTU client for Python up in a handy R package that allows us to access, subset, and download CMEMS data all through the comfort of the RStudio interface! There is a tutorial on the GitHub repo that walks through the process, but I thought it was useful to flesh it out a bit more in the example that follows below.
+At this point one may be thinking "wait a second, these have all been SST only products, this isn't really a post about environmental data!". But that's where GLORYS comes in. This product has a range of variables one may be interested in. Not just SST. But yes, they are all physical variables. No bio-geochemistry in sight. Bamboozled! But if you've read this far, why stop now?! These data require a [CMEMS](http://marine.copernicus.eu/) account, same as the OSTIA data. They can also be downloaded via direct FTP access, but these files are enormous so in almost every use case this is not what one is intending to do. Rather these data are almost always subsetted in some way first. Luckily CMEMS has made this available to their user base with the introduction of the [MOTU client](https://github.com/clstoulouse/motu-client-python/releases). Unluckily they have only made this available for use in Python. I have asked the people behind this process in person if there are plans for an officially supported R version and the short and long answers were no. That's where Mark Payne and his [RCMEMS](https://github.com/markpayneatwork/RCMEMS) package enter the picture. He has wrapped the MOTU client for Python up in a handy R package that allows us to access, subset, and download CMEMS data all through the comfort of the RStudio interface! There is a tutorial on the GitHub repo that walks through the process that I show below if one would like an additional look at this process.
 
 ```{r GLORYS-dl}
 # Non-R software
@@ -231,7 +231,7 @@ date_range <- base::expand.grid(1993:2018, 1:12) %>%
   dplyr::select(year_mon)
 
 # Download function
-  # NB: This function is currently designed to subset data to a specific dowmain
+  # NB: This function is currently designed to subset data to a specific domain
   # Please change your lon/lat accordingly
   # NB: This function will save files to data/GLORYS in the root directory
   # To change this change the --out-dir argument near the end of the chunk of text
@@ -289,5 +289,5 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)
 
 ## Conclusion
 
-I hope this has been a useful whack of data for anyone looking to download any of these products for their science. The techniques laid out in the code here should apply to most other data products as well as their aren't that many different methods of hosting data. If I've missed anything that people feel is an important data source that can't be adapted from the code here let me know and I'm happy to see what I can do.
+I hope this has been a useful whack of data for anyone looking to download any of these products for their science. The techniques laid out in the code here should apply to most other data products as well as there aren't that many different methods of hosting data. If I've missed anything that people feel is an important data source that can't be adapted from the code here let me know and I'm happy to see what I can do.
 
