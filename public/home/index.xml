@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 -0400</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.com/home/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title></title>
       <link>https://theoceancode.netlify.com/home/hero_carousel/</link>
-      <pubDate>Sun, 15 Oct 2017 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 15 Oct 2017 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/hero_carousel/</guid>
       <description></description>
@@ -24,7 +24,7 @@
     <item>
       <title></title>
       <link>https://theoceancode.netlify.com/home/hero/</link>
-      <pubDate>Wed, 22 Aug 2018 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 22 Aug 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/hero/</guid>
       <description></description>
@@ -33,7 +33,7 @@
     <item>
       <title></title>
       <link>https://theoceancode.netlify.com/home/about/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 -0500</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 -0400</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/about/</guid>
       <description>Biography Robert Schlegel is an OFI postdoc fellow in the Department of Physical Oceanography at WHOI. His research focuses on developing the methodologies that will allow us to harness machine learning for the identification of the forces responsible for the formation of marine heatwaves.</description>
@@ -42,7 +42,7 @@
     <item>
       <title>Publications</title>
       <link>https://theoceancode.netlify.com/home/publications/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/publications/</guid>
       <description></description>
@@ -51,7 +51,7 @@
     <item>
       <title>Packages</title>
       <link>https://theoceancode.netlify.com/home/packages/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 -0500</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 -0400</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/packages/</guid>
       <description></description>
@@ -60,7 +60,7 @@
     <item>
       <title>Blog Posts</title>
       <link>https://theoceancode.netlify.com/home/posts/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/posts/</guid>
       <description></description>
@@ -78,7 +78,7 @@
     <item>
       <title>Talks</title>
       <link>https://theoceancode.netlify.com/home/talks/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/talks/</guid>
       <description></description>
@@ -87,7 +87,7 @@
     <item>
       <title>Posters</title>
       <link>https://theoceancode.netlify.com/home/posters/</link>
-      <pubDate>Mon, 06 May 2019 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 06 May 2019 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/posters/</guid>
       <description></description>
@@ -96,7 +96,7 @@
     <item>
       <title>Projects</title>
       <link>https://theoceancode.netlify.com/home/projects/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/projects/</guid>
       <description></description>
@@ -105,7 +105,7 @@
     <item>
       <title>Selected Talks</title>
       <link>https://theoceancode.netlify.com/home/talks_selected/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/talks_selected/</guid>
       <description></description>
@@ -114,7 +114,7 @@
     <item>
       <title>Selected Publications</title>
       <link>https://theoceancode.netlify.com/home/publications_selected/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/publications_selected/</guid>
       <description></description>
@@ -123,7 +123,7 @@
     <item>
       <title>Teaching</title>
       <link>https://theoceancode.netlify.com/home/teaching/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/teaching/</guid>
       <description>I am not currently teaching.</description>
@@ -132,7 +132,7 @@
     <item>
       <title>Workshops</title>
       <link>https://theoceancode.netlify.com/home/workshops/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/workshops/</guid>
       <description>Below please find links to workshops I run:
@@ -142,7 +142,7 @@
     <item>
       <title>Contact</title>
       <link>https://theoceancode.netlify.com/home/contact/</link>
-      <pubDate>Wed, 22 Aug 2018 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 22 Aug 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/contact/</guid>
       <description></description>
@@ -151,7 +151,7 @@
     <item>
       <title>Tags</title>
       <link>https://theoceancode.netlify.com/home/tags/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/tags/</guid>
       <description></description>
@@ -160,7 +160,7 @@
     <item>
       <title>Search</title>
       <link>https://theoceancode.netlify.com/home/search/</link>
-      <pubDate>Mon, 23 Jul 2018 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 23 Jul 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/home/search/</guid>
       <description></description>

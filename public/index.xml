@@ -21,7 +21,7 @@
 &lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Objective&lt;/h2&gt;
 &lt;p&gt;Having been working in environmental science for several years now, entirely using R, I’ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn’t be. Most data hosting organisations do want scientists to use their data and do make it freely available. But sometimes it feels like the path to access was designed by crab people, rather than normal topside humans. I recently needed to gather several new data products and in classic ‘cut your nose off to spite your face’ fashion I insisted on doing all of it directly through an R script that could be run in RStudio. Besides being stubborn, one of the main reasons I felt this was necessary is that I wanted these download scripts to be able to be run operationally via a cron job. I think I came out pretty successful in the end so wanted to share the code with the rest of the internet. Enjoy.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Packages not avilale via CRAN
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Packages not available via CRAN
 remotes::install_github(&amp;quot;skgrange/threadr&amp;quot;)
 remotes::install_github(&amp;quot;markpayneatwork/RCMEMS&amp;quot;)
 
@@ -70,7 +70,7 @@ OISST_url_daily &amp;lt;- function(target_month){
   return(OISST_table)
 }
 
-# Here we collect the URLs for every day of data avilable from 2019 onwards
+# Here we collect the URLs for every day of data available from 2019 onwards
 OISST_filenames &amp;lt;- plyr::ldply(OISST_months$months, .fun = OISST_url_daily)
 
 # Just to keep things tidy in this vignette I am now going to limit this data collection even further
@@ -145,8 +145,6 @@ download_CCI &amp;lt;- function(date_choice, CCI_URL){
 doParallel::registerDoParallel(cores = 3)
 
 # Download all old data: 1981-09-01 to 2016-12-31
-  # NB: 1985/04/10 will not download. 504 timeout every time...
-  # It won&amp;#39;t download manually either
   # NB: Note the &amp;#39;[1:3]&amp;#39; below. This limits the downloads to only the first three files
   # Delete that to download everything.
   # But please do not download ALL of the files unless there is a need to do so.
@@ -197,13 +195,13 @@ doParallel::registerDoParallel(cores = 3)
 # Download data from 2019-01-01 to present day
   # NB: Some files won&amp;#39;t download when run in parallel
   # I think the FTP server may be more aware of multiple requests than an HTTPS server
-  # It may also have been due to high tikoraluk use, too
+  # It may also have been due to high server use at the time, too
 plyr::l_ply(date_range, .fun = download_OSTIA, .parallel = T, 
             user_credentials = user_credentials)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;downloading-glorys&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Downloading GLORYS&lt;/h2&gt;
-&lt;p&gt;At this point one may be thinking “wait a second, these have all been SST only products, this isn’t really a post about environmental data!”. But that’s where GLORYS comes in. This product has a range of variables one may be interested in. Not just SST. But yes, they are all physical variables. No bio-geochemistry in sight. Bamboozled! But if you’ve read this far, why stop now?! These data require a &lt;a href=&#34;http://marine.copernicus.eu/&#34;&gt;CMEMS&lt;/a&gt; account, same as the OSTIA data. They can also be downloaded via direct FTP access, but these files are enormous so in almost every use case this is not what one is intending to do. Rather these data are almost always subsetted in some way first. Luckily CMEMS has made this available to their user base with the introduction of the &lt;a href=&#34;https://github.com/clstoulouse/motu-client-python/releases&#34;&gt;MOTU client&lt;/a&gt;. Unluckily they have only made this available for use in Python. I have asked the people behind this process in person if there are plans for an officially supported R version and the short and long answers were no. That’s where Mark Payne and his &lt;a href=&#34;https://github.com/markpayneatwork/RCMEMS&#34;&gt;RCMEMS&lt;/a&gt; package enter the picture. He has wrapped the MOTU client for Python up in a handy R package that allows us to access, subset, and download CMEMS data all through the comfort of the RStudio interface! There is a tutorial on the GitHub repo that walks through the process, but I thought it was useful to flesh it out a bit more in the example that follows below.&lt;/p&gt;
+&lt;p&gt;At this point one may be thinking “wait a second, these have all been SST only products, this isn’t really a post about environmental data!”. But that’s where GLORYS comes in. This product has a range of variables one may be interested in. Not just SST. But yes, they are all physical variables. No bio-geochemistry in sight. Bamboozled! But if you’ve read this far, why stop now?! These data require a &lt;a href=&#34;http://marine.copernicus.eu/&#34;&gt;CMEMS&lt;/a&gt; account, same as the OSTIA data. They can also be downloaded via direct FTP access, but these files are enormous so in almost every use case this is not what one is intending to do. Rather these data are almost always subsetted in some way first. Luckily CMEMS has made this available to their user base with the introduction of the &lt;a href=&#34;https://github.com/clstoulouse/motu-client-python/releases&#34;&gt;MOTU client&lt;/a&gt;. Unluckily they have only made this available for use in Python. I have asked the people behind this process in person if there are plans for an officially supported R version and the short and long answers were no. That’s where Mark Payne and his &lt;a href=&#34;https://github.com/markpayneatwork/RCMEMS&#34;&gt;RCMEMS&lt;/a&gt; package enter the picture. He has wrapped the MOTU client for Python up in a handy R package that allows us to access, subset, and download CMEMS data all through the comfort of the RStudio interface! There is a tutorial on the GitHub repo that walks through the process that I show below if one would like an additional look at this process.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Non-R software
 # Unfortunately the subsetting of CMEMS data will require that one has Python installed
 # https://www.python.org/downloads/
@@ -220,7 +218,7 @@ date_range &amp;lt;- base::expand.grid(1993:2018, 1:12) %&amp;gt;%
   dplyr::select(year_mon)
 
 # Download function
-  # NB: This function is currently designed to subset data to a specific dowmain
+  # NB: This function is currently designed to subset data to a specific domain
   # Please change your lon/lat accordingly
   # NB: This function will save files to data/GLORYS in the root directory
   # To change this change the --out-dir argument near the end of the chunk of text
@@ -277,7 +275,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
 &lt;/div&gt;
 &lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I hope this has been a useful whack of data for anyone looking to download any of these products for their science. The techniques laid out in the code here should apply to most other data products as well as their aren’t that many different methods of hosting data. If I’ve missed anything that people feel is an important data source that can’t be adapted from the code here let me know and I’m happy to see what I can do.&lt;/p&gt;
+&lt;p&gt;I hope this has been a useful whack of data for anyone looking to download any of these products for their science. The techniques laid out in the code here should apply to most other data products as well as there aren’t that many different methods of hosting data. If I’ve missed anything that people feel is an important data source that can’t be adapted from the code here let me know and I’m happy to see what I can do.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -285,7 +283,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Detecting Marine Heatwaves With Sub-Optimal Data</title>
       <link>https://theoceancode.netlify.com/publication/detection/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 -0500</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 -0400</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication/detection/</guid>
       <description></description>
@@ -294,7 +292,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>heatwaveR</title>
       <link>https://theoceancode.netlify.com/package/heatwaver/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 -0500</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 -0400</pubDate>
       
       <guid>https://theoceancode.netlify.com/package/heatwaver/</guid>
       <description></description>
@@ -303,7 +301,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>coastR</title>
       <link>https://theoceancode.netlify.com/package/coastr/</link>
-      <pubDate>Sat, 14 Dec 2019 00:00:00 -0500</pubDate>
+      <pubDate>Sat, 14 Dec 2019 00:00:00 -0400</pubDate>
       
       <guid>https://theoceancode.netlify.com/package/coastr/</guid>
       <description></description>
@@ -312,7 +310,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Detecting marine heatwaves with sub-optimal data</title>
       <link>https://theoceancode.netlify.com/poster/mhw_detection_poster/</link>
-      <pubDate>Mon, 06 May 2019 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 06 May 2019 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/poster/mhw_detection_poster/</guid>
       <description></description>
@@ -321,7 +319,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Marine heatwave tracker</title>
       <link>https://theoceancode.netlify.com/project/mhwtracker/</link>
-      <pubDate>Mon, 25 Mar 2019 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 25 Mar 2019 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/project/mhwtracker/</guid>
       <description></description>
@@ -330,7 +328,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Marine heatwaves: the new normal</title>
       <link>https://theoceancode.netlify.com/talk/mhw_2019/</link>
-      <pubDate>Tue, 19 Mar 2019 00:00:00 -0400</pubDate>
+      <pubDate>Tue, 19 Mar 2019 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/talk/mhw_2019/</guid>
       <description></description>
@@ -339,7 +337,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
       <link>https://theoceancode.netlify.com/publication/heatwaver/</link>
-      <pubDate>Fri, 31 Aug 2018 00:00:00 -0400</pubDate>
+      <pubDate>Fri, 31 Aug 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication/heatwaver/</guid>
       <description></description>
@@ -358,7 +356,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
 &lt;h2&gt;Objective&lt;/h2&gt;
 &lt;p&gt;In South Africa there are a range of idioms for different time frames in which someone may (or may not) do something. The most common of these are: ‘now’, ‘just now’, and ‘now now’. If one were to Google these sayings one would find that there is general agreements on how long these time frames are, but that agreement is not absolute.&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.com/img/just_now.jpeg&#34; alt=&#34;Advice from the internet.&#34; /&gt;
+&lt;img src=&#34;https://theoceancode.netlify.com/img/just_now.jpeg&#34; alt=&#34;&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;Advice from the internet.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;This got me to wondering just how much disagreement there may be around the country. And more specifically I wanted to know how these times changed between specific locations. If one is interested in contributing to the survey, it may be taken &lt;a href=&#34;https://docs.google.com/forms/d/e/1FAIpQLSeNyF8XJeLXLoPCfE9VdEMc_SOHkX84KF82OOudVKq6K15YTg/viewform?usp=sf_link&#34;&gt;here&lt;/a&gt;. To avoid too much confusion with the answers that could be given, specific times were provided to the participants in a multiple choice format. These times (minutes) were: 5, 15, 30, 60, 120, 300.&lt;/p&gt;
@@ -435,7 +433,7 @@ survey_long %&amp;gt;%
   summarise(noramlity = as.numeric(shapiro.test(minutes)[1]))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 3 x 2
 ##   saying   noramlity
-##   &amp;lt;chr&amp;gt;        &amp;lt;dbl&amp;gt;
+## * &amp;lt;chr&amp;gt;        &amp;lt;dbl&amp;gt;
 ## 1 just now     0.565
 ## 2 now          0.713
 ## 3 now now      0.671&lt;/code&gt;&lt;/pre&gt;
@@ -636,7 +634,7 @@ survey_city %&amp;gt;%
     <item>
       <title>Privacy Policy</title>
       <link>https://theoceancode.netlify.com/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 -0400</pubDate>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
@@ -820,7 +818,7 @@ grid.arrange(bohai_sea_along_map, bohai_sea_away_map, nrow = 1)&lt;/code&gt;&lt;
     <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
       <link>https://theoceancode.netlify.com/publication/predominant/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 -0400</pubDate>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
       <description></description>
@@ -1333,7 +1331,7 @@ gg &amp;lt;- ggplot() +
 &lt;/div&gt;
 &lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Summary&lt;/h2&gt;
-&lt;p&gt;The developments in the gridding system have brought the potential for using ggplot for these more complex maps forward quite a bit. As long as one does not use a constrained mapping coordinate system (i.e. &lt;code&gt;coord_fixed&lt;/code&gt;) the grob-ification of the ggplot objects seems to allow the placing of the pieces into a common area to be performed smoothly. Displaying many different bits of information cleanly is always a challenge. This figure is particularly busy, out of necessity. I think it turned out very nicely though.&lt;/p&gt;
+&lt;p&gt;The developments in the gridding system have brought the potential for using ggplot for these more complex maps forward quite a bit. As long as one does not use a constrained mapping coordinate system (i.e. &lt;code&gt;coord_fixed&lt;/code&gt;) the grob-ification of the ggplot objects seems to allow the placing of the pieces into a common area to be performed smoothly. Displaying many different bits of information cleanly is always a challenge. This figure is particularly busy, out of necessity. I think it turned out very nicely though.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/mapping_with_ggplot2_files/figure-html/mg-final-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;: Map showing the southern tip of the African continent. The top panel shows the typical sea surface temperature and surface currents on January 1st. The bottom panel likewise shows the typical surface air temperatures and winds on any given January 1st.&lt;/p&gt;
 &lt;/div&gt;

@@ -12,7 +12,7 @@ tags: ["survey", "statistics"]
 <h2>Objective</h2>
 <p>In South Africa there are a range of idioms for different time frames in which someone may (or may not) do something. The most common of these are: ‘now’, ‘just now’, and ‘now now’. If one were to Google these sayings one would find that there is general agreements on how long these time frames are, but that agreement is not absolute.</p>
 <div class="figure">
-<img src="/img/just_now.jpeg" alt="Advice from the internet." />
+<img src="/img/just_now.jpeg" alt="" />
 <p class="caption">Advice from the internet.</p>
 </div>
 <p>This got me to wondering just how much disagreement there may be around the country. And more specifically I wanted to know how these times changed between specific locations. If one is interested in contributing to the survey, it may be taken <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNyF8XJeLXLoPCfE9VdEMc_SOHkX84KF82OOudVKq6K15YTg/viewform?usp=sf_link">here</a>. To avoid too much confusion with the answers that could be given, specific times were provided to the participants in a multiple choice format. These times (minutes) were: 5, 15, 30, 60, 120, 300.</p>
@@ -89,7 +89,7 @@ survey_long %&gt;%
   summarise(noramlity = as.numeric(shapiro.test(minutes)[1]))</code></pre>
 <pre><code>## # A tibble: 3 x 2
 ##   saying   noramlity
-##   &lt;chr&gt;        &lt;dbl&gt;
+## * &lt;chr&gt;        &lt;dbl&gt;
 ## 1 just now     0.565
 ## 2 now          0.713
 ## 3 now now      0.671</code></pre>
