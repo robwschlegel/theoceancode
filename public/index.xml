@@ -36,10 +36,10 @@ library(RCMEMS) # For subsetting CMEMS data before download&lt;/code&gt;&lt;/pre
 &lt;/div&gt;
 &lt;div id=&#34;downloading-noaa-oisst&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Downloading NOAA OISST&lt;/h2&gt;
-&lt;p&gt;I’ve already written a post about how to download NOAA OISST data using the &lt;strong&gt;&lt;code&gt;rerddap&lt;/code&gt;&lt;/strong&gt; package which may be found &lt;a href=&#34;https://robwschlegel.github.io/heatwaveR/articles/OISST_preparation.html&#34;&gt;here&lt;/a&gt;. That post talks about how to get subsets of NOAA data, which is useful for projects with a refined scope, but it is laboriously slow if one simply wants the full global product. It is also important to note that as of December 2019 the NOAA OISST data up on the ERDDAP server stopped working. It may be back as of this writing (Feb 2020), but any data source that is allowed to be down for multiple months is not reliable and should be avoided. On that note, it is also now known that from 2016 onwards massive cold biases have begun to seep into this product. See the poster &lt;a href=&#34;https://ams.confex.com/ams/2019Annual/webprogram/Manuscript/Paper352621/Liu.bufr.ncei%20AMS%20Poster%2047x33-final2.pdf&#34;&gt;here&lt;/a&gt; that was presented at the 2019 AGU. That being said, this dataset is still incredibly useful and should the fine people at NOAA decide to act on this knowledge the product can be repaired. I think it is still one of the best options for historic SST research and is something I continue to use in my day-to-day.&lt;/p&gt;
-&lt;p&gt;I feel like I need to stress here that this is a very direct and unlimited method for accessing these data and I urge responsibility in only downloading as much data as are necessary. Please do not download the entire dataset just because you can.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# First we tell R where the dat are on the interwebs
-OISST_url_month &amp;lt;- &amp;quot;https://www.ncei.noaa.gov/data/sea-surface-temperature-optimum-interpolation/access/avhrr-only/&amp;quot;
+&lt;p&gt;I’ve already written a post about how to download NOAA OISST data using the &lt;strong&gt;&lt;code&gt;rerddap&lt;/code&gt;&lt;/strong&gt; package which may be found &lt;a href=&#34;https://robwschlegel.github.io/heatwaveR/articles/OISST_preparation.html&#34;&gt;here&lt;/a&gt;. That post talks about how to get subsets of NOAA data, which is useful for projects with a refined scope, but it is laboriously slow if one simply wants the full global product. It must also be noted that as of this writing (June 3rd, 2020) the new OISST v2.1 data were not yet available on the ERDDAP server even though the old v2 data have now been rendered unavailable. For the time being it is necessary to download the full global data and then subset down to one’s desired study area. The following section of this blog post will outline how to do that.&lt;/p&gt;
+&lt;p&gt;I need to stress that this is a very direct and unlimited method for accessing these data and I urge responsibility in only downloading as much data as are necessary. Please do not download the entire dataset just because you can.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# First we tell R where the data are on the interwebs
+OISST_url_month &amp;lt;- &amp;quot;https://www.ncei.noaa.gov/data/sea-surface-temperature-optimum-interpolation/v2.1/access/avhrr/&amp;quot;
 
 # Then we pull that into a happy format
   # There is a lot here so it takes ~1 minute
@@ -77,25 +77,51 @@ OISST_filenames &amp;lt;- plyr::ldply(OISST_months$months, .fun = OISST_url_dail
 OISST_filenames &amp;lt;- OISST_filenames %&amp;gt;% 
   filter(t &amp;lt;= &amp;quot;2019-01-31&amp;quot;)
 
-# This function will go about downloading each day of data as a temporary NetCDF file
+# This function will go about downloading each day of data as a NetCDF file
 # We will run this via plyr to expedite the process
-# Note that this will download files into a &amp;#39;data&amp;#39; folder in the root directory
-# To change the location of the download change the &amp;#39;destfile&amp;#39; argument
+# Note that this will download files into a &amp;#39;data/OISST&amp;#39; folder in the root directory
+# If this folder does not exist it will create it
+# This function will also check if the file has been previously downloaded
 OISST_url_daily_dl &amp;lt;- function(target_URL){
-  download.file(url = target_URL, method = &amp;quot;libcurl&amp;quot;, destfile = &amp;quot;~/data/OISST/temp.nc&amp;quot;)
-  temp_dat &amp;lt;- tidync(&amp;quot;~/data/OISST/temp.nc&amp;quot;) %&amp;gt;% 
-    hyper_tibble() %&amp;gt;% 
-    select(lon, lat, time, sst) %&amp;gt;% 
-    dplyr::rename(t = time, temp = sst) %&amp;gt;% 
-    mutate(t = as.Date(t, origin = &amp;quot;1978-01-01&amp;quot;))
-  return(temp_dat)
+  dir.create(&amp;quot;~/data/OISST&amp;quot;, showWarnings = F)
+  file_name &amp;lt;- paste0(&amp;quot;~/data/OISST/&amp;quot;,sapply(strsplit(target_URL, split = &amp;quot;/&amp;quot;), &amp;quot;[[&amp;quot;, 10))
+  if(!file.exists(file_name)) download.file(url = target_URL, method = &amp;quot;libcurl&amp;quot;, destfile = file_name)
 }
 
-# And with that we are clear for take off
-system.time(OISST_dat &amp;lt;- plyr::ldply(OISST_filenames$full_name, .fun = OISST_url_daily_dl)) # 42 seconds
+# The way this code has been written it may be run on multiple cores
+# Most modern laptops have at least 4 cores, so we will utilise 3 of them here
+# One should always leave at least 1 core free
+doParallel::registerDoParallel(cores = 3)
 
-# In under 1 minute a user may have a full month of global data downloaded, processed, and ready for use in R.
-# This scales well into years and decades, too. Assuming one has the RAM for it.&lt;/code&gt;&lt;/pre&gt;
+# And with that we are clear for take off
+system.time(plyr::ldply(OISST_filenames$full_name, .fun = OISST_url_daily_dl, .parallel = T)) # ~15 seconds
+
+# In roughly 15 seconds a user may have a full month of global data downloaded
+# This scales well into years and decades, too&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Because it is not currently possible to download subsetted OISST data from a GRIDDAP server I find that it is useful to include here the code one would use to load and subset downloaded OISST data. Please note that the OISST data have longitude values from 0 to 360, not -180 to 180.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# This function will load and subset daily data into one data.frame
+# Note that the subsetting of lon/lat is done before the data are loaded
+# This means it will use much less RAM and is viable for use on most laptops
+# Assuming one&amp;#39;s study area is not too large
+OISST_load &amp;lt;- function(file_name, lon1, lon2, lat1, lat2){
+      OISST_dat &amp;lt;- tidync(file_name) %&amp;gt;%
+        hyper_filter(lon = between(lon, lon1, lon2),
+                     lat = between(lat, lat1, lat2)) %&amp;gt;% 
+        hyper_tibble() %&amp;gt;% 
+        select(lon, lat, time, sst) %&amp;gt;% 
+        dplyr::rename(t = time, temp = sst) %&amp;gt;% 
+        mutate(t = as.Date(t, origin = &amp;quot;1978-01-01&amp;quot;))
+      return(OISST_dat)
+}
+
+# Locate the files that will be loaded
+OISST_files &amp;lt;- dir(&amp;quot;~/data/OISST&amp;quot;, full.names = T)
+
+# Load the data in parallel
+OISST_dat &amp;lt;- plyr::ldply(.data = OISST_files, .fun = OISST_load, .parallel = T,
+                         lon1 = 260, lon2 = 280, lat1 = 30, lat2 = 50)
+
+# This should only take a few seconds to run at most&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;downloading-cci&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Downloading CCI&lt;/h2&gt;
@@ -433,7 +459,7 @@ survey_long %&amp;gt;%
   summarise(noramlity = as.numeric(shapiro.test(minutes)[1]))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 3 x 2
 ##   saying   noramlity
-## * &amp;lt;chr&amp;gt;        &amp;lt;dbl&amp;gt;
+##   &amp;lt;chr&amp;gt;        &amp;lt;dbl&amp;gt;
 ## 1 just now     0.565
 ## 2 now          0.713
 ## 3 now now      0.671&lt;/code&gt;&lt;/pre&gt;

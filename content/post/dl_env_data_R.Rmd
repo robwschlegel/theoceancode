@@ -35,13 +35,13 @@ library(RCMEMS) # For subsetting CMEMS data before download
 
 ## Downloading NOAA OISST
 
-I've already written a post about how to download NOAA OISST data using the __`rerddap`__ package which may be found [here](https://robwschlegel.github.io/heatwaveR/articles/OISST_preparation.html). That post talks about how to get subsets of NOAA data, which is useful for projects with a refined scope, but it is laboriously slow if one simply wants the full global product. It is also important to note that as of December 2019 the NOAA OISST data up on the ERDDAP server stopped working. It may be back as of this writing (Feb 2020), but any data source that is allowed to be down for multiple months is not reliable and should be avoided. On that note, it is also now known that from 2016 onwards massive cold biases have begun to seep into this product. See the poster [here](https://ams.confex.com/ams/2019Annual/webprogram/Manuscript/Paper352621/Liu.bufr.ncei%20AMS%20Poster%2047x33-final2.pdf) that was presented at the 2019 AGU. That being said, this dataset is still incredibly useful and should the fine people at NOAA decide to act on this knowledge the product can be repaired. I think it is still one of the best options for historic SST research and is something I continue to use in my day-to-day. 
+I've already written a post about how to download NOAA OISST data using the __`rerddap`__ package which may be found [here](https://robwschlegel.github.io/heatwaveR/articles/OISST_preparation.html). That post talks about how to get subsets of NOAA data, which is useful for projects with a refined scope, but it is laboriously slow if one simply wants the full global product. It must also be noted that as of this writing (June 3rd, 2020) the new OISST v2.1 data were not yet available on the ERDDAP server even though the old v2 data have now been rendered unavailable. For the time being it is necessary to download the full global data and then subset down to one's desired study area. The following section of this blog post will outline how to do that.
 
-I feel like I need to stress here that this is a very direct and unlimited method for accessing these data and I urge responsibility in only downloading as much data as are necessary. Please do not download the entire dataset just because you can.
+I need to stress that this is a very direct and unlimited method for accessing these data and I urge responsibility in only downloading as much data as are necessary. Please do not download the entire dataset just because you can.
 
 ```{r NOAA-dl}
-# First we tell R where the dat are on the interwebs
-OISST_url_month <- "https://www.ncei.noaa.gov/data/sea-surface-temperature-optimum-interpolation/access/avhrr-only/"
+# First we tell R where the data are on the interwebs
+OISST_url_month <- "https://www.ncei.noaa.gov/data/sea-surface-temperature-optimum-interpolation/v2.1/access/avhrr/"
 
 # Then we pull that into a happy format
   # There is a lot here so it takes ~1 minute
@@ -79,25 +79,55 @@ OISST_filenames <- plyr::ldply(OISST_months$months, .fun = OISST_url_daily)
 OISST_filenames <- OISST_filenames %>% 
   filter(t <= "2019-01-31")
 
-# This function will go about downloading each day of data as a temporary NetCDF file
+# This function will go about downloading each day of data as a NetCDF file
 # We will run this via plyr to expedite the process
-# Note that this will download files into a 'data' folder in the root directory
-# To change the location of the download change the 'destfile' argument
+# Note that this will download files into a 'data/OISST' folder in the root directory
+# If this folder does not exist it will create it
+# This function will also check if the file has been previously downloaded
 OISST_url_daily_dl <- function(target_URL){
-  download.file(url = target_URL, method = "libcurl", destfile = "~/data/OISST/temp.nc")
-  temp_dat <- tidync("~/data/OISST/temp.nc") %>% 
-    hyper_tibble() %>% 
-    select(lon, lat, time, sst) %>% 
-    dplyr::rename(t = time, temp = sst) %>% 
-    mutate(t = as.Date(t, origin = "1978-01-01"))
-  return(temp_dat)
+  dir.create("~/data/OISST", showWarnings = F)
+  file_name <- paste0("~/data/OISST/",sapply(strsplit(target_URL, split = "/"), "[[", 10))
+  if(!file.exists(file_name)) download.file(url = target_URL, method = "libcurl", destfile = file_name)
 }
 
-# And with that we are clear for take off
-system.time(OISST_dat <- plyr::ldply(OISST_filenames$full_name, .fun = OISST_url_daily_dl)) # 42 seconds
+# The way this code has been written it may be run on multiple cores
+# Most modern laptops have at least 4 cores, so we will utilise 3 of them here
+# One should always leave at least 1 core free
+doParallel::registerDoParallel(cores = 3)
 
-# In under 1 minute a user may have a full month of global data downloaded, processed, and ready for use in R.
-# This scales well into years and decades, too. Assuming one has the RAM for it.
+# And with that we are clear for take off
+system.time(plyr::ldply(OISST_filenames$full_name, .fun = OISST_url_daily_dl, .parallel = T)) # ~15 seconds
+
+# In roughly 15 seconds a user may have a full month of global data downloaded
+# This scales well into years and decades, too
+```
+
+Because it is not currently possible to download subsetted OISST data from a GRIDDAP server I find that it is useful to include here the code one would use to load and subset downloaded OISST data. Please note that the OISST data have longitude values from 0 to 360, not -180 to 180.
+
+```{r NOAA-load}
+# This function will load and subset daily data into one data.frame
+# Note that the subsetting of lon/lat is done before the data are loaded
+# This means it will use much less RAM and is viable for use on most laptops
+# Assuming one's study area is not too large
+OISST_load <- function(file_name, lon1, lon2, lat1, lat2){
+      OISST_dat <- tidync(file_name) %>%
+        hyper_filter(lon = between(lon, lon1, lon2),
+                     lat = between(lat, lat1, lat2)) %>% 
+        hyper_tibble() %>% 
+        select(lon, lat, time, sst) %>% 
+        dplyr::rename(t = time, temp = sst) %>% 
+        mutate(t = as.Date(t, origin = "1978-01-01"))
+      return(OISST_dat)
+}
+
+# Locate the files that will be loaded
+OISST_files <- dir("~/data/OISST", full.names = T)
+
+# Load the data in parallel
+OISST_dat <- plyr::ldply(.data = OISST_files, .fun = OISST_load, .parallel = T,
+                         lon1 = 260, lon2 = 280, lat1 = 30, lat2 = 50)
+
+# This should only take a few seconds to run at most
 ```
 
 ## Downloading CCI
