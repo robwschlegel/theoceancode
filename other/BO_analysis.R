@@ -30,17 +30,16 @@ BO_test <- function(var_name, scenario = "present", year = NA){
   
   # Download data
   if(scenario == "present"){
-    BO_layers <- load_layers(c(min_layer, max_layer))
+    BO_layers_dl <- load_layers(c(min_layer, max_layer))
+    var_title <- var_name
   } else {
-    min_vec <- strsplit(min_layer, "_")
-    min_layer_future <- paste(min_vec[[1]][1], scenario, year, min_vec[[1]][2], min_vec[[1]][3], sep = "_")
-    max_vec <- strsplit(max_layer, "_")
-    max_layer_future <- paste(max_vec[[1]][1], scenario, year, max_vec[[1]][2], max_vec[[1]][3], sep = "_")
-    BO_layers <- get_future_layers(c(min_layer_future, max_layer_future), scenario = scenario, year = year)
+    BO_layer_names <- get_future_layers(c(min_layer, max_layer), scenario = scenario, year = year)
+    BO_layers_dl <- load_layers(BO_layer_names$layer_code)
+    var_title <- gsub("max_", "X_", BO_layer_names$layer_code[1])
   }
   
   # Prepare it for plotting
-  BO_layers_test <- as.data.frame(BO_layers, xy = T) %>% 
+  BO_layers_test <- as.data.frame(BO_layers_dl, xy = T) %>% 
     dplyr::rename(lon = x, lat = y) %>% 
     mutate(lon = round(lon, 4), 
            lat = round(lat, 4)) %>% 
@@ -53,9 +52,9 @@ BO_test <- function(var_name, scenario = "present", year = NA){
   test_plot <- ggplot(data = BO_layers_test, aes(x = lon, y = lat)) +
     geom_raster(aes(fill = max_min)) +
     coord_quickmap(expand = F) +
-    labs(fill = "Max greater than min", x = NULL, y = NULL, title = var_name) +
+    labs(fill = "Max greater than min", x = NULL, y = NULL, title = var_title) +
     theme(legend.position = "bottom")
-  return(test_plot)
+  ggsave("~/figures/BO2_curvelltX_bdmax.png", bottom_velocity_test, height = 5, width = 8)
 }
 
 
@@ -64,12 +63,28 @@ BO_test <- function(var_name, scenario = "present", year = NA){
 # The first issue noted in the BO layers was the discrepancy in bottom current velocities
 # NB: Remember that these figure take about a minute to save due to the high resolution
 bottom_velocity_test <- BO_test("BO2_curvelltX_bdmax")
-ggsave("~/figures/BO2_curvelltX_bdmax.png", height = 5, width = 8)
+
 
 # It has also been noted that the surface currents are problematic
 surface_velocity_test <- BO_test("BO2_curvelltX_ss")
-ggsave("~/figures/BO2_curvelltX_ss.png", height = 5, width = 8)
+ggsave("~/figures/BO2_curvelltX_ss.png", surface_velocity_test, height = 5, width = 8)
 
 # These issues persist into the future projections as well
-surface_velocity_test <- BO_test("BO2_curvelltX_ss", scenario = "RCP85", year = 2050)
-ggsave("~/figures/BO2_curvelltX_ss_RCP8.5_2050.png", height = 5, width = 8)
+surface_velocity_2050_test <- BO_test("BO2_curvelltX_ss", scenario = "RCP85", year = 2050)
+ggsave("~/figures/BO2_curvelltX_ss_RCP85_2050.png", surface_velocity_2050_test, height = 5, width = 8)
+# Interestingly the future SSS layer appears to be the mirror image of the present SSS layer
+surface_velocity_2100_test <- BO_test("BO2_curvelltX_ss", scenario = "RCP85", year = 2100)
+ggsave("~/figures/BO2_curvelltX_ss_RCP85_2100.png", surface_velocity_2100_test, height = 5, width = 8)
+
+# Sea surface temperatures are fine
+SST_test <- BO_test("BO2_curvelltX_bdmax")
+ggsave("~/figures/BO2_curvelltX_bdmax.png", bottom_velocity_test, height = 5, width = 8)
+
+# Bottom temperatures however are problematic
+
+
+# All of the nutrient layers are also fine
+
+
+# And as for ice cover
+
