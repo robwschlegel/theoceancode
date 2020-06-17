@@ -1,0 +1,114 @@
+---
+title: "Analysis of Bio-Oracle data"
+author: "Robert W Schlegel"
+date: "2020-02-14"
+categories: ["R"]
+tags: ["data", "SDM"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+## Objective
+
+The purpose of this script is to perform an analysis of the Bio-Oracle data layers.
+The is necessary as it has been determined that some of these layers appear to have very large issues.
+Specifically there are many layers where the minimum values are greater than the maximum values.
+Below is a function that contains the entire testing pipeline to highlight the errors in the data.
+
+```{r}
+# Load required libraries
+library(tidyverse)
+library(sdmpredictors)
+
+# The possible layers for download from Bio-Oracle
+BO_layers <- list_layers(datasets = "Bio-ORACLE")
+
+# The future layers
+BO_layers_future <- list_layers_future(datasets = "Bio-ORACLE")
+```
+
+## Testing pipeline
+
+Choose a variable from the list of BO variables that have a max and min version of the layer
+Replace the 'max' or 'min' with 'X' and give that to the function, it will do the rest
+NB: These figures take about 1 minute to render due to their high resolution
+NB: This function assumes there is a "figures" folder in the root directory
+
+```{r}
+BO_test <- function(var_name, scenario = "present", year = NA){
+  
+  min_layer <- gsub("X", "min", var_name)
+  max_layer <- gsub("X", "max", var_name)
+  
+  # Download data
+  if(scenario == "present"){
+    BO_layers_dl <- load_layers(c(min_layer, max_layer))
+    var_title <- var_name
+  } else {
+    BO_layer_names <- get_future_layers(c(min_layer, max_layer), scenario = scenario, year = year)
+    BO_layers_dl <- load_layers(BO_layer_names$layer_code)
+    var_title <- gsub("max_", "X_", BO_layer_names$layer_code[1])
+  }
+  
+  # Prepare it for plotting
+  BO_layers_test <- as.data.frame(BO_layers_dl, xy = T) %>% 
+    dplyr::rename(lon = x, lat = y) %>% 
+    mutate(lon = round(lon, 4), 
+           lat = round(lat, 4)) %>% 
+    na.omit() %>% 
+    `colnames<-`(c("lon", "lat", "min_val", "max_val")) %>% 
+    mutate(max_min = ifelse(max_val > min_val, TRUE, FALSE),
+           min_over_max = min_val/max_val)
+  
+  # Visualise pixels where the max and min values are not as expected
+  test_plot <- ggplot(data = BO_layers_test, aes(x = lon, y = lat)) +
+    geom_raster(aes(fill = max_min)) +
+    coord_quickmap(expand = F) +
+    labs(fill = "Max greater than min", x = NULL, y = NULL, title = var_title) +
+    theme(legend.position = "bottom")
+  ggsave(paste0("~/figures/",var_title,".png"), test_plot, height = 5, width = 8)
+}
+```
+
+## Look at layers
+
+In the following lines of code we will go through all of the BO layers that have a min/max option
+and we will compare them to ascertain whether the max values are always greater than the mins
+They should be, but we have found that this is often not the case
+When possible we will also look at future projections of the layers with RCP8.5 at 2050 and 2100
+
+```{r}
+# Up first is Chlorophyll
+
+# The first issue noted in the BO layers was the discrepancy in bottom current velocities
+# NB: Remember that these figure take about a minute to save due to the high resolution
+BO_test("BO2_curvelltX_bdmax")
+BO_test("BO2_curvelltX_bdmax", scenario = "RCP85", year = 2050)
+BO_test("BO2_curvelltX_bdmax", scenario = "RCP85", year = 2100)
+
+# It has also been noted that the surface currents are problematic
+BO_test("BO2_curvelltX_ss")
+BO_test("BO2_curvelltX_ss", scenario = "RCP85", year = 2050)
+BO_test("BO2_curvelltX_ss", scenario = "RCP85", year = 2100)
+# Interestingly the errors in the future current velocity layers are near mirror images of the present layer
+
+# Sea surface temperatures are fine
+BO_test("BO2_curvelltX_bdmax")
+
+# Bottom temperatures however are problematic
+
+
+# All of the nutrient layers are also fine
+
+
+# And as for ice cover
+
+```
+
+This is not meant to be exhaustive, but does represent the majority of the data offered by Bio-Oracle.
+
+## Discussion
+
+It appears that all of the layers that have issues are physical oceanography layers. Specifically it is my understanding that these layers would have been adapted from the GLORYS reanalysis product. Therefore the next logical step in understanding this issue would be to investigate the GLORYS data.
