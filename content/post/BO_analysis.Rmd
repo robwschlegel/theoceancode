@@ -12,10 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 ## Objective
 
-The purpose of this script is to perform an analysis of the Bio-Oracle data layers.
-The is necessary as it has been determined that some of these layers appear to have very large issues.
-Specifically there are many layers where the minimum values are greater than the maximum values.
-Below is a function that contains the entire testing pipeline to highlight the errors in the data.
+It has been determined that some of the layers in the current version of the Bio-Oracle product appear to have very large issues. Specifically there are many layers where the minimum values are greater than the maximum values. It is unclear how this could be possible, so in the following text and code we will look into how we go about investigating these data layers and we will discuss which layers are fine, and which are not.
 
 ```{r}
 # Load required libraries
@@ -31,14 +28,12 @@ BO_layers_future <- list_layers_future(datasets = "Bio-ORACLE")
 
 ## Testing pipeline
 
-Choose a variable from the list of BO variables that have a max and min version of the layer
-Replace the 'max' or 'min' with 'X' and give that to the function, it will do the rest
-NB: These figures take about 1 minute to render due to their high resolution
-NB: This function assumes there is a "figures" folder in the root directory
+The following code chunk contains a function that will perform the entire testing pipeline that highlights any errors in the data. To use it we choose a variable from the list of Bio-Oracle variables shown above that have a max and min version of the layer. One must replace the 'max' or 'min' with 'X' and give that to the function, it will do the rest. Note that if one is running this script the figures this function will save to disk take about 1 minute to render due to their high resolution. Also please note that this function assumes there is a "figures" folder in the root directory on the computer on which this code is being run. If not, one must be created or the function must be changed to point at a desired folder.
 
 ```{r}
 BO_test <- function(var_name, scenario = "present", year = NA){
   
+  # Establish min/max layer names
   min_layer <- gsub("X", "min", var_name)
   max_layer <- gsub("X", "max", var_name)
   
@@ -52,63 +47,281 @@ BO_test <- function(var_name, scenario = "present", year = NA){
     var_title <- gsub("max_", "X_", BO_layer_names$layer_code[1])
   }
   
-  # Prepare it for plotting
+  # Prepare data for plotting
   BO_layers_test <- as.data.frame(BO_layers_dl, xy = T) %>% 
     dplyr::rename(lon = x, lat = y) %>% 
     mutate(lon = round(lon, 4), 
            lat = round(lat, 4)) %>% 
     na.omit() %>% 
     `colnames<-`(c("lon", "lat", "min_val", "max_val")) %>% 
-    mutate(max_min = ifelse(max_val > min_val, TRUE, FALSE),
-           min_over_max = min_val/max_val)
+    mutate(max_min = ifelse(max_val >= min_val, TRUE, FALSE))
   
-  # Visualise pixels where the max and min values are not as expected
+  # Visualise pixels where min values are greater than the max
   test_plot <- ggplot(data = BO_layers_test, aes(x = lon, y = lat)) +
     geom_raster(aes(fill = max_min)) +
     coord_quickmap(expand = F) +
     labs(fill = "Max greater than min", x = NULL, y = NULL, title = var_title) +
     theme(legend.position = "bottom")
+  
+  # Save figure to disk
   ggsave(paste0("~/figures/",var_title,".png"), test_plot, height = 5, width = 8)
 }
 ```
 
 ## Look at layers
 
-In the following lines of code we will go through all of the BO layers that have a min/max option
-and we will compare them to ascertain whether the max values are always greater than the mins
-They should be, but we have found that this is often not the case
-When possible we will also look at future projections of the layers with RCP8.5 at 2050 and 2100
+In the following lines of code we will go through all of the BO layers that have a min/max option and we will compare them to ascertain whether the maximum values are always greater than the minimums. They should be, but we have found that sometimes this is not the case. When possible we will also look at future projections of the layers with RCP8.5 at 2050 and 2100. In the first code chunk in this section we will look at the older Bio-Oracle layers.
 
-```{r}
-# Up first is Chlorophyll
+```{r old-layer-test}
+# Up first we start with the older Bio-Oracle layers
 
-# The first issue noted in the BO layers was the discrepancy in bottom current velocities
-# NB: Remember that these figure take about a minute to save due to the high resolution
-BO_test("BO2_curvelltX_bdmax")
-BO_test("BO2_curvelltX_bdmax", scenario = "RCP85", year = 2050)
-BO_test("BO2_curvelltX_bdmax", scenario = "RCP85", year = 2100)
+# Bathymetry
+BO_test("BO_bathyX") # No issues
 
-# It has also been noted that the surface currents are problematic
-BO_test("BO2_curvelltX_ss")
-BO_test("BO2_curvelltX_ss", scenario = "RCP85", year = 2050)
-BO_test("BO2_curvelltX_ss", scenario = "RCP85", year = 2100)
-# Interestingly the errors in the future current velocity layers are near mirror images of the present layer
+# Chlorophyll
+BO_test("BO_chloX") # No issues
 
-# Sea surface temperatures are fine
-BO_test("BO2_curvelltX_bdmax")
+# Cloud fraction
+BO_test("BO_cloudX") # No issues
 
-# Bottom temperatures however are problematic
+# Diffuse attenuation
+BO_test("BO_daX") # No issues
 
-
-# All of the nutrient layers are also fine
-
-
-# And as for ice cover
-
+# SST
+BO_test("BO_sstX") # No issues
 ```
 
-This is not meant to be exhaustive, but does represent the majority of the data offered by Bio-Oracle.
+It is reassuring to see that all of the older BO layers have no issues in them. From my initial testing it looked like the layers with errors may have been from data assimilation from the GLORYS product for the most recent Bio-Oracle layers. That the older layers have no issues appears to support the hypothesis that the bug in the Bio-Oracle pipeline was introduced in the BO2 version of the product.
+
+The next code chunk goes through all of the newer layers and where possible the future projections, too. Note that many layers have four different depth options. The surface (ss), the min (bdmin), the mean (bdmean), and the max (bdmax) depths present at each pixel. Another distinction to make for the following tests is that there are min/max values for each layer, which take the absolute min/max recorded at a pixel. And then there are the long-term min/max values, which are the average annual min/max recorded over the length of the available data. The long-term min/max values are more representative of the climatological means within an area, and the absolute min/max are representative of the most extreme events that may occur in an area. Generally one is going to be more interested in the long-term values for normal species distribution modelling (SDM) applications.
+
+```{r new-layer-test}
+# Carbon phytoplankton biomass absolute
+BO_test("BO2_carbonphytoX_bdmax") # No issues
+BO_test("BO2_carbonphytoX_bdmean") # No issues
+BO_test("BO2_carbonphytoX_bdmin") # No issues
+BO_test("BO2_carbonphytoX_ss") # No issues
+
+# Carbon phytoplankton biomass long-term
+BO_test("BO2_carbonphytoltX_bdmax") # No issues
+BO_test("BO2_carbonphytoltX_bdmean") # No issues
+BO_test("BO2_carbonphytoltX_bdmin") # No issues
+BO_test("BO2_carbonphytoltX_ss") # No issues
+
+# Chlorophyll absolute
+BO_test("BO2_chloX_bdmax") # No issues
+BO_test("BO2_chloX_bdmean") # No issues
+BO_test("BO2_chloX_bdmin") # No issues
+BO_test("BO2_chloX_ss") # No issues
+BO_test("BO2_chloX_ss", scenario = "RCP85", year = 2050) # Most pixels fail
+BO_test("BO2_chloX_ss", scenario = "RCP85", year = 2100) # Slightly better than the 2050 data
+
+# Chlorophyll long-term
+BO_test("BO2_chloltX_bdmax") # No issues
+BO_test("BO2_chloltX_bdmean") # No issues
+BO_test("BO2_chloltX_bdmin") # No issues
+BO_test("BO2_chloltX_ss") # No issues
+BO_test("BO2_chloltX_ss", scenario = "RCP85", year = 2050) # Same issues as non-long-term layer
+BO_test("BO2_chloltX_ss", scenario = "RCP85", year = 2100) # Slightly better than the 2050 data
+
+# Current velocities absolute
+BO_test("BO2_curvelX_bdmax") # Global issues
+BO_test("BO2_curvelX_bdmax", scenario = "RCP85", year = 2050) # Global issues
+BO_test("BO2_curvelX_bdmax", scenario = "RCP85", year = 2100) # Global issues
+BO_test("BO2_curvelX_bdmean") # Global issues
+BO_test("BO2_curvelX_bdmean", scenario = "RCP85", year = 2050) # Global issues
+BO_test("BO2_curvelX_bdmean", scenario = "RCP85", year = 2100) # Global issues
+BO_test("BO2_curvelX_bdmin") # Global issues
+BO_test("BO2_curvelX_bdmin", scenario = "RCP85", year = 2050) # Global issues
+BO_test("BO2_curvelX_bdmin", scenario = "RCP85", year = 2100) # Global issues
+BO_test("BO2_curvelX_ss") # Mostly fails around the equator
+BO_test("BO2_curvelX_ss", scenario = "RCP85", year = 2050) # Mirror image errors of present day
+BO_test("BO2_curvelX_ss", scenario = "RCP85", year = 2100)
+
+# Current velocities long-term
+# The first issue noted in the BO2 layers were these
+BO_test("BO2_curvelltX_bdmax") # Global issues
+BO_test("BO2_curvelltX_bdmax", scenario = "RCP85", year = 2050) # Global issues
+BO_test("BO2_curvelltX_bdmax", scenario = "RCP85", year = 2100) # Global issues
+BO_test("BO2_curvelltX_bdmean") # Global issues
+BO_test("BO2_curvelltX_bdmean", scenario = "RCP85", year = 2050) # Global issues
+BO_test("BO2_curvelltX_bdmean", scenario = "RCP85", year = 2100) # Global issues
+BO_test("BO2_curvelltX_bdmin") # Global issues
+BO_test("BO2_curvelltX_bdmin", scenario = "RCP85", year = 2050) # Global issues
+BO_test("BO2_curvelltX_bdmin", scenario = "RCP85", year = 2100) # Global issues
+BO_test("BO2_curvelltX_ss") # Mostly fails around the equator
+BO_test("BO2_curvelltX_ss", scenario = "RCP85", year = 2050) # Mirror image errors of present day
+BO_test("BO2_curvelltX_ss", scenario = "RCP85", year = 2100) # Mirror image errors of present day
+
+# Dissolved oxygen
+BO_test("BO2_dissoxX_bdmax") # No issues
+BO_test("BO2_dissoxX_bdmean") # No issues
+BO_test("BO2_dissoxX_bdmin") # No issues
+BO_test("BO2_dissoxX_ss") # No issues
+
+# Dissolved oxygen long-term
+BO_test("BO2_dissoxltX_bdmax") # No issues
+BO_test("BO2_dissoxltX_bdmean") # No issues
+BO_test("BO2_dissoxltX_bdmin") # No issues
+BO_test("BO2_dissoxltX_ss") # No issues
+
+# Ice cover
+BO_test("BO2_icecoverX_ss") # No issues
+
+# Ice cover long-term
+BO_test("BO2_icecoverltX_ss") # No issues
+
+# Ice thickness
+BO_test("BO2_icethickX_ss")
+BO_test("BO2_icethickX_ss", scenario = "RCP85", year = 2050)
+BO_test("BO2_icethickX_ss", scenario = "RCP85", year = 2100)
+
+# Ice thickness long-term
+BO_test("BO2_icethickltX_ss")
+BO_test("BO2_icethickltX_ss", scenario = "RCP85", year = 2050)
+BO_test("BO2_icethickltX_ss", scenario = "RCP85", year = 2100)
+
+# Iron
+BO_test("BO2_ironX_bdmax")
+BO_test("BO2_ironX_bdmean")
+BO_test("BO2_ironX_bdmin")
+BO_test("BO2_ironX_ss")
+
+# Iron long-term
+BO_test("BO2_ironltX_bdmax")
+BO_test("BO2_ironltX_bdmean")
+BO_test("BO2_ironltX_bdmin")
+BO_test("BO2_ironltX_ss")
+
+# Light at bottom
+BO_test("BO2_lightbotX_bdmax")
+BO_test("BO2_lightbotX_bdmean")
+BO_test("BO2_lightbotX_bdmin")
+
+# Light at bottom long-term
+BO_test("BO2_lightbotltX_bdmax")
+BO_test("BO2_lightbotltX_bdmean")
+BO_test("BO2_lightbotltX_bdmin")
+
+# Nitrate
+BO_test("BO2_nitratemax_bdmax")
+BO_test("BO2_nitratemax_bdmean")
+BO_test("BO2_nitratemax_bdmin")
+BO_test("BO2_nitratemax_sss")
+
+# Nitrate long-term
+BO_test("BO2_nitrateltmax_bdmax")
+BO_test("BO2_nitrateltmax_bdmean")
+BO_test("BO2_nitrateltmax_bdmin")
+BO_test("BO2_nitrateltmax_sss")
+
+# Phosphate absolute
+BO_test("BO2_phosphateX_bdmax")
+BO_test("BO2_phosphateX_bdmean")
+BO_test("BO2_phosphateX_bdmin")
+BO_test("BO2_phosphateX_ss")
+
+# Phosphate long-term
+BO_test("BO2_phosphateltX_bdmax")
+BO_test("BO2_phosphateltX_bdmean")
+BO_test("BO2_phosphateltX_bdmin")
+BO_test("BO2_phosphateltX_ss")
+
+# Primary production absolute
+BO_test("BO2_ppmax_bdmax")
+BO_test("BO2_ppmax_bdmean")
+BO_test("BO2_ppmax_bdmin")
+BO_test("BO2_ppmax_ss")
+
+# Primary production long-term
+BO_test("BO2_ppltmax_bdmax")
+BO_test("BO2_ppltmax_bdmean")
+BO_test("BO2_ppltmax_bdmin")
+BO_test("BO2_ppltmax_ss")
+
+# Salinity absolute
+BO_test("BO2_salinityX_bdmax")
+BO_test("BO2_salinityX_bdmax", scenario = "RCP85", year = 2050)
+BO_test("BO2_salinityX_bdmax", scenario = "RCP85", year = 2100)
+BO_test("BO2_salinityX_bdmean")
+BO_test("BO2_salinityX_bdmean", scenario = "RCP85", year = 2050)
+BO_test("BO2_salinityX_bdmean", scenario = "RCP85", year = 2100)
+BO_test("BO2_salinityX_bdmin")
+BO_test("BO2_salinityX_bdmin", scenario = "RCP85", year = 2050)
+BO_test("BO2_salinityX_bdmin", scenario = "RCP85", year = 2100)
+BO_test("BO2_salinityX_ss")
+BO_test("BO2_salinityX_ss", scenario = "RCP85", year = 2050)
+BO_test("BO2_salinityX_ss", scenario = "RCP85", year = 2100)
+
+# Salinity long-term
+BO_test("BO2_salinityltX_bdmax")
+BO_test("BO2_salinityltX_bdmax", scenario = "RCP85", year = 2050)
+BO_test("BO2_salinityltX_bdmax", scenario = "RCP85", year = 2100)
+BO_test("BO2_salinityltX_bdmean")
+BO_test("BO2_salinityltX_bdmean", scenario = "RCP85", year = 2050)
+BO_test("BO2_salinityltX_bdmean", scenario = "RCP85", year = 2100)
+BO_test("BO2_salinityltX_bdmin")
+BO_test("BO2_salinityltX_bdmin", scenario = "RCP85", year = 2050)
+BO_test("BO2_salinityltX_bdmin", scenario = "RCP85", year = 2100)
+BO_test("BO2_salinityltX_ss")
+BO_test("BO2_salinityltX_ss", scenario = "RCP85", year = 2050)
+BO_test("BO2_salinityltX_ss", scenario = "RCP85", year = 2100)
+
+# Silicate absolute
+BO_test("BO2_silicatemax_bdmax")
+BO_test("BO2_silicatemax_bdmean")
+BO_test("BO2_silicatemax_bdmin")
+BO_test("BO2_silicatemax_ss")
+
+# Silicate long-term
+BO_test("BO2_silicateltmax_bdmax")
+BO_test("BO2_silicateltmax_bdmean")
+BO_test("BO2_silicateltmax_bdmin")
+BO_test("BO2_silicateltmax_ss")
+
+# Temperature absolute
+BO_test("BO2_tempmax_bdmax")
+BO_test("BO2_tempmax_bdmax", scenario = "RCP85", year = 2050)
+BO_test("BO2_tempmax_bdmax", scenario = "RCP85", year = 2100)
+BO_test("BO2_tempmax_bdmean")
+BO_test("BO2_tempmax_bdmean", scenario = "RCP85", year = 2050)
+BO_test("BO2_tempmax_bdmean", scenario = "RCP85", year = 2100)
+BO_test("BO2_tempmax_bdmin")
+BO_test("BO2_tempmax_bdmin", scenario = "RCP85", year = 2050)
+BO_test("BO2_tempmax_bdmin", scenario = "RCP85", year = 2100)
+BO_test("BO2_tempmax_ss")
+BO_test("BO2_tempmax_ss", scenario = "RCP85", year = 2050)
+BO_test("BO2_tempmax_ss", scenario = "RCP85", year = 2100)
+
+# Temperature long-term
+BO_test("BO2_templtmax_bdmax")
+BO_test("BO2_templtmax_bdmax", scenario = "RCP85", year = 2050)
+BO_test("BO2_templtmax_bdmax", scenario = "RCP85", year = 2100)
+BO_test("BO2_templtmax_bdmean")
+BO_test("BO2_templtmax_bdmean", scenario = "RCP85", year = 2050)
+BO_test("BO2_templtmax_bdmean", scenario = "RCP85", year = 2100)
+BO_test("BO2_templtmax_bdmin")
+BO_test("BO2_templtmax_bdmin", scenario = "RCP85", year = 2050)
+BO_test("BO2_templtmax_bdmin", scenario = "RCP85", year = 2100)
+BO_test("BO2_templtmax_ss")
+BO_test("BO2_templtmax_ss", scenario = "RCP85", year = 2050)
+BO_test("BO2_templtmax_ss", scenario = "RCP85", year = 2100)
+```
+
+This is not meant to be exhaustive, but does represent the majority of the data offered by Bio-Oracle. I had hypothesised that the three different depth options per pixel would have been related to the issues in the data assimilation but it does not appear to be the case. I've concluded this because Whenever a depth layer has issues, those errors appear to be very similar across the three different depth layers.
 
 ## Discussion
 
-It appears that all of the layers that have issues are physical oceanography layers. Specifically it is my understanding that these layers would have been adapted from the GLORYS reanalysis product. Therefore the next logical step in understanding this issue would be to investigate the GLORYS data.
+It appears that all of the layers that have issues are physical oceanography layers. Specifically it is my understanding that these layers would have been adapted from the GLORYS reanalysis product. Therefore the next logical step in understanding this issue would be to investigate the GLORYS data. But even if there were issues in the GLORYS product, which I doubt, it would not explain how the data layers here could have minimum values being reported as greater than the maximum values in the distribution. The only thing that makes any sense is that the data layers are created independently of each other. But why?
+
+Without being able to see the pipeline code myself all I can do is ponder, which isn't terribly useful. So to wrap things up I'll provide two tables; the layers with no issues, and those with issues. I would strongly recommend not using any data layers that did not pass the tests in this analysis until the curators of the Bio-Oracle data address these issues in a new release.
+
+Layers with no issues (fine for use):
+- All of the older BO layers are fine
+- Carbon phytoplankton biomass absolute and long-term at all depths
+- Chlorophyll absolute and long-term at all depths for present day projections
+- Dissolved oxygen absolute and long-term at all depths
+
+Problem layers (do not use):
+- Chlorophyll future projections for absolutes and long-terms at all depths
+- Current velocity absolutes and long-terms for all depths and all present and future projections
