@@ -74,7 +74,7 @@ enableGitInfo = false
   avatar = "Schlegel_profile_small.JPG"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
   email = "robwschlegel@gmail.com"
   address = "Institut de la Mer de Villefranche (IMEV), 181 Chemin du Lazaret, 06230 Villefranche-sur-Mer, France"
-  office_hours = "Monday - Friday 08:00 to 17:00 or email for appointment"
+  office_hours = "Monday - Friday 08:00 to 17:00 or email for meeting"
   phone = "+1 774-244-9279"
   skype = "robert.william.schlegel"
   telegram = ""
@@ -108,9 +108,9 @@ enableGitInfo = false
   #   3: OpenStreetMap (Mapbox)
   map = 2
   map_api_key = ""
-  latitude = "41.524558"
-  longitude = "-70.6710935"
-  zoom = 12
+  latitude = "43.6976908"
+  longitude = "7.3062373"
+  zoom = 11
 
   # Date and time format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )
   #   Examples: "Mon, Jan 2, 2006" or "2006-01-02"
