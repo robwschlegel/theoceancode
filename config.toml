@@ -18,7 +18,7 @@ copyright = "&copy; 2019"
 theme = "hugo-academic"
 enableEmoji = true
 footnotereturnlinkcontents = "<sup>^</sup>"
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "\\.knit\\.md$", "\\.utf8\\.md$", "_cache$"]
 preserveTaxonomyNames = true
 paginate = 10
 
@@ -64,17 +64,17 @@ enableGitInfo = false
 
   # Your details.
   name = "Robert William Schlegel"
-  role = "Postdoc fellow"
+  role = "Data scientist"
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-  organizations = [ { name = "WHOI", url = "https://www.whoi.edu/" } ]
+  organizations = [ { name = "FACE-IT", url = "https://www.face-it-project.eu/" } ]
 
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
   avatar = "Schlegel_profile_small.JPG"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
   email = "robwschlegel@gmail.com"
-  address = "Physical Oceanography: Clark 316A, 360 Woods Hole Rd, Woods Hole, MA 05234"
-  office_hours = "Monday - Friday 14:00 to 16:00 or email for appointment"
+  address = "Institut de la Mer de Villefranche (IMEV), 181 Chemin du Lazaret, 06230 Villefranche-sur-Mer, France"
+  office_hours = "Monday - Friday 08:00 to 17:00 or email for appointment"
   phone = "+1 774-244-9279"
   skype = "robert.william.schlegel"
   telegram = ""

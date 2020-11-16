@@ -13,7 +13,7 @@ weight = 5
     "Marine heatwaves",
     "Climate change",
     "Machine learning",
-    "Data Science"
+    "Data science"
   ]
 
 # List your qualifications (such as academic degrees).
@@ -36,4 +36,4 @@ weight = 5
 
 # Biography
 
-Robert Schlegel is an [OFI](https://www.oceanfrontierinstitute.com/) postdoc fellow in the Department of Physical Oceanography at WHOI. His research focuses on developing the methodologies that will allow us to harness machine learning for the identification of the forces responsible for the formation of marine heatwaves.
+Robert Schlegel is a data scientist for the FACE-IT project, which aims to understand, document, and make available the most important drivers of change in Arctic fjord ecosystems. He is based out of the Institut de la Mer de Villefranche (IMEV), a research outpost for Sorbonne Université.
