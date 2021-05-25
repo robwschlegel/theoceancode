@@ -36,4 +36,4 @@ weight = 5
 
 # Biography
 
-Robert Schlegel is a data scientist for the FACE-IT project, which has the overarching objective of enabling adaptive co-management of social-ecological fjord systems in the Arctic in the face of rapid cryosphere and biodiversity changes. He is based out of the Institut de la Mer de Villefranche (IMEV), a research outpost for Sorbonne Université.
+Robert Schlegel is a data scientist for the FACE-IT project, which has the overarching objective of enabling adaptive co-management of social-ecological fjord systems in the Arctic in the face of rapid cryosphere and biodiversity changes. He is based out of the Institut de la Mer de Villefranche (IMEV), a research outpost for Sorbonne Université. His area of focus is marine heatwaves (MHWs).
