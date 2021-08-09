@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Sat, 14 Dec 2019 00:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 14 Dec 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.com/tags/coastal/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>coastR</title>
       <link>https://theoceancode.netlify.com/package/coastr/</link>
-      <pubDate>Sat, 14 Dec 2019 00:00:00 -0400</pubDate>
+      <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.com/package/coastr/</guid>
       <description>An R package with useful functions for coastal oceanography.</description>
@@ -33,7 +33,7 @@
     <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
       <link>https://theoceancode.netlify.com/publication/predominant/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
       <description></description>
@@ -51,7 +51,7 @@
     <item>
       <title>Nearshore and offshore co-occurrence of marine heatwaves and cold-spells</title>
       <link>https://theoceancode.netlify.com/publication/cooccurrence/</link>
-      <pubDate>Tue, 10 Jan 2017 00:00:00 -0400</pubDate>
+      <pubDate>Tue, 10 Jan 2017 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication/cooccurrence/</guid>
       <description></description>

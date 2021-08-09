@@ -6,8 +6,135 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Fri, 14 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 May 2021 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ODV figures in R with bathymetry</title>
+      <link>https://theoceancode.netlify.com/post/odv_bathy/</link>
+      <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/post/odv_bathy/</guid>
+      <description>
+&lt;script src=&#34;https://theoceancode.netlify.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Objective&lt;/h2&gt;
+&lt;p&gt;Nearly four years after writing a blog post about &lt;a href=&#34;https://theoceancode.netlify.app/post/odv_figures/&#34;&gt;recreating R figures in ODV&lt;/a&gt; I had someone reach out to me expressing interest in adding a bathymetry layer over the interpolated data. It’s always nice to know that these blog posts are being found useful for other researchers. And I have to admit I’m a bit surprised that the code still runs 4 years later. Especially considering that it uses the &lt;strong&gt;&lt;code&gt;tidyverse&lt;/code&gt;&lt;/strong&gt; which is notorious for breaking backwards compatibility. In order to demonstrate the overlaying of bathymetry data on a CTD transect we will need to use a different dataset than in the previous blog post. One may use any data one would like, but for this blog I went to this &lt;a href=&#34;https://robert-schlegel.shinyapps.io/CTD_project/&#34;&gt;shiny app&lt;/a&gt; to extract some data from the coast of South Africa. Specifically I filtered for temperature data from November 1990 at all depths. We won’t go back over the theory for recreating the ODV figure in this blog post, so please revisit that for a recap as necessary. Below I will show two of the necessary steps to get interpolated CTD data before we begin on the bathymetry mask.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Load libraries
+library(tidyverse)
+library(lubridate)
+library(reshape2)
+library(MBA)
+library(mgcv)
+library(marmap)
+library(FNN)
+
+# The transects in this dataset do not have an ID column
+# So we manually select the first transect (rows 1 - 12)
+# This is then used as a mask to select all depths for these pixels
+# We will also use these unique lon/lat coords for bathymetry points
+ctd_mask &amp;lt;- read_csv(&amp;quot;../../static/data/CTD_transect.csv&amp;quot;) %&amp;gt;% 
+  select(lon, lat) %&amp;gt;% 
+  slice(1:12) %&amp;gt;% 
+  unique()
+
+# Load and screen data
+  # For ease I am only using monthly means
+  # and depth values rounded to 10 metres
+ctd &amp;lt;- read_csv(&amp;quot;../../static/data/CTD_transect.csv&amp;quot;) %&amp;gt;% 
+  mutate(depth = -depth) %&amp;gt;%  # Correct for plotting
+  right_join(ctd_mask, by = c(&amp;quot;lon&amp;quot;, &amp;quot;lat&amp;quot;)) %&amp;gt;% 
+  select(lon, lat, depth, temp)
+
+# Manually extracted hexidecimal ODV colour palette
+ODV_colours &amp;lt;- c(&amp;quot;#feb483&amp;quot;, &amp;quot;#d31f2a&amp;quot;, &amp;quot;#ffc000&amp;quot;, &amp;quot;#27ab19&amp;quot;, &amp;quot;#0db5e6&amp;quot;, &amp;quot;#7139fe&amp;quot;, &amp;quot;#d16cfa&amp;quot;)
+
+# Create quick scatterplot
+ggplot(data = ctd, aes(x = lon, y = depth)) +
+  geom_point(aes(colour = temp)) +
+  scale_colour_gradientn(colours = rev(ODV_colours)) +
+  labs(y = &amp;quot;depth (m)&amp;quot;, x = &amp;quot;longitude (°E)&amp;quot;, colour = &amp;quot;temp. (°C)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/odv_bathy_files/figure-html/setup-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;: A non-interpolated scatterplot of our temperature (°C) data shown as a function of depth (m) over longitude (°E).&lt;/p&gt;
+&lt;p&gt;It looks like we have a nice little upwelling signal coming through at the coast. It will be interesting to see how the interpolation handles that. We’ll quickly run the interpolation and then get to the bathymetry overlay. Note that these data are not on a straight latitude transect, but we are not going to worry about that in this blog post.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Now we may interpolate the data
+# NB: The columns that mba.surf() will interpolate are the X, Y, Z values in that order
+ctd_mba &amp;lt;- mba.surf(ctd[c(&amp;quot;lon&amp;quot;, &amp;quot;depth&amp;quot;, &amp;quot;temp&amp;quot;)], no.X = 300, no.Y = 300, extend = T)
+dimnames(ctd_mba$xyz.est$z) &amp;lt;- list(ctd_mba$xyz.est$x, ctd_mba$xyz.est$y)
+ctd_mba &amp;lt;- melt(ctd_mba$xyz.est$z, varnames = c(&amp;#39;lon&amp;#39;, &amp;#39;depth&amp;#39;), value.name = &amp;#39;temp&amp;#39;) %&amp;gt;% 
+  filter(depth &amp;lt; 0) %&amp;gt;% 
+  mutate(temp = round(temp, 1))
+
+# Finally we create our gridded result
+ggplot(data = ctd_mba, aes(x = lon, y = depth)) +
+  geom_raster(aes(fill = temp)) +
+  geom_contour(aes(z = temp), binwidth = 2, colour = &amp;quot;black&amp;quot;, alpha = 0.2) +
+  geom_contour(aes(z = temp), breaks = 20, colour = &amp;quot;black&amp;quot;) +
+  scale_fill_gradientn(colours = rev(ODV_colours)) +
+  labs(y = &amp;quot;depth (m)&amp;quot;, x = &amp;quot;longitude (°E)&amp;quot;, fill = &amp;quot;temp. (°C)&amp;quot;) +
+  coord_cartesian(expand = F)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/odv_bathy_files/figure-html/interp-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 2&lt;/strong&gt;: The same temperature (°C) profiles seen in Figure 1 with the missing values filled in with multilevel B-splines.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bathymetry&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bathymetry&lt;/h2&gt;
+&lt;p&gt;The interpolation seems to have done a decent job of acknowledging the upwelling signal. It may be possible to tweak the interpolation more, as desired, but I’m happy enough with it for the purposes of this post. We are going to skip over the step to cut out the artefacts at the bottom of the figure where there are not data points because we are rather going to just overlay our bathymetry mask. First we will download the bathymetry data. Then we find the points that are closest to our CTD transect. These will then be used for the grey overlay at the bottom of the figure.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Bathymetry within transect bounding box
+bathy &amp;lt;- getNOAA.bathy(lon1 = min(ctd$lon), lon2 = max(ctd$lon), 
+                       lat1 = min(ctd$lat), lat2 = max(ctd$lat), 
+                       resolution = 5) # Larger numbers for coarser data
+
+# Convert bathy object to a data.frame for easier use
+bathy_df &amp;lt;- data.frame(lon_b = as.numeric(rownames(bathy)),
+                       lat_b = as.numeric(colnames(bathy)),
+                       depth = as.numeric(bathy)) %&amp;gt;% 
+  mutate(bathy_idx = 1:n()) # Used for merging CTD and bathy data
+
+# Find nearest points to transect data
+ctd_mask &amp;lt;- ctd_mask %&amp;gt;% 
+  mutate(bathy_idx = as.vector(knnx.index(as.matrix(bathy_df[,c(&amp;quot;lon_b&amp;quot;, &amp;quot;lat_b&amp;quot;)]),
+                                           as.matrix(ctd_mask[,c(&amp;quot;lon&amp;quot;, &amp;quot;lat&amp;quot;)]), k = 1))) %&amp;gt;% 
+  left_join(bathy_df, by = &amp;quot;bathy_idx&amp;quot;)
+
+# Manually create bottom of the bathy mask polygon
+bathy_mask &amp;lt;- data.frame(lon = c(ctd_mask$lon, rev(ctd_mask$lon)),
+                         depth = c(ctd_mask$depth, rep(min(ctd_mask$depth), nrow(ctd_mask))))
+
+# We may now use that bathy mask for our final figure
+ggplot(data = ctd_mba, aes(x = lon, y = depth)) +
+  geom_raster(aes(fill = temp)) +
+  geom_contour(aes(z = temp), binwidth = 2, colour = &amp;quot;black&amp;quot;, alpha = 0.2) +
+  geom_contour(aes(z = temp), breaks = 20, colour = &amp;quot;black&amp;quot;) +
+  geom_polygon(data = bathy_mask, fill = &amp;quot;grey80&amp;quot;, colour = &amp;quot;black&amp;quot;) +
+  scale_fill_gradientn(colours = rev(ODV_colours)) +
+  labs(y = &amp;quot;depth (m)&amp;quot;, x = &amp;quot;longitude (°E)&amp;quot;, fill = &amp;quot;temp. (°C)&amp;quot;) +
+  coord_cartesian(expand = F)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/odv_bathy_files/figure-html/bathy-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 3&lt;/strong&gt;: The same temperature (°C) profiles seen in Figure 2 with the bathymetry values overlaid.&lt;/p&gt;
+&lt;p&gt;Unfortunately in this example there is a bit of blank space in the bottom left of the plot because the CTD casts do not go deeper than 200 m, and the interpolation doesn’t fill in values outside of the rectangular box dictated by the X (lon) and Y (depth) values. A cheeky workaround for this issue would be to simply crop the figure to the bottom of the interpolated data, and not the bathymetry.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We may now use that bathy mask for our final figure
+ggplot(data = ctd_mba, aes(x = lon, y = depth)) +
+  geom_raster(aes(fill = temp)) +
+  geom_contour(aes(z = temp), binwidth = 2, colour = &amp;quot;black&amp;quot;, alpha = 0.2) +
+  geom_contour(aes(z = temp), breaks = 20, colour = &amp;quot;black&amp;quot;) +
+  geom_polygon(data = bathy_mask, fill = &amp;quot;grey80&amp;quot;, colour = &amp;quot;black&amp;quot;) +
+  geom_point(data = ctd, aes(x = lon, y = depth),
+             colour = &amp;#39;black&amp;#39;, size = 0.2, alpha = 0.4, shape = 8) +
+  scale_fill_gradientn(colours = rev(ODV_colours)) +
+  labs(y = &amp;quot;depth (m)&amp;quot;, x = &amp;quot;longitude (°E)&amp;quot;, fill = &amp;quot;temp. (°C)&amp;quot;) +
+  coord_cartesian(expand = F, ylim = c(-200, 0)) +
+  theme(panel.border = element_rect(fill = NA, colour = &amp;quot;black&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/odv_bathy_files/figure-html/bathy-crop-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;strong&gt;Figure 4&lt;/strong&gt;: The plotting area cropped to the interpolated data, rather than the bathymetry mask. Also shown with black dots are the original CTD data.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;In this tutorial we have seen how to plot a bathymetry overlay that matches the lon/lat coordinates of the CTD casts. I’m sure there is a way to force the interpolation to fill in values at a greater depth to match the bathymetry, but the focus of this blog was on adding the bathymetry mask itself, and I think we have addressed this issue. The workflow outlined above has a couple of bumps in it, but should be adaptable to a range of applications.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Downloading environmental data in R</title>
@@ -309,7 +436,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Detecting Marine Heatwaves With Sub-Optimal Data</title>
       <link>https://theoceancode.netlify.com/publication/detection/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication/detection/</guid>
       <description></description>
@@ -318,7 +445,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>heatwaveR</title>
       <link>https://theoceancode.netlify.com/package/heatwaver/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.com/package/heatwaver/</guid>
       <description></description>
@@ -327,7 +454,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>coastR</title>
       <link>https://theoceancode.netlify.com/package/coastr/</link>
-      <pubDate>Sat, 14 Dec 2019 00:00:00 -0400</pubDate>
+      <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.com/package/coastr/</guid>
       <description></description>
@@ -336,7 +463,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Detecting marine heatwaves with sub-optimal data</title>
       <link>https://theoceancode.netlify.com/poster/mhw_detection_poster/</link>
-      <pubDate>Mon, 06 May 2019 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 06 May 2019 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.com/poster/mhw_detection_poster/</guid>
       <description></description>
@@ -345,7 +472,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Marine heatwave tracker</title>
       <link>https://theoceancode.netlify.com/project/mhwtracker/</link>
-      <pubDate>Mon, 25 Mar 2019 00:00:00 -0300</pubDate>
+      <pubDate>Mon, 25 Mar 2019 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.com/project/mhwtracker/</guid>
       <description></description>
@@ -354,7 +481,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Marine heatwaves: the new normal</title>
       <link>https://theoceancode.netlify.com/talk/mhw_2019/</link>
-      <pubDate>Tue, 19 Mar 2019 00:00:00 -0300</pubDate>
+      <pubDate>Tue, 19 Mar 2019 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.com/talk/mhw_2019/</guid>
       <description></description>
@@ -363,7 +490,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
       <link>https://theoceancode.netlify.com/publication/heatwaver/</link>
-      <pubDate>Fri, 31 Aug 2018 00:00:00 -0300</pubDate>
+      <pubDate>Fri, 31 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication/heatwaver/</guid>
       <description></description>
@@ -660,7 +787,7 @@ survey_city %&amp;gt;%
     <item>
       <title>Privacy Policy</title>
       <link>https://theoceancode.netlify.com/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 -0300</pubDate>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.com/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
@@ -844,7 +971,7 @@ grid.arrange(bohai_sea_along_map, bohai_sea_away_map, nrow = 1)&lt;/code&gt;&lt;
     <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
       <link>https://theoceancode.netlify.com/publication/predominant/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
       <description></description>
@@ -1150,216 +1277,6 @@ grid.arrange(bohai_sea_map, bohai_sea_seq_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt
 &lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;The usefulness of the &lt;code&gt;seq_sites()&lt;/code&gt; function is demonstrated above on a number of different scales and coastal features. This is in no way an exhaustive test of this function and I welcome any input from anyone that uses it for their own work. The premise on which this function operates is very basic and so theoretically it should be very adaptive. The only thing to look out for is if one has a very convoluted coastline with a long stretch without any sites as the algorithm may think this is two separate coastlines.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Mapping with ggplot2</title>
-      <link>https://theoceancode.netlify.com/post/mapping_with_ggplot2/</link>
-      <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/post/mapping_with_ggplot2/</guid>
-      <description>
-
-
-&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Objective&lt;/h2&gt;
-&lt;p&gt;There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always “Figure 1”. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area. Being a happy convert to the &lt;a href=&#34;https://cran.r-project.org/web/packages/tidyverse/&#34;&gt;tidyverse&lt;/a&gt; I only teach the graphics of &lt;a href=&#34;https://cran.r-project.org/web/packages/ggplot2/&#34;&gt;ggplot2&lt;/a&gt;. I have found that people often prefer to use the &lt;a href=&#34;https://cran.r-project.org/web/packages/ggmap/&#34;&gt;ggmap&lt;/a&gt; extension to create ggplot quality figures with Google map backgrounds, but I personally think that a more traditional monotone background for maps looks more professional. What I’ve decided to showcase this week is the data and code required to create a publication quality map. Indeed, the following code will create the aforementioned obligatory “Figure 1” in a paper I am currently preparing for submission.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;data&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Data&lt;/h2&gt;
-&lt;p&gt;There are heaps of packages etc. that one may use to create maps. And there is a never ending source of blogs, books and tutorials that illustrate many of the different ways to visualise spatial data. For my international and geographic borders I prefer to use data I’ve downloaded from &lt;a href=&#34;https://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html&#34;&gt;GSHHSG&lt;/a&gt; and then converted to dataframes using functions found in the &lt;a href=&#34;https://cran.r-project.org/web/packages/PBSmapping/&#34;&gt;PBSmapping&lt;/a&gt; package. I then save these converted dataframes as .Rdata objects on my computer for ease of use with all of my projects. For the domestic borders of a country, which I won’t use in this post, one may go &lt;a href=&#34;http://gadm.org/&#34;&gt;here&lt;/a&gt;. Note however that for some strange reason this website still has the pre-1994 borders for South Africa. For the correct SA borders one must go &lt;a href=&#34;http://www.demarcation.org.za/index.php/downloads/boundary-data/boundary-data-main-files/province&#34;&gt;here&lt;/a&gt;. The current SA borders may actually be download in the .Rdata format, which is neat.&lt;/p&gt;
-&lt;p&gt;Once one has the borders to be used in the map, the next step is to think about what one actually wants to show. The main purpose of this map is to show where several in situ coastal seawater temperature time series were collected. This could be done quite simply but a plain black and white map is offensively boring so we want to make sure there is a good amount of (but not too much!) colour in order to entice the reader. I personally find pictures of meso-scale oceanic phenomena particularly beautiful so try to include them whenever I can. Luckily that is also what I study so it is not strange that I include such things in my work. Now if only I studied panda’s, too…&lt;/p&gt;
-&lt;p&gt;Panda’s aside, the current work I am engaged in also requires that the atmospheric processes around southern Africa be considered in addition to the oceanography. To visualise both air and sea concurrently would be a mess so we will want to create separate panels for each. Because I have been working with reanalysis data lately, and not satellite data, I am also able to include the wind/ current vectors in order to really help the temperature patterns pop. The oceanic data are from the &lt;a href=&#34;wp.csiro.au/bluelink&#34;&gt;BRAN2016&lt;/a&gt; product and the atmospheric data are from &lt;a href=&#34;http://www.ecmwf.int/en/research/climate-reanalysis/era-interim&#34;&gt;ERA-Interim&lt;/a&gt;. Both of which are available for download for free for scientific pursuits. I’ve chosen here to use the mean values for January 1st as the summer months provide the most clear example of the thermal differences between the Agulhas and Benguela currents. The code used to create the scale bar in the maps may be found &lt;a href=&#34;http://editerna.free.fr/wp/?p=76&#34;&gt;here&lt;/a&gt;. It’s not a proper ggplot geom function but works well enough. I’ve also decided to add the 200 m isobath to the sea panel. These data come from NOAA.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Libraries
-library(tidyverse)
-library(viridis)
-library(gridExtra)
-
-## Data
-# South Africa map data
-load(&amp;quot;../../static/data/southern_africa_coast.Rdata&amp;quot;) # Lowres
-names(southern_africa_coast)[1] &amp;lt;- &amp;quot;lon&amp;quot;
-load(&amp;quot;../../static/data/sa_shore.Rdata&amp;quot;) # Hires
-names(sa_shore)[4:5] &amp;lt;- c(&amp;quot;lon&amp;quot;,&amp;quot;lat&amp;quot;)
-
-# International borders
-load(&amp;quot;../../static/data/africa_borders.Rdata&amp;quot;)
-
-# Reanalysis data
-load(&amp;quot;../../static/data/all_jan1_0.5.Rdata&amp;quot;)
-names(all_jan1_0.5)[1:2] &amp;lt;- c(&amp;quot;lon&amp;quot;,&amp;quot;lat&amp;quot;)
-
-# In situ time series locations
-site_list &amp;lt;- read_csv(&amp;quot;../../static/data/mg_site_list.csv&amp;quot;)
-site_list$order &amp;lt;- 1:nrow(site_list)
-
-# Bathymetry data
-load(&amp;quot;../../static/data/sa_bathy.Rdata&amp;quot;)
-
-## Scale bar function
-source(&amp;quot;../../static/func/scale.bar.func.R&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;mapping&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Mapping&lt;/h2&gt;
-&lt;p&gt;I find that it is easier to keep track of the different aspects of a map when they are stored as different dataframes. One should however avoid having too many loose dataframes running about in the global environment. It is a balancing act and requires one to find a happy middle ground. Here I am going to cut the &lt;code&gt;all_jan1_0.5&lt;/code&gt; dataframe into 4. One each for air and sea temperatures and vectors. I am also going to reduce the resolution of the wind so that the vectors will plot more nicely.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Devide the reanalysis data
-sea_temp &amp;lt;- filter(all_jan1_0.5, variable == &amp;quot;BRAN/temp&amp;quot;)
-air_temp &amp;lt;- filter(all_jan1_0.5, variable == &amp;quot;ERA/temp&amp;quot;)
-currents &amp;lt;- filter(all_jan1_0.5, variable == &amp;quot;BRAN/u&amp;quot; | variable == &amp;quot;BRAN/v&amp;quot;) %&amp;gt;% 
-  select(-date, -index) %&amp;gt;% 
-  spread(key = variable, value = value) %&amp;gt;% 
-  rename(u = &amp;quot;BRAN/u&amp;quot;, v = &amp;quot;BRAN/v&amp;quot;)
-winds &amp;lt;- filter(all_jan1_0.5, variable == &amp;quot;ERA/u&amp;quot; | variable == &amp;quot;ERA/v&amp;quot;) %&amp;gt;% 
-  select(-date, -index) %&amp;gt;% 
-  spread(key = variable, value = value) %&amp;gt;% 
-  rename(u = &amp;quot;ERA/u&amp;quot;, v = &amp;quot;ERA/v&amp;quot;)
-
-# Reduce wind/ current vectors
-lon_sub &amp;lt;- seq(10, 40, by = 1)
-lat_sub &amp;lt;- seq(-40, -15, by = 1)
-# currents &amp;lt;- currents[(currents$lon %in% lon_sub &amp;amp; currents$lat %in% lat_sub),]
-winds &amp;lt;- winds[(winds$lon %in% lon_sub &amp;amp; winds$lat %in% lat_sub),]&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With just a few alterations to our nicely divided up dataframes we are ready to create a map. We will look at the code required to create each map and then put it all together in the end.&lt;/p&gt;
-&lt;p&gt;First up is the most busy. The following code chunk will create the top panel of our map, the sea state. It is necessary to label all of the locations mentioned in the text and so they are thrown on here. In order to make the site label easier to read I’ve made them red. This is particularly jarring but I think I like it.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Establish the vector scalar for the currents
-current_uv_scalar &amp;lt;- 2
-
-# The top figure (sea)
-mg_top &amp;lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) +
-  # The ocean temperature
-    geom_raster(data = sea_temp, aes(fill = value)) +
-  # The bathymetry
-    stat_contour(data = sa_bathy[sa_bathy$depth &amp;lt; -200 &amp;amp; sa_bathy$depth &amp;gt; -2000,], 
-                 aes(x = lon, y = lat, z = depth, alpha = ..level..),
-                 colour = &amp;quot;ivory&amp;quot;, size = 0.5, binwidth = 1000, na.rm = TRUE, show.legend = FALSE) +
-  # The current vectors
-    geom_segment(data = currents, aes(xend = lon + u * current_uv_scalar, yend = lat + v * current_uv_scalar),
-                 arrow = arrow(angle = 15, length = unit(0.02, &amp;quot;inches&amp;quot;), type = &amp;quot;closed&amp;quot;), alpha = 0.4) +
-  # The land mass
-    geom_polygon(aes(group = group), fill = &amp;quot;grey70&amp;quot;, colour = &amp;quot;black&amp;quot;, size = 0.5, show.legend = FALSE) +
-    geom_path(data = africa_borders, aes(group = group)) +
-  # The legend for the vector length
-    geom_label(aes(x = 36, y = -37, label = &amp;quot;1.0 m/s\n&amp;quot;), size = 3, label.padding = unit(0.5, &amp;quot;lines&amp;quot;)) +
-    geom_segment(aes(x = 35, y = -37.5, xend = 37, yend = -37.5)) +
-  # The in situ sites
-    geom_point(data = site_list, shape = 1,  size = 2.8, colour = &amp;quot;ivory&amp;quot;) +
-    geom_text(data = site_list, aes(label = order), size = 1.9, colour = &amp;quot;red&amp;quot;) +
-  # Oceans
-    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;INDIAN\nOCEAN&amp;quot;, x = 37.00, y = -34.0, size = 4.0, angle = 0, colour = &amp;quot;ivory&amp;quot;) +
-    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;ATLANTIC\nOCEAN&amp;quot;, x = 13.10, y = -34.0, size = 4.0, angle = 0, colour = &amp;quot;ivory&amp;quot;) +
-  # Benguela
-    geom_segment(aes(x = 17.2, y = -32.6, xend = 15.2, yend = -29.5),
-                arrow = arrow(length = unit(0.3, &amp;quot;cm&amp;quot;)), size = 0.5, colour = &amp;quot;ivory&amp;quot;) +
-    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;Benguela&amp;quot;, x = 16.0, y = -31.8, size = 3.5, angle = 298, colour = &amp;quot;ivory&amp;quot;) +
-  # Agulhas
-    geom_segment(aes(x = 33, y = -29.5, xend = 29.8, yend = -33.0),
-                arrow = arrow(length = unit(0.3, &amp;quot;cm&amp;quot;)), size = 0.5, colour = &amp;quot;ivory&amp;quot;) +
-    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;Agulhas&amp;quot;, x = 31.7, y = -31.7, size = 3.5, angle = 53, colour = &amp;quot;ivory&amp;quot;) +
-  # Agulhas Bank
-    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;Agulhas\nBank&amp;quot;, x = 22.5, y = -35.5, size = 3.0, angle = 0, colour = &amp;quot;ivory&amp;quot;) +
-  # Cape Peninsula
-    annotate(&amp;quot;text&amp;quot;, label = &amp;quot;Cape\nPeninsula&amp;quot;, x = 17.2, y = -35, size = 3.0, angle = 0, colour = &amp;quot;ivory&amp;quot;) +
-  # Improve on the x and y axis labels
-    scale_x_continuous(breaks = seq(15, 35, 5),
-                       labels = scales::unit_format(prefix = &amp;quot;°E&amp;quot;, sep = &amp;quot;&amp;quot;),
-                       position = &amp;quot;top&amp;quot;) +
-    scale_y_continuous(breaks = seq(-35, -30, 5),
-                       labels = c(&amp;quot;35°S&amp;quot;, &amp;quot;30°S&amp;quot;)) +
-    labs(x = NULL, y = NULL) +
-  # Slightly shrink the plotting area
-    coord_cartesian(xlim = c(10.5, 39.5), ylim = c(-39.5, -25.5), expand = F) +
-  # Use viridis colour scheme
-    scale_fill_viridis(name = &amp;quot;Temp.\n(°C)&amp;quot;, option = &amp;quot;D&amp;quot;) +
-  # Adjust the theme
-    theme_bw() +
-    theme(panel.border = element_rect(fill = NA, colour = &amp;quot;black&amp;quot;, size = 1),
-          axis.text = element_text(colour = &amp;quot;black&amp;quot;),
-          axis.ticks = element_line(colour = &amp;quot;black&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Many of the sites that need to be plotted are laying on top of each other. This is never good, but is made worse when the sites in question are refereed to frequently in the text. For this reason we need to create a little panel inside of the larger figure that shows a zoomed in picture of False Bay. Complete with text labels.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# False Bay inset
-fb &amp;lt;- ggplot(data = sa_shore, aes(x = lon, y = lat)) +
-  # The land mass
-    geom_polygon(aes(group = PID),
-                fill = &amp;quot;grey70&amp;quot;, colour = NA, size = 0.5, show.legend = FALSE) +
-  # The in situ sites
-    geom_point(data = site_list, shape = 1,  size = 3, colour = &amp;quot;black&amp;quot;) +
-    geom_text(data = site_list, aes(label = order), size = 2.3, colour = &amp;quot;red&amp;quot;) +
-  # Text label
-    geom_text(aes(x = 18.65, y = -34.25, label = &amp;quot;False\nBay&amp;quot;), size = 2.7) +
-  # Control the x and y axes
-    coord_cartesian(xlim = c(18.2, 19), ylim = c(-34.5, -33.8), expand = F) +
-    scale_x_continuous(breaks = c(18.5), label = &amp;quot;18.5°E&amp;quot;) +
-    scale_y_continuous(breaks = c(-34.1), label = &amp;quot;34.1°S&amp;quot;) +
-    labs(x = NULL, y = NULL) +
-  # Change the theme for cleaner over-plotting
-    theme_bw() +
-    theme(plot.background = element_blank(),
-          axis.text = element_text(colour = &amp;quot;ivory&amp;quot;),
-          axis.text.y = element_text(angle = 90, hjust = 0.5),
-          axis.ticks = element_line(colour = &amp;quot;ivory&amp;quot;),
-          panel.border = element_rect(colour = &amp;quot;ivory&amp;quot;),
-          panel.grid = element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We could possibly create another inset panel for the clomp of sites around Hamburg but this figure is already getting too busy. So we’ll leave it for now. One inset panel will serve to illustrate the code necessary to create a faceted map so for the purposes of this post it will also suffice. That leaves us with only the bottom panel to create. The air state. I’ve decided to put the scale bar/ North arrow on this panel in an attempt to balance the amount of information in each panel.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Establish the vector scalar for the wind
-wind_uv_scalar &amp;lt;- 0.5
-
-# The bottom figure (air)
-mg_bottom &amp;lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) +
-  # The ocean temperature
-    geom_raster(data = air_temp, aes(fill = value)) +
-  # The land mass
-    geom_polygon(aes(group = group), fill = NA, colour = &amp;quot;black&amp;quot;, size = 0.5, show.legend = FALSE) +
-    geom_path(data = africa_borders, aes(group = group)) +
-  # The current vectors
-    geom_segment(data = winds, aes(xend = lon + u * wind_uv_scalar, yend = lat + v * wind_uv_scalar),
-                 arrow = arrow(angle = 15, length = unit(0.02, &amp;quot;inches&amp;quot;), type = &amp;quot;closed&amp;quot;), alpha = 0.4) +
-  # The legend for the vector length
-    geom_label(aes(x = 36, y = -37, label = &amp;quot;4.0 m/s\n&amp;quot;), size = 3, label.padding = unit(0.5, &amp;quot;lines&amp;quot;)) +
-    geom_segment(aes(x = 35, y = -37.5, xend = 37, yend = -37.5)) +
-  # Improve on the x and y axis labels
-    scale_x_continuous(breaks = seq(15, 35, 5),
-                       labels = scales::unit_format(prefix = &amp;quot;°E&amp;quot;, sep = &amp;quot;&amp;quot;)) +
-    scale_y_continuous(breaks = seq(-35, -30, 5),
-                       labels = c(&amp;quot;35°S&amp;quot;, &amp;quot;30°S&amp;quot;)) +
-    labs(x = NULL, y = NULL) +
-  # Scale bar
-    scaleBar(lon = 13, lat = -38.0, distanceLon = 200, distanceLat = 50, distanceLegend = 90, dist.unit = &amp;quot;km&amp;quot;,
-             arrow.length = 200, arrow.distance = 130, arrow.North.size = 4) +
-  # Slightly shrink the plotting area
-    coord_cartesian(xlim = c(10.5, 39.5), ylim = c(-39.5, -25.5), expand = F) +
-  # Use viridis colour scheme
-    scale_fill_viridis(name = &amp;quot;Temp.\n(°C)&amp;quot;, option = &amp;quot;A&amp;quot;) +
-  # Adjust the theme
-    theme_bw() +
-    theme(panel.border = element_rect(fill = NA, colour = &amp;quot;black&amp;quot;, size = 1),
-          axis.text = element_text(colour = &amp;quot;black&amp;quot;),
-          axis.ticks = element_line(colour = &amp;quot;black&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With our three pieces of the map complete, it is time to stick them together. There are many ways to do this but I have recently found that using &lt;code&gt;annotation_custom&lt;/code&gt; allows one to stick any sort of ggplot like object onto any other sort of ggplot object. This is an exciting development and opens up a lot of doors for some pretty creative stuff. Here I will just use it to demonstrate simple faceting, but combined with panel gridding. Really though the sky is the limit.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Convert the figures to grobs
-mg_top_grob &amp;lt;- ggplotGrob(mg_top)
-fb_grob &amp;lt;- ggplotGrob(fb)
-mg_bottom_grob &amp;lt;- ggplotGrob(mg_bottom)
-
-# Stick them together
-gg &amp;lt;- ggplot() +
-  # First set the x and y axis values so we know what the ranges are
-  # in order to make it easier to place our facets
-    coord_equal(xlim = c(1, 10), ylim = c(1, 10), expand = F) +
-  # Then we place our facetsover one another using the coordinates we created
-    annotation_custom(mg_top_grob,
-                      xmin = 1, xmax = 10, ymin = 5.5, ymax = 10) +
-    annotation_custom(fb_grob,
-                      xmin = 3.5, xmax = 5.5, ymin = 7.2, ymax = 8.8) +
-    annotation_custom(mg_bottom_grob,
-                      xmin = 1, xmax = 10, ymin = 1, ymax = 5.5)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
-&lt;p&gt;The developments in the gridding system have brought the potential for using ggplot for these more complex maps forward quite a bit. As long as one does not use a constrained mapping coordinate system (i.e. &lt;code&gt;coord_fixed&lt;/code&gt;) the grob-ification of the ggplot objects seems to allow the placing of the pieces into a common area to be performed smoothly. Displaying many different bits of information cleanly is always a challenge. This figure is particularly busy, out of necessity. I think it turned out very nicely though.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/post/mapping_with_ggplot2_files/figure-html/mg-final-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;: Map showing the southern tip of the African continent. The top panel shows the typical sea surface temperature and surface currents on January 1st. The bottom panel likewise shows the typical surface air temperatures and winds on any given January 1st.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

@@ -15,10 +15,10 @@
   
     
   
-  <meta name="description" content="Research conducted on how sub-optimal a time series may be and still produce comparable marine heatwaves to an optimal time series.">
+  <meta name="description" content="Objective Nearly four years after writing a blog post about recreating R figures in ODV I had someone reach out to me expressing interest in adding a bathymetry layer over the interpolated data. It’s always nice to know that these blog posts are being found useful for other researchers. And I have to admit I’m a bit surprised that the code still runs 4 years later. Especially considering that it uses the tidyverse which is notorious for breaking backwards compatibility.">
 
   
-  <link rel="alternate" hreflang="en-uk" href="https://theoceancode.netlify.com/poster/mhw_detection_poster/">
+  <link rel="alternate" hreflang="en-uk" href="https://theoceancode.netlify.com/post/odv_bathy/">
 
   
 
@@ -98,7 +98,7 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="https://theoceancode.netlify.com/poster/mhw_detection_poster/">
+  <link rel="canonical" href="https://theoceancode.netlify.com/post/odv_bathy/">
 
   <meta property="twitter:card" content="summary_large_image">
   
@@ -106,21 +106,21 @@
   <meta property="twitter:creator" content="@robwschlegel">
   
   <meta property="og:site_name" content="The Ocean Code">
-  <meta property="og:url" content="https://theoceancode.netlify.com/poster/mhw_detection_poster/">
-  <meta property="og:title" content="Detecting marine heatwaves with sub-optimal data | The Ocean Code">
-  <meta property="og:description" content="Research conducted on how sub-optimal a time series may be and still produce comparable marine heatwaves to an optimal time series.">
+  <meta property="og:url" content="https://theoceancode.netlify.com/post/odv_bathy/">
+  <meta property="og:title" content="ODV figures in R with bathymetry | The Ocean Code">
+  <meta property="og:description" content="Objective Nearly four years after writing a blog post about recreating R figures in ODV I had someone reach out to me expressing interest in adding a bathymetry layer over the interpolated data. It’s always nice to know that these blog posts are being found useful for other researchers. And I have to admit I’m a bit surprised that the code still runs 4 years later. Especially considering that it uses the tidyverse which is notorious for breaking backwards compatibility.">
   <meta property="og:locale" content="en-uk">
   
-  <meta property="article:published_time" content="2019-05-06T00:00:00&#43;02:00">
+  <meta property="article:published_time" content="2021-05-21T00:00:00&#43;00:00">
   
-  <meta property="article:modified_time" content="2019-05-06T00:00:00&#43;02:00">
-  
-
+  <meta property="article:modified_time" content="2021-05-21T00:00:00&#43;00:00">
   
 
   
 
-  <title>Detecting marine heatwaves with sub-optimal data | The Ocean Code</title>
+  
+
+  <title>ODV figures in R with bathymetry | The Ocean Code</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -317,7 +317,7 @@
 
 
   <div class="article-container">
-    <h1 itemprop="name">Detecting marine heatwaves with sub-optimal data</h1>
+    <h1 itemprop="name">ODV figures in R with bathymetry</h1>
 
     
 
@@ -332,9 +332,9 @@
 
   <span class="article-date">
     
-    <meta content="2019-05-06 00:00:00 &#43;0200 CEST" itemprop="datePublished">
-    <time datetime="2019-05-06 00:00:00 &#43;0200 CEST" itemprop="dateModified">
-      2019-05-06
+    <meta content="2021-05-21 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2021-05-21 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      2021-05-21
     </time>
   </span>
   <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
@@ -344,13 +344,24 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    0 min read
+    6 min read
   </span>
   
 
   
   
 
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="https://theoceancode.netlify.com/categories/r/">R</a>
+    
+  </span>
+  
   
 
   
@@ -359,35 +370,35 @@
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Detecting%20marine%20heatwaves%20with%20sub-optimal%20data&amp;url=https%3a%2f%2ftheoceancode.netlify.com%2fposter%2fmhw_detection_poster%2f"
+         href="https://twitter.com/intent/tweet?text=ODV%20figures%20in%20R%20with%20bathymetry&amp;url=https%3a%2f%2ftheoceancode.netlify.com%2fpost%2fodv_bathy%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2ftheoceancode.netlify.com%2fposter%2fmhw_detection_poster%2f"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2ftheoceancode.netlify.com%2fpost%2fodv_bathy%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-facebook"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2ftheoceancode.netlify.com%2fposter%2fmhw_detection_poster%2f&amp;title=Detecting%20marine%20heatwaves%20with%20sub-optimal%20data"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2ftheoceancode.netlify.com%2fpost%2fodv_bathy%2f&amp;title=ODV%20figures%20in%20R%20with%20bathymetry"
          target="_blank" rel="noopener">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2ftheoceancode.netlify.com%2fposter%2fmhw_detection_poster%2f&amp;title=Detecting%20marine%20heatwaves%20with%20sub-optimal%20data"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2ftheoceancode.netlify.com%2fpost%2fodv_bathy%2f&amp;title=ODV%20figures%20in%20R%20with%20bathymetry"
          target="_blank" rel="noopener">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Detecting%20marine%20heatwaves%20with%20sub-optimal%20data&amp;body=https%3a%2f%2ftheoceancode.netlify.com%2fposter%2fmhw_detection_poster%2f">
+         href="mailto:?subject=ODV%20figures%20in%20R%20with%20bathymetry&amp;body=https%3a%2f%2ftheoceancode.netlify.com%2fpost%2fodv_bathy%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -402,6 +413,124 @@
 
     <div class="article-style" itemprop="articleBody">
       
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="objective" class="section level2">
+<h2>Objective</h2>
+<p>Nearly four years after writing a blog post about <a href="https://theoceancode.netlify.app/post/odv_figures/">recreating R figures in ODV</a> I had someone reach out to me expressing interest in adding a bathymetry layer over the interpolated data. It’s always nice to know that these blog posts are being found useful for other researchers. And I have to admit I’m a bit surprised that the code still runs 4 years later. Especially considering that it uses the <strong><code>tidyverse</code></strong> which is notorious for breaking backwards compatibility. In order to demonstrate the overlaying of bathymetry data on a CTD transect we will need to use a different dataset than in the previous blog post. One may use any data one would like, but for this blog I went to this <a href="https://robert-schlegel.shinyapps.io/CTD_project/">shiny app</a> to extract some data from the coast of South Africa. Specifically I filtered for temperature data from November 1990 at all depths. We won’t go back over the theory for recreating the ODV figure in this blog post, so please revisit that for a recap as necessary. Below I will show two of the necessary steps to get interpolated CTD data before we begin on the bathymetry mask.</p>
+<pre class="r"><code># Load libraries
+library(tidyverse)
+library(lubridate)
+library(reshape2)
+library(MBA)
+library(mgcv)
+library(marmap)
+library(FNN)
+
+# The transects in this dataset do not have an ID column
+# So we manually select the first transect (rows 1 - 12)
+# This is then used as a mask to select all depths for these pixels
+# We will also use these unique lon/lat coords for bathymetry points
+ctd_mask &lt;- read_csv(&quot;../../static/data/CTD_transect.csv&quot;) %&gt;% 
+  select(lon, lat) %&gt;% 
+  slice(1:12) %&gt;% 
+  unique()
+
+# Load and screen data
+  # For ease I am only using monthly means
+  # and depth values rounded to 10 metres
+ctd &lt;- read_csv(&quot;../../static/data/CTD_transect.csv&quot;) %&gt;% 
+  mutate(depth = -depth) %&gt;%  # Correct for plotting
+  right_join(ctd_mask, by = c(&quot;lon&quot;, &quot;lat&quot;)) %&gt;% 
+  select(lon, lat, depth, temp)
+
+# Manually extracted hexidecimal ODV colour palette
+ODV_colours &lt;- c(&quot;#feb483&quot;, &quot;#d31f2a&quot;, &quot;#ffc000&quot;, &quot;#27ab19&quot;, &quot;#0db5e6&quot;, &quot;#7139fe&quot;, &quot;#d16cfa&quot;)
+
+# Create quick scatterplot
+ggplot(data = ctd, aes(x = lon, y = depth)) +
+  geom_point(aes(colour = temp)) +
+  scale_colour_gradientn(colours = rev(ODV_colours)) +
+  labs(y = &quot;depth (m)&quot;, x = &quot;longitude (°E)&quot;, colour = &quot;temp. (°C)&quot;)</code></pre>
+<p><img src="/post/odv_bathy_files/figure-html/setup-1.png" width="672" /></p>
+<p><strong>Figure 1</strong>: A non-interpolated scatterplot of our temperature (°C) data shown as a function of depth (m) over longitude (°E).</p>
+<p>It looks like we have a nice little upwelling signal coming through at the coast. It will be interesting to see how the interpolation handles that. We’ll quickly run the interpolation and then get to the bathymetry overlay. Note that these data are not on a straight latitude transect, but we are not going to worry about that in this blog post.</p>
+<pre class="r"><code># Now we may interpolate the data
+# NB: The columns that mba.surf() will interpolate are the X, Y, Z values in that order
+ctd_mba &lt;- mba.surf(ctd[c(&quot;lon&quot;, &quot;depth&quot;, &quot;temp&quot;)], no.X = 300, no.Y = 300, extend = T)
+dimnames(ctd_mba$xyz.est$z) &lt;- list(ctd_mba$xyz.est$x, ctd_mba$xyz.est$y)
+ctd_mba &lt;- melt(ctd_mba$xyz.est$z, varnames = c(&#39;lon&#39;, &#39;depth&#39;), value.name = &#39;temp&#39;) %&gt;% 
+  filter(depth &lt; 0) %&gt;% 
+  mutate(temp = round(temp, 1))
+
+# Finally we create our gridded result
+ggplot(data = ctd_mba, aes(x = lon, y = depth)) +
+  geom_raster(aes(fill = temp)) +
+  geom_contour(aes(z = temp), binwidth = 2, colour = &quot;black&quot;, alpha = 0.2) +
+  geom_contour(aes(z = temp), breaks = 20, colour = &quot;black&quot;) +
+  scale_fill_gradientn(colours = rev(ODV_colours)) +
+  labs(y = &quot;depth (m)&quot;, x = &quot;longitude (°E)&quot;, fill = &quot;temp. (°C)&quot;) +
+  coord_cartesian(expand = F)</code></pre>
+<p><img src="/post/odv_bathy_files/figure-html/interp-1.png" width="672" /></p>
+<p><strong>Figure 2</strong>: The same temperature (°C) profiles seen in Figure 1 with the missing values filled in with multilevel B-splines.</p>
+</div>
+<div id="bathymetry" class="section level2">
+<h2>Bathymetry</h2>
+<p>The interpolation seems to have done a decent job of acknowledging the upwelling signal. It may be possible to tweak the interpolation more, as desired, but I’m happy enough with it for the purposes of this post. We are going to skip over the step to cut out the artefacts at the bottom of the figure where there are not data points because we are rather going to just overlay our bathymetry mask. First we will download the bathymetry data. Then we find the points that are closest to our CTD transect. These will then be used for the grey overlay at the bottom of the figure.</p>
+<pre class="r"><code># Bathymetry within transect bounding box
+bathy &lt;- getNOAA.bathy(lon1 = min(ctd$lon), lon2 = max(ctd$lon), 
+                       lat1 = min(ctd$lat), lat2 = max(ctd$lat), 
+                       resolution = 5) # Larger numbers for coarser data
+
+# Convert bathy object to a data.frame for easier use
+bathy_df &lt;- data.frame(lon_b = as.numeric(rownames(bathy)),
+                       lat_b = as.numeric(colnames(bathy)),
+                       depth = as.numeric(bathy)) %&gt;% 
+  mutate(bathy_idx = 1:n()) # Used for merging CTD and bathy data
+
+# Find nearest points to transect data
+ctd_mask &lt;- ctd_mask %&gt;% 
+  mutate(bathy_idx = as.vector(knnx.index(as.matrix(bathy_df[,c(&quot;lon_b&quot;, &quot;lat_b&quot;)]),
+                                           as.matrix(ctd_mask[,c(&quot;lon&quot;, &quot;lat&quot;)]), k = 1))) %&gt;% 
+  left_join(bathy_df, by = &quot;bathy_idx&quot;)
+
+# Manually create bottom of the bathy mask polygon
+bathy_mask &lt;- data.frame(lon = c(ctd_mask$lon, rev(ctd_mask$lon)),
+                         depth = c(ctd_mask$depth, rep(min(ctd_mask$depth), nrow(ctd_mask))))
+
+# We may now use that bathy mask for our final figure
+ggplot(data = ctd_mba, aes(x = lon, y = depth)) +
+  geom_raster(aes(fill = temp)) +
+  geom_contour(aes(z = temp), binwidth = 2, colour = &quot;black&quot;, alpha = 0.2) +
+  geom_contour(aes(z = temp), breaks = 20, colour = &quot;black&quot;) +
+  geom_polygon(data = bathy_mask, fill = &quot;grey80&quot;, colour = &quot;black&quot;) +
+  scale_fill_gradientn(colours = rev(ODV_colours)) +
+  labs(y = &quot;depth (m)&quot;, x = &quot;longitude (°E)&quot;, fill = &quot;temp. (°C)&quot;) +
+  coord_cartesian(expand = F)</code></pre>
+<p><img src="/post/odv_bathy_files/figure-html/bathy-1.png" width="672" /></p>
+<p><strong>Figure 3</strong>: The same temperature (°C) profiles seen in Figure 2 with the bathymetry values overlaid.</p>
+<p>Unfortunately in this example there is a bit of blank space in the bottom left of the plot because the CTD casts do not go deeper than 200 m, and the interpolation doesn’t fill in values outside of the rectangular box dictated by the X (lon) and Y (depth) values. A cheeky workaround for this issue would be to simply crop the figure to the bottom of the interpolated data, and not the bathymetry.</p>
+<pre class="r"><code># We may now use that bathy mask for our final figure
+ggplot(data = ctd_mba, aes(x = lon, y = depth)) +
+  geom_raster(aes(fill = temp)) +
+  geom_contour(aes(z = temp), binwidth = 2, colour = &quot;black&quot;, alpha = 0.2) +
+  geom_contour(aes(z = temp), breaks = 20, colour = &quot;black&quot;) +
+  geom_polygon(data = bathy_mask, fill = &quot;grey80&quot;, colour = &quot;black&quot;) +
+  geom_point(data = ctd, aes(x = lon, y = depth),
+             colour = &#39;black&#39;, size = 0.2, alpha = 0.4, shape = 8) +
+  scale_fill_gradientn(colours = rev(ODV_colours)) +
+  labs(y = &quot;depth (m)&quot;, x = &quot;longitude (°E)&quot;, fill = &quot;temp. (°C)&quot;) +
+  coord_cartesian(expand = F, ylim = c(-200, 0)) +
+  theme(panel.border = element_rect(fill = NA, colour = &quot;black&quot;))</code></pre>
+<p><img src="/post/odv_bathy_files/figure-html/bathy-crop-1.png" width="672" />
+<strong>Figure 4</strong>: The plotting area cropped to the interpolated data, rather than the bathymetry mask. Also shown with black dots are the original CTD data.</p>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>In this tutorial we have seen how to plot a bathymetry overlay that matches the lon/lat coordinates of the CTD casts. I’m sure there is a way to force the interpolation to fill in values at a greater depth to match the bathymetry, but the focus of this blog was on adding the bathymetry mask itself, and I think we have addressed this issue. The workflow outlined above has a couple of bumps in it, but should be adaptable to a range of applications.</p>
+</div>
+
     </div>
 
     
@@ -409,9 +538,11 @@
 
 <div class="article-tags">
   
-  <a class="label label-default" href="">marine heatwaves</a>
+  <a class="label label-default" href="https://theoceancode.netlify.com/tags/odv/">ODV</a>
   
-  <a class="label label-default" href="https://theoceancode.netlify.com/tags/r/">R</a>
+  <a class="label label-default" href="https://theoceancode.netlify.com/tags/visuals/">visuals</a>
+  
+  <a class="label label-default" href="https://theoceancode.netlify.com/tags/interpolation/">interpolation</a>
   
 </div>
 
@@ -425,15 +556,13 @@
       <h3>Related</h3>
       <ul>
         
-        <li><a href="/publication/heatwaver/">heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</a></li>
+        <li><a href="/post/odv_figures/">ODV figures in R</a></li>
         
-        <li><a href="/project/mhwtracker/">Marine heatwave tracker</a></li>
+        <li><a href="/post/polar_plot_clims/">Polar plot climatologies</a></li>
         
-        <li><a href="/publication/predominant/">Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</a></li>
+        <li><a href="/post/mapping_with_ggplot2/">Mapping with ggplot2</a></li>
         
-        <li><a href="/publication/cooccurrence/">Nearshore and offshore co-occurrence of marine heatwaves and cold-spells</a></li>
-        
-        <li><a href="/publication/trend-analysis/">Climate Change in Coastal Waters: Time Series Properties Affecting Trend Estimation</a></li>
+        <li><a href="/post/wind_vectors/">Wind Vector Time Series</a></li>
         
       </ul>
     </div>

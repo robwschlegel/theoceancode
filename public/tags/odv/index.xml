@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Mon, 26 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.com/tags/odv/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ODV figures in R with bathymetry</title>
+      <link>https://theoceancode.netlify.com/post/odv_bathy/</link>
+      <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/post/odv_bathy/</guid>
+      <description>Objective Nearly four years after writing a blog post about recreating R figures in ODV I had someone reach out to me expressing interest in adding a bathymetry layer over the interpolated data. It’s always nice to know that these blog posts are being found useful for other researchers. And I have to admit I’m a bit surprised that the code still runs 4 years later. Especially considering that it uses the tidyverse which is notorious for breaking backwards compatibility.</description>
+    </item>
     
     <item>
       <title>ODV figures in R</title>

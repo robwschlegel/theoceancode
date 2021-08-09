@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Fri, 14 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ODV</title>
+      <link>https://theoceancode.netlify.com/tags/odv/</link>
+      <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/tags/odv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>interpolation</title>
+      <link>https://theoceancode.netlify.com/tags/interpolation/</link>
+      <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/tags/interpolation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>visuals</title>
+      <link>https://theoceancode.netlify.com/tags/visuals/</link>
+      <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/tags/visuals/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>data</title>
@@ -42,7 +69,7 @@
     <item>
       <title>R</title>
       <link>https://theoceancode.netlify.com/tags/r/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.com/tags/r/</guid>
       <description></description>
@@ -51,7 +78,7 @@
     <item>
       <title>marine heatwaves</title>
       <link>https://theoceancode.netlify.com/tags/marine-heatwaves/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.com/tags/marine-heatwaves/</guid>
       <description></description>
@@ -60,7 +87,7 @@
     <item>
       <title>coastal</title>
       <link>https://theoceancode.netlify.com/tags/coastal/</link>
-      <pubDate>Sat, 14 Dec 2019 00:00:00 -0400</pubDate>
+      <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.com/tags/coastal/</guid>
       <description></description>
@@ -87,7 +114,7 @@
     <item>
       <title>atmosphere</title>
       <link>https://theoceancode.netlify.com/tags/atmosphere/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.com/tags/atmosphere/</guid>
       <description></description>
@@ -96,7 +123,7 @@
     <item>
       <title>ocean</title>
       <link>https://theoceancode.netlify.com/tags/ocean/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 -0300</pubDate>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.com/tags/ocean/</guid>
       <description></description>
@@ -108,15 +135,6 @@
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/tags/climatology/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>visuals</title>
-      <link>https://theoceancode.netlify.com/tags/visuals/</link>
-      <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/tags/visuals/</guid>
       <description></description>
     </item>
     
@@ -153,24 +171,6 @@
       <pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/tags/politics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ODV</title>
-      <link>https://theoceancode.netlify.com/tags/odv/</link>
-      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/tags/odv/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>interpolation</title>
-      <link>https://theoceancode.netlify.com/tags/interpolation/</link>
-      <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/tags/interpolation/</guid>
       <description></description>
     </item>
     
@@ -222,7 +222,7 @@
     <item>
       <title>time series analysis</title>
       <link>https://theoceancode.netlify.com/tags/time-series-analysis/</link>
-      <pubDate>Thu, 15 Dec 2016 00:00:00 -0400</pubDate>
+      <pubDate>Thu, 15 Dec 2016 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.com/tags/time-series-analysis/</guid>
       <description></description>
