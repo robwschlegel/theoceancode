@@ -1,0 +1,992 @@
+---
+title: 'The Road to Marine Heatwaves'
+author: 'Robert W Schlegel'
+date: 2022-07-01
+categories: ["R"]
+tags: ["MHW", "Arctic"]
+---
+
+***
+
+<br>
+
+<center>
+![](/img/value.jpeg){ width=70% }  
+</center>
+
+<br>
+
+***
+
+<br>
+
+# Myself
+
+## Bachelor's in psychology
+
+- "Effect of abnormally small troop size on aggressive and prosocial behavior in patas monkeys, _Erythrocebus patas_"
+<center>
+![](/img/Patas_Monkey_Jr.jpeg){ width=100% }
+(Wikipedia)
+</center>
+
+<br>
+
+## Diving Instructor
+
+- Worked throughout Asia and Africa
+
+<center>
+![](graph/santa.jpg){ width=60% }
+</center>
+
+<br>
+
+## Master's degree
+
+- "The effects of the Cold Ridge variability on small pelagic transition and retention from the West coast to the South coast of South Africa"
+
+<center>
+![Henry Jager](graph/pilchardschool1.png){ width=100% }
+</center>
+
+<br>
+
+## PhD
+
+- "Coastal marine heatwaves: Understanding extreme forces"
+
+<center>
+![](graph/longest_maxima.jpg){ width=100% }
+</center>
+
+<br>
+
+## Postdoc
+
+- "Drivers of Marine Heatwaves in the Northwest Atlantic: the role of air-sea interaction during onset and decline"
+
+<center>
+![](graph/canada_tube.jpg){ width=100% }
+</center>
+
+<br>
+
+***
+
+<br>
+
+# Marine heatwaves (MHWs)
+
+## What are they?
+
+* "A prolonged discrete anomalously warm water event that can be described by its duration, intensity, rate of evolution, and spatial extent." [@Hobday2016]
+* Temperature at a location exceeds the 90th percentile for a given calendar day, for 5+ days, with no more than a 2 day gap 
+
+<br>
+
+## Why should we care?
+
+* MHWs are increasing in duration and intensity globally [@Oliver2018]
+* We already know of many MHWs that have had dire consequences
+* These events provide snapshots of the future ocean
+
+<center>
+![](graph/oliver_2019_fig4.jpg){ width=100% }
+[@Oliver2019]
+</center>
+
+<br>
+
+<!-- ## Infamous MHWs {.tabset .tabset-fade .tabset-pills}  -->
+
+<!-- ### Med - '03 {-} -->
+
+<!-- * Cause - Atmospheric forcing   -->
+<!-- * Effect - Gorgonian mortality up to 80% [@Garrabou2009] -->
+
+<!-- <center> -->
+<!-- ![](graph/gorgonian_fan.jpg){ width=70% } -->
+<!-- </center> -->
+
+<!-- <br> -->
+
+<!-- *** -->
+
+<!-- ### WA - '11 {-} -->
+
+<!-- * Cause - La Nina + Abnormal Leeuwin Current movement onto coast  [@Feng2013; @Benthuysen2014] -->
+<!-- * Effect - Permanent loss of 100+ km of kelp forest [@Wernberg2016]   -->
+
+<!-- <center> -->
+<!-- ![Thomas Wernberg](graph/WA_kelp_change.jpg){ width=100% }   -->
+<!-- (_Thomas Wernberg_) -->
+<!-- </center>   -->
+
+<!-- <br> -->
+
+<!-- *** -->
+
+<!-- ### NWA - '12 {-} -->
+
+<!-- * Cause - Atmos. forcing due to anomalous jet stream [@Chen2015a] -->
+<!-- * Cause - Labrador Current vs. Gulf Stream [@Brickman2018] -->
+<!-- * Effect - Range shifts, early lobsters, CAN vs. USA [@Mills2013] -->
+
+<!-- <center> -->
+<!-- ![](graph/lobster.jpeg){ width=70% }   -->
+<!-- </center> -->
+
+<!-- <br> -->
+
+<!-- *** -->
+
+<!-- ### "The Blob" - '14/16 {-} -->
+
+<!-- * Cause - Warm winter, poor mixing, high SLP, air-sea flux, then an El Nino [@Bond2015a] -->
+<!-- * Effect - Practically every trophic level negatively impacted to some degree -->
+
+<!-- <center> -->
+<!-- ![EPA](graph/dead_sea_lions.jpg){ width=70% }   -->
+<!-- (_EPA_) -->
+<!-- </center>   -->
+
+<!-- <br> -->
+
+***
+
+<br>
+
+# Detecting MHWs {.tabset .tabset-fade .tabset-pills} 
+
+## Time series {-}
+
+<center>
+![](graph/WA_ts_base_1.png){ width=100% }
+</center>  
+  
+<!-- * First we start with a normal temperature time series -->
+<!-- * Temperature (°C) on the y-axis, date on the x-axis -->
+
+<br>
+
+***
+
+## Day-of-year {-}
+
+<center>
+![](graph/WA_ts_clim_1.png){ width=100% }
+</center>
+  
+<!-- * Clump all of the same day-of-year (doy) together -->
+<!-- * The range of values for each doy are shown here as boxplots -->
+
+<br>
+
+***
+
+## 11-day {-}
+
+<center>
+![](graph/WA_ts_clim_2.png){ width=100% }
+</center>
+
+<!-- * Calculate climatologies based on an 11-day moving average -->
+<!-- * _Seasonal signal_ (light blue) & 90th percentile _threshold_ (dark blue) -->
+
+<br>
+
+***
+
+## 31-day {-}
+
+<center>
+![](graph/WA_ts_clim_3.png){ width=100% }
+</center>
+
+<!-- * A final smoothing with a 31-day moving average -->
+<!-- * Preferable to harmonic regression -->
+
+<br>
+
+***
+
+## TS+clim {-}
+<center>
+![](graph/WA_ts_base_2.png){ width=100% }
+</center>
+
+<!-- * _Seasonal signal_ & _threshold_ applied to base time series -->
+
+<br>
+
+***
+
+## Events {-}
+<center>
+![](graph/WA_ts_base_3.png){ width=100% }
+</center>
+  
+<!-- * Any temperatures above the _threshold_ for 5+ days marked as a marine heatwaves -->
+
+<br>
+
+***
+
+<br>
+
+# Quantifying MHWs {.tabset .tabset-fade .tabset-pills}
+
+## Single {-}
+<center>
+![](graph/WA_flame_1.png){ width=100% }
+</center>
+
+<!-- * First we isolate the individual events -->
+
+<br>
+
+<!-- *** -->
+
+<!-- ## Many {-} -->
+
+<!-- <center> -->
+<!-- ![](graph/WA_lolli_base_1.png){ width=100% } -->
+<!-- </center> -->
+
+<!-- * These metrics are calculated for each MHW in the time series -->
+<!-- * The max intensity of each event shown with a lolliplot -->
+
+<!-- <br> -->
+
+***
+
+## Anatomy {-}
+<center>
+![](graph/WA_flame_2.png){ width=100% }
+</center>
+
+<!-- * Then we create a range of metrics from it -->
+<!-- * Here we see the three most commonly used -->
+
+<br>
+
+***
+
+## Categories {-}
+<center>
+![](graph/WA_flame_3.png){ width=100% }
+</center>
+
+<!-- * There is also the more qualitative category system [@Hobday2018] -->
+<!-- * A compromise between using the 90th or 99th percentile -->
+
+<br>
+
+<!-- *** -->
+
+<!-- ## Cat. % {-} -->
+<!-- <center> -->
+<!-- ![](graph/WA_flame_4.png){ width=100% } -->
+<!-- </center> -->
+
+<!-- * There are metrics for categories, too -->
+<!-- * Here we see the percentage (days) at each category -->
+
+<!-- <br> -->
+
+***
+
+<br>
+
+## Summary {.tabset -}
+
+### Global {-}
+
+![](graph/OISST_cat_historic_1982-2011.png){ width=100% }
+
+<br>
+<br>
+<br>
+
+***
+
+<br>
+
+### Med {-}
+
+![](graph/MHW_cat_historic.png){ width=100% }
+
+<br>
+<br>
+<br>
+
+***
+
+<br>
+
+## 1985 {.tabset -}
+
+### Global {-}
+
+![](graph/OISST_cat_summary_1982-2011_1985.png){ width=100% }
+
+<br>
+
+***
+
+<br>
+
+### Med {-}
+
+![](graph/MHW_cat_summary_1985.png){ width=100% }
+
+
+<br>
+
+***
+
+## 2016 {.tabset -}
+
+### Global {-}
+
+![](graph/OISST_cat_summary_1982-2011_2016.png){ width=100% }
+
+<br>
+
+***
+
+<br>
+
+### Med {-}
+
+![](graph/MHW_cat_summary_2016.png){ width=100% }
+
+
+<br>
+
+***
+
+## Projections {-}
+<center>
+![](graph/oliver_2019_fig3.jpg){ width=100% }
+[@Oliver2019]
+</center>
+  
+<br>
+<br>
+<br>
+
+***
+
+<!-- ## So far {-} -->
+<!-- <center> -->
+<!-- ![](graph/worst_day_so_far.jpeg){ width=80% } -->
+<!-- </center> -->
+
+<!-- <br> -->
+
+<!-- *** -->
+
+<br>
+
+# Resources for MHWs
+
+<br>
+
+- International Working Group
+
+<center>
+![](graph/working_group_screen_shot.png){ width=90% }  
+marineheatwaves.org
+</center>
+
+<br>
+
+- TMedNet
+
+<center>
+![](graph/TMedNet_screenshot.png){ width=70% }  
+t-mednet.org
+</center>
+
+<br>
+
+* Programming languages
+  * Python: <https://github.com/ecjoliver/marineHeatWaves>
+  * R: <https://robwschlegel.github.io/heatwaveR/index.html>
+  * MATLAB: <https://github.com/ZijieZhaoMMHW/m_mhw1.0>
+
+<br>
+
+* Database
+  * Marine Heatwave Tracker: (http://www.marineheatwaves.org/tracker)
+  * Download MHW results: climatologies, event metrics, and categories
+
+<center>
+![](graph/NZ_Nov_2020.png){ width=100% }  
+![](graph/NZ_ts_Nov_2020.png){ width=100% }  
+</center>
+
+<br>
+
+***
+
+<br>
+
+# Primary drivers of MHWs
+
+## Known drivers of past MHWs
+
+* Advection and heat flux are primary drivers
+* Different regions of the world show different primary drivers
+* Large seas (i.e. the Mediterranean) -> warm air (heat flux)
+* Coastal oceans (i.e. NW Atlantic) -> abnormal currents (advection)
+
+## Methods
+- Data: NOAA OISST, GLORYS, ERA5
+- NW Atlantic in 6 regions from @Richaud2016
+- One average time series per variable per region
+- Time period: 1993 - 2018
+- Total MHW count: 291
+- Variables related to MHW onset and decline
+- SOM for the common synoptic air/sea states
+
+<center>
+![](graph/fig_1.png){ width=100% }
+</center> 
+
+<br>
+
+## Heat flux
+
+- The *onset* of 49% of MHWs due to heat flux
+- The *decline* of 17% of MHWs due to heat flux
+- https://robert-schlegel.shinyapps.io/MHWflux/
+
+<br>
+
+<center>
+![](graph/fig_2.png){ width=100% }
+</center> 
+
+<br>
+<br>
+<br>
+
+<!-- ## Other variables -->
+
+<!-- <center> -->
+<!-- ![](graph/fig_4.png){ width=80% } -->
+<!-- </center>  -->
+
+<!-- <br> -->
+
+## Machine learning {.tabset .tabset-fade .tabset-pills} 
+
+### Definition {-}
+
+<center>
+![](graph/machine_learning_aliens.png){ width=50% }
+</center>    
+
+<br>
+
+<font size="5">"A field of study concerned with the design and development of algorithms and techniques that allow computers to learn." </font>    
+(_Wiktionary_)
+
+<br>
+
+***
+
+### Stress {-}
+
+* The computer "learns" by reducing stress
+* Stress is generally the unexplained variance in a model
+
+</center>
+![](graph/cat_herd.gif){ width=90% }
+</center> 
+
+<br>
+<br>
+
+***
+
+### Clustering {-}
+
+* After ordinating the data (e.g. PCA / EOF) the computer tries to find the most similar clusters for them
+  
+<center> 
+![](graph/K-mean kats.png){ width=80% }  
+(_Angé Ackerman_)
+</center> 
+
+<br>
+
+***
+
+### Self-organising maps {-}
+
+* With self-organising maps the computer then arranges the clusters
+  
+<center> 
+![](graph/Self-organising cats2.png){ width=80% }  
+(_Angé Ackerman_)
+</center> 
+
+<br>
+
+***
+
+### Results {-}
+  
+<center> 
+![](graph/fig_7.png){ width=80% }  
+</center> 
+
+<br>
+
+***
+
+<br>
+
+# Kelp in the Eastern Canadian Arctic {.tabset .tabset-fade .tabset-pills}
+
+## Methods {-}
+
+- Species distribution modelling study of Arctic Kelps
+- Kelp presence from multiple sources
+- Kelp percent cover from ArcticKelp Canada
+- Bio-Oracle v2.1 environmental data
+- Present, 2050, 2100 using RCP8.5 projections
+- Ensemble model: presence/absence 
+- Random forest model: percent cover
+
+<br>
+<br>
+<br>
+
+***
+
+<br>
+
+## Study area {-}
+
+<center> 
+![](graph/fig_1a.png){ width=100% }  
+</center> 
+
+<br>
+
+***
+
+<br>
+
+## Species {.tabset -}
+
+### _Agarum_ {-}
+
+<br>
+
+- _Agarum clathratum_
+
+<center> 
+![](graph/agarum_1.JPG){ width=90% }  
+</center> 
+
+<br>
+
+***
+
+<br>
+
+### _Alaria_ {-}
+
+<br>
+
+- _Alaria esculenta_
+
+<center> 
+![](graph/alaria_1.jpg){ width=70% }  
+</center> 
+
+<br>
+
+***
+
+<br>
+
+### Laminariales spp. {-}
+
+<br>
+
+- _Laminaria digitata_
+- _Laminaria solidungula_
+- _Saccharina latissima_
+
+<center> 
+![](graph/lam_sach_3.JPG){ width=90% }  
+</center> 
+
+<br>
+
+***
+
+<br>
+
+## Results {-}
+
+<center> 
+![](graph/fig_4_arctic.png){ width=70% }  
+</center> 
+
+<br>
+
+***
+
+<br>
+
+# FACE-IT {.tabset .tabset-fade .tabset-pills}
+
+<!-- Rather than quotes, how about state the objectives of the project, the study sites, an overview of the data that you will archive and the specific deliverables you will produce ? -->
+
+## Objectives {-}
+
+<br>
+FACE-IT  
+  
+> "The overarching objective of FACE-IT is to enable adaptive co-management of social-ecological fjord systems in the Arctic in the face of rapid cryosphere and biodiversity changes."
+
+<br>
+
+Work Package (WP) 1  
+  
+> (1) Compile data on key potential drivers of changes in coastal biodiversity  
+> (2) Make the project data openly accessible  
+
+***
+
+## Study sites {-}
+
+![](graph/map_full.png){ width=100% } 
+
+<br>
+
+***
+
+<br>
+
+## Data archive {-}
+
+![](graph/var_tables.png){ width=100% } 
+
+<br>
+
+***
+
+<br>
+
+## Deliverables {-}
+
+- Data Management Plan (DMP) (6 months)
+- Report on key drivers of changes in Arctic biodiversity (6 months)
+- Meta-database (12 months)
+- Review article on past and future changes of key drivers (24 months)
+- Compilation of social science data (40 months)
+- Final data compilation on PANGAEA (42 months)
+
+<br>
+
+***
+
+<br>
+
+# Acknowledgements
+
+<br>
+
+<center>  
+
+<br>
+
+![](graph/FACE-IT_Logo_PNG_900.png){ width=70% }
+
+<br>
+
+![](graph/h2020.png)  
+Grant # 869154
+
+<br>
+
+![](graph/ofi_logo.jpg){ width=50% }
+
+<br>
+
+![](graph/dal_science.png){ width=50% }
+
+<br>
+
+![](graph/WHOI_logo.png){ width=40% }
+
+![](graph/ArcticKelp logo.png){ width=90% }
+
+</center>
+
+<br>
+
+***
+
+<br>
+
+# Questions {.tabset}
+
+## Thank you {-}
+
+<center>
+![](graph/thanks_for_all_the_fish.gif){ width=100% }
+</center>
+
+<br>
+
+***
+
+<br>
+
+## Marine cold-spells {-}
+
+<center>
+![](graph/MCS_flame.png){ width=100% }  
+
+![](graph/MCS_lolli.png){ width=100% }  
+</center>
+
+<br>
+
+***
+
+<br>
+
+## Ordination {-}
+
+* Note how the daily synoptic states form a smooth ellipsoid
+* Then note how scattered the marine heatwave synoptic states are
+
+<center>
+![](graph/MDS.png){ width=90% }
+</center>
+
+<br>
+
+***
+
+<br>
+
+## Air-sea heat flux {-}
+
+Surface heat flux (W/m^2^):
+
+* Q~s~: The short wave energy radiated from the sun (shortwave radiation)  
+* Q~l~: The net long-wave energy radiated back from the ocean (longwave radiation)  
+* Q~e~: The heat loss by evaporation (latent heat flux)  
+* Q~h~: The sensible heat loss by conduction (sensible heat flux)
+* Q~net~ = Q~s~ + Q~l~ + Q~e~ + Q~h~ (net positive downward heat flux)
+
+Mixed layer depth:
+
+* H: MLD (mixed-layer depth)
+* T~mix~: MLD temperature
+* ρ~0~: Density of sea water
+* c~p~: Specific heat of sea water
+
+Surface movement: 
+
+* **u~mix~** = (u~mix~, v~mix~): Horizontal velocity averaged within the mixed layer
+* ∇~h~ = (∂/∂x, ∂/∂y): Horizontal gradient operator
+* **u~mix~**$\cdot$∇~h~T~mix~ = Temperature change due to horizontal advection
+
+Surface temperature:
+
+* $\delta$T~mix~ /  $\delta$t = ( (Q~net~ - (Q~s~(-H))) / ρ~0~c~p~H ) - **u~mix~**$\cdot$$\nabla$~h~T~mix~ + (*res*)
+
+[@Benthuysen2014; @Chen2015a; @Oliver2017]
+
+<br>
+
+***
+
+<br>
+
+## SOM methodology {.tabset .tabset-fade .tabset-pills -}
+
+* Are there recurrent environmental patterns during MHWs?
+* If so, can these be detected/quantified by a computer?
+* The use of self-organising maps (SOM) to identify MHW drivers has already been tested [@Schlegel2017a; @Oliver2018a]
+* This technique allows a machine to clarify for us which drivers are most prominent during hundreds of MHWs simultaneously
+  
+### Data {-}
+
+<!-- It is necessary to use three different remote/reanalysis products in order to incorporate the main mixed layer temperature heat budget terms into this research. Those products and their variables are: -->
+The spatial grid resolution is 0.25 lon/lat and the temporal resolution is daily.
+
+* NOAA OISST
+  * Sea surface temperature (SST; °C)
+* GLORYS
+  * Mixed layer depth (MLD; -m)
+  * Surface ocean currents (U and V; m/s)
+  * Mean sea level pressure (MSLP; hPa) **- NOT USED IN SOM**
+* ERA 5
+  * Surface air temperature (t2m; °C)
+  * Net positive downward heat flux (Q~net~; W/m2)
+    * Latent + sensible heat flux + short + long-wave rad. (Q~e~ + Q~h~ + Q~s~ + Q~l~)
+  * Surface wind currents (U and V; m/s)
+
+<br>
+
+***
+
+### Study area {-}
+
+<!-- * The coastline of Atlantic Canada was divided into several regions based on their SST and SSS climatologies [@Richaud2016] -->
+
+<center>
+![](graph/NWA_study_area.png){ width=70% }  
+[@Richaud2016]  
+</center>
+
+<br>
+
+***
+
+### MHWs {-}
+
+<!-- * All SST pixels within each region averaged into one time series -->
+<!-- * MHWs calculated from these six averaged time series -->
+<!-- * A total of 289 MHWs were detected -->
+
+![](graph/MHW_lolli_plot.png){ width=100% } 
+
+<br>
+
+***
+
+### Packets  {.tabset .tabset-fade .tabset-pills -}
+
+<!-- * The start and end dates of each MHW were used to create a packet of synoptic state information -->
+<!-- * These packets contained one mean anomaly value per pixel per variable for the entire study area -->
+<!--   * The variables: SST, U, V, t2m, U10, V10, MLD, Q~net~ -->
+<!-- * Anomalies were calculated by subtracting the daily climatology per pixel per variable from the base daily values -->
+<!-- * Climatologies were calculated using the @Hobday2016 methodology -->
+<!-- * Data packets of synoptic state anomalies fed to SOM to produce 12 most common states -->
+<!-- * The occurrence of these states with regions + seasons quantified -->
+
+#### GM 14 {-}
+
+<center>
+![](graph/synoptic_gm_14.png){ width=100% }  
+</center>
+
+<br>
+
+***
+
+#### GSL 39 {-}
+
+<center>
+![](graph/synoptic_gsl_39.png){ width=100% }  
+</center>
+
+<br>
+
+***
+
+#### MAB 23 {-}
+
+<center>
+![](graph/synoptic_mab_23.png){ width=100% }  
+</center>
+
+<br>
+
+***
+
+### Results  {.tabset .tabset-fade .tabset-pills -}
+
+#### All  {.tabset .tabset-fade .tabset-pills -}
+
+##### SST + U + V (anom) {-}
+
+<center>
+![](graph/fig_S1.png){ width=90% } 
+</center>
+
+<br>
+
+***
+
+##### Air + U + V + MSLP (anom) {-}
+
+<center>
+![](graph/fig_7.png){ width=90% } 
+</center>
+
+<br>
+
+***
+
+##### Regions + seasons {-}
+
+<center>
+![](graph/fig_6.png){ width=90% }
+</center>
+
+<br>
+
+***
+
+#### Nodes  {.tabset .tabset-fade .tabset-pills -}
+
+##### Node L {-}
+
+<center>
+![](graph/node_12_panels.png){ width=100% } 
+</center>
+
+<br>
+
+***
+
+##### Node 4 {-}
+
+<center>
+![](graph/node_4_panels.png){ width=100% } 
+</center>
+
+<br>
+
+***
+
+##### Node 6 {-}
+
+<center>
+![](graph/node_6_panels.png){ width=100% } 
+</center>
+
+<br>
+
+***
+
+### Problems {-}
+
+* The output is too verbose for human consumption
+* It does not say what the actual drivers are
+* Fine detail is lost when aggregating into nodes
+* Limited usefulness in work on prediction/projection
+
+<br>
+
+***
+
+<br>
+
+# References
