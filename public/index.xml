@@ -758,7 +758,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Detecting Marine Heatwaves With Sub-Optimal Data</title>
       <link>https://theoceancode.netlify.com/publication/detection/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 -0800</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 -0500</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication/detection/</guid>
       <description></description>
@@ -767,7 +767,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>heatwaveR</title>
       <link>https://theoceancode.netlify.com/package/heatwaver/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 -0800</pubDate>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 -0500</pubDate>
       
       <guid>https://theoceancode.netlify.com/package/heatwaver/</guid>
       <description></description>
@@ -776,7 +776,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>coastR</title>
       <link>https://theoceancode.netlify.com/package/coastr/</link>
-      <pubDate>Sat, 14 Dec 2019 00:00:00 -0800</pubDate>
+      <pubDate>Sat, 14 Dec 2019 00:00:00 -0500</pubDate>
       
       <guid>https://theoceancode.netlify.com/package/coastr/</guid>
       <description></description>
@@ -785,7 +785,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Detecting marine heatwaves with sub-optimal data</title>
       <link>https://theoceancode.netlify.com/poster/mhw_detection_poster/</link>
-      <pubDate>Mon, 06 May 2019 00:00:00 -0700</pubDate>
+      <pubDate>Mon, 06 May 2019 00:00:00 -0400</pubDate>
       
       <guid>https://theoceancode.netlify.com/poster/mhw_detection_poster/</guid>
       <description></description>
@@ -794,7 +794,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Marine heatwave tracker</title>
       <link>https://theoceancode.netlify.com/project/mhwtracker/</link>
-      <pubDate>Mon, 25 Mar 2019 00:00:00 -0700</pubDate>
+      <pubDate>Mon, 25 Mar 2019 00:00:00 -0400</pubDate>
       
       <guid>https://theoceancode.netlify.com/project/mhwtracker/</guid>
       <description></description>
@@ -803,7 +803,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>Marine heatwaves: the new normal</title>
       <link>https://theoceancode.netlify.com/talk/mhw_2019/</link>
-      <pubDate>Tue, 19 Mar 2019 00:00:00 -0700</pubDate>
+      <pubDate>Tue, 19 Mar 2019 00:00:00 -0400</pubDate>
       
       <guid>https://theoceancode.netlify.com/talk/mhw_2019/</guid>
       <description></description>
@@ -812,7 +812,7 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     <item>
       <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
       <link>https://theoceancode.netlify.com/publication/heatwaver/</link>
-      <pubDate>Fri, 31 Aug 2018 00:00:00 -0700</pubDate>
+      <pubDate>Fri, 31 Aug 2018 00:00:00 -0400</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication/heatwaver/</guid>
       <description></description>
@@ -1106,7 +1106,7 @@ survey_city %&amp;gt;%
     <item>
       <title>Privacy Policy</title>
       <link>https://theoceancode.netlify.com/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 -0700</pubDate>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 -0400</pubDate>
       
       <guid>https://theoceancode.netlify.com/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
@@ -1290,7 +1290,7 @@ grid.arrange(bohai_sea_along_map, bohai_sea_away_map, nrow = 1)&lt;/code&gt;&lt;
     <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
       <link>https://theoceancode.netlify.com/publication/predominant/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 -0700</pubDate>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 -0400</pubDate>
       
       <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
       <description></description>
