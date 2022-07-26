@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MHW on The Ocean Code</title>
+    <link>https://theoceancode.netlify.com/tags/mhw/</link>
+    <description>Recent content in MHW on The Ocean Code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <copyright>&amp;copy; 2019</copyright>
+    <lastBuildDate>Fri, 01 Jul 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://theoceancode.netlify.com/tags/mhw/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Road to Marine Heatwaves</title>
+      <link>https://theoceancode.netlify.com/post/update_2022/</link>
+      <pubDate>Fri, 01 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/post/update_2022/</guid>
+      <description> Outline  </description>
+    </item>
+    
+  </channel>
+</rss>

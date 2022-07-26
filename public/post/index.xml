@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 -0800</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.com/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -19,6 +19,15 @@
       
       <guid>https://theoceancode.netlify.com/post/odv_bathy/</guid>
       <description>Objective Nearly four years after writing a blog post about recreating R figures in ODV I had someone reach out to me expressing interest in adding a bathymetry layer over the interpolated data. It’s always nice to know that these blog posts are being found useful for other researchers. And I have to admit I’m a bit surprised that the code still runs 4 years later. Especially considering that it uses the tidyverse which is notorious for breaking backwards compatibility.</description>
+    </item>
+    
+    <item>
+      <title>Analysis of Bio-Oracle data</title>
+      <link>https://theoceancode.netlify.com/post/bo_analysis/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/post/bo_analysis/</guid>
+      <description>Objective While running some brief quality control tests on Bio-Oracle layers before using them for a recent project it was detected that some of the layers in the current version of the Bio-Oracle product appear to have very large errors. Specifically the error is that there are layers where the minimum values are greater than the maximum values. It is unclear how this could be possible, so in the following text and code we will look into how we go about investigating these data layers and we will discuss which layers are fine, and which are not.</description>
     </item>
     
     <item>

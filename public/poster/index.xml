@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Mon, 06 May 2019 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 06 May 2019 00:00:00 -0700</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.com/poster/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Detecting marine heatwaves with sub-optimal data</title>
       <link>https://theoceancode.netlify.com/poster/mhw_detection_poster/</link>
-      <pubDate>Mon, 06 May 2019 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 06 May 2019 00:00:00 -0700</pubDate>
       
       <guid>https://theoceancode.netlify.com/poster/mhw_detection_poster/</guid>
       <description>Research conducted on how sub-optimal a time series may be and still produce comparable marine heatwaves to an optimal time series.</description>
