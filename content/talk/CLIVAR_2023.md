@@ -9,7 +9,7 @@ time_start = 2023-07-24T09:30:00
 time_end = 2023-07-24T10:00:00
 
 # Abstract and optional shortened version.
-abstract = ""
+abstract = "Everything you wanted to know about the marine heatwave definition, but were too afraid to ask. Now with 100% more interactivity!"
 abstract_short = ""
 
 # Name of event and optional event URL.
@@ -27,7 +27,7 @@ selected = true
 #   Simply enter your project's filename without extension.
 #   E.g. `projects = ["deep-learning"]` references `content/project/deep-learning.md`.
 #   Otherwise, set `projects = []`.
-projects = []
+projects = ["demoMHW"]
 
 # Tags (optional).
 #   Set `tags = []` for no tags, or use the form `tags = ["A Tag", "Another Tag"]` for one or more tags.
@@ -35,7 +35,7 @@ tags = ["marine heatwaves"]
 
 # Links (optional).
 url_pdf = ""
-url_slides = "https://theoceancode.netlify.app/files/day_1_basics.html"
+url_slides = "https://theoceancode.netlify.app/files/day_1_basics_HTTPS.html"
 url_video = ""
 url_code = ""
 
@@ -48,8 +48,7 @@ highlight = true
 # Featured image
 # Place your image in the `static/img/` folder and reference its filename below, e.g. `image = "example.jpg"`.
 [header]
-image = "Afraid-To-Ask-Andy.jpg"
-caption = "Everything you wanted to know about the marine heatwave definition, but were too afraid to ask."
+image = "MHW_def.png"
 
 +++
 
