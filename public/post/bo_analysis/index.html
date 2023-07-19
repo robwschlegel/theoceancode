@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en-uk">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 2.4.0">
+  <meta name="generator" content="Hugo 0.55.5" />
+  <meta name="author" content="Robert William Schlegel">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Objective While running some brief quality control tests on Bio-Oracle layers before using them for a recent project it was detected that some of the layers in the current version of the Bio-Oracle product appear to have very large errors. Specifically the error is that there are layers where the minimum values are greater than the maximum values. It is unclear how this could be possible, so in the following text and code we will look into how we go about investigating these data layers and we will discuss which layers are fine, and which are not.">
+
+  
+  <link rel="alternate" hreflang="en-uk" href="https://theoceancode.netlify.com/post/bo_analysis/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-118123016-2', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="https://theoceancode.netlify.com/index.xml" type="application/rss+xml" title="The Ocean Code">
+  <link rel="feed" href="https://theoceancode.netlify.com/index.xml" type="application/rss+xml" title="The Ocean Code">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://theoceancode.netlify.com/post/bo_analysis/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@robwschlegel">
+  <meta property="twitter:creator" content="@robwschlegel">
+  
+  <meta property="og:site_name" content="The Ocean Code">
+  <meta property="og:url" content="https://theoceancode.netlify.com/post/bo_analysis/">
+  <meta property="og:title" content="Analysis of Bio-Oracle data | The Ocean Code">
+  <meta property="og:description" content="Objective While running some brief quality control tests on Bio-Oracle layers before using them for a recent project it was detected that some of the layers in the current version of the Bio-Oracle product appear to have very large errors. Specifically the error is that there are layers where the minimum values are greater than the maximum values. It is unclear how this could be possible, so in the following text and code we will look into how we go about investigating these data layers and we will discuss which layers are fine, and which are not.">
+  <meta property="og:locale" content="en-uk">
+  
+  <meta property="article:published_time" content="2020-06-18T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2020-06-18T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>Analysis of Bio-Oracle data | The Ocean Code</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">The Ocean Code</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#publications">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#packages">
+            
+            <span>Packages</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Blog</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#talks">
+            
+            <span>Talks</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posters">
+            
+            <span>Posters</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#workshops">
+            
+            <span>Workshops</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Analysis of Bio-Oracle data</h1>
+
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Robert William Schlegel">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2020-06-18 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2020-06-18 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      2020-06-18
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Robert William Schlegel">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    13 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="https://theoceancode.netlify.com/categories/r/">R</a>
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Analysis%20of%20Bio-Oracle%20data&amp;url=https%3a%2f%2ftheoceancode.netlify.com%2fpost%2fbo_analysis%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2ftheoceancode.netlify.com%2fpost%2fbo_analysis%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2ftheoceancode.netlify.com%2fpost%2fbo_analysis%2f&amp;title=Analysis%20of%20Bio-Oracle%20data"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2ftheoceancode.netlify.com%2fpost%2fbo_analysis%2f&amp;title=Analysis%20of%20Bio-Oracle%20data"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Analysis%20of%20Bio-Oracle%20data&amp;body=https%3a%2f%2ftheoceancode.netlify.com%2fpost%2fbo_analysis%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+
+<div id="objective" class="section level2">
+<h2>Objective</h2>
+<p>While running some brief quality control tests on Bio-Oracle layers before using them for a recent project it was detected that some of the layers in the current version of the Bio-Oracle product appear to have very large errors. Specifically the error is that there are layers where the minimum values are greater than the maximum values. It is unclear how this could be possible, so in the following text and code we will look into how we go about investigating these data layers and we will discuss which layers are fine, and which are not. This error was first detected in the current velocity layers but a brief search turned up errors in other layers, too. So in this post we will be going through each individual layer to test for this max less than min error. We will look at all of the different depths as well as the future projections.</p>
+<pre class="r"><code># Load required libraries
+library(tidyverse)
+library(sdmpredictors)
+
+# The possible layers for download from Bio-Oracle
+BO_layers &lt;- list_layers(datasets = &quot;Bio-ORACLE&quot;)
+
+# The future layers
+BO_layers_future &lt;- list_layers_future(datasets = &quot;Bio-ORACLE&quot;)</code></pre>
+</div>
+<div id="testing-pipeline" class="section level2">
+<h2>Testing pipeline</h2>
+<p>The following code chunk contains a function that will run the testing pipeline that highlights any errors in the data. To use it we choose a variable from the list of Bio-Oracle variables shown above that have a max and min version of the layer. One must replace the ‘max’ or ‘min’ with ‘X’ and give that to the function, it will do the rest. Note that if one is running this script the figures this function will save to disk take about 1 minute to render due to their high resolution. Also please note that this function assumes there is a “figures” folder in the root directory on the computer on which this code is being run. If not, one must be created or the function must be changed to point to the desired folder.</p>
+<pre class="r"><code>BO_test &lt;- function(var_name, scenario = &quot;present&quot;, year = NA){
+  
+  # Establish min/max layer names
+  min_layer &lt;- gsub(&quot;X&quot;, &quot;min&quot;, var_name)
+  max_layer &lt;- gsub(&quot;X&quot;, &quot;max&quot;, var_name)
+  
+  # Download data
+  if(scenario == &quot;present&quot;){
+    BO_layers_dl &lt;- load_layers(c(min_layer, max_layer))
+    var_title &lt;- var_name
+  } else {
+    BO_layer_names &lt;- get_future_layers(c(min_layer, max_layer), scenario = scenario, year = year)
+    BO_layers_dl &lt;- load_layers(BO_layer_names$layer_code)
+    var_title &lt;- gsub(&quot;max_&quot;, &quot;X_&quot;, BO_layer_names$layer_code[1])
+  }
+  
+  # Prepare data for plotting
+  BO_layers_test &lt;- as.data.frame(BO_layers_dl, xy = T) %&gt;% 
+    dplyr::rename(lon = x, lat = y) %&gt;% 
+    mutate(lon = round(lon, 4), 
+           lat = round(lat, 4)) %&gt;% 
+    na.omit() %&gt;% 
+    `colnames&lt;-`(c(&quot;lon&quot;, &quot;lat&quot;, &quot;min_val&quot;, &quot;max_val&quot;)) %&gt;% 
+    mutate(max_min = ifelse(max_val &gt;= min_val, TRUE, FALSE))
+  
+  # Visualise pixels where min values are greater than the max
+  test_plot &lt;- ggplot(data = BO_layers_test, aes(x = lon, y = lat)) +
+    geom_raster(aes(fill = max_min)) +
+    coord_quickmap(expand = F) +
+    labs(fill = &quot;Max greater than min&quot;, x = NULL, y = NULL, title = var_title) +
+    theme(legend.position = &quot;bottom&quot;)
+  
+  # Save figure to disk
+  ggsave(paste0(&quot;~/figures/&quot;,var_title,&quot;.png&quot;), test_plot, height = 5, width = 8)
+}</code></pre>
+</div>
+<div id="look-at-layers" class="section level2">
+<h2>Look at layers</h2>
+<p>In this section we will go through all of the BO layers that have a min/max option and we will compare them to ascertain whether the maximum values are always greater than the minimums, which they should be, but we have found that sometimes this is not the case. When possible we will also look at future projections of the layers with RCP8.5 at 2050 and 2100. In the first code chunk in this section we will look at the older Bio-Oracle layers.</p>
+<pre class="r"><code># Up first we start with the older Bio-Oracle layers
+
+# Bathymetry
+BO_test(&quot;BO_bathyX&quot;) # No issues
+
+# Chlorophyll
+BO_test(&quot;BO_chloX&quot;) # No issues
+
+# Cloud fraction
+BO_test(&quot;BO_cloudX&quot;) # No issues
+
+# Diffuse attenuation
+BO_test(&quot;BO_daX&quot;) # No issues
+
+# SST
+BO_test(&quot;BO_sstX&quot;) # No issues</code></pre>
+<p>It is reassuring to see that all of the older BO layers have no issues in them. From my initial testing it looked like the layers with errors may have been from data assimilation from the GLORYS product for the most recent Bio-Oracle layers. That the older layers have no issues appears to support the hypothesis that the bug in the Bio-Oracle pipeline was introduced in the BO2 version of the product.</p>
+<p>The next code chunk goes through all of the newer layers and where possible the future projections, too. Note that many layers have four different depth options. The surface (ss), the min (bdmin), the mean (bdmean), and the max (bdmax) depths present at each pixel. We are testing all of these as I have hypothesised that the inclusion of these three different depths may be responsible for some of the errors observed. Another distinction to make for the following tests is that there are min/max values for each layer, which take the absolute min/max recorded at a pixel. And then there are the long-term min/max values, which are the average annual min/max recorded over the length of the available data. The long-term min/max values are more representative of the climatological means within an area, and the absolute min/max are representative of the most extreme events that may occur in an area. Generally one is going to be more interested in the long-term values for normal species distribution modelling (SDM) applications. Because these min/max values are calculated differently it is necessary to test both of them to see if the errors in the data differ in any discernible way.</p>
+<pre class="r"><code># Carbon phytoplankton biomass absolute
+BO_test(&quot;BO2_carbonphytoX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_carbonphytoX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_carbonphytoX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_carbonphytoX_ss&quot;) # No issues
+
+# Carbon phytoplankton biomass long-term
+BO_test(&quot;BO2_carbonphytoltX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_carbonphytoltX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_carbonphytoltX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_carbonphytoltX_ss&quot;) # No issues
+
+# Chlorophyll absolute
+BO_test(&quot;BO2_chloX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_chloX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_chloX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_chloX_ss&quot;) # No issues
+BO_test(&quot;BO2_chloX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Most pixels fail
+BO_test(&quot;BO2_chloX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Slightly better than the 2050 data
+
+# Chlorophyll long-term
+BO_test(&quot;BO2_chloltX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_chloltX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_chloltX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_chloltX_ss&quot;) # No issues
+BO_test(&quot;BO2_chloltX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Same issues as absolute layer
+BO_test(&quot;BO2_chloltX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Slightly better than the 2050 data
+
+# Current velocities absolute
+BO_test(&quot;BO2_curvelX_bdmax&quot;) # Global issues
+BO_test(&quot;BO2_curvelX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Global issues
+BO_test(&quot;BO2_curvelX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Global issues
+BO_test(&quot;BO2_curvelX_bdmean&quot;) # Global issues
+BO_test(&quot;BO2_curvelX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Global issues
+BO_test(&quot;BO2_curvelX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Global issues
+BO_test(&quot;BO2_curvelX_bdmin&quot;) # Global issues
+BO_test(&quot;BO2_curvelX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Global issues
+BO_test(&quot;BO2_curvelX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Global issues
+BO_test(&quot;BO2_curvelX_ss&quot;) # Mostly fails around the equator
+BO_test(&quot;BO2_curvelX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Mirror image errors of present day
+BO_test(&quot;BO2_curvelX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Mirror image errors of present day
+
+# Current velocities long-term
+# The first issue noted in the BO2 layers were these
+BO_test(&quot;BO2_curvelltX_bdmax&quot;) # Global issues
+BO_test(&quot;BO2_curvelltX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Global issues
+BO_test(&quot;BO2_curvelltX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Global issues
+BO_test(&quot;BO2_curvelltX_bdmean&quot;) # Global issues
+BO_test(&quot;BO2_curvelltX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Global issues
+BO_test(&quot;BO2_curvelltX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Global issues
+BO_test(&quot;BO2_curvelltX_bdmin&quot;) # Global issues
+BO_test(&quot;BO2_curvelltX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Global issues
+BO_test(&quot;BO2_curvelltX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Global issues
+BO_test(&quot;BO2_curvelltX_ss&quot;) # Mostly fails around the equator
+BO_test(&quot;BO2_curvelltX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Mirror image errors of present day
+BO_test(&quot;BO2_curvelltX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Mirror image errors of present day
+
+# Dissolved oxygen
+BO_test(&quot;BO2_dissoxX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_dissoxX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_dissoxX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_dissoxX_ss&quot;) # No issues
+
+# Dissolved oxygen long-term
+BO_test(&quot;BO2_dissoxltX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_dissoxltX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_dissoxltX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_dissoxltX_ss&quot;) # No issues
+
+# Ice cover
+BO_test(&quot;BO2_icecoverX_ss&quot;) # No issues
+
+# Ice cover long-term
+BO_test(&quot;BO2_icecoverltX_ss&quot;) # No issues
+
+# Ice thickness
+BO_test(&quot;BO2_icethickX_ss&quot;) # No issues
+BO_test(&quot;BO2_icethickX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2050) # All ice layers areas appear to be wrong
+BO_test(&quot;BO2_icethickX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # All ice layers areas appear to be wrong
+
+# Ice thickness long-term
+BO_test(&quot;BO2_icethickltX_ss&quot;) # No issues
+BO_test(&quot;BO2_icethickltX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2050) # All ice layers areas appear to be wrong
+BO_test(&quot;BO2_icethickltX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # All ice layers areas appear to be wrong
+
+# Iron
+BO_test(&quot;BO2_ironX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_ironX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_ironX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_ironX_ss&quot;) # No issues
+
+# Iron long-term
+BO_test(&quot;BO2_ironltX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_ironltX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_ironltX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_ironltX_ss&quot;) # No issues
+
+# Light at bottom
+BO_test(&quot;BO2_lightbotX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_lightbotX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_lightbotX_bdmin&quot;) # No issues
+
+# Light at bottom long-term
+BO_test(&quot;BO2_lightbotltX_bdmax&quot;) # Global errors different from current velocity errors
+BO_test(&quot;BO2_lightbotltX_bdmean&quot;) # Global errors different from current velocity errors
+BO_test(&quot;BO2_lightbotltX_bdmin&quot;) # Global errors different from current velocity errors
+
+# Nitrate
+BO_test(&quot;BO2_nitratemax_bdmax&quot;) # No issues
+BO_test(&quot;BO2_nitratemax_bdmean&quot;) # No issues
+BO_test(&quot;BO2_nitratemax_bdmin&quot;) # No issues
+BO_test(&quot;BO2_nitratemax_ss&quot;) # No issues
+
+# Nitrate long-term
+BO_test(&quot;BO2_nitrateltmax_bdmax&quot;) # No issues
+BO_test(&quot;BO2_nitrateltmax_bdmean&quot;) # No issues
+BO_test(&quot;BO2_nitrateltmax_bdmin&quot;) # No issues
+BO_test(&quot;BO2_nitrateltmax_ss&quot;) # No issues
+
+# Phosphate absolute
+BO_test(&quot;BO2_phosphateX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_phosphateX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_phosphateX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_phosphateX_ss&quot;) # No issues
+
+# Phosphate long-term
+BO_test(&quot;BO2_phosphateltX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_phosphateltX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_phosphateltX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_phosphateltX_ss&quot;) # No issues
+
+# Primary production absolute
+BO_test(&quot;BO2_ppmax_bdmax&quot;) # No issues
+BO_test(&quot;BO2_ppmax_bdmean&quot;) # No issues
+BO_test(&quot;BO2_ppmax_bdmin&quot;) # No issues
+BO_test(&quot;BO2_ppmax_ss&quot;) # No issues
+
+# Primary production long-term
+BO_test(&quot;BO2_ppltmax_bdmax&quot;) # No issues
+BO_test(&quot;BO2_ppltmax_bdmean&quot;) # No issues
+BO_test(&quot;BO2_ppltmax_bdmin&quot;) # No issues
+BO_test(&quot;BO2_ppltmax_ss&quot;) # No issues
+
+# Salinity absolute
+BO_test(&quot;BO2_salinityX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_salinityX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Most pixels fail
+BO_test(&quot;BO2_salinityX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Most pixels fail
+BO_test(&quot;BO2_salinityX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_salinityX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Most pixels fail
+BO_test(&quot;BO2_salinityX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Most pixels fail
+BO_test(&quot;BO2_salinityX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_salinityX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Most pixels fail
+BO_test(&quot;BO2_salinityX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Most pixels fail
+BO_test(&quot;BO2_salinityX_ss&quot;) # No issues
+BO_test(&quot;BO2_salinityX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Almost all pixels fail
+BO_test(&quot;BO2_salinityX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Almost all pixels fail
+
+# Salinity long-term
+BO_test(&quot;BO2_salinityltX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_salinityltX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Global issues
+BO_test(&quot;BO2_salinityltX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Global issues
+BO_test(&quot;BO2_salinityltX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_salinityltX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Global issues
+BO_test(&quot;BO2_salinityltX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Global issues
+BO_test(&quot;BO2_salinityltX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_salinityltX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Global issues
+BO_test(&quot;BO2_salinityltX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Global issues
+BO_test(&quot;BO2_salinityltX_ss&quot;) # No issues
+BO_test(&quot;BO2_salinityltX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Almost all pixels fail
+BO_test(&quot;BO2_salinityltX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Almost all pixels fail
+
+# Silicate absolute
+BO_test(&quot;BO2_silicatemax_bdmax&quot;) # No issues
+BO_test(&quot;BO2_silicatemax_bdmean&quot;) # No issues
+BO_test(&quot;BO2_silicatemax_bdmin&quot;) # No issues
+BO_test(&quot;BO2_silicatemax_ss&quot;) # No issues
+
+# Silicate long-term
+BO_test(&quot;BO2_silicateltmax_bdmax&quot;) # No issues
+BO_test(&quot;BO2_silicateltmax_bdmean&quot;) # No issues
+BO_test(&quot;BO2_silicateltmax_bdmin&quot;) # No issues
+BO_test(&quot;BO2_silicateltmax_ss&quot;) # No issues
+
+# Temperature absolute
+BO_test(&quot;BO2_tempX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_tempX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Almost all pixels fail
+BO_test(&quot;BO2_tempX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Almost all pixels fail
+BO_test(&quot;BO2_tempX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_tempX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Almost all pixels fail
+BO_test(&quot;BO2_tempX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Almost all pixels fail
+BO_test(&quot;BO2_tempX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_tempX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Almost all pixels fail
+BO_test(&quot;BO2_tempX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Almost all pixels fail
+BO_test(&quot;BO2_tempX_ss&quot;) # No issues
+BO_test(&quot;BO2_tempX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2050) # All pixels fail
+BO_test(&quot;BO2_tempX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # All pixels fail
+
+# Temperature long-term
+BO_test(&quot;BO2_templtX_bdmax&quot;) # No issues
+BO_test(&quot;BO2_templtX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Almost all pixels fail
+BO_test(&quot;BO2_templtX_bdmax&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Almost all pixels fail
+BO_test(&quot;BO2_templtX_bdmean&quot;) # No issues
+BO_test(&quot;BO2_templtX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Almost all pixels fail
+BO_test(&quot;BO2_templtX_bdmean&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Almost all pixels fail
+BO_test(&quot;BO2_templtX_bdmin&quot;) # No issues
+BO_test(&quot;BO2_templtX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2050) # Almost all pixels fail
+BO_test(&quot;BO2_templtX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Almost all pixels fail
+BO_test(&quot;BO2_templtX_ss&quot;) # No issues
+BO_test(&quot;BO2_templtX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2050) # All but a few pixels fail
+BO_test(&quot;BO2_templtX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # All but a few different pixels fail</code></pre>
+</div>
+<div id="discussion" class="section level2">
+<h2>Discussion</h2>
+<p>This is not meant to be exhaustive, but does represent the majority of the data layers offered by Bio-Oracle. I had hypothesised that the three different depth options per pixel would have been related to the issues in the data assimilation but it does not appear to be the case. I’ve concluded this because whenever a depth layer has issues, those errors appear to be very similar across the three different depth layers. One consistent pattern we do see is if there are any errors, then every depth layer for that variable will also have errors. This also applies to absolute vs. long-term max/min layers. Errors in one means errors in all. Another consistent pattern in the error was that all of the future projections at all depths for absolute and long-term min/max values had errors in them. This begs the question of how it is that the future projection can have no errors, while the present day layers do not. How are these future projection layers calculated differently from the present day? Are they not based on the same data?</p>
+<p>Most of the layers that have issues are physical layers. It is my understanding that these layers would have been adapted from the GLORYS reanalysis product. Therefore the next logical step in understanding this issue would be to investigate the GLORYS data. But even if there were issues in the GLORYS product, which I doubt, it would not explain how the data layers here could have minimum values being reported as greater than the maximum values in the distribution. The only thing that makes any sense is that the data layers are created independently of each other. But why?</p>
+<p>Without being able to see the pipeline code myself all I can do is ponder, which isn’t terribly useful. So to wrap things up I’ll provide two tables; the layers with no issues, and those with issues. I would strongly recommend against using any data layers that did not pass the tests in this analysis until the curators of the Bio-Oracle data address these issues in a future release/version.</p>
+<p>Layers with no issues (fine for use):
+- All of the older BO layers appear fine
+- Carbon phytoplankton biomass absolute and long-term at all depths
+- Chlorophyll absolute and long-term at all depths for present day projections only
+- Dissolved oxygen absolute and long-term at all depths
+- Ice cover absolute and long-term
+- Ice thickness absolute and long-term for present day projections only
+- Iron absolute and long-term for all depths
+- Nitrate absolute and long-term for all depths
+- Phosphate absolute and long-term for all depths
+- Primary productivity absolute and long-term for all depths
+- Salinity absolute and long-term at all depths for present day projections only
+- Temperature absolute and long-term at all depths for present day projections only</p>
+<p>Problem layers (do not use):
+- Chlorophyll future projections for absolutes and long-terms at all depths
+- Current velocity absolutes and long-terms for all depths and all present and future projections
+- Ice thickness absolute and long-term for future projections
+- Light at bottom absolute and long-term for all depths
+- Salinity absolute and long-term at all depths for future projections
+- Temperature absolute and long-term at all depths for future projections</p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="label label-default" href="https://theoceancode.netlify.com/tags/data/">data</a>
+  
+  <a class="label label-default" href="https://theoceancode.netlify.com/tags/sdm/">SDM</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/dl_env_data_r/">Downloading environmental data in R</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+
+    
+    <p class="powered-by">
+      <a href="https://theoceancode.netlify.com/privacy/">Privacy Policy</a>
+    </p>
+    
+
+    <p class="powered-by">
+
+      &copy; 2019 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: { linebreaks: { automatic: true } },
+        tex2jax: { inlineMath: [ ['$', '$'], ['\\(','\\)'] ], displayMath: [ ['$$','$$'], ['\\[', '\\]'] ], processEscapes: false },
+        TeX: { noUndefined: { attributes: { mathcolor: 'red', mathbackground: '#FFEEEE', mathsize: '90%' } } },
+        messageStyle: 'none'
+      });
+    </script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/search.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    <script src="/js/search.js"></script>
+    
+
+    
+    
+
+  </body>
+</html>
+

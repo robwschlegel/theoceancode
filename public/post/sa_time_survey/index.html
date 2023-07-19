@@ -470,7 +470,7 @@ city_plot &lt;- ggplot(data = survey, aes(x = city)) +
   theme(axis.text.x = element_text(angle = 15))
 # city_plot
 ggarrange(province_plot, city_plot, ncol = 1, nrow = 2)</code></pre>
-<div class="figure"><span id="fig:location-bar"></span>
+<div class="figure"><span style="display:block;" id="fig:location-bar"></span>
 <img src="/post/SA_time_survey_files/figure-html/location-bar-1.png" alt="Bar plots showing the total pariticpants by province or city." width="672" />
 <p class="caption">
 Figure 1: Bar plots showing the total pariticpants by province or city.
@@ -486,7 +486,7 @@ Figure 1: Bar plots showing the total pariticpants by province or city.
   scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
   scale_fill_brewer(palette = &quot;Accent&quot;) +
   labs(x = &quot;&quot;)</code></pre>
-<div class="figure"><span id="fig:basic-plot"></span>
+<div class="figure"><span style="display:block;" id="fig:basic-plot"></span>
 <img src="/post/SA_time_survey_files/figure-html/basic-plot-1.png" alt="Boxplots showing the distribution of times (minutes) survey participants gave for the three most common time frame idioms in South Africa." width="672" />
 <p class="caption">
 Figure 2: Boxplots showing the distribution of times (minutes) survey participants gave for the three most common time frame idioms in South Africa.
@@ -498,7 +498,7 @@ Figure 2: Boxplots showing the distribution of times (minutes) survey participan
 survey_long %&gt;% 
   group_by(saying) %&gt;% 
   summarise(noramlity = as.numeric(shapiro.test(minutes)[1]))</code></pre>
-<pre><code>## # A tibble: 3 x 2
+<pre><code>## # A tibble: 3 × 2
 ##   saying   noramlity
 ##   &lt;chr&gt;        &lt;dbl&gt;
 ## 1 just now     0.565
@@ -514,11 +514,10 @@ survey_long %&gt;%
 ## Bartlett&#39;s K-squared = 5.227, df = 2, p-value = 0.07328</code></pre>
 <p>Surprisingly these data meet all of our assumptions so we may perform a simple one-way ANOVA on them to detect any significant differences.</p>
 <pre class="r"><code>glance(aov(minutes ~ saying, data = survey_long))</code></pre>
-<pre><code>## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1    0.0615        0.0441  103.      3.54  0.0326     3  -670. 1349. 1360.
-## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+<pre><code>## # A tibble: 1 × 6
+##   logLik   AIC   BIC deviance  nobs r.squared
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
+## 1  -670. 1349. 1360. 1143843.   111    0.0615</code></pre>
 <p>Less surprisingly, there is a significant difference in the times given for these three idioms. But let’s dive just a bit deeper with a post-hoc Tukey (not Turkey) test to see which categories specifically are different from which.</p>
 <pre class="r"><code>TukeyHSD(aov(minutes ~ saying, data = survey_long))</code></pre>
 <pre><code>##   Tukey multiple comparisons of means
@@ -549,7 +548,7 @@ survey_province &lt;- survey_long %&gt;%
   scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
   scale_fill_brewer(palette = &quot;Set2&quot;) +
   labs(x = &quot;&quot;)</code></pre>
-<div class="figure"><span id="fig:province-plot"></span>
+<div class="figure"><span style="display:block;" id="fig:province-plot"></span>
 <img src="/post/SA_time_survey_files/figure-html/province-plot-1.png" alt="Boxplots showing the distribution of times by province." width="672" />
 <p class="caption">
 Figure 3: Boxplots showing the distribution of times by province.
@@ -560,7 +559,7 @@ Figure 3: Boxplots showing the distribution of times by province.
 survey_province %&gt;% 
   group_by(saying, province) %&gt;% 
   summarise(normality = as.numeric(shapiro.test(minutes)[1]))</code></pre>
-<pre><code>## # A tibble: 12 x 3
+<pre><code>## # A tibble: 12 × 3
 ## # Groups:   saying [3]
 ##    saying   province     normality
 ##    &lt;chr&gt;    &lt;fct&gt;            &lt;dbl&gt;
@@ -586,11 +585,10 @@ survey_province %&gt;%
 ## Bartlett&#39;s K-squared = 69.523, df = 11, p-value = 1.505e-10</code></pre>
 <p>The different groups of time are all normally distributed, but the variances differ. Regardless, we are going to stick to a normal two-way ANOVA as there are no good alternatives to this for non-parametric data and transforming these data is a bother.</p>
 <pre class="r"><code>glance(aov(minutes ~ saying + province, data = survey_province))</code></pre>
-<pre><code>## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0.204         0.163  94.4      5.06 3.58e-4     6  -623. 1261. 1279.
-## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+<pre><code>## # A tibble: 1 × 6
+##   logLik   AIC   BIC deviance  nobs r.squared
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
+## 1  -623. 1261. 1279.  881685.   105     0.204</code></pre>
 <p>Significant differences are to be had here. So let’s break it down and see which groups specifically differ.</p>
 <pre class="r"><code>TukeyHSD(aov(minutes ~ saying + province, data = survey_province))</code></pre>
 <pre><code>##   Tukey multiple comparisons of means
@@ -629,7 +627,7 @@ survey_city &lt;- survey_long %&gt;%
   scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
   scale_fill_brewer(palette = &quot;Set3&quot;) +
   labs(x = &quot;&quot;)</code></pre>
-<div class="figure"><span id="fig:city-plot"></span>
+<div class="figure"><span style="display:block;" id="fig:city-plot"></span>
 <img src="/post/SA_time_survey_files/figure-html/city-plot-1.png" alt="Boxplots showing the distribution of times by city." width="672" />
 <p class="caption">
 Figure 4: Boxplots showing the distribution of times by city.
@@ -640,7 +638,7 @@ Figure 4: Boxplots showing the distribution of times by city.
 survey_city %&gt;% 
   group_by(saying, city) %&gt;% 
   summarise(normality = as.numeric(shapiro.test(minutes)[1]))</code></pre>
-<pre><code>## # A tibble: 9 x 3
+<pre><code>## # A tibble: 9 × 3
 ## # Groups:   saying [3]
 ##   saying   city         normality
 ##   &lt;chr&gt;    &lt;fct&gt;            &lt;dbl&gt;
@@ -663,11 +661,10 @@ survey_city %&gt;%
 ## Bartlett&#39;s K-squared = 55.177, df = 8, p-value = 4.078e-09</code></pre>
 <p>… and again we see that while normally distributed, the variance of our sample sets differ significantly from one another. Regardless, we’ll stick to the two-way ANOVA.</p>
 <pre class="r"><code>glance(aov(minutes ~ saying + city, data = survey_city))</code></pre>
-<pre><code>## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0.205         0.164  94.2      4.91 0.00141     5  -481.  973.  987.
-## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+<pre><code>## # A tibble: 1 × 6
+##   logLik   AIC   BIC deviance  nobs r.squared
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
+## 1  -481.  973.  987.  674933.    81     0.205</code></pre>
 <p>As one likely would have deduced from Figure <a href="#fig:city-plot">4</a>, the scores are significantly different from one another.</p>
 <pre class="r"><code>TukeyHSD(aov(minutes ~ saying + city, data = survey_city))</code></pre>
 <pre><code>##   Tukey multiple comparisons of means

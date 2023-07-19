@@ -137,6 +137,328 @@ ggplot(data = ctd_mba, aes(x = lon, y = depth)) +
     </item>
     
     <item>
+      <title>Analysis of Bio-Oracle data</title>
+      <link>https://theoceancode.netlify.com/post/bo_analysis/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/post/bo_analysis/</guid>
+      <description>
+
+
+&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Objective&lt;/h2&gt;
+&lt;p&gt;While running some brief quality control tests on Bio-Oracle layers before using them for a recent project it was detected that some of the layers in the current version of the Bio-Oracle product appear to have very large errors. Specifically the error is that there are layers where the minimum values are greater than the maximum values. It is unclear how this could be possible, so in the following text and code we will look into how we go about investigating these data layers and we will discuss which layers are fine, and which are not. This error was first detected in the current velocity layers but a brief search turned up errors in other layers, too. So in this post we will be going through each individual layer to test for this max less than min error. We will look at all of the different depths as well as the future projections.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Load required libraries
+library(tidyverse)
+library(sdmpredictors)
+
+# The possible layers for download from Bio-Oracle
+BO_layers &amp;lt;- list_layers(datasets = &amp;quot;Bio-ORACLE&amp;quot;)
+
+# The future layers
+BO_layers_future &amp;lt;- list_layers_future(datasets = &amp;quot;Bio-ORACLE&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;testing-pipeline&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Testing pipeline&lt;/h2&gt;
+&lt;p&gt;The following code chunk contains a function that will run the testing pipeline that highlights any errors in the data. To use it we choose a variable from the list of Bio-Oracle variables shown above that have a max and min version of the layer. One must replace the ‘max’ or ‘min’ with ‘X’ and give that to the function, it will do the rest. Note that if one is running this script the figures this function will save to disk take about 1 minute to render due to their high resolution. Also please note that this function assumes there is a “figures” folder in the root directory on the computer on which this code is being run. If not, one must be created or the function must be changed to point to the desired folder.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;BO_test &amp;lt;- function(var_name, scenario = &amp;quot;present&amp;quot;, year = NA){
+  
+  # Establish min/max layer names
+  min_layer &amp;lt;- gsub(&amp;quot;X&amp;quot;, &amp;quot;min&amp;quot;, var_name)
+  max_layer &amp;lt;- gsub(&amp;quot;X&amp;quot;, &amp;quot;max&amp;quot;, var_name)
+  
+  # Download data
+  if(scenario == &amp;quot;present&amp;quot;){
+    BO_layers_dl &amp;lt;- load_layers(c(min_layer, max_layer))
+    var_title &amp;lt;- var_name
+  } else {
+    BO_layer_names &amp;lt;- get_future_layers(c(min_layer, max_layer), scenario = scenario, year = year)
+    BO_layers_dl &amp;lt;- load_layers(BO_layer_names$layer_code)
+    var_title &amp;lt;- gsub(&amp;quot;max_&amp;quot;, &amp;quot;X_&amp;quot;, BO_layer_names$layer_code[1])
+  }
+  
+  # Prepare data for plotting
+  BO_layers_test &amp;lt;- as.data.frame(BO_layers_dl, xy = T) %&amp;gt;% 
+    dplyr::rename(lon = x, lat = y) %&amp;gt;% 
+    mutate(lon = round(lon, 4), 
+           lat = round(lat, 4)) %&amp;gt;% 
+    na.omit() %&amp;gt;% 
+    `colnames&amp;lt;-`(c(&amp;quot;lon&amp;quot;, &amp;quot;lat&amp;quot;, &amp;quot;min_val&amp;quot;, &amp;quot;max_val&amp;quot;)) %&amp;gt;% 
+    mutate(max_min = ifelse(max_val &amp;gt;= min_val, TRUE, FALSE))
+  
+  # Visualise pixels where min values are greater than the max
+  test_plot &amp;lt;- ggplot(data = BO_layers_test, aes(x = lon, y = lat)) +
+    geom_raster(aes(fill = max_min)) +
+    coord_quickmap(expand = F) +
+    labs(fill = &amp;quot;Max greater than min&amp;quot;, x = NULL, y = NULL, title = var_title) +
+    theme(legend.position = &amp;quot;bottom&amp;quot;)
+  
+  # Save figure to disk
+  ggsave(paste0(&amp;quot;~/figures/&amp;quot;,var_title,&amp;quot;.png&amp;quot;), test_plot, height = 5, width = 8)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;look-at-layers&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Look at layers&lt;/h2&gt;
+&lt;p&gt;In this section we will go through all of the BO layers that have a min/max option and we will compare them to ascertain whether the maximum values are always greater than the minimums, which they should be, but we have found that sometimes this is not the case. When possible we will also look at future projections of the layers with RCP8.5 at 2050 and 2100. In the first code chunk in this section we will look at the older Bio-Oracle layers.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Up first we start with the older Bio-Oracle layers
+
+# Bathymetry
+BO_test(&amp;quot;BO_bathyX&amp;quot;) # No issues
+
+# Chlorophyll
+BO_test(&amp;quot;BO_chloX&amp;quot;) # No issues
+
+# Cloud fraction
+BO_test(&amp;quot;BO_cloudX&amp;quot;) # No issues
+
+# Diffuse attenuation
+BO_test(&amp;quot;BO_daX&amp;quot;) # No issues
+
+# SST
+BO_test(&amp;quot;BO_sstX&amp;quot;) # No issues&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It is reassuring to see that all of the older BO layers have no issues in them. From my initial testing it looked like the layers with errors may have been from data assimilation from the GLORYS product for the most recent Bio-Oracle layers. That the older layers have no issues appears to support the hypothesis that the bug in the Bio-Oracle pipeline was introduced in the BO2 version of the product.&lt;/p&gt;
+&lt;p&gt;The next code chunk goes through all of the newer layers and where possible the future projections, too. Note that many layers have four different depth options. The surface (ss), the min (bdmin), the mean (bdmean), and the max (bdmax) depths present at each pixel. We are testing all of these as I have hypothesised that the inclusion of these three different depths may be responsible for some of the errors observed. Another distinction to make for the following tests is that there are min/max values for each layer, which take the absolute min/max recorded at a pixel. And then there are the long-term min/max values, which are the average annual min/max recorded over the length of the available data. The long-term min/max values are more representative of the climatological means within an area, and the absolute min/max are representative of the most extreme events that may occur in an area. Generally one is going to be more interested in the long-term values for normal species distribution modelling (SDM) applications. Because these min/max values are calculated differently it is necessary to test both of them to see if the errors in the data differ in any discernible way.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Carbon phytoplankton biomass absolute
+BO_test(&amp;quot;BO2_carbonphytoX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_carbonphytoX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_carbonphytoX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_carbonphytoX_ss&amp;quot;) # No issues
+
+# Carbon phytoplankton biomass long-term
+BO_test(&amp;quot;BO2_carbonphytoltX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_carbonphytoltX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_carbonphytoltX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_carbonphytoltX_ss&amp;quot;) # No issues
+
+# Chlorophyll absolute
+BO_test(&amp;quot;BO2_chloX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_chloX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_chloX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_chloX_ss&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_chloX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Most pixels fail
+BO_test(&amp;quot;BO2_chloX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Slightly better than the 2050 data
+
+# Chlorophyll long-term
+BO_test(&amp;quot;BO2_chloltX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_chloltX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_chloltX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_chloltX_ss&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_chloltX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Same issues as absolute layer
+BO_test(&amp;quot;BO2_chloltX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Slightly better than the 2050 data
+
+# Current velocities absolute
+BO_test(&amp;quot;BO2_curvelX_bdmax&amp;quot;) # Global issues
+BO_test(&amp;quot;BO2_curvelX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Global issues
+BO_test(&amp;quot;BO2_curvelX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Global issues
+BO_test(&amp;quot;BO2_curvelX_bdmean&amp;quot;) # Global issues
+BO_test(&amp;quot;BO2_curvelX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Global issues
+BO_test(&amp;quot;BO2_curvelX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Global issues
+BO_test(&amp;quot;BO2_curvelX_bdmin&amp;quot;) # Global issues
+BO_test(&amp;quot;BO2_curvelX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Global issues
+BO_test(&amp;quot;BO2_curvelX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Global issues
+BO_test(&amp;quot;BO2_curvelX_ss&amp;quot;) # Mostly fails around the equator
+BO_test(&amp;quot;BO2_curvelX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Mirror image errors of present day
+BO_test(&amp;quot;BO2_curvelX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Mirror image errors of present day
+
+# Current velocities long-term
+# The first issue noted in the BO2 layers were these
+BO_test(&amp;quot;BO2_curvelltX_bdmax&amp;quot;) # Global issues
+BO_test(&amp;quot;BO2_curvelltX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Global issues
+BO_test(&amp;quot;BO2_curvelltX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Global issues
+BO_test(&amp;quot;BO2_curvelltX_bdmean&amp;quot;) # Global issues
+BO_test(&amp;quot;BO2_curvelltX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Global issues
+BO_test(&amp;quot;BO2_curvelltX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Global issues
+BO_test(&amp;quot;BO2_curvelltX_bdmin&amp;quot;) # Global issues
+BO_test(&amp;quot;BO2_curvelltX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Global issues
+BO_test(&amp;quot;BO2_curvelltX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Global issues
+BO_test(&amp;quot;BO2_curvelltX_ss&amp;quot;) # Mostly fails around the equator
+BO_test(&amp;quot;BO2_curvelltX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Mirror image errors of present day
+BO_test(&amp;quot;BO2_curvelltX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Mirror image errors of present day
+
+# Dissolved oxygen
+BO_test(&amp;quot;BO2_dissoxX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_dissoxX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_dissoxX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_dissoxX_ss&amp;quot;) # No issues
+
+# Dissolved oxygen long-term
+BO_test(&amp;quot;BO2_dissoxltX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_dissoxltX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_dissoxltX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_dissoxltX_ss&amp;quot;) # No issues
+
+# Ice cover
+BO_test(&amp;quot;BO2_icecoverX_ss&amp;quot;) # No issues
+
+# Ice cover long-term
+BO_test(&amp;quot;BO2_icecoverltX_ss&amp;quot;) # No issues
+
+# Ice thickness
+BO_test(&amp;quot;BO2_icethickX_ss&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_icethickX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # All ice layers areas appear to be wrong
+BO_test(&amp;quot;BO2_icethickX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # All ice layers areas appear to be wrong
+
+# Ice thickness long-term
+BO_test(&amp;quot;BO2_icethickltX_ss&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_icethickltX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # All ice layers areas appear to be wrong
+BO_test(&amp;quot;BO2_icethickltX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # All ice layers areas appear to be wrong
+
+# Iron
+BO_test(&amp;quot;BO2_ironX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ironX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ironX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ironX_ss&amp;quot;) # No issues
+
+# Iron long-term
+BO_test(&amp;quot;BO2_ironltX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ironltX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ironltX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ironltX_ss&amp;quot;) # No issues
+
+# Light at bottom
+BO_test(&amp;quot;BO2_lightbotX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_lightbotX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_lightbotX_bdmin&amp;quot;) # No issues
+
+# Light at bottom long-term
+BO_test(&amp;quot;BO2_lightbotltX_bdmax&amp;quot;) # Global errors different from current velocity errors
+BO_test(&amp;quot;BO2_lightbotltX_bdmean&amp;quot;) # Global errors different from current velocity errors
+BO_test(&amp;quot;BO2_lightbotltX_bdmin&amp;quot;) # Global errors different from current velocity errors
+
+# Nitrate
+BO_test(&amp;quot;BO2_nitratemax_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_nitratemax_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_nitratemax_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_nitratemax_ss&amp;quot;) # No issues
+
+# Nitrate long-term
+BO_test(&amp;quot;BO2_nitrateltmax_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_nitrateltmax_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_nitrateltmax_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_nitrateltmax_ss&amp;quot;) # No issues
+
+# Phosphate absolute
+BO_test(&amp;quot;BO2_phosphateX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_phosphateX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_phosphateX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_phosphateX_ss&amp;quot;) # No issues
+
+# Phosphate long-term
+BO_test(&amp;quot;BO2_phosphateltX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_phosphateltX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_phosphateltX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_phosphateltX_ss&amp;quot;) # No issues
+
+# Primary production absolute
+BO_test(&amp;quot;BO2_ppmax_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ppmax_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ppmax_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ppmax_ss&amp;quot;) # No issues
+
+# Primary production long-term
+BO_test(&amp;quot;BO2_ppltmax_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ppltmax_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ppltmax_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_ppltmax_ss&amp;quot;) # No issues
+
+# Salinity absolute
+BO_test(&amp;quot;BO2_salinityX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_salinityX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Most pixels fail
+BO_test(&amp;quot;BO2_salinityX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Most pixels fail
+BO_test(&amp;quot;BO2_salinityX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_salinityX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Most pixels fail
+BO_test(&amp;quot;BO2_salinityX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Most pixels fail
+BO_test(&amp;quot;BO2_salinityX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_salinityX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Most pixels fail
+BO_test(&amp;quot;BO2_salinityX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Most pixels fail
+BO_test(&amp;quot;BO2_salinityX_ss&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_salinityX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Almost all pixels fail
+BO_test(&amp;quot;BO2_salinityX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Almost all pixels fail
+
+# Salinity long-term
+BO_test(&amp;quot;BO2_salinityltX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_salinityltX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Global issues
+BO_test(&amp;quot;BO2_salinityltX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Global issues
+BO_test(&amp;quot;BO2_salinityltX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_salinityltX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Global issues
+BO_test(&amp;quot;BO2_salinityltX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Global issues
+BO_test(&amp;quot;BO2_salinityltX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_salinityltX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Global issues
+BO_test(&amp;quot;BO2_salinityltX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Global issues
+BO_test(&amp;quot;BO2_salinityltX_ss&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_salinityltX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Almost all pixels fail
+BO_test(&amp;quot;BO2_salinityltX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Almost all pixels fail
+
+# Silicate absolute
+BO_test(&amp;quot;BO2_silicatemax_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_silicatemax_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_silicatemax_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_silicatemax_ss&amp;quot;) # No issues
+
+# Silicate long-term
+BO_test(&amp;quot;BO2_silicateltmax_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_silicateltmax_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_silicateltmax_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_silicateltmax_ss&amp;quot;) # No issues
+
+# Temperature absolute
+BO_test(&amp;quot;BO2_tempX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_tempX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Almost all pixels fail
+BO_test(&amp;quot;BO2_tempX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Almost all pixels fail
+BO_test(&amp;quot;BO2_tempX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_tempX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Almost all pixels fail
+BO_test(&amp;quot;BO2_tempX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Almost all pixels fail
+BO_test(&amp;quot;BO2_tempX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_tempX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Almost all pixels fail
+BO_test(&amp;quot;BO2_tempX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Almost all pixels fail
+BO_test(&amp;quot;BO2_tempX_ss&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_tempX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # All pixels fail
+BO_test(&amp;quot;BO2_tempX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # All pixels fail
+
+# Temperature long-term
+BO_test(&amp;quot;BO2_templtX_bdmax&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_templtX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Almost all pixels fail
+BO_test(&amp;quot;BO2_templtX_bdmax&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Almost all pixels fail
+BO_test(&amp;quot;BO2_templtX_bdmean&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_templtX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Almost all pixels fail
+BO_test(&amp;quot;BO2_templtX_bdmean&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Almost all pixels fail
+BO_test(&amp;quot;BO2_templtX_bdmin&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_templtX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # Almost all pixels fail
+BO_test(&amp;quot;BO2_templtX_bdmin&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # Almost all pixels fail
+BO_test(&amp;quot;BO2_templtX_ss&amp;quot;) # No issues
+BO_test(&amp;quot;BO2_templtX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2050) # All but a few pixels fail
+BO_test(&amp;quot;BO2_templtX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;, year = 2100) # All but a few different pixels fail&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;discussion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Discussion&lt;/h2&gt;
+&lt;p&gt;This is not meant to be exhaustive, but does represent the majority of the data layers offered by Bio-Oracle. I had hypothesised that the three different depth options per pixel would have been related to the issues in the data assimilation but it does not appear to be the case. I’ve concluded this because whenever a depth layer has issues, those errors appear to be very similar across the three different depth layers. One consistent pattern we do see is if there are any errors, then every depth layer for that variable will also have errors. This also applies to absolute vs. long-term max/min layers. Errors in one means errors in all. Another consistent pattern in the error was that all of the future projections at all depths for absolute and long-term min/max values had errors in them. This begs the question of how it is that the future projection can have no errors, while the present day layers do not. How are these future projection layers calculated differently from the present day? Are they not based on the same data?&lt;/p&gt;
+&lt;p&gt;Most of the layers that have issues are physical layers. It is my understanding that these layers would have been adapted from the GLORYS reanalysis product. Therefore the next logical step in understanding this issue would be to investigate the GLORYS data. But even if there were issues in the GLORYS product, which I doubt, it would not explain how the data layers here could have minimum values being reported as greater than the maximum values in the distribution. The only thing that makes any sense is that the data layers are created independently of each other. But why?&lt;/p&gt;
+&lt;p&gt;Without being able to see the pipeline code myself all I can do is ponder, which isn’t terribly useful. So to wrap things up I’ll provide two tables; the layers with no issues, and those with issues. I would strongly recommend against using any data layers that did not pass the tests in this analysis until the curators of the Bio-Oracle data address these issues in a future release/version.&lt;/p&gt;
+&lt;p&gt;Layers with no issues (fine for use):
+- All of the older BO layers appear fine
+- Carbon phytoplankton biomass absolute and long-term at all depths
+- Chlorophyll absolute and long-term at all depths for present day projections only
+- Dissolved oxygen absolute and long-term at all depths
+- Ice cover absolute and long-term
+- Ice thickness absolute and long-term for present day projections only
+- Iron absolute and long-term for all depths
+- Nitrate absolute and long-term for all depths
+- Phosphate absolute and long-term for all depths
+- Primary productivity absolute and long-term for all depths
+- Salinity absolute and long-term at all depths for present day projections only
+- Temperature absolute and long-term at all depths for present day projections only&lt;/p&gt;
+&lt;p&gt;Problem layers (do not use):
+- Chlorophyll future projections for absolutes and long-terms at all depths
+- Current velocity absolutes and long-terms for all depths and all present and future projections
+- Ice thickness absolute and long-term for future projections
+- Light at bottom absolute and long-term for all depths
+- Salinity absolute and long-term at all depths for future projections
+- Temperature absolute and long-term at all depths for future projections&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Downloading environmental data in R</title>
       <link>https://theoceancode.netlify.com/post/dl_env_data_r/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
@@ -470,6 +792,15 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)&lt;/c
     </item>
     
     <item>
+      <title>Demo for the MHW definition</title>
+      <link>https://theoceancode.netlify.com/project/demomhw/</link>
+      <pubDate>Mon, 25 Mar 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/project/demomhw/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Marine heatwave tracker</title>
       <link>https://theoceancode.netlify.com/project/mhwtracker/</link>
       <pubDate>Mon, 25 Mar 2019 00:00:00 +0100</pubDate>
@@ -556,7 +887,7 @@ city_plot &amp;lt;- ggplot(data = survey, aes(x = city)) +
   theme(axis.text.x = element_text(angle = 15))
 # city_plot
 ggarrange(province_plot, city_plot, ncol = 1, nrow = 2)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:location-bar&#34;&gt;&lt;/span&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span style=&#34;display:block;&#34; id=&#34;fig:location-bar&#34;&gt;&lt;/span&gt;
 &lt;img src=&#34;https://theoceancode.netlify.com/post/SA_time_survey_files/figure-html/location-bar-1.png&#34; alt=&#34;Bar plots showing the total pariticpants by province or city.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 1: Bar plots showing the total pariticpants by province or city.
@@ -572,7 +903,7 @@ Figure 1: Bar plots showing the total pariticpants by province or city.
   scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
   scale_fill_brewer(palette = &amp;quot;Accent&amp;quot;) +
   labs(x = &amp;quot;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:basic-plot&#34;&gt;&lt;/span&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span style=&#34;display:block;&#34; id=&#34;fig:basic-plot&#34;&gt;&lt;/span&gt;
 &lt;img src=&#34;https://theoceancode.netlify.com/post/SA_time_survey_files/figure-html/basic-plot-1.png&#34; alt=&#34;Boxplots showing the distribution of times (minutes) survey participants gave for the three most common time frame idioms in South Africa.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 2: Boxplots showing the distribution of times (minutes) survey participants gave for the three most common time frame idioms in South Africa.
@@ -584,7 +915,7 @@ Figure 2: Boxplots showing the distribution of times (minutes) survey participan
 survey_long %&amp;gt;% 
   group_by(saying) %&amp;gt;% 
   summarise(noramlity = as.numeric(shapiro.test(minutes)[1]))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 3 x 2
+&lt;pre&gt;&lt;code&gt;## # A tibble: 3 × 2
 ##   saying   noramlity
 ##   &amp;lt;chr&amp;gt;        &amp;lt;dbl&amp;gt;
 ## 1 just now     0.565
@@ -600,11 +931,10 @@ survey_long %&amp;gt;%
 ## Bartlett&amp;#39;s K-squared = 5.227, df = 2, p-value = 0.07328&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Surprisingly these data meet all of our assumptions so we may perform a simple one-way ANOVA on them to detect any significant differences.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;glance(aov(minutes ~ saying, data = survey_long))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-##       &amp;lt;dbl&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
-## 1    0.0615        0.0441  103.      3.54  0.0326     3  -670. 1349. 1360.
-## # … with 2 more variables: deviance &amp;lt;dbl&amp;gt;, df.residual &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 × 6
+##   logLik   AIC   BIC deviance  nobs r.squared
+##    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;     &amp;lt;dbl&amp;gt;
+## 1  -670. 1349. 1360. 1143843.   111    0.0615&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Less surprisingly, there is a significant difference in the times given for these three idioms. But let’s dive just a bit deeper with a post-hoc Tukey (not Turkey) test to see which categories specifically are different from which.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TukeyHSD(aov(minutes ~ saying, data = survey_long))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
@@ -635,7 +965,7 @@ survey_province &amp;lt;- survey_long %&amp;gt;%
   scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
   scale_fill_brewer(palette = &amp;quot;Set2&amp;quot;) +
   labs(x = &amp;quot;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:province-plot&#34;&gt;&lt;/span&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span style=&#34;display:block;&#34; id=&#34;fig:province-plot&#34;&gt;&lt;/span&gt;
 &lt;img src=&#34;https://theoceancode.netlify.com/post/SA_time_survey_files/figure-html/province-plot-1.png&#34; alt=&#34;Boxplots showing the distribution of times by province.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 3: Boxplots showing the distribution of times by province.
@@ -646,7 +976,7 @@ Figure 3: Boxplots showing the distribution of times by province.
 survey_province %&amp;gt;% 
   group_by(saying, province) %&amp;gt;% 
   summarise(normality = as.numeric(shapiro.test(minutes)[1]))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 12 x 3
+&lt;pre&gt;&lt;code&gt;## # A tibble: 12 × 3
 ## # Groups:   saying [3]
 ##    saying   province     normality
 ##    &amp;lt;chr&amp;gt;    &amp;lt;fct&amp;gt;            &amp;lt;dbl&amp;gt;
@@ -672,11 +1002,10 @@ survey_province %&amp;gt;%
 ## Bartlett&amp;#39;s K-squared = 69.523, df = 11, p-value = 1.505e-10&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The different groups of time are all normally distributed, but the variances differ. Regardless, we are going to stick to a normal two-way ANOVA as there are no good alternatives to this for non-parametric data and transforming these data is a bother.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;glance(aov(minutes ~ saying + province, data = survey_province))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-##       &amp;lt;dbl&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
-## 1     0.204         0.163  94.4      5.06 3.58e-4     6  -623. 1261. 1279.
-## # … with 2 more variables: deviance &amp;lt;dbl&amp;gt;, df.residual &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 × 6
+##   logLik   AIC   BIC deviance  nobs r.squared
+##    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;     &amp;lt;dbl&amp;gt;
+## 1  -623. 1261. 1279.  881685.   105     0.204&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Significant differences are to be had here. So let’s break it down and see which groups specifically differ.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TukeyHSD(aov(minutes ~ saying + province, data = survey_province))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
@@ -715,7 +1044,7 @@ survey_city &amp;lt;- survey_long %&amp;gt;%
   scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
   scale_fill_brewer(palette = &amp;quot;Set3&amp;quot;) +
   labs(x = &amp;quot;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:city-plot&#34;&gt;&lt;/span&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span style=&#34;display:block;&#34; id=&#34;fig:city-plot&#34;&gt;&lt;/span&gt;
 &lt;img src=&#34;https://theoceancode.netlify.com/post/SA_time_survey_files/figure-html/city-plot-1.png&#34; alt=&#34;Boxplots showing the distribution of times by city.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 4: Boxplots showing the distribution of times by city.
@@ -726,7 +1055,7 @@ Figure 4: Boxplots showing the distribution of times by city.
 survey_city %&amp;gt;% 
   group_by(saying, city) %&amp;gt;% 
   summarise(normality = as.numeric(shapiro.test(minutes)[1]))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 9 x 3
+&lt;pre&gt;&lt;code&gt;## # A tibble: 9 × 3
 ## # Groups:   saying [3]
 ##   saying   city         normality
 ##   &amp;lt;chr&amp;gt;    &amp;lt;fct&amp;gt;            &amp;lt;dbl&amp;gt;
@@ -749,11 +1078,10 @@ survey_city %&amp;gt;%
 ## Bartlett&amp;#39;s K-squared = 55.177, df = 8, p-value = 4.078e-09&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;… and again we see that while normally distributed, the variance of our sample sets differ significantly from one another. Regardless, we’ll stick to the two-way ANOVA.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;glance(aov(minutes ~ saying + city, data = survey_city))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-##       &amp;lt;dbl&amp;gt;         &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
-## 1     0.205         0.164  94.2      4.91 0.00141     5  -481.  973.  987.
-## # … with 2 more variables: deviance &amp;lt;dbl&amp;gt;, df.residual &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 × 6
+##   logLik   AIC   BIC deviance  nobs r.squared
+##    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;     &amp;lt;dbl&amp;gt;
+## 1  -481.  973.  987.  674933.    81     0.205&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;As one likely would have deduced from Figure &lt;a href=&#34;#fig:city-plot&#34;&gt;4&lt;/a&gt;, the scores are significantly different from one another.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TukeyHSD(aov(minutes ~ saying + city, data = survey_city))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
@@ -975,310 +1303,6 @@ grid.arrange(bohai_sea_along_map, bohai_sea_away_map, nrow = 1)&lt;/code&gt;&lt;
       
       <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Polar plot climatologies</title>
-      <link>https://theoceancode.netlify.com/post/polar_plot_clims/</link>
-      <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/post/polar_plot_clims/</guid>
-      <description>
-
-
-&lt;div id=&#34;objective&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Objective&lt;/h2&gt;
-&lt;p&gt;Whilst cruising about on &lt;a href=&#34;http://imgur.com&#34;&gt;Imgur&lt;/a&gt; I found a post about science stuff. Not uncommon, which is nice. These sorts of grab-bag posts about nothing in particular often include some mention of climate science, almost exclusively some sort of clever visualisation of a warming planet. That seems to be what people are most interested in. I’m not complaining though, it keeps me employed. The aforementioned post caught my attention more than usual because it included a GIF, and not just a static picture of some sort of blue thing that is becoming alarmingly red (that was not meant to be a political metaphor). I’m referring to the now famous GIF by climate scientist Ed Hawkins (&lt;span class=&#34;citation&#34;&gt;@ed_hawkins&lt;/span&gt;) whose blog may be found &lt;a href=&#34;https://www.climate-lab-book.ac.uk/&#34;&gt;here&lt;/a&gt;, and the specific post in question &lt;a href=&#34;https://www.climate-lab-book.ac.uk/2016/spiralling-global-temperatures/&#34;&gt;here&lt;/a&gt;. A quick bit of research on this animation revealed that it has likely been viewed by millions of people, was featured in the opening ceremony of the Rio Olympics, and was created in MATLAB. Those three key points made me decide to do a post on how to re-create this exact figure in R via a bit of reverse engineering. The original GIF in question is below.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_temp.gif&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;: The ever broadening spiral of global temperatures created by &lt;a href=&#34;https://www.climate-lab-book.ac.uk/&#34;&gt;Ed Hawkins&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;data&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Data&lt;/h2&gt;
-&lt;p&gt;Figure 1 above uses the global mean temperature anomalies taken from &lt;a href=&#34;http://www.metoffice.gov.uk/hadobs/hadcrut4/&#34;&gt;HadCRUT4&lt;/a&gt;. These data have an impressive range of collection, going back to 1850. Very few datasets match this length of collection, and I’m not going to attempt to do so here. What I am going to do is use the data that I work with on a daily basis. These are the &lt;a href=&#34;https://github.com/ajsmit/SACTN&#34;&gt;SACTN&lt;/a&gt; data that may also be downloaded &lt;a href=&#34;https://robert-schlegel.shinyapps.io/SACTN/&#34;&gt;here&lt;/a&gt; via a GUI. As a coastal oceanographer I am mostly interested in changing climates in the near shore. While not publish explicitly, a &lt;a href=&#34;http://journals.ametsoc.org/doi/abs/10.1175/JCLI-D-16-0014.1&#34;&gt;paper&lt;/a&gt; about the appropriate methodology one should use does exist, and this methodology has been applied to all of the time series in the SACTN dataset accordingly. It is therefore known what the rates of decadal change along the coast of South Africa are, and we may rely on this in order to cherry pick the more dramatic time series in order to make prettier visuals.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;code&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Code&lt;/h2&gt;
-&lt;p&gt;With our end goal established (Figure 1), and our dataset chosen (SACTN), we may now get busy with the actual code necessary. As one may have inferred from the title of this post, Figure 1 is what we call a “polar plot”. This may appear complex to some, but is actually a very simple visualisation, as we shall see below. But first we need to prep our data. For consistency in the creation of the anomaly values below I will use 1981 – 2010 for the climatology of each time series.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Libraries
-library(tidyverse)
-library(viridis)
-library(lubridate)
-library(zoo)
-library(gridExtra)
-library(animation)
-
-## Data
-# SACTN
-load(&amp;quot;../../static/data/SACTN_monthly_v4.2.RData&amp;quot;)
-
-## Subset
-# Subseting function
-ts.sub &amp;lt;- function(site){
-  ts &amp;lt;- SACTN_monthly_v4.2 %&amp;gt;% 
-    filter(index == site) %&amp;gt;%
-    mutate(year = year(as.yearmon(date)),
-           month = month(as.yearmon(date), label = T),
-           clim = mean(temp[year %in% seq(1981,2010)], na.rm = T),
-           anom = temp-clim,
-           index = as.character(index)) %&amp;gt;%
-    rename(site = index) %&amp;gt;% 
-    select(site, year, month, anom)
-  return(ts)
-}
-
-# Warming site
-PN &amp;lt;- ts.sub(&amp;quot;Port Nolloth/SAWS&amp;quot;)
-
-# Cooling site
-SP &amp;lt;- ts.sub(&amp;quot;Sea Point/SAWS&amp;quot;)
-
-# Neutral site
-KB &amp;lt;- ts.sub(&amp;quot;Kent Bay/KZNSB&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With our data prepared we may now create the series of functions that will make a spiralling polar plot of temperatures for any time series we feed into it. I prefer to use the &lt;a href=&#34;https://cran.r-project.org/web/packages/animation/index.html&#34;&gt;animation&lt;/a&gt; package to create animations in R. This requires that one also installs &lt;a href=&#34;http://www.imagemagick.org/script/index.php&#34;&gt;image magick&lt;/a&gt; beforehand. This is a free software that is available for all major operating systems. There are a few ways to create animations in R, but I won’t go into that now. The method I employ to create the animations below may seem odd at first, but as far as I have seen it is the most efficient way to do so. The philosophy employed here is that we want to have one final function that simply counts forward one step at a time, creating each frame of the GIF. This function calls on other functions that are calculating the necessary stats and creating the visuals from them in the background. By creating animations in this way, our up front prep and calculation time is almost non-existent. It does mean that the animations take longer to compile, but they are also much more dynamic and we may feed any number of different dataframes into them to get different outputs. I have found over the years that the more automated ones code can be the better.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;## Function that creates a polar plot
-polar.plot &amp;lt;- function(df, i){
-  # Add bridges for polar coordinates
-  years &amp;lt;- unique(df$year)[1:i]
-  df2 &amp;lt;- filter(df, year %in% years)
-  bridges &amp;lt;- df2[df2$month == &amp;#39;Jan&amp;#39;,]
-  bridges$year &amp;lt;- bridges$year - 1
-  if(nrow(bridges) == 0){
-    bridges &amp;lt;- data.frame(site = df2$site[1], year = min(df2$year), month = NA, anom = NA)
-  } else {
-    bridges$month &amp;lt;- NA
-  }
-  blanks &amp;lt;- data.frame(site = df2$site[1], expand.grid(year = min(df2$year)-1, month = month.abb), anom = NA)
-  # Polar plot
-  pp &amp;lt;- ggplot(data = rbind(blanks, df2, bridges), aes(x = month, y = anom, group = year)) +
-    # Circular black background
-    geom_rect(colour = &amp;quot;black&amp;quot;, fill = &amp;quot;black&amp;quot;, aes(xmin = &amp;quot;Jan&amp;quot;, xmax = NA,
-                  ymin = min(df$anom, na.rm = T), ymax = max(df$anom, na.rm = T))) +
-                  # ymin = min(df$anom, na.rm = T), ymax = 3)) +
-    # Anomaly threshold labels
-    geom_hline(aes(yintercept = 1.0), colour = &amp;quot;red&amp;quot;) +
-    geom_label(aes(x = &amp;quot;Jan&amp;quot;, y = 1.0, label = &amp;quot;1.0°C&amp;quot;),
-               colour = &amp;quot;red&amp;quot;, fill = &amp;quot;black&amp;quot;, size = 3) +
-    geom_hline(aes(yintercept = 2.0), colour = &amp;quot;red&amp;quot;) +
-    geom_label(aes(x = &amp;quot;Jan&amp;quot;, y = 2.0, label = &amp;quot;2.0°C&amp;quot;),
-               colour = &amp;quot;red&amp;quot;, fill = &amp;quot;black&amp;quot;, size = 3) +
-    geom_hline(aes(yintercept = 3.0), colour = &amp;quot;red&amp;quot;) +
-    geom_label(aes(x = &amp;quot;Jan&amp;quot;, y = 3.0, label = &amp;quot;3.0°C&amp;quot;),
-               colour = &amp;quot;red&amp;quot;, fill = &amp;quot;black&amp;quot;, size = 3) +
-    geom_hline(aes(yintercept = 4.0), colour = &amp;quot;red&amp;quot;) +
-    geom_label(aes(x = &amp;quot;Jan&amp;quot;, y = 4.0, label = &amp;quot;4.0°C&amp;quot;),
-               colour = &amp;quot;red&amp;quot;, fill = &amp;quot;black&amp;quot;, size = 3) +
-    # Temperature spiral
-    geom_path(aes(colour = anom), show.legend = F) +
-    # Scale corrections
-    scale_colour_viridis(limits = c(min(df$anom, na.rm = T), max(df$anom, na.rm = T))) +
-    scale_x_discrete(expand = c(0,0), breaks = month.abb) +
-    scale_y_continuous(expand = c(0,0),
-                       limits = c(min(df$anom, na.rm = T), max(df$anom, na.rm = T))) +
-    # Year label
-    geom_text(aes(x = &amp;quot;Jan&amp;quot;, y = min(df$anom, na.rm = T), label = max(df2$year, na.rm = T)),
-              colour = &amp;quot;ivory&amp;quot;, size = 8) +
-    # Additional tweaks
-    ggtitle(paste0(df$site[1],&amp;quot; temperature change (&amp;quot;,min(df$year),&amp;quot;-&amp;quot;,max(df$year),&amp;quot;)&amp;quot;)) +
-    coord_polar() +
-    theme(panel.background = element_rect(fill = &amp;quot;grey20&amp;quot;),
-          plot.background = element_rect(fill = &amp;quot;grey20&amp;quot;),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          # axis.text.x = element_text(colour = &amp;quot;ivory&amp;quot;),
-          axis.text.x = element_text(colour = &amp;quot;ivory&amp;quot;, angle =
-            (360/(2*pi)*rev(seq(pi/12, 2*pi-pi/12, len = 12)))+15,
-            size = 12),
-          axis.text.y = element_blank(),
-          axis.title = element_blank(),
-          axis.ticks = element_blank(),
-          axis.ticks.length = unit(0, &amp;quot;cm&amp;quot;),
-          plot.title = element_text(hjust = 0.5, colour = &amp;quot;ivory&amp;quot;, size = 15))
-  print(pp)
-}
-
-## Create animation of polar plots
-animate.polar.plot &amp;lt;- function(df) {
-  lapply(seq(1,length(unique(df$year))), function(i) {
-    polar.plot(df = df, i = i)
-  })
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With the above two functions created, we may now call them nested within one another via the &lt;code&gt;saveGIF&lt;/code&gt; function below.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# By default &amp;#39;saveGIF()&amp;#39; outputs to the same folder 
-# the script where the code is being run from is located.
-# For that reason one may want to manually change the
-# working directory beforehand.
-# setwd(&amp;quot;somewhere else&amp;quot;)
-system.time(saveGIF(animate.polar.plot(df = PN), interval = 0.4, ani.width = 457, 
-                    movie.name = &amp;quot;polar_plot_PN.gif&amp;quot;)) ## 262 seconds
-system.time(saveGIF(animate.polar.plot(df = SP), interval = 0.4, ani.width = 457, 
-                    movie.name = &amp;quot;polar_plot_SP.gif&amp;quot;)) ## 221 seconds
-system.time(saveGIF(animate.polar.plot(df = KB), interval = 0.4, ani.width = 457, 
-                    movie.name = &amp;quot;polar_plot_KB.gif&amp;quot;)) ## 183 seconds
-# setwd(&amp;quot;back to where you were&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
-&lt;p&gt;As one may see in the following GIFs, local extremes often outpace global averages. This should not be terribly surprising. In order to better illustrate this I have expanded the anomaly labels along the y-axes more so than seen in Figure 1. The increasing patterns are not as clear in these following GIFs as in the original that they are based on. This is because the original is based on a global average, which provides for a much smoother trend. I hope people enjoy these and feel free to plop your own temperature time series into the code to create your own polar plot figures!&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_plot_PN.gif&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Figure 2&lt;/strong&gt;: The polar plot for Port Nolloth, where temperatures have been increasing.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_plot_SP.gif&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Figure 3&lt;/strong&gt;: The polar plot for Sea Point, where temperatures have been decreasing.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.com/img/polar_plot_KB.gif&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Figure 4&lt;/strong&gt;: The polar plot for Kent Bay, where temperatures have been holding level.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Sequential sites</title>
-      <link>https://theoceancode.netlify.com/post/seq_sites/</link>
-      <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/post/seq_sites/</guid>
-      <description>
-
-
-&lt;div id=&#34;preface&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Preface&lt;/h2&gt;
-&lt;p&gt;The rest of the blog post after this preface section is a copy of the vignette I’ve written for the first function in the new package I am developing: &lt;code&gt;coastR&lt;/code&gt;. This package aims to provide functions that are useful for coastal oceanography but that do not yet exist in the R language. It is not my intention to provide algorithms for physical oceanography as these may already be found elsewhere. This post covers how one may determine the correct sequence of sites along a convoluted coastline.&lt;/p&gt;
-&lt;p&gt;Now that I’ve handed in my PhD I am a little less pressed as far as deadlines go and I would like to return to my habit of creating a new blog post every Friday. I’ve written quite a bit of code over the last three years and much of it needs to find it’s way into the &lt;code&gt;coastR&lt;/code&gt;. Next week I am planning on uploading a function for calculating shore normal transects. Until then, please enjoy the spectacle of sequential ordering. Woo.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;overview&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;The human mind prefers to see patterns in whatever it encounters. To this end we try to provide ourselves with data that are stored in a way that will appeal to that disposition. For a time series this usually means that the data are saved sequentially through time. For spatial data this means that the data are saved in some sort of sequential state, too. But what might that be? For 2D, 3D, or 4D data this can get tricky rather quickly and one tends to default to netcdf files. But with 1D data we are able to decide how we want the data to be structured as they will fit within a simple dataframe. But how can spatial data be 1D? Nothing in nature truly is, but I use 1D here as an expedient way of describing data that are constrained to some physical (usually continuous) barrier. Specifically for use with &lt;code&gt;seq_sites()&lt;/code&gt; we will be looking at sites along a coastline.&lt;/p&gt;
-&lt;p&gt;If one has meta-data for a number of sampling sites they should be saved in the order they may be found along the coastline. Some would perhaps prefer to order sites alphabetically, I am not one of them for a number of reasons. Not least of which being that this is too simple a way of organising. One could also choose to organise ones coastal sites in numerical order of either longitude or latitude. This quickly becomes problematic for most stretches of coastline as natural formations such as peninsulas and embayments will prevent the correct ordering of sites based on only latitude or longitude. It is therefore necessary to query the longitude and latitude of each site in a list against a land mask in order to determine the correct order along the coastline. This is what will be demonstrated below.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# devtools::install_github(&amp;quot;robwschlegel/coastR&amp;quot;) # Install coastR
-library(coastR)
-library(tidyverse)
-library(gridExtra)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;sample-locations&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Sample locations&lt;/h2&gt;
-&lt;p&gt;For the purpose of this vignette we will manually create a few dataframes for different coastlines around the world of varying degrees of complexity and length. The first two dataframes are taken from the SACTN site list included in the &lt;code&gt;coastR&lt;/code&gt; package. The rest have their lon/lat values grabbed from Google maps. Note that the order of the sites is intentionally entered incorrectly so as to be able to demonstrate the efficacy of &lt;code&gt;seq_sites()&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Cape Point, South Africa
-cape_point &amp;lt;- SACTN_site_list %&amp;gt;% 
-  slice(c(31, 22, 26, 17, 19, 21, 30)) %&amp;gt;% 
-  mutate(order = 1:n())
-
-# South Africa
-south_africa &amp;lt;- SACTN_site_list %&amp;gt;% 
-  slice(c(1,34, 10, 20, 50, 130, 90)) %&amp;gt;% 
-  mutate(order = 1:n())
-
-# Baja Peninsula, Mexico
-baja_pen &amp;lt;- data.frame(
-  order = 1:7,
-  lon = c(-116.4435, -114.6800, -109.6574, -111.9503, -112.2537, -113.7918, -114.1881),
-  lat = c(30.9639, 30.7431, 22.9685, 26.9003, 25.0391, 29.4619, 28.0929)
-)
-
-# Bohai Sea, China
-bohai_sea &amp;lt;- data.frame(
-  order = 1:7,
-  lon = c(122.0963, 121.2723, 121.0687, 121.8742, 120.2962, 117.6650, 122.6380),
-  lat = c(39.0807, 39.0086, 37.7842, 40.7793, 40.0691, 38.4572, 37.4494)
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;sequential-sites&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Sequential sites&lt;/h2&gt;
-&lt;p&gt;Now that we have our sample sites it is time to order them correctly along the coast sequentially. Should one prefer the opposite order to what &lt;code&gt;seq_sites()&lt;/code&gt; produces, this may be changed by using the &lt;code&gt;reverse&lt;/code&gt; argument found within the function. Additionally, if one has sites located on islands just off the coast, one may choose to allow the algorithm to take these islands into account. Note that this then will force the algorithm to calculate the sequential order of these sites as though they were part of a different sequence because they will no longer be on the same 1D plain. Generally this would not be desirable and one would rather order sites on coastal islands in line with the rest of the coast. This is the default setting, but we may see how this changes with the Baja Peninsula site list.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# NB: This code will produce warnings
-  # This is fine as it is stating that the
-  # &amp;#39;order&amp;#39; column has been re-written,
-  # which is the intended result of this function.
-
-# Cape Point, South Africa
-cape_point_seq &amp;lt;- seq_sites(cape_point)
-
-# South Africa
-south_africa_seq &amp;lt;- seq_sites(south_africa)
-
-# Baja Peninsula, Mexico
-baja_pen_seq &amp;lt;- seq_sites(baja_pen)
-baja_pen_island_seq &amp;lt;- seq_sites(baja_pen, coast = FALSE)
-
-# Bohai sea, China
-bohai_sea_seq &amp;lt;- seq_sites(bohai_sea)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;comparison&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Comparison&lt;/h2&gt;
-&lt;p&gt;With the sites correctly ordered sequentially along the coast we may now compare the before and after products. To do so in a tidy way we will first create a function that plots our sites for us on a global map.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Create base map
-world_map &amp;lt;- ggplot() + 
-  borders(fill = &amp;quot;grey40&amp;quot;, colour = &amp;quot;black&amp;quot;)
-
-# Create titles
-titles &amp;lt;- c(&amp;quot;Deurmekaar&amp;quot;, &amp;quot;Sequential&amp;quot;, &amp;quot;Islands&amp;quot;)
-
-# Plotting function
-plot_sites &amp;lt;- function(site_list, buffer, title_choice){
-  world_map +
-  geom_point(data = site_list, size = 6,
-             aes(x = lon, y = lat, colour = as.factor(order))) +
-  coord_cartesian(xlim = c(min(site_list$lon - buffer), 
-                           max(site_list$lon + buffer)),
-                  ylim = c(min(site_list$lat - buffer), 
-                           max(site_list$lat + buffer))) +
-  labs(x = &amp;quot;&amp;quot;, y = &amp;quot;&amp;quot;, colour = &amp;quot;Site\norder&amp;quot;) +
-  ggtitle(titles[title_choice])
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;div id=&#34;cape-point-south-africa&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Cape Point, South Africa&lt;/h3&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cape_point_map &amp;lt;- plot_sites(cape_point, 0.5, 1)
-cape_point_seq_map &amp;lt;- plot_sites(cape_point_seq, 0.5, 2)
-grid.arrange(cape_point_map, cape_point_seq_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.com/post/seq_sites_files/figure-html/cape_point_comp-1.png&#34; alt=&#34;Comparison of site ordering around Cape Point, South Africa.&#34; width=&#34;960&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;
-(#fig:cape_point_comp)Comparison of site ordering around Cape Point, South Africa.
-&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;south-africa&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;South Africa&lt;/h3&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;south_africa_map &amp;lt;- plot_sites(south_africa, 1, 1)
-south_africa_seq_map &amp;lt;- plot_sites(south_africa_seq, 1, 2)
-grid.arrange(south_africa_map, south_africa_seq_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.com/post/seq_sites_files/figure-html/south_africa_comp-1.png&#34; alt=&#34;Comparison of site ordering around South Africa.&#34; width=&#34;960&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;
-(#fig:south_africa_comp)Comparison of site ordering around South Africa.
-&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;baja-peninsula-mexico&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Baja Peninsula, Mexico&lt;/h3&gt;
-&lt;p&gt;Note in the image below that site seven in the ‘Islands’ panel appears to be ordered incorrectly. This is because we have asked the function to first look for sites along the coast, and then order sites around nearby islands by setting the argument &lt;code&gt;coast&lt;/code&gt; to TRUE. This is because the algorithm only works on one continuous line. When islands are introduced this then represents a second set of 1D coordinates and so the algorithm plans accordingly. This feature has been added so that if one chooses to have islands be apart from the initial ordering of the coastal sites it may be done. The default however is to remove islands from the coastal land mask so that they are ordered according to their nearest location to the coast.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;baja_pen_map &amp;lt;- plot_sites(baja_pen, 1, 1)
-baja_pen_seq_map &amp;lt;- plot_sites(baja_pen_seq, 1, 2)
-baja_pen_island_seq_map &amp;lt;- plot_sites(baja_pen_island_seq, 1, 3)
-grid.arrange(baja_pen_map, baja_pen_seq_map, baja_pen_island_seq_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.com/post/seq_sites_files/figure-html/baja_pen_comp-1.png&#34; alt=&#34;Comparison of site ordering around the Baja Peninsula, Mexico.&#34; width=&#34;960&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;
-(#fig:baja_pen_comp)Comparison of site ordering around the Baja Peninsula, Mexico.
-&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;bohai-sea-china&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Bohai Sea, China&lt;/h3&gt;
-&lt;p&gt;Below in the ‘Sequential’ panel we see the result of having set the &lt;code&gt;reverse&lt;/code&gt; argument to TRUE. Hardly noticeable, but potentially useful.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bohai_sea_map &amp;lt;- plot_sites(bohai_sea, 1, 1)
-bohai_sea_seq_map &amp;lt;- plot_sites(bohai_sea_seq, 1, 2)
-grid.arrange(bohai_sea_map, bohai_sea_seq_map, nrow = 1)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.com/post/seq_sites_files/figure-html/bohai_sea_comp-1.png&#34; alt=&#34;Comparison of site ordering around the Bohai Sea, China.&#34; width=&#34;960&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;
-(#fig:bohai_sea_comp)Comparison of site ordering around the Bohai Sea, China.
-&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;The usefulness of the &lt;code&gt;seq_sites()&lt;/code&gt; function is demonstrated above on a number of different scales and coastal features. This is in no way an exhaustive test of this function and I welcome any input from anyone that uses it for their own work. The premise on which this function operates is very basic and so theoretically it should be very adaptive. The only thing to look out for is if one has a very convoluted coastline with a long stretch without any sites as the algorithm may think this is two separate coastlines.&lt;/p&gt;
-&lt;/div&gt;
-</description>
     </item>
     
   </channel>

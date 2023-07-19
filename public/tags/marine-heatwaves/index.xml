@@ -40,6 +40,15 @@
     </item>
     
     <item>
+      <title>Demo for the MHW definition</title>
+      <link>https://theoceancode.netlify.com/project/demomhw/</link>
+      <pubDate>Mon, 25 Mar 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/project/demomhw/</guid>
+      <description>An interactive application that allows the user to explore the components of the MHW definition.</description>
+    </item>
+    
+    <item>
       <title>Marine heatwave tracker</title>
       <link>https://theoceancode.netlify.com/project/mhwtracker/</link>
       <pubDate>Mon, 25 Mar 2019 00:00:00 +0100</pubDate>
