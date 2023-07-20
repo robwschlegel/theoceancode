@@ -15,7 +15,7 @@
   
     
   
-  <meta name="description" content="Objective Having been working in environmental science for several years now, entirely using R, I’ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn’t be. Most data hosting organisations do want scientists to use their data and do make it freely available.">
+  <meta name="description" content="Objective Having been working in environmental science for several years now, entirely using R, I&rsquo;ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn&rsquo;t be. Most data hosting organisations do want scientists to use their data and do make it freely available.">
 
   
   <link rel="alternate" hreflang="en-uk" href="https://theoceancode.netlify.com/post/dl_env_data_r/">
@@ -108,7 +108,7 @@
   <meta property="og:site_name" content="The Ocean Code">
   <meta property="og:url" content="https://theoceancode.netlify.com/post/dl_env_data_r/">
   <meta property="og:title" content="Downloading environmental data in R | The Ocean Code">
-  <meta property="og:description" content="Objective Having been working in environmental science for several years now, entirely using R, I’ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn’t be. Most data hosting organisations do want scientists to use their data and do make it freely available.">
+  <meta property="og:description" content="Objective Having been working in environmental science for several years now, entirely using R, I&rsquo;ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn&rsquo;t be. Most data hosting organisations do want scientists to use their data and do make it freely available.">
   <meta property="og:locale" content="en-uk">
   
   <meta property="article:published_time" content="2020-02-14T00:00:00&#43;00:00">
@@ -414,11 +414,11 @@
     <div class="article-style" itemprop="articleBody">
       
 
+<h2 id="objective">Objective</h2>
 
-<div id="objective" class="section level2">
-<h2>Objective</h2>
-<p>Having been working in environmental science for several years now, entirely using R, I’ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn’t be. Most data hosting organisations do want scientists to use their data and do make it freely available. But sometimes it feels like the path to access was designed by crab people, rather than normal topside humans. I recently needed to gather several new data products and in classic ‘cut your nose off to spite your face’ fashion I insisted on doing all of it directly through an R script that could be run in RStudio. Besides being stubborn, one of the main reasons I felt this was necessary is that I wanted these download scripts to be able to be run operationally via a cron job. I think I came out pretty successful in the end so wanted to share the code with the rest of the internet. Enjoy.</p>
-<pre class="r"><code># Packages not available via CRAN
+<p>Having been working in environmental science for several years now, entirely using R, I&rsquo;ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn&rsquo;t be. Most data hosting organisations do want scientists to use their data and do make it freely available. But sometimes it feels like the path to access was designed by crab people, rather than normal topside humans. I recently needed to gather several new data products and in classic &lsquo;cut your nose off to spite your face&rsquo; fashion I insisted on doing all of it directly through an R script that could be run in RStudio. Besides being stubborn, one of the main reasons I felt this was necessary is that I wanted these download scripts to be able to be run operationally via a cron job. I think I came out pretty successful in the end so wanted to share the code with the rest of the internet. Enjoy.</p>
+
+<pre><code class="language-r"># Packages not available via CRAN
 remotes::install_github(&quot;skgrange/threadr&quot;)
 remotes::install_github(&quot;markpayneatwork/RCMEMS&quot;)
 
@@ -429,20 +429,23 @@ library(XML) # For reading the HTML tables created by RCurl
 library(tidync) # For easily dealing with NetCDF data
 library(doParallel) # For parallel processing
 library(threadr) # For downloading from FTP sites that require user credentials
-library(RCMEMS) # For subsetting CMEMS data before download</code></pre>
-</div>
-<div id="downloading-noaa-oisst" class="section level2">
-<h2>Downloading NOAA OISST</h2>
-<p>I’ve already written a post about how to download NOAA OISST data using the <strong><code>rerddap</code></strong> package which may be found <a href="https://robwschlegel.github.io/heatwaveR/articles/OISST_preparation.html">here</a>. That post talks about how to get subsets of NOAA data, which is useful for projects with a refined scope, but it is laboriously slow if one simply wants the full global product. It must also be noted that as of this writing (June 3rd, 2020) the new OISST v2.1 data were not yet available on the ERDDAP server even though the old v2 data have now been rendered unavailable. For the time being it is necessary to download the full global data and then subset down to one’s desired study area. The following section of this blog post will outline how to do that.</p>
+library(RCMEMS) # For subsetting CMEMS data before download
+</code></pre>
+
+<h2 id="downloading-noaa-oisst">Downloading NOAA OISST</h2>
+
+<p>I&rsquo;ve already written a post about how to download NOAA OISST data using the <strong><code>rerddap</code></strong> package which may be found <a href="https://robwschlegel.github.io/heatwaveR/articles/OISST_preparation.html" target="_blank">here</a>. That post talks about how to get subsets of NOAA data, which is useful for projects with a refined scope, but it is laboriously slow if one simply wants the full global product. It must also be noted that as of this writing (June 3rd, 2020) the new OISST v2.1 data were not yet available on the ERDDAP server even though the old v2 data have now been rendered unavailable. For the time being it is necessary to download the full global data and then subset down to one&rsquo;s desired study area. The following section of this blog post will outline how to do that.</p>
+
 <p>I need to stress that this is a very direct and unlimited method for accessing these data and I urge responsibility in only downloading as much data as are necessary. Please do not download the entire dataset just because you can.</p>
-<pre class="r"><code># First we tell R where the data are on the interwebs
+
+<pre><code class="language-r"># First we tell R where the data are on the interwebs
 OISST_url_month &lt;- &quot;https://www.ncei.noaa.gov/data/sea-surface-temperature-optimum-interpolation/v2.1/access/avhrr/&quot;
 
 # Then we pull that into a happy format
   # There is a lot here so it takes ~1 minute
 OISST_url_month_get &lt;- getURL(OISST_url_month)
 
-# Before we continue let&#39;s set a limit on the data we are going to download
+# Before we continue let's set a limit on the data we are going to download
   # NB: One should not simply download the entire dataset just because it is possible.
   # There should be a compelling reason for doing so.
 start_date &lt;- as.Date(&quot;2019-01-01&quot;)
@@ -476,7 +479,7 @@ OISST_filenames &lt;- OISST_filenames %&gt;%
 
 # This function will go about downloading each day of data as a NetCDF file
 # We will run this via plyr to expedite the process
-# Note that this will download files into a &#39;data/OISST&#39; folder in the root directory
+# Note that this will download files into a 'data/OISST' folder in the root directory
 # If this folder does not exist it will create it
 # This function will also check if the file has been previously downloaded
 OISST_url_daily_dl &lt;- function(target_URL){
@@ -494,12 +497,15 @@ doParallel::registerDoParallel(cores = 3)
 system.time(plyr::ldply(OISST_filenames$full_name, .fun = OISST_url_daily_dl, .parallel = T)) # ~15 seconds
 
 # In roughly 15 seconds a user may have a full month of global data downloaded
-# This scales well into years and decades, too</code></pre>
+# This scales well into years and decades, too
+</code></pre>
+
 <p>Because it is not currently possible to download subsetted OISST data from a GRIDDAP server I find that it is useful to include here the code one would use to load and subset downloaded OISST data. Please note that the OISST data have longitude values from 0 to 360, not -180 to 180.</p>
-<pre class="r"><code># This function will load and subset daily data into one data.frame
+
+<pre><code class="language-r"># This function will load and subset daily data into one data.frame
 # Note that the subsetting of lon/lat is done before the data are loaded
 # This means it will use much less RAM and is viable for use on most laptops
-# Assuming one&#39;s study area is not too large
+# Assuming one's study area is not too large
 OISST_load &lt;- function(file_name, lon1, lon2, lat1, lat2){
       OISST_dat &lt;- tidync(file_name) %&gt;%
         hyper_filter(lon = between(lon, lon1, lon2),
@@ -518,12 +524,14 @@ OISST_files &lt;- dir(&quot;~/data/OISST&quot;, full.names = T)
 OISST_dat &lt;- plyr::ldply(.data = OISST_files, .fun = OISST_load, .parallel = T,
                          lon1 = 260, lon2 = 280, lat1 = 30, lat2 = 50)
 
-# This should only take a few seconds to run at most</code></pre>
-</div>
-<div id="downloading-cci" class="section level2">
-<h2>Downloading CCI</h2>
+# This should only take a few seconds to run at most
+</code></pre>
+
+<h2 id="downloading-cci">Downloading CCI</h2>
+
 <p>An up-and-coming star in the world of remotely sensed data products, the Climate Change Initiative (CCI) has recently been putting out some industry leading products. These are all freely available for access and use for scientific research purposes. These have quickly become regarded as the most accurate products available and their use is now encouraged over other products. Unfortunately they are not available in near-real-time and so can currently only be used for historic analyses. A recent update of these data for 2017 and 2018 was made available and one assumes that 2019 will follow suit some time by the end of 2020.</p>
-<pre class="r"><code># The URLs where the data are housed for direct download
+
+<pre><code class="language-r"># The URLs where the data are housed for direct download
   # NB: Note that the versions are different; v2.1 vs. v2.0
   # NB: It looks like going straight through the thredds server is a more stable option
 CCI_URL_old &lt;- &quot;http://dap.ceda.ac.uk/thredds/fileServer/neodc/esacci/sst/data/CDR_v2/Analysis/L4/v2.1&quot;
@@ -531,7 +539,7 @@ CCI_URL_new &lt;- &quot;http://dap.ceda.ac.uk/thredds/fileServer/neodc/c3s_sst/d
 
 # The date ranges that are housed therein
   # NB: These are historic repos and therefore the dates are static
-  # I assume that the &#39;new&#39; data will be updated through 2019 by the end of 2020
+  # I assume that the 'new' data will be updated through 2019 by the end of 2020
 date_range_old &lt;- seq(as.Date(&quot;1981-09-01&quot;), as.Date(&quot;2016-12-31&quot;), by = &quot;day&quot;)
 date_range_new &lt;- seq(as.Date(&quot;2017-01-01&quot;), as.Date(&quot;2018-12-31&quot;), by = &quot;day&quot;)
 
@@ -568,27 +576,29 @@ download_CCI &lt;- function(date_choice, CCI_URL){
 doParallel::registerDoParallel(cores = 3)
 
 # Download all old data: 1981-09-01 to 2016-12-31
-  # NB: Note the &#39;[1:3]&#39; below. This limits the downloads to only the first three files
+  # NB: Note the '[1:3]' below. This limits the downloads to only the first three files
   # Delete that to download everything.
   # But please do not download ALL of the files unless there is a need to do so.
 plyr::l_ply(date_range_old[1:3], .fun = download_CCI, CCI_URL = CCI_URL_old, .parallel = T)
 
 # Download all new data: 2016-01-01 to 2018-12-31
-plyr::l_ply(date_range_new[1:3], .fun = download_CCI, CCI_URL = CCI_URL_new, .parallel = T)</code></pre>
-</div>
-<div id="downloading-ostia" class="section level2">
-<h2>Downloading OSTIA</h2>
-<p>As noted above, CCI data products are quickly becoming the preferred standard. Unfortunately they are not available in near-real-time. This is where OSTIA data come in to fill the gap. Though not exactly the same assimilation process as CCI, these products come from the same suite of data sources. I do not yet know if these data for 2019 onwards can be used in combination with a climatology created from the CCI data, but it is on my to do list to find out. In order to download these data one will need to have a <a href="http://marine.copernicus.eu/">CMEMS</a> account. This is free for researchers and very fast to sign up for. Once one has received a user name and password it is possible to use the code below to download the data via their FTP server. No Python required!</p>
-<pre class="r"><code># The URL where the data are housed for FTP
+plyr::l_ply(date_range_new[1:3], .fun = download_CCI, CCI_URL = CCI_URL_new, .parallel = T)
+</code></pre>
+
+<h2 id="downloading-ostia">Downloading OSTIA</h2>
+
+<p>As noted above, CCI data products are quickly becoming the preferred standard. Unfortunately they are not available in near-real-time. This is where OSTIA data come in to fill the gap. Though not exactly the same assimilation process as CCI, these products come from the same suite of data sources. I do not yet know if these data for 2019 onwards can be used in combination with a climatology created from the CCI data, but it is on my to do list to find out. In order to download these data one will need to have a <a href="http://marine.copernicus.eu/" target="_blank">CMEMS</a> account. This is free for researchers and very fast to sign up for. Once one has received a user name and password it is possible to use the code below to download the data via their FTP server. No Python required!</p>
+
+<pre><code class="language-r"># The URL where the data are housed for FTP
 OSTIA_URL &lt;- &quot;ftp://nrt.cmems-du.eu/Core/SST_GLO_SST_L4_NRT_OBSERVATIONS_010_001/METOFFICE-GLO-SST-L4-NRT-OBS-SST-V2&quot;
 
 # The date ranges that are housed therein
 # NB: These are historic repos and therefore the dates are static
-# I assume that the &#39;new&#39; data will be updated through 2019 by the end of 2020
+# I assume that the 'new' data will be updated through 2019 by the end of 2020
 date_range &lt;- seq(as.Date(&quot;2019-01-01&quot;), as.Date(&quot;2019-01-03&quot;), by = &quot;day&quot;)
 
 # Enter ones credentials here
-# Note that the &#39;:&#39;  between &#39;username&#39; and &#39;password&#39; is required
+# Note that the ':'  between 'username' and 'password' is required
 user_credentials &lt;- &quot;username:password&quot;
 
 # Download function 
@@ -616,16 +626,18 @@ download_OSTIA &lt;- function(date_choice, user_credentials){
 doParallel::registerDoParallel(cores = 3)
 
 # Download data from 2019-01-01 to present day
-  # NB: Some files won&#39;t download when run in parallel
+  # NB: Some files won't download when run in parallel
   # I think the FTP server may be more aware of multiple requests than an HTTPS server
   # It may also have been due to high server use at the time, too
 plyr::l_ply(date_range, .fun = download_OSTIA, .parallel = T, 
-            user_credentials = user_credentials)</code></pre>
-</div>
-<div id="downloading-glorys" class="section level2">
-<h2>Downloading GLORYS</h2>
-<p>At this point one may be thinking “wait a second, these have all been SST only products, this isn’t really a post about environmental data!”. But that’s where GLORYS comes in. This product has a range of variables one may be interested in. Not just SST. But yes, they are all physical variables. No bio-geochemistry in sight. Bamboozled! But if you’ve read this far, why stop now?! These data require a <a href="http://marine.copernicus.eu/">CMEMS</a> account, same as the OSTIA data. They can also be downloaded via direct FTP access, but these files are enormous so in almost every use case this is not what one is intending to do. Rather these data are almost always subsetted in some way first. Luckily CMEMS has made this available to their user base with the introduction of the <a href="https://github.com/clstoulouse/motu-client-python/releases">MOTU client</a>. Unluckily they have only made this available for use in Python. I have asked the people behind this process in person if there are plans for an officially supported R version and the short and long answers were no. That’s where Mark Payne and his <a href="https://github.com/markpayneatwork/RCMEMS">RCMEMS</a> package enter the picture. He has wrapped the MOTU client for Python up in a handy R package that allows us to access, subset, and download CMEMS data all through the comfort of the RStudio interface! There is a tutorial on the GitHub repo that walks through the process that I show below if one would like an additional look at this process.</p>
-<pre class="r"><code># Non-R software
+            user_credentials = user_credentials)
+</code></pre>
+
+<h2 id="downloading-glorys">Downloading GLORYS</h2>
+
+<p>At this point one may be thinking &ldquo;wait a second, these have all been SST only products, this isn&rsquo;t really a post about environmental data!&rdquo;. But that&rsquo;s where GLORYS comes in. This product has a range of variables one may be interested in. Not just SST. But yes, they are all physical variables. No bio-geochemistry in sight. Bamboozled! But if you&rsquo;ve read this far, why stop now?! These data require a <a href="http://marine.copernicus.eu/" target="_blank">CMEMS</a> account, same as the OSTIA data. They can also be downloaded via direct FTP access, but these files are enormous so in almost every use case this is not what one is intending to do. Rather these data are almost always subsetted in some way first. Luckily CMEMS has made this available to their user base with the introduction of the <a href="https://github.com/clstoulouse/motu-client-python/releases" target="_blank">MOTU client</a>. Unluckily they have only made this available for use in Python. I have asked the people behind this process in person if there are plans for an officially supported R version and the short and long answers were no. That&rsquo;s where Mark Payne and his <a href="https://github.com/markpayneatwork/RCMEMS" target="_blank">RCMEMS</a> package enter the picture. He has wrapped the MOTU client for Python up in a handy R package that allows us to access, subset, and download CMEMS data all through the comfort of the RStudio interface! There is a tutorial on the GitHub repo that walks through the process that I show below if one would like an additional look at this process.</p>
+
+<pre><code class="language-r"># Non-R software
 # Unfortunately the subsetting of CMEMS data will require that one has Python installed
 # https://www.python.org/downloads/
 # Then one must download
@@ -654,7 +666,7 @@ download_GLORYS &lt;- function(date_choice){
     # This is a dummy script first generated by using the UI on the CMEMS website
     # No need to change anything here except for the --user and --pwd at the end
     # Please place your CMEMS username and password in those fields
-  GLORYS_script &lt;- &#39;python ~/motuclient-python/motuclient.py --motu http://my.cmems-du.eu/motu-web/Motu --service-id GLOBAL_REANALYSIS_PHY_001_030-TDS --product-id global-reanalysis-phy-001-030-daily --longitude-min -180 --longitude-max 179.9166717529297 --latitude-min -80 --latitude-max 90 --date-min &quot;2018-12-25 12:00:00&quot; --date-max &quot;2018-12-25 12:00:00&quot; --depth-min 0.493 --depth-max 0.4942 --variable thetao --variable bottomT --variable so --variable zos --variable uo --variable vo --variable mlotst --variable siconc --variable sithick --variable usi --variable vsi --out-dir data --out-name test.nc --user username --pwd password&#39;
+  GLORYS_script &lt;- 'python ~/motuclient-python/motuclient.py --motu http://my.cmems-du.eu/motu-web/Motu --service-id GLOBAL_REANALYSIS_PHY_001_030-TDS --product-id global-reanalysis-phy-001-030-daily --longitude-min -180 --longitude-max 179.9166717529297 --latitude-min -80 --latitude-max 90 --date-min &quot;2018-12-25 12:00:00&quot; --date-max &quot;2018-12-25 12:00:00&quot; --depth-min 0.493 --depth-max 0.4942 --variable thetao --variable bottomT --variable so --variable zos --variable uo --variable vo --variable mlotst --variable siconc --variable sithick --variable usi --variable vsi --out-dir data --out-name test.nc --user username --pwd password'
   
   # Prep the necessary URL pieces
   date_start &lt;- parse_date(date_choice, format = &quot;%Y-%m&quot;)
@@ -691,15 +703,15 @@ download_GLORYS &lt;- function(date_choice){
   Sys.sleep(2) # Give the server a quick breather
 }
 
-# I&#39;ve limited the download to only 1 file
-# Delete &#39;[1]&#39; to download everything
+# I've limited the download to only 1 file
+# Delete '[1]' to download everything
   #NB: The CMEMS server is a little wonky, rather not try to multicore this
-plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)</code></pre>
-</div>
-<div id="conclusion" class="section level2">
-<h2>Conclusion</h2>
-<p>I hope this has been a useful whack of data for anyone looking to download any of these products for their science. The techniques laid out in the code here should apply to most other data products as well as there aren’t that many different methods of hosting data. If I’ve missed anything that people feel is an important data source that can’t be adapted from the code here let me know and I’m happy to see what I can do.</p>
-</div>
+plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I hope this has been a useful whack of data for anyone looking to download any of these products for their science. The techniques laid out in the code here should apply to most other data products as well as there aren&rsquo;t that many different methods of hosting data. If I&rsquo;ve missed anything that people feel is an important data source that can&rsquo;t be adapted from the code here let me know and I&rsquo;m happy to see what I can do.</p>
 
     </div>
 
@@ -720,6 +732,16 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)</code
 
 
     
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/dl_env_data_r/">Downloading environmental data in R</a></li>
+        
+      </ul>
+    </div>
     
 
     

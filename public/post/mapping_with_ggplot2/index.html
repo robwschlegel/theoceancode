@@ -15,7 +15,7 @@
   
     
   
-  <meta name="description" content="Objective There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always “Figure 1”. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area.">
+  <meta name="description" content="Objective There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always &ldquo;Figure 1&rdquo;. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area.">
 
   
   <link rel="alternate" hreflang="en-uk" href="https://theoceancode.netlify.com/post/mapping_with_ggplot2/">
@@ -108,7 +108,7 @@
   <meta property="og:site_name" content="The Ocean Code">
   <meta property="og:url" content="https://theoceancode.netlify.com/post/mapping_with_ggplot2/">
   <meta property="og:title" content="Mapping with ggplot2 | The Ocean Code">
-  <meta property="og:description" content="Objective There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always “Figure 1”. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area.">
+  <meta property="og:description" content="Objective There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always &ldquo;Figure 1&rdquo;. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area.">
   <meta property="og:locale" content="en-uk">
   
   <meta property="article:published_time" content="2017-07-17T00:00:00&#43;00:00">
@@ -414,17 +414,19 @@
     <div class="article-style" itemprop="articleBody">
       
 
+<h2 id="objective">Objective</h2>
 
-<div id="objective" class="section level2">
-<h2>Objective</h2>
-<p>There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always “Figure 1”. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area. Being a happy convert to the <a href="https://cran.r-project.org/web/packages/tidyverse/">tidyverse</a> I only teach the graphics of <a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a>. I have found that people often prefer to use the <a href="https://cran.r-project.org/web/packages/ggmap/">ggmap</a> extension to create ggplot quality figures with Google map backgrounds, but I personally think that a more traditional monotone background for maps looks more professional. What I’ve decided to showcase this week is the data and code required to create a publication quality map. Indeed, the following code will create the aforementioned obligatory “Figure 1” in a paper I am currently preparing for submission.</p>
-</div>
-<div id="data" class="section level2">
-<h2>Data</h2>
-<p>There are heaps of packages etc. that one may use to create maps. And there is a never ending source of blogs, books and tutorials that illustrate many of the different ways to visualise spatial data. For my international and geographic borders I prefer to use data I’ve downloaded from <a href="https://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html">GSHHSG</a> and then converted to dataframes using functions found in the <a href="https://cran.r-project.org/web/packages/PBSmapping/">PBSmapping</a> package. I then save these converted dataframes as .Rdata objects on my computer for ease of use with all of my projects. For the domestic borders of a country, which I won’t use in this post, one may go <a href="http://gadm.org/">here</a>. Note however that for some strange reason this website still has the pre-1994 borders for South Africa. For the correct SA borders one must go <a href="http://www.demarcation.org.za/index.php/downloads/boundary-data/boundary-data-main-files/province">here</a>. The current SA borders may actually be download in the .Rdata format, which is neat.</p>
-<p>Once one has the borders to be used in the map, the next step is to think about what one actually wants to show. The main purpose of this map is to show where several in situ coastal seawater temperature time series were collected. This could be done quite simply but a plain black and white map is offensively boring so we want to make sure there is a good amount of (but not too much!) colour in order to entice the reader. I personally find pictures of meso-scale oceanic phenomena particularly beautiful so try to include them whenever I can. Luckily that is also what I study so it is not strange that I include such things in my work. Now if only I studied panda’s, too…</p>
-<p>Panda’s aside, the current work I am engaged in also requires that the atmospheric processes around southern Africa be considered in addition to the oceanography. To visualise both air and sea concurrently would be a mess so we will want to create separate panels for each. Because I have been working with reanalysis data lately, and not satellite data, I am also able to include the wind/ current vectors in order to really help the temperature patterns pop. The oceanic data are from the <a href="wp.csiro.au/bluelink">BRAN2016</a> product and the atmospheric data are from <a href="http://www.ecmwf.int/en/research/climate-reanalysis/era-interim">ERA-Interim</a>. Both of which are available for download for free for scientific pursuits. I’ve chosen here to use the mean values for January 1st as the summer months provide the most clear example of the thermal differences between the Agulhas and Benguela currents. The code used to create the scale bar in the maps may be found <a href="http://editerna.free.fr/wp/?p=76">here</a>. It’s not a proper ggplot geom function but works well enough. I’ve also decided to add the 200 m isobath to the sea panel. These data come from NOAA.</p>
-<pre class="r"><code>## Libraries
+<p>There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always &ldquo;Figure 1&rdquo;. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area. Being a happy convert to the <a href="https://cran.r-project.org/web/packages/tidyverse/" target="_blank">tidyverse</a> I only teach the graphics of <a href="https://cran.r-project.org/web/packages/ggplot2/" target="_blank">ggplot2</a>. I have found that people often prefer to use the <a href="https://cran.r-project.org/web/packages/ggmap/" target="_blank">ggmap</a> extension to create ggplot quality figures with Google map backgrounds, but I personally think that a more traditional monotone background for maps looks more professional. What I&rsquo;ve decided to showcase this week is the data and code required to create a publication quality map. Indeed, the following code will create the aforementioned obligatory &ldquo;Figure 1&rdquo; in a paper I am currently preparing for submission.</p>
+
+<h2 id="data">Data</h2>
+
+<p>There are heaps of packages etc. that one may use to create maps. And there is a never ending source of blogs, books and tutorials that illustrate many of the different ways to visualise spatial data. For my international and geographic borders I prefer to use data I&rsquo;ve downloaded from <a href="https://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html" target="_blank">GSHHSG</a> and then converted to dataframes using functions found in the <a href="https://cran.r-project.org/web/packages/PBSmapping/" target="_blank">PBSmapping</a> package. I then save these converted dataframes as .Rdata objects on my computer for ease of use with all of my projects. For the domestic borders of a country, which I won&rsquo;t use in this post, one may go <a href="http://gadm.org/" target="_blank">here</a>. Note however that for some strange reason this website still has the pre-1994 borders for South Africa. For the correct SA borders one must go <a href="http://www.demarcation.org.za/index.php/downloads/boundary-data/boundary-data-main-files/province" target="_blank">here</a>. The current SA borders may actually be download in the .Rdata format, which is neat.</p>
+
+<p>Once one has the borders to be used in the map, the next step is to think about what one actually wants to show. The main purpose of this map is to show where several in situ coastal seawater temperature time series were collected. This could be done quite simply but a plain black and white map is offensively boring so we want to make sure there is a good amount of (but not too much!) colour in order to entice the reader. I personally find pictures of meso-scale oceanic phenomena particularly beautiful so try to include them whenever I can. Luckily that is also what I study so it is not strange that I include such things in my work. Now if only I studied panda&rsquo;s, too&hellip;</p>
+
+<p>Panda&rsquo;s aside, the current work I am engaged in also requires that the atmospheric processes around southern Africa be considered in addition to the oceanography. To visualise both air and sea concurrently would be a mess so we will want to create separate panels for each. Because I have been working with reanalysis data lately, and not satellite data, I am also able to include the wind/ current vectors in order to really help the temperature patterns pop. The oceanic data are from the <a href="wp.csiro.au/bluelink" target="_blank">BRAN2016</a> product and the atmospheric data are from <a href="http://www.ecmwf.int/en/research/climate-reanalysis/era-interim" target="_blank">ERA-Interim</a>. Both of which are available for download for free for scientific pursuits. I&rsquo;ve chosen here to use the mean values for January 1st as the summer months provide the most clear example of the thermal differences between the Agulhas and Benguela currents. The code used to create the scale bar in the maps may be found <a href="http://editerna.free.fr/wp/?p=76" target="_blank">here</a>. It&rsquo;s not a proper ggplot geom function but works well enough. I&rsquo;ve also decided to add the 200 m isobath to the sea panel. These data come from NOAA.</p>
+
+<pre><code class="language-r">## Libraries
 library(tidyverse)
 library(viridis)
 library(gridExtra)
@@ -451,12 +453,14 @@ site_list$order &lt;- 1:nrow(site_list)
 load(&quot;../../static/data/sa_bathy.Rdata&quot;)
 
 ## Scale bar function
-source(&quot;../../static/func/scale.bar.func.R&quot;)</code></pre>
-</div>
-<div id="mapping" class="section level2">
-<h2>Mapping</h2>
+source(&quot;../../static/func/scale.bar.func.R&quot;)
+</code></pre>
+
+<h2 id="mapping">Mapping</h2>
+
 <p>I find that it is easier to keep track of the different aspects of a map when they are stored as different dataframes. One should however avoid having too many loose dataframes running about in the global environment. It is a balancing act and requires one to find a happy middle ground. Here I am going to cut the <code>all_jan1_0.5</code> dataframe into 4. One each for air and sea temperatures and vectors. I am also going to reduce the resolution of the wind so that the vectors will plot more nicely.</p>
-<pre class="r"><code># Devide the reanalysis data
+
+<pre><code class="language-r"># Devide the reanalysis data
 sea_temp &lt;- filter(all_jan1_0.5, variable == &quot;BRAN/temp&quot;)
 air_temp &lt;- filter(all_jan1_0.5, variable == &quot;ERA/temp&quot;)
 currents &lt;- filter(all_jan1_0.5, variable == &quot;BRAN/u&quot; | variable == &quot;BRAN/v&quot;) %&gt;% 
@@ -472,10 +476,14 @@ winds &lt;- filter(all_jan1_0.5, variable == &quot;ERA/u&quot; | variable == &qu
 lon_sub &lt;- seq(10, 40, by = 1)
 lat_sub &lt;- seq(-40, -15, by = 1)
 # currents &lt;- currents[(currents$lon %in% lon_sub &amp; currents$lat %in% lat_sub),]
-winds &lt;- winds[(winds$lon %in% lon_sub &amp; winds$lat %in% lat_sub),]</code></pre>
+winds &lt;- winds[(winds$lon %in% lon_sub &amp; winds$lat %in% lat_sub),]
+</code></pre>
+
 <p>With just a few alterations to our nicely divided up dataframes we are ready to create a map. We will look at the code required to create each map and then put it all together in the end.</p>
-<p>First up is the most busy. The following code chunk will create the top panel of our map, the sea state. It is necessary to label all of the locations mentioned in the text and so they are thrown on here. In order to make the site label easier to read I’ve made them red. This is particularly jarring but I think I like it.</p>
-<pre class="r"><code># Establish the vector scalar for the currents
+
+<p>First up is the most busy. The following code chunk will create the top panel of our map, the sea state. It is necessary to label all of the locations mentioned in the text and so they are thrown on here. In order to make the site label easier to read I&rsquo;ve made them red. This is particularly jarring but I think I like it.</p>
+
+<pre><code class="language-r"># Establish the vector scalar for the currents
 current_uv_scalar &lt;- 2
 
 # The top figure (sea)
@@ -528,9 +536,12 @@ mg_top &lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) +
     theme_bw() +
     theme(panel.border = element_rect(fill = NA, colour = &quot;black&quot;, size = 1),
           axis.text = element_text(colour = &quot;black&quot;),
-          axis.ticks = element_line(colour = &quot;black&quot;))</code></pre>
+          axis.ticks = element_line(colour = &quot;black&quot;))
+</code></pre>
+
 <p>Many of the sites that need to be plotted are laying on top of each other. This is never good, but is made worse when the sites in question are refereed to frequently in the text. For this reason we need to create a little panel inside of the larger figure that shows a zoomed in picture of False Bay. Complete with text labels.</p>
-<pre class="r"><code># False Bay inset
+
+<pre><code class="language-r"># False Bay inset
 fb &lt;- ggplot(data = sa_shore, aes(x = lon, y = lat)) +
   # The land mass
     geom_polygon(aes(group = PID),
@@ -552,9 +563,12 @@ fb &lt;- ggplot(data = sa_shore, aes(x = lon, y = lat)) +
           axis.text.y = element_text(angle = 90, hjust = 0.5),
           axis.ticks = element_line(colour = &quot;ivory&quot;),
           panel.border = element_rect(colour = &quot;ivory&quot;),
-          panel.grid = element_blank())</code></pre>
-<p>We could possibly create another inset panel for the clomp of sites around Hamburg but this figure is already getting too busy. So we’ll leave it for now. One inset panel will serve to illustrate the code necessary to create a faceted map so for the purposes of this post it will also suffice. That leaves us with only the bottom panel to create. The air state. I’ve decided to put the scale bar/ North arrow on this panel in an attempt to balance the amount of information in each panel.</p>
-<pre class="r"><code># Establish the vector scalar for the wind
+          panel.grid = element_blank())
+</code></pre>
+
+<p>We could possibly create another inset panel for the clomp of sites around Hamburg but this figure is already getting too busy. So we&rsquo;ll leave it for now. One inset panel will serve to illustrate the code necessary to create a faceted map so for the purposes of this post it will also suffice. That leaves us with only the bottom panel to create. The air state. I&rsquo;ve decided to put the scale bar/ North arrow on this panel in an attempt to balance the amount of information in each panel.</p>
+
+<pre><code class="language-r"># Establish the vector scalar for the wind
 wind_uv_scalar &lt;- 0.5
 
 # The bottom figure (air)
@@ -587,9 +601,12 @@ mg_bottom &lt;- ggplot(data = southern_africa_coast, aes(x = lon, y = lat)) +
     theme_bw() +
     theme(panel.border = element_rect(fill = NA, colour = &quot;black&quot;, size = 1),
           axis.text = element_text(colour = &quot;black&quot;),
-          axis.ticks = element_line(colour = &quot;black&quot;))</code></pre>
+          axis.ticks = element_line(colour = &quot;black&quot;))
+</code></pre>
+
 <p>With our three pieces of the map complete, it is time to stick them together. There are many ways to do this but I have recently found that using <code>annotation_custom</code> allows one to stick any sort of ggplot like object onto any other sort of ggplot object. This is an exciting development and opens up a lot of doors for some pretty creative stuff. Here I will just use it to demonstrate simple faceting, but combined with panel gridding. Really though the sky is the limit.</p>
-<pre class="r"><code># Convert the figures to grobs
+
+<pre><code class="language-r"># Convert the figures to grobs
 mg_top_grob &lt;- ggplotGrob(mg_top)
 fb_grob &lt;- ggplotGrob(fb)
 mg_bottom_grob &lt;- ggplotGrob(mg_bottom)
@@ -605,14 +622,16 @@ gg &lt;- ggplot() +
     annotation_custom(fb_grob,
                       xmin = 3.5, xmax = 5.5, ymin = 7.2, ymax = 8.8) +
     annotation_custom(mg_bottom_grob,
-                      xmin = 1, xmax = 10, ymin = 1, ymax = 5.5)</code></pre>
-</div>
-<div id="summary" class="section level2">
-<h2>Summary</h2>
-<p>The developments in the gridding system have brought the potential for using ggplot for these more complex maps forward quite a bit. As long as one does not use a constrained mapping coordinate system (i.e. <code>coord_fixed</code>) the grob-ification of the ggplot objects seems to allow the placing of the pieces into a common area to be performed smoothly. Displaying many different bits of information cleanly is always a challenge. This figure is particularly busy, out of necessity. I think it turned out very nicely though.</p>
+                      xmin = 1, xmax = 10, ymin = 1, ymax = 5.5)
+</code></pre>
+
+<h2 id="summary">Summary</h2>
+
+<p>The developments in the gridding system have brought the potential for using ggplot for these more complex maps forward quite a bit. As long as one does not use a constrained mapping coordinate system (i.e. <code>coord_fixed</code>) the grob-ification of the ggplot objects seems to allow the placing of the pieces into a common area to be performed smoothly. Displaying many different bits of information cleanly is always a challenge. This figure is particularly busy, out of necessity. I think it turned out very nicely though.</p>
+
 <p><img src="/post/mapping_with_ggplot2_files/figure-html/mg-final-1.png" width="672" /></p>
+
 <p><strong>Figure 1</strong>: Map showing the southern tip of the African continent. The top panel shows the typical sea surface temperature and surface currents on January 1st. The bottom panel likewise shows the typical surface air temperatures and winds on any given January 1st.</p>
-</div>
 
     </div>
 

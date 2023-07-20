@@ -22,12 +22,30 @@
     </item>
     
     <item>
+      <title>Analysis of Bio-Oracle data</title>
+      <link>https://theoceancode.netlify.com/post/bo_analysis/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/post/bo_analysis/</guid>
+      <description>Objective While running some brief quality control tests on Bio-Oracle layers before using them for a recent project it was detected that some of the layers in the current version of the Bio-Oracle product appear to have very large errors. Specifically the error is that there are layers where the minimum values are greater than the maximum values. It is unclear how this could be possible, so in the following text and code we will look into how we go about investigating these data layers and we will discuss which layers are fine, and which are not.</description>
+    </item>
+    
+    <item>
       <title>Downloading environmental data in R</title>
       <link>https://theoceancode.netlify.com/post/dl_env_data_r/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/dl_env_data_r/</guid>
       <description>Objective Having been working in environmental science for several years now, entirely using R, I’ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn’t be. Most data hosting organisations do want scientists to use their data and do make it freely available.</description>
+    </item>
+    
+    <item>
+      <title>Downloading environmental data in R</title>
+      <link>https://theoceancode.netlify.com/post/dl_env_data_r/</link>
+      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/post/dl_env_data_r/</guid>
+      <description>Objective Having been working in environmental science for several years now, entirely using R, I&amp;rsquo;ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn&amp;rsquo;t be. Most data hosting organisations do want scientists to use their data and do make it freely available.</description>
     </item>
     
   </channel>

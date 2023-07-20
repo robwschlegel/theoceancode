@@ -18,7 +18,7 @@
       <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/mapping_with_ggplot2/</guid>
-      <description>Objective There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always “Figure 1”. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area.</description>
+      <description>Objective There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always &amp;ldquo;Figure 1&amp;rdquo;. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area.</description>
     </item>
     
     <item>
@@ -27,7 +27,7 @@
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/wind_vectors/</guid>
-      <description>Objective As more and more physical scientists (e.g. oceanographers) move to R from other object oriented command line programming languages, such as Matlab, there will be more and more demand for the code that is needed to do some basic things that they may already know how to do in their previous languages that they don’t yet know how to do in R. Surprisingly, there are many things that should be very easy to find how to do in R that are not.</description>
+      <description>Objective As more and more physical scientists (e.g. oceanographers) move to R from other object oriented command line programming languages, such as Matlab, there will be more and more demand for the code that is needed to do some basic things that they may already know how to do in their previous languages that they don&amp;rsquo;t yet know how to do in R. Surprisingly, there are many things that should be very easy to find how to do in R that are not.</description>
     </item>
     
   </channel>

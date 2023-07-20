@@ -414,11 +414,11 @@
     <div class="article-style" itemprop="articleBody">
       
 
+<h2 id="objective">Objective</h2>
 
-<div id="objective" class="section level2">
-<h2>Objective</h2>
 <p>While running some brief quality control tests on Bio-Oracle layers before using them for a recent project it was detected that some of the layers in the current version of the Bio-Oracle product appear to have very large errors. Specifically the error is that there are layers where the minimum values are greater than the maximum values. It is unclear how this could be possible, so in the following text and code we will look into how we go about investigating these data layers and we will discuss which layers are fine, and which are not. This error was first detected in the current velocity layers but a brief search turned up errors in other layers, too. So in this post we will be going through each individual layer to test for this max less than min error. We will look at all of the different depths as well as the future projections.</p>
-<pre class="r"><code># Load required libraries
+
+<pre><code class="language-r"># Load required libraries
 library(tidyverse)
 library(sdmpredictors)
 
@@ -426,12 +426,14 @@ library(sdmpredictors)
 BO_layers &lt;- list_layers(datasets = &quot;Bio-ORACLE&quot;)
 
 # The future layers
-BO_layers_future &lt;- list_layers_future(datasets = &quot;Bio-ORACLE&quot;)</code></pre>
-</div>
-<div id="testing-pipeline" class="section level2">
-<h2>Testing pipeline</h2>
-<p>The following code chunk contains a function that will run the testing pipeline that highlights any errors in the data. To use it we choose a variable from the list of Bio-Oracle variables shown above that have a max and min version of the layer. One must replace the ‘max’ or ‘min’ with ‘X’ and give that to the function, it will do the rest. Note that if one is running this script the figures this function will save to disk take about 1 minute to render due to their high resolution. Also please note that this function assumes there is a “figures” folder in the root directory on the computer on which this code is being run. If not, one must be created or the function must be changed to point to the desired folder.</p>
-<pre class="r"><code>BO_test &lt;- function(var_name, scenario = &quot;present&quot;, year = NA){
+BO_layers_future &lt;- list_layers_future(datasets = &quot;Bio-ORACLE&quot;)
+</code></pre>
+
+<h2 id="testing-pipeline">Testing pipeline</h2>
+
+<p>The following code chunk contains a function that will run the testing pipeline that highlights any errors in the data. To use it we choose a variable from the list of Bio-Oracle variables shown above that have a max and min version of the layer. One must replace the &lsquo;max&rsquo; or &lsquo;min&rsquo; with &lsquo;X&rsquo; and give that to the function, it will do the rest. Note that if one is running this script the figures this function will save to disk take about 1 minute to render due to their high resolution. Also please note that this function assumes there is a &ldquo;figures&rdquo; folder in the root directory on the computer on which this code is being run. If not, one must be created or the function must be changed to point to the desired folder.</p>
+
+<pre><code class="language-r">BO_test &lt;- function(var_name, scenario = &quot;present&quot;, year = NA){
   
   # Establish min/max layer names
   min_layer &lt;- gsub(&quot;X&quot;, &quot;min&quot;, var_name)
@@ -465,12 +467,14 @@ BO_layers_future &lt;- list_layers_future(datasets = &quot;Bio-ORACLE&quot;)</co
   
   # Save figure to disk
   ggsave(paste0(&quot;~/figures/&quot;,var_title,&quot;.png&quot;), test_plot, height = 5, width = 8)
-}</code></pre>
-</div>
-<div id="look-at-layers" class="section level2">
-<h2>Look at layers</h2>
+}
+</code></pre>
+
+<h2 id="look-at-layers">Look at layers</h2>
+
 <p>In this section we will go through all of the BO layers that have a min/max option and we will compare them to ascertain whether the maximum values are always greater than the minimums, which they should be, but we have found that sometimes this is not the case. When possible we will also look at future projections of the layers with RCP8.5 at 2050 and 2100. In the first code chunk in this section we will look at the older Bio-Oracle layers.</p>
-<pre class="r"><code># Up first we start with the older Bio-Oracle layers
+
+<pre><code class="language-r"># Up first we start with the older Bio-Oracle layers
 
 # Bathymetry
 BO_test(&quot;BO_bathyX&quot;) # No issues
@@ -485,10 +489,14 @@ BO_test(&quot;BO_cloudX&quot;) # No issues
 BO_test(&quot;BO_daX&quot;) # No issues
 
 # SST
-BO_test(&quot;BO_sstX&quot;) # No issues</code></pre>
+BO_test(&quot;BO_sstX&quot;) # No issues
+</code></pre>
+
 <p>It is reassuring to see that all of the older BO layers have no issues in them. From my initial testing it looked like the layers with errors may have been from data assimilation from the GLORYS product for the most recent Bio-Oracle layers. That the older layers have no issues appears to support the hypothesis that the bug in the Bio-Oracle pipeline was introduced in the BO2 version of the product.</p>
+
 <p>The next code chunk goes through all of the newer layers and where possible the future projections, too. Note that many layers have four different depth options. The surface (ss), the min (bdmin), the mean (bdmean), and the max (bdmax) depths present at each pixel. We are testing all of these as I have hypothesised that the inclusion of these three different depths may be responsible for some of the errors observed. Another distinction to make for the following tests is that there are min/max values for each layer, which take the absolute min/max recorded at a pixel. And then there are the long-term min/max values, which are the average annual min/max recorded over the length of the available data. The long-term min/max values are more representative of the climatological means within an area, and the absolute min/max are representative of the most extreme events that may occur in an area. Generally one is going to be more interested in the long-term values for normal species distribution modelling (SDM) applications. Because these min/max values are calculated differently it is necessary to test both of them to see if the errors in the data differ in any discernible way.</p>
-<pre class="r"><code># Carbon phytoplankton biomass absolute
+
+<pre><code class="language-r"># Carbon phytoplankton biomass absolute
 BO_test(&quot;BO2_carbonphytoX_bdmax&quot;) # No issues
 BO_test(&quot;BO2_carbonphytoX_bdmean&quot;) # No issues
 BO_test(&quot;BO2_carbonphytoX_bdmin&quot;) # No issues
@@ -697,13 +705,17 @@ BO_test(&quot;BO2_templtX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2050
 BO_test(&quot;BO2_templtX_bdmin&quot;, scenario = &quot;RCP85&quot;, year = 2100) # Almost all pixels fail
 BO_test(&quot;BO2_templtX_ss&quot;) # No issues
 BO_test(&quot;BO2_templtX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2050) # All but a few pixels fail
-BO_test(&quot;BO2_templtX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # All but a few different pixels fail</code></pre>
-</div>
-<div id="discussion" class="section level2">
-<h2>Discussion</h2>
-<p>This is not meant to be exhaustive, but does represent the majority of the data layers offered by Bio-Oracle. I had hypothesised that the three different depth options per pixel would have been related to the issues in the data assimilation but it does not appear to be the case. I’ve concluded this because whenever a depth layer has issues, those errors appear to be very similar across the three different depth layers. One consistent pattern we do see is if there are any errors, then every depth layer for that variable will also have errors. This also applies to absolute vs. long-term max/min layers. Errors in one means errors in all. Another consistent pattern in the error was that all of the future projections at all depths for absolute and long-term min/max values had errors in them. This begs the question of how it is that the future projection can have no errors, while the present day layers do not. How are these future projection layers calculated differently from the present day? Are they not based on the same data?</p>
+BO_test(&quot;BO2_templtX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) # All but a few different pixels fail
+</code></pre>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>This is not meant to be exhaustive, but does represent the majority of the data layers offered by Bio-Oracle. I had hypothesised that the three different depth options per pixel would have been related to the issues in the data assimilation but it does not appear to be the case. I&rsquo;ve concluded this because whenever a depth layer has issues, those errors appear to be very similar across the three different depth layers. One consistent pattern we do see is if there are any errors, then every depth layer for that variable will also have errors. This also applies to absolute vs. long-term max/min layers. Errors in one means errors in all. Another consistent pattern in the error was that all of the future projections at all depths for absolute and long-term min/max values had errors in them. This begs the question of how it is that the future projection can have no errors, while the present day layers do not. How are these future projection layers calculated differently from the present day? Are they not based on the same data?</p>
+
 <p>Most of the layers that have issues are physical layers. It is my understanding that these layers would have been adapted from the GLORYS reanalysis product. Therefore the next logical step in understanding this issue would be to investigate the GLORYS data. But even if there were issues in the GLORYS product, which I doubt, it would not explain how the data layers here could have minimum values being reported as greater than the maximum values in the distribution. The only thing that makes any sense is that the data layers are created independently of each other. But why?</p>
-<p>Without being able to see the pipeline code myself all I can do is ponder, which isn’t terribly useful. So to wrap things up I’ll provide two tables; the layers with no issues, and those with issues. I would strongly recommend against using any data layers that did not pass the tests in this analysis until the curators of the Bio-Oracle data address these issues in a future release/version.</p>
+
+<p>Without being able to see the pipeline code myself all I can do is ponder, which isn&rsquo;t terribly useful. So to wrap things up I&rsquo;ll provide two tables; the layers with no issues, and those with issues. I would strongly recommend against using any data layers that did not pass the tests in this analysis until the curators of the Bio-Oracle data address these issues in a future release/version.</p>
+
 <p>Layers with no issues (fine for use):
 - All of the older BO layers appear fine
 - Carbon phytoplankton biomass absolute and long-term at all depths
@@ -717,6 +729,7 @@ BO_test(&quot;BO2_templtX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) #
 - Primary productivity absolute and long-term for all depths
 - Salinity absolute and long-term at all depths for present day projections only
 - Temperature absolute and long-term at all depths for present day projections only</p>
+
 <p>Problem layers (do not use):
 - Chlorophyll future projections for absolutes and long-terms at all depths
 - Current velocity absolutes and long-terms for all depths and all present and future projections
@@ -724,7 +737,6 @@ BO_test(&quot;BO2_templtX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) #
 - Light at bottom absolute and long-term for all depths
 - Salinity absolute and long-term at all depths for future projections
 - Temperature absolute and long-term at all depths for future projections</p>
-</div>
 
     </div>
 
@@ -748,6 +760,10 @@ BO_test(&quot;BO2_templtX_ss&quot;, scenario = &quot;RCP85&quot;, year = 2100) #
       <div class="hr-light"></div>
       <h3>Related</h3>
       <ul>
+        
+        <li><a href="/post/bo_analysis/">Analysis of Bio-Oracle data</a></li>
+        
+        <li><a href="/post/dl_env_data_r/">Downloading environmental data in R</a></li>
         
         <li><a href="/post/dl_env_data_r/">Downloading environmental data in R</a></li>
         
