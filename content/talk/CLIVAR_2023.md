@@ -35,7 +35,7 @@ tags = ["marine heatwaves"]
 
 # Links (optional).
 url_pdf = ""
-url_slides = "https://theoceancode.netlify.app/files/day_1_basics_HTTPS.html"
+url_slides = "https://theoceancode.netlify.app/files/day_1_basics.html"
 url_video = ""
 url_code = ""
 
