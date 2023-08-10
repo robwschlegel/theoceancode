@@ -58,20 +58,20 @@
     </item>
     
     <item>
+      <title>Projects</title>
+      <link>https://theoceancode.netlify.app/home/projects/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/home/projects/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Blog Posts</title>
       <link>https://theoceancode.netlify.app/home/posts/</link>
       <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.app/home/posts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://theoceancode.netlify.app/home/skills/</link>
-      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/home/skills/</guid>
       <description></description>
     </item>
     
@@ -94,11 +94,30 @@
     </item>
     
     <item>
-      <title>Projects</title>
-      <link>https://theoceancode.netlify.app/home/projects/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
+      <title>Workshops</title>
+      <link>https://theoceancode.netlify.app/home/workshops/</link>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.app/home/projects/</guid>
+      <guid>https://theoceancode.netlify.app/home/workshops/</guid>
+      <description>Below please find links to workshops I run:
+ Introduction to R  </description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://theoceancode.netlify.app/home/contact/</link>
+      <pubDate>Wed, 22 Aug 2018 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/home/contact/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://theoceancode.netlify.app/home/skills/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/home/skills/</guid>
       <description></description>
     </item>
     
@@ -127,25 +146,6 @@
       
       <guid>https://theoceancode.netlify.app/home/teaching/</guid>
       <description>I am not currently teaching.</description>
-    </item>
-    
-    <item>
-      <title>Workshops</title>
-      <link>https://theoceancode.netlify.app/home/workshops/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/home/workshops/</guid>
-      <description>Below please find links to workshops I run:
- Introduction to R  </description>
-    </item>
-    
-    <item>
-      <title>Contact</title>
-      <link>https://theoceancode.netlify.app/home/contact/</link>
-      <pubDate>Wed, 22 Aug 2018 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/home/contact/</guid>
-      <description></description>
     </item>
     
     <item>

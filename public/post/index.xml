@@ -31,30 +31,12 @@
     </item>
     
     <item>
-      <title>Analysis of Bio-Oracle data</title>
-      <link>https://theoceancode.netlify.app/post/bo_analysis/</link>
-      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/post/bo_analysis/</guid>
-      <description>Objective While running some brief quality control tests on Bio-Oracle layers before using them for a recent project it was detected that some of the layers in the current version of the Bio-Oracle product appear to have very large errors. Specifically the error is that there are layers where the minimum values are greater than the maximum values. It is unclear how this could be possible, so in the following text and code we will look into how we go about investigating these data layers and we will discuss which layers are fine, and which are not.</description>
-    </item>
-    
-    <item>
       <title>Downloading environmental data in R</title>
       <link>https://theoceancode.netlify.app/post/dl_env_data_r/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.app/post/dl_env_data_r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Downloading environmental data in R</title>
-      <link>https://theoceancode.netlify.app/post/dl_env_data_r/</link>
-      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/post/dl_env_data_r/</guid>
-      <description></description>
+      <description>Objective Having been working in environmental science for several years now, entirely using R, I&amp;rsquo;ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn&amp;rsquo;t be. Most data hosting organisations do want scientists to use their data and do make it freely available.</description>
     </item>
     
     <item>
@@ -73,7 +55,7 @@ This got me to wondering just how much disagreement there may be around the coun
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.app/post/transects/</guid>
-      <description></description>
+      <description>Preface This week I have expanded the coastR package with the inclusion of a function that calculates the angle of the heading for alongshore or shore-normal transects. The rest of this blog post is the vignette that I&amp;rsquo;ve written detailing the set of this function. Next week I&amp;rsquo;ll likely be taking a break from coastR development to finally create a package for the SACTN dataset. That is a project that has been in the works for a loooong time and it will be good to finally see a development release available to the public.</description>
     </item>
     
     <item>
@@ -101,15 +83,6 @@ This got me to wondering just how much disagreement there may be around the coun
       
       <guid>https://theoceancode.netlify.app/post/mapping_with_ggplot2/</guid>
       <description>Objective There are many different things that require scientists to use programming languages (like R). Far too many to count here. There is however one common use amongst almost all environmental scientists: mapping. Almost every report, research project or paper will have need to refer to a study area. This is almost always &amp;ldquo;Figure 1&amp;rdquo;. To this end, whenever I teach R, or run workshops on it, one of the questions I am always prepared for is how to create a map of a particular area.</description>
-    </item>
-    
-    <item>
-      <title>Goats per capita</title>
-      <link>https://theoceancode.netlify.app/post/goats_per_capita/</link>
-      <pubDate>Mon, 10 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/post/goats_per_capita/</guid>
-      <description>Objective A few weeks ago for a post about the relationship between gender equality and GDP/ capita I found a nifty website that has a massive amount of census information for most countries on our planet. Much of this information could be used to answer some very interesting and/ or important questions. But some of the data can be used to answer seemingly pointless questions. And that’s what I intend to do this week.</description>
     </item>
     
     <item>
@@ -146,15 +119,6 @@ This got me to wondering just how much disagreement there may be around the coun
       
       <guid>https://theoceancode.netlify.app/post/gender_gdp/</guid>
       <description>Objective Most people living in the Western World are very quick to extol the virtues of gender equality. There are however many places where this is not so. This then inevitably leads to conflict as cultures and nations are drawn closer together on our ever shrinking earth. Perhaps not the sort of conflict that leads to sabre rattling, but certainly ideological disagreements that affect policy and have real impacts on large swathes of humanity.</description>
-    </item>
-    
-    <item>
-      <title>Gender and GDP</title>
-      <link>https://theoceancode.netlify.app/post/gender_gdp/</link>
-      <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/post/gender_gdp/</guid>
-      <description></description>
     </item>
     
     <item>

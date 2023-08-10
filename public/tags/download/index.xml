@@ -18,16 +18,7 @@
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.app/post/dl_env_data_r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Downloading environmental data in R</title>
-      <link>https://theoceancode.netlify.app/post/dl_env_data_r/</link>
-      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/post/dl_env_data_r/</guid>
-      <description></description>
+      <description>Objective Having been working in environmental science for several years now, entirely using R, I&amp;rsquo;ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn&amp;rsquo;t be. Most data hosting organisations do want scientists to use their data and do make it freely available.</description>
     </item>
     
   </channel>
