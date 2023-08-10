@@ -1,6 +1,8 @@
 [build]
 command = 'hugo'
+context = 'production'
 publish = 'public'
+
 [build.environment]
 HUGO_VERSION = '0.101.0'
 
@@ -14,4 +16,5 @@ command = 'hugo -F -b $DEPLOY_PRIME_URL'
 
 [context.production]
 [context.production.environment]
+HUGO_VERSION = '0.101.0'
 HUGO_ENV = 'production'
