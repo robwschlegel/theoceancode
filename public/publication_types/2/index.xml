@@ -7,10 +7,46 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 09 Mar 2021 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.app/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Drivers of Marine Heatwaves in the Northwest Atlantic: The Role of Air–Sea Interaction During Onset and Decline</title>
+      <link>https://theoceancode.netlify.app/publication/primary_drivers/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/primary_drivers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marine Heatwaves</title>
+      <link>https://theoceancode.netlify.app/publication/mhw/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/mhw/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marine cold-spells</title>
+      <link>https://theoceancode.netlify.app/publication/mcs/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/mcs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>What and where? Predicting invasion hotspots in the Arctic marine realm</title>
+      <link>https://theoceancode.netlify.app/publication/what_where/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/what_where/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Detecting Marine Heatwaves With Sub-Optimal Data</title>

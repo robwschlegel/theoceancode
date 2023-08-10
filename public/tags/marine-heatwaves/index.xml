@@ -31,6 +31,24 @@
     </item>
     
     <item>
+      <title>Drivers of Marine Heatwaves in the Northwest Atlantic: The Role of Air–Sea Interaction During Onset and Decline</title>
+      <link>https://theoceancode.netlify.app/publication/primary_drivers/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/primary_drivers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marine Heatwaves</title>
+      <link>https://theoceancode.netlify.app/publication/mhw/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/mhw/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Detecting Marine Heatwaves With Sub-Optimal Data</title>
       <link>https://theoceancode.netlify.app/publication/detection/</link>
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
@@ -76,11 +94,29 @@
     </item>
     
     <item>
+      <title>Marine Heatwave Tracker: The app to see when and where marine heatwaves are happening around the world</title>
+      <link>https://theoceancode.netlify.app/publication/tracker/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/tracker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
       <link>https://theoceancode.netlify.app/publication/heatwaver/</link>
       <pubDate>Fri, 31 Aug 2018 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.app/publication/heatwaver/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nearshore and offshore co-occurrence of marine heatwaves and cold-spells</title>
+      <link>https://theoceancode.netlify.app/publication/cooccurrence/</link>
+      <pubDate>Tue, 10 Jan 2017 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/cooccurrence/</guid>
       <description></description>
     </item>
     

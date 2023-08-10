@@ -169,6 +169,33 @@ ggplot(data = ctd_mba, aes(x = lon, y = depth)) +
     </item>
     
     <item>
+      <title>Drivers of Marine Heatwaves in the Northwest Atlantic: The Role of Air–Sea Interaction During Onset and Decline</title>
+      <link>https://theoceancode.netlify.app/publication/primary_drivers/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/primary_drivers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marine Heatwaves</title>
+      <link>https://theoceancode.netlify.app/publication/mhw/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/mhw/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marine cold-spells</title>
+      <link>https://theoceancode.netlify.app/publication/mcs/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/mcs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Analysis of Bio-Oracle data</title>
       <link>https://theoceancode.netlify.app/post/bo_analysis/</link>
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
@@ -500,6 +527,15 @@ BO_test(&amp;quot;BO2_templtX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;
 - Salinity absolute and long-term at all depths for future projections
 - Temperature absolute and long-term at all depths for future projections&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>What and where? Predicting invasion hotspots in the Arctic marine realm</title>
+      <link>https://theoceancode.netlify.app/publication/what_where/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/what_where/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -863,391 +899,6 @@ plyr::l_ply(date_range$year_mon[1], .fun = download_GLORYS, .parallel = F)
       
       <guid>https://theoceancode.netlify.app/project/mhwtracker/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Marine heatwaves: the new normal</title>
-      <link>https://theoceancode.netlify.app/talk/mhw_2019/</link>
-      <pubDate>Tue, 19 Mar 2019 00:00:00 +0100</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/talk/mhw_2019/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
-      <link>https://theoceancode.netlify.app/publication/heatwaver/</link>
-      <pubDate>Fri, 31 Aug 2018 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/publication/heatwaver/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>South Africa time survey</title>
-      <link>https://theoceancode.netlify.app/post/sa_time_survey/</link>
-      <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/post/sa_time_survey/</guid>
-      <description>
-
-&lt;h2 id=&#34;objective&#34;&gt;Objective&lt;/h2&gt;
-
-&lt;p&gt;In South Africa there are a range of idioms for different time frames in which someone may (or may not) do something. The most common of these are: &amp;lsquo;now&amp;rsquo;, &amp;lsquo;just now&amp;rsquo;, and &amp;lsquo;now now&amp;rsquo;. If one were to Google these sayings one would find that there is general agreements on how long these time frames are, but that agreement is not absolute.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://theoceancode.netlify.app/img/just_now.jpeg&#34; alt=&#34;Advice from the internet.&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This got me to wondering just how much disagreement there may be around the country. And more specifically I wanted to know how these times changed between specific locations. If one is interested in contributing to the survey, it may be taken &lt;a href=&#34;https://docs.google.com/forms/d/e/1FAIpQLSeNyF8XJeLXLoPCfE9VdEMc_SOHkX84KF82OOudVKq6K15YTg/viewform?usp=sf_link&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. To avoid too much confusion with the answers that could be given, specific times were provided to the participants in a multiple choice format. These times (minutes) were: 5, 15, 30, 60, 120, 300.&lt;/p&gt;
-
-&lt;h2 id=&#34;data-prep&#34;&gt;Data prep&lt;/h2&gt;
-
-&lt;p&gt;The survey data are downloaded from &lt;a href=&#34;https://www.google.com/forms/about/&#34; target=&#34;_blank&#34;&gt;Google Forms&lt;/a&gt; rather easily as a .csv file, so that&amp;rsquo;s nice. Unfortunately, the way in which one sets up the survey for humans is difficult for R to understand so we need quite a bit of processing after we load the data.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
-library(ggpubr)
-library(broom)
-
-survey &amp;lt;- read_csv(&amp;quot;../../static/data/SA Time Survey.csv&amp;quot;, skip = 1, col_types = &amp;quot;cccccc&amp;quot;,
-                   col_names = c(&amp;quot;time&amp;quot;, &amp;quot;just now&amp;quot;, &amp;quot;now now&amp;quot;, &amp;quot;now&amp;quot;, &amp;quot;province&amp;quot;, &amp;quot;city&amp;quot;)) %&amp;gt;% 
-  select(-time) %&amp;gt;%
-  mutate(`just now` = as.numeric(sapply(strsplit(`just now`, &amp;quot; &amp;quot;), &amp;quot;[[&amp;quot;, 1)),
-         `now now` = as.numeric(sapply(strsplit(`now now`, &amp;quot; &amp;quot;), &amp;quot;[[&amp;quot;, 1)),
-         `now` = as.numeric(sapply(strsplit(`now`, &amp;quot; &amp;quot;), &amp;quot;[[&amp;quot;, 1)),
-         province = gsub(&amp;quot;Kzn&amp;quot;, &amp;quot;KZN&amp;quot;, province),
-         province = gsub(&amp;quot;GP&amp;quot;, &amp;quot;Gauteng&amp;quot;, province),
-         province = as.factor(province),
-         city = as.factor(city))
-
-# Check that city and province names are all lekker
-# levels(survey$province)
-# levels(survey$city)
-
-# Create a long version for easier stats
-survey_long &amp;lt;- survey %&amp;gt;% 
-  gather(key = &amp;quot;saying&amp;quot;, value = &amp;quot;minutes&amp;quot;, -province, -city) %&amp;gt;% 
-  na.omit()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;participant-locations&#34;&gt;Participant locations&lt;/h2&gt;
-
-&lt;p&gt;With our data prepared, I first wanted to see from where the surveys were taken. I&amp;rsquo;ve done this by splitting them up into province or city. This is also one of the few situations in which a bar plot is an appropriate visualisation. The columns below that show &amp;lsquo;NA&amp;rsquo; are for participants that declined to share their location.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;province_plot &amp;lt;- ggplot(data = survey, aes(x = province)) +
-  geom_bar(aes(fill = province), show.legend = F) +
-  ggtitle(&amp;quot;Provinces of participants&amp;quot;) +
-  labs(x = &amp;quot;&amp;quot;)
-# province_plot
-city_plot &amp;lt;- ggplot(data = survey, aes(x = city)) +
-  geom_bar(aes(fill = city), show.legend = F) +
-  ggtitle(&amp;quot;Cities of participants&amp;quot;) +
-  labs(x = &amp;quot;&amp;quot;) +
-  theme(axis.text.x = element_text(angle = 15))
-# city_plot
-ggarrange(province_plot, city_plot, ncol = 1, nrow = 2)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.app/post/SA_time_survey_files/figure-html/location-bar-1.png&#34; alt=&#34;Bar plots showing the total pariticpants by province or city.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;&lt;span id=&#34;fig:location-bar&#34;&gt;&lt;/span&gt;Figure 1: Bar plots showing the total pariticpants by province or city.&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&#34;participant-time-frames&#34;&gt;Participant time frames&lt;/h2&gt;
-
-&lt;p&gt;With the locations of of our participants visualised we now want to see what sort of time frames people around the country attribute to the three most common idioms.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(data = survey_long, aes(x = saying, y = minutes, fill = saying)) +
-  geom_boxplot(show.legend = FALSE, outlier.colour = NA) +
-  geom_jitter(shape = 21, alpha = 0.6, width = 0.3, height = 0.0, show.legend = FALSE) +
-  scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
-  scale_fill_brewer(palette = &amp;quot;Accent&amp;quot;) +
-  labs(x = &amp;quot;&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.app/post/SA_time_survey_files/figure-html/basic-plot-1.png&#34; alt=&#34;Boxplots showing the distribution of times (minutes) survey participants gave for the three most common time frame idioms in South Africa.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;&lt;span id=&#34;fig:basic-plot&#34;&gt;&lt;/span&gt;Figure 2: Boxplots showing the distribution of times (minutes) survey participants gave for the three most common time frame idioms in South Africa.&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;p&gt;As we may see in Figure &lt;a href=&#34;#fig:basic-plot&#34;&gt;2&lt;/a&gt;, &amp;lsquo;just now&amp;rsquo; and &amp;lsquo;now now&amp;rsquo; appear to have similar distributions, whereas &amp;lsquo;now&amp;rsquo; is markedly different. Participants answered the maximum score of 300 minutes for all idioms, but for &amp;lsquo;just now&amp;rsquo; and &amp;lsquo;now now&amp;rsquo; this was infrequent enough that the large scores are considered to be outliers. For &amp;lsquo;now&amp;rsquo;, enough participants answered with longer times that the distribution appears much larger than for the other two idioms. Even though these distributions appear different, let&amp;rsquo;s run the stats on them to make sure. Because we want to compare distributions of scores for three different categories we will be using an ANOVA if the data meet a few basic assumptions.&lt;/p&gt;
-
-&lt;p&gt;Just as a quick recap, these assumptions are: homoscedasticity (homogeneity of variance), normality of distribution, random &amp;amp; independently sampled. It is also a good idea to have at least a sample size of ten for each category. Seeing as how this was an Internet survey, we were not able to ensure that the participants are a random representation of the South African populace, nor can we be certain that they submitted their answers independent of one another. I am however just going to go ahead and assume that they did. As for the assumptions of homoscedasticity and the normality of the distributions, we can directly test these. In R, the normality of a distribution is tested with &lt;code&gt;shapiro.test()&lt;/code&gt;. Any non-significant result (&lt;em&gt;p&lt;/em&gt; &amp;gt; 0.05) means that the data are normally distributed. To test for homoscedasticity we will use &lt;code&gt;bartlett.test()&lt;/code&gt;. A non-significant result (&lt;em&gt;p&lt;/em&gt; &amp;gt; 0.05) from this test indicates that the variances between the categories are equivalent.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# test for normality
-survey_long %&amp;gt;% 
-  group_by(saying) %&amp;gt;% 
-  summarise(noramlity = as.numeric(shapiro.test(minutes)[1]))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## # A tibble: 3 × 2
-##   saying   noramlity
-##   &amp;lt;chr&amp;gt;        &amp;lt;dbl&amp;gt;
-## 1 just now     0.565
-## 2 now          0.713
-## 3 now now      0.671
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Test for homoscedasticity
-survey_long %&amp;gt;% 
-  bartlett.test(minutes ~ saying, data = .)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## 
-## 	Bartlett test of homogeneity of variances
-## 
-## data:  minutes by saying
-## Bartlett&#39;s K-squared = 5.227, df = 2, p-value = 0.07328
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Surprisingly these data meet all of our assumptions so we may perform a simple one-way ANOVA on them to detect any significant differences.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;glance(aov(minutes ~ saying, data = survey_long))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## # A tibble: 1 × 6
-##   logLik   AIC   BIC deviance  nobs r.squared
-##    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;     &amp;lt;dbl&amp;gt;
-## 1  -670. 1349. 1360. 1143843.   111    0.0615
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Less surprisingly, there is a significant difference in the times given for these three idioms. But let&amp;rsquo;s dive just a bit deeper with a post-hoc Tukey (not Turkey) test to see which categories specifically are different from which.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;TukeyHSD(aov(minutes ~ saying, data = survey_long))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-## 
-## Fit: aov(formula = minutes ~ saying, data = survey_long)
-## 
-## $saying
-##                       diff         lwr       upr     p adj
-## now-just now      60.81081    3.949653 117.67197 0.0330869
-## now now-just now  14.18919  -42.671969  71.05035 0.8241544
-## now now-now      -46.62162 -103.482779  10.23954 0.1302148
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Looking at the names given in the &amp;lsquo;saying&amp;rsquo; column, and the values given in the &amp;lsquo;p adj&amp;rsquo; column we may see which individual idioms are different from which.  Unsurprisingly, judging from Figure &lt;a href=&#34;#fig:basic-plot&#34;&gt;2&lt;/a&gt;, &amp;lsquo;now now&amp;rsquo; and &amp;lsquo;just now&amp;rsquo; are not different. Interesting though is that &amp;lsquo;now&amp;rsquo; is significantly different from &amp;lsquo;just now&amp;rsquo;, but not &amp;lsquo;now now&amp;rsquo;. The initial results made it look as though &amp;lsquo;now&amp;rsquo; would have been significantly different from both.&lt;/p&gt;
-
-&lt;h2 id=&#34;province-time-frames&#34;&gt;Province time frames&lt;/h2&gt;
-
-&lt;p&gt;Preferably, many more people would have taken the survey so that we could draw more conclusive results. I&amp;rsquo;m rather certain that should more people take the survey the distributions of the scores for the three idioms would even out more until there were no significant differences between any of them. Enough participants have taken the test however that we may compare the results for a few different provinces.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Remove provinces with fewer than nine entries
-# Ten would be preferable, but at nine we allow the inclusion of KZN
-survey_province &amp;lt;- survey_long %&amp;gt;% 
-  group_by(province) %&amp;gt;% 
-  filter(n() &amp;gt;= 9) %&amp;gt;% 
-  ungroup()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And now with the provinces that have only a few answers filtered out, let&amp;rsquo;s see what the data look like as boxplots.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(data = survey_province, aes(x = saying, y = minutes, fill = province)) +
-  geom_boxplot(outlier.colour = NA) +
-  geom_point(shape = 21, position = position_jitterdodge()) +
-  scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
-  scale_fill_brewer(palette = &amp;quot;Set2&amp;quot;) +
-  labs(x = &amp;quot;&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.app/post/SA_time_survey_files/figure-html/province-plot-1.png&#34; alt=&#34;Boxplots showing the distribution of times by province.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;&lt;span id=&#34;fig:province-plot&#34;&gt;&lt;/span&gt;Figure 3: Boxplots showing the distribution of times by province.&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Right away for me it appears that the time frames for the Eastern Cape are shorter than for the other three provinces. KZN appears to be the longest, with Gauteng and the Western Cape seeming similar. Because we have multiple independent variables (saying and province) we want a two-way ANOVA. But before we do that, let&amp;rsquo;s again check for normality and homoscedasticity.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# test for normality
-survey_province %&amp;gt;% 
-  group_by(saying, province) %&amp;gt;% 
-  summarise(normality = as.numeric(shapiro.test(minutes)[1]))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## # A tibble: 12 × 3
-## # Groups:   saying [3]
-##    saying   province     normality
-##    &amp;lt;chr&amp;gt;    &amp;lt;fct&amp;gt;            &amp;lt;dbl&amp;gt;
-##  1 just now Eastern Cape     0.640
-##  2 just now Gauteng          0.867
-##  3 just now KZN              0.865
-##  4 just now Western Cape     0.537
-##  5 now      Eastern Cape     0.766
-##  6 now      Gauteng          0.721
-##  7 now      KZN              0.75 
-##  8 now      Western Cape     0.729
-##  9 now now  Eastern Cape     0.684
-## 10 now now  Gauteng          0.689
-## 11 now now  KZN              0.813
-## 12 now now  Western Cape     0.718
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Test for homoscedasticity
-survey_province %&amp;gt;% 
-  bartlett.test(minutes ~ interaction(saying, province), data = .)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## 
-## 	Bartlett test of homogeneity of variances
-## 
-## data:  minutes by interaction(saying, province)
-## Bartlett&#39;s K-squared = 69.523, df = 11, p-value = 1.505e-10
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The different groups of time are all normally distributed, but the variances differ. Regardless, we are going to stick to a normal two-way ANOVA as there are no good alternatives to this for non-parametric data and transforming these data is a bother.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;glance(aov(minutes ~ saying + province, data = survey_province))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## # A tibble: 1 × 6
-##   logLik   AIC   BIC deviance  nobs r.squared
-##    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;     &amp;lt;dbl&amp;gt;
-## 1  -623. 1261. 1279.  881685.   105     0.204
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Significant differences are to be had here. So let&amp;rsquo;s break it down and see which groups specifically differ.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;TukeyHSD(aov(minutes ~ saying + province, data = survey_province))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-## 
-## Fit: aov(formula = minutes ~ saying + province, data = survey_province)
-## 
-## $saying
-##                       diff        lwr        upr     p adj
-## now-just now      70.14286   16.46427 123.821448 0.0068600
-## now now-just now  15.42857  -38.25002  69.107162 0.7734013
-## now now-now      -54.71429 -108.39288  -1.035695 0.0447008
-## 
-## $province
-##                                 diff         lwr       upr     p adj
-## Gauteng-Eastern Cape       63.452381  -15.761193 142.66595 0.1624466
-## KZN-Eastern Cape          139.722222   39.043527 240.40092 0.0025348
-## Western Cape-Eastern Cape  73.289474    6.613379 139.96557 0.0252743
-## KZN-Gauteng                76.269841  -21.982505 174.52219 0.1845631
-## Western Cape-Gauteng        9.837093  -53.115472  72.78966 0.9768852
-## Western Cape-KZN          -66.432749 -154.888584  22.02309 0.2092492
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We may see that by removing some of the answers from the less represented provinces there is now a significant difference between the scores for &amp;lsquo;now&amp;rsquo; and &amp;lsquo;now now&amp;rsquo; as well as &amp;lsquo;just now&amp;rsquo;. Additionally we may see that the scores for Eastern Cape differ significantly from KZN and the Western Cape. One could also look at the interactions between the two independent variables but I&amp;rsquo;m not quite interested in that level of depth here.&lt;/p&gt;
-
-&lt;h2 id=&#34;city-time-frames&#34;&gt;City time frames&lt;/h2&gt;
-
-&lt;p&gt;With the breakdown for the province time frames out of the way, we are going to wrap up this analysis by looking at the difference between cities.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Remove provinces with fewer than five entries
-# Ten is preferable, but at five we may include Mthatha
-survey_city &amp;lt;- survey_long %&amp;gt;% 
-  group_by(saying, city) %&amp;gt;% 
-  filter(n() &amp;gt;= 5) %&amp;gt;% 
-  ungroup()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(data = survey_city, aes(x = saying, y = minutes, fill = city)) +
-  geom_boxplot(outlier.colour = NA) +
-  geom_point(shape = 21, position = position_jitterdodge()) +
-  scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
-  scale_fill_brewer(palette = &amp;quot;Set3&amp;quot;) +
-  labs(x = &amp;quot;&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;https://theoceancode.netlify.app/post/SA_time_survey_files/figure-html/city-plot-1.png&#34; alt=&#34;Boxplots showing the distribution of times by city.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;&lt;span id=&#34;fig:city-plot&#34;&gt;&lt;/span&gt;Figure 4: Boxplots showing the distribution of times by city.&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Again with the assumptions&amp;hellip;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# test for normality
-survey_city %&amp;gt;% 
-  group_by(saying, city) %&amp;gt;% 
-  summarise(normality = as.numeric(shapiro.test(minutes)[1]))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## # A tibble: 9 × 3
-## # Groups:   saying [3]
-##   saying   city         normality
-##   &amp;lt;chr&amp;gt;    &amp;lt;fct&amp;gt;            &amp;lt;dbl&amp;gt;
-## 1 just now Cape Town        0.577
-## 2 just now Johannesburg     0.912
-## 3 just now Mthatha          0.552
-## 4 now      Cape Town        0.739
-## 5 now      Johannesburg     0.757
-## 6 now      Mthatha          0.754
-## 7 now now  Cape Town        0.739
-## 8 now now  Johannesburg     0.741
-## 9 now now  Mthatha          0.552
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# Test for homoscedasticity
-survey_city %&amp;gt;% 
-  bartlett.test(minutes ~ interaction(saying, city), data = .)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## 
-## 	Bartlett test of homogeneity of variances
-## 
-## data:  minutes by interaction(saying, city)
-## Bartlett&#39;s K-squared = 55.177, df = 8, p-value = 4.078e-09
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&amp;hellip; and again we see that while normally distributed, the variance of our sample sets differ significantly from one another. Regardless, we&amp;rsquo;ll stick to the two-way ANOVA.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;glance(aov(minutes ~ saying + city, data = survey_city))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;## # A tibble: 1 × 6
-##   logLik   AIC   BIC deviance  nobs r.squared
-##    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;     &amp;lt;dbl&amp;gt;
-## 1  -481.  973.  987.  674933.    81     0.205
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As one likely would have deduced from Figure &lt;a href=&#34;#fig:city-plot&#34;&gt;4&lt;/a&gt;, the scores are significantly different from one another.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;TukeyHSD(aov(minutes ~ saying + city, data = survey_city))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-## 
-## Fit: aov(formula = minutes ~ saying + city, data = survey_city)
-## 
-## $saying
-##                       diff        lwr         upr     p adj
-## now-just now      77.96296   16.65151 139.2744119 0.0090081
-## now now-just now  16.85185  -44.45960  78.1633008 0.7889537
-## now now-now      -61.11111 -122.42256   0.2003379 0.0509401
-## 
-## $city
-##                             diff        lwr        upr     p adj
-## Johannesburg-Cape Town -10.72917  -72.99124  51.532904 0.9108240
-## Mthatha-Cape Town      -84.89583 -151.53238 -18.259285 0.0088590
-## Mthatha-Johannesburg   -74.16667 -152.92265   4.589316 0.0691761
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;From the post-hoc test we may see that &amp;lsquo;now&amp;rsquo; differs significantly from &amp;lsquo;just now in these three cities, and if we&amp;rsquo;re feeling generous we may say that &amp;lsquo;now&amp;rsquo; also differs significantly from &amp;lsquo;now now&amp;rsquo;. But like with the rest of the country, &amp;lsquo;now now&amp;rsquo; and &amp;lsquo;just now&amp;rsquo; are not significantly different time frames. Looking at the city breakdown we see that the only significant difference is between Mthatha and Cape Town. Johannesburg and Cape Town do not differ.&lt;/p&gt;
-
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;The general conclusion I&amp;rsquo;ve drawn from the analysis of the South Africa time survey results is that the understanding people in the Eastern Cape have of the time frames for these idioms is significantly faster than in the other major provinces in South Africa. The numbers don&amp;rsquo;t lie!&lt;/p&gt;
-
-&lt;p&gt;Speaking to people about this survey (before the results were out), the general consensus was that Johannesburg people would give significantly faster scores than people in other parts of the country, particularly Cape Town. That does not however appear to be the case. Also surprising from these results was that &amp;lsquo;now&amp;rsquo; tended to be considered to be a significantly longer time frame than &amp;lsquo;just now&amp;rsquo; and &amp;lsquo;now now&amp;rsquo;. Most people I&amp;rsquo;ve talked to about these idioms agree that &amp;lsquo;now&amp;rsquo; is meant to be the fastest&amp;hellip; so I&amp;rsquo;m not sure how that worked out. Unsurprising to me, but perhaps to some South Africans, was that there is no difference between &amp;lsquo;just now&amp;rsquo; and &amp;lsquo;now now&amp;rsquo;. I was not surprised by this because talking with people around the country I very infrequently heard people, even while in the same room, agree on the time frames for these idioms.&lt;/p&gt;
-
-&lt;p&gt;There are of course a host of issues with this study. One thing I&amp;rsquo;m wondering about the Eastern Cape scores being significantly faster than the other provinces is if perhaps people in the Eastern Cape have a wider range of idioms for giving someone a time frame? Meaning, perhaps &amp;lsquo;now&amp;rsquo;, &amp;lsquo;just now&amp;rsquo;, and &amp;lsquo;now now&amp;rsquo; are all much faster than other provinces because there is some other popular idiom people use there that denotes a longer time frame. It&amp;rsquo;s also possible that people in other provinces misunderstood the survey. Though I did make it very clear that the answers were in minutes and not seconds, specifically to attempt to prevent people from making that mistake. Lastly, this analysis suffers from a regrettably small sample size. I would have preferred at least 100 responses, rather than 40. It is still wonderful to be able to get some numbers in the game and get a glimpse of the fact that there is little agreement about these time frames.&lt;/p&gt;
-
-&lt;p&gt;Hopefully posting these results will snare a few more people into taking the survey and in another couple of months I can make a follow up post with the additional feedback.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Privacy Policy</title>
-      <link>https://theoceancode.netlify.app/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/privacy/</guid>
-      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
-</description>
     </item>
     
   </channel>
