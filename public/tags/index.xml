@@ -2,238 +2,238 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/</link>
+    <link>https://theoceancode.netlify.app/tags/</link>
     <description>Recent content in Tags on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 10 Aug 2023 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>marine heatwaves</title>
-      <link>https://theoceancode.netlify.com/tags/marine-heatwaves/</link>
-      <pubDate>Mon, 24 Jul 2023 00:00:00 +0200</pubDate>
+      <title>R</title>
+      <link>https://theoceancode.netlify.app/tags/r/</link>
+      <pubDate>Thu, 10 Aug 2023 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/marine-heatwaves/</guid>
+      <guid>https://theoceancode.netlify.app/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>marine heatwaves</title>
+      <link>https://theoceancode.netlify.app/tags/marine-heatwaves/</link>
+      <pubDate>Thu, 10 Aug 2023 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/marine-heatwaves/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ODV</title>
-      <link>https://theoceancode.netlify.com/tags/odv/</link>
+      <link>https://theoceancode.netlify.app/tags/odv/</link>
       <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/odv/</guid>
+      <guid>https://theoceancode.netlify.app/tags/odv/</guid>
       <description></description>
     </item>
     
     <item>
       <title>interpolation</title>
-      <link>https://theoceancode.netlify.com/tags/interpolation/</link>
+      <link>https://theoceancode.netlify.app/tags/interpolation/</link>
       <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/interpolation/</guid>
+      <guid>https://theoceancode.netlify.app/tags/interpolation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>visuals</title>
-      <link>https://theoceancode.netlify.com/tags/visuals/</link>
+      <link>https://theoceancode.netlify.app/tags/visuals/</link>
       <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/visuals/</guid>
+      <guid>https://theoceancode.netlify.app/tags/visuals/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SDM</title>
-      <link>https://theoceancode.netlify.com/tags/sdm/</link>
+      <link>https://theoceancode.netlify.app/tags/sdm/</link>
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/sdm/</guid>
+      <guid>https://theoceancode.netlify.app/tags/sdm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>data</title>
-      <link>https://theoceancode.netlify.com/tags/data/</link>
+      <link>https://theoceancode.netlify.app/tags/data/</link>
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/data/</guid>
+      <guid>https://theoceancode.netlify.app/tags/data/</guid>
       <description></description>
     </item>
     
     <item>
       <title>download</title>
-      <link>https://theoceancode.netlify.com/tags/download/</link>
+      <link>https://theoceancode.netlify.app/tags/download/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/download/</guid>
+      <guid>https://theoceancode.netlify.app/tags/download/</guid>
       <description></description>
     </item>
     
     <item>
       <title>environmental</title>
-      <link>https://theoceancode.netlify.com/tags/environmental/</link>
+      <link>https://theoceancode.netlify.app/tags/environmental/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/environmental/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>https://theoceancode.netlify.com/tags/r/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/tags/r/</guid>
+      <guid>https://theoceancode.netlify.app/tags/environmental/</guid>
       <description></description>
     </item>
     
     <item>
       <title>coastal</title>
-      <link>https://theoceancode.netlify.com/tags/coastal/</link>
+      <link>https://theoceancode.netlify.app/tags/coastal/</link>
       <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/coastal/</guid>
+      <guid>https://theoceancode.netlify.app/tags/coastal/</guid>
       <description></description>
     </item>
     
     <item>
       <title>statistics</title>
-      <link>https://theoceancode.netlify.com/tags/statistics/</link>
+      <link>https://theoceancode.netlify.app/tags/statistics/</link>
       <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/statistics/</guid>
+      <guid>https://theoceancode.netlify.app/tags/statistics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>survey</title>
-      <link>https://theoceancode.netlify.com/tags/survey/</link>
+      <link>https://theoceancode.netlify.app/tags/survey/</link>
       <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/survey/</guid>
+      <guid>https://theoceancode.netlify.app/tags/survey/</guid>
       <description></description>
     </item>
     
     <item>
       <title>atmosphere</title>
-      <link>https://theoceancode.netlify.com/tags/atmosphere/</link>
+      <link>https://theoceancode.netlify.app/tags/atmosphere/</link>
       <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/atmosphere/</guid>
+      <guid>https://theoceancode.netlify.app/tags/atmosphere/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ocean</title>
-      <link>https://theoceancode.netlify.com/tags/ocean/</link>
+      <link>https://theoceancode.netlify.app/tags/ocean/</link>
       <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/ocean/</guid>
+      <guid>https://theoceancode.netlify.app/tags/ocean/</guid>
       <description></description>
     </item>
     
     <item>
       <title>climatology</title>
-      <link>https://theoceancode.netlify.com/tags/climatology/</link>
+      <link>https://theoceancode.netlify.app/tags/climatology/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/climatology/</guid>
+      <guid>https://theoceancode.netlify.app/tags/climatology/</guid>
       <description></description>
     </item>
     
     <item>
       <title>mapping</title>
-      <link>https://theoceancode.netlify.com/tags/mapping/</link>
+      <link>https://theoceancode.netlify.app/tags/mapping/</link>
       <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/mapping/</guid>
+      <guid>https://theoceancode.netlify.app/tags/mapping/</guid>
       <description></description>
     </item>
     
     <item>
       <title>wind</title>
-      <link>https://theoceancode.netlify.com/tags/wind/</link>
+      <link>https://theoceancode.netlify.app/tags/wind/</link>
       <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/wind/</guid>
+      <guid>https://theoceancode.netlify.app/tags/wind/</guid>
       <description></description>
     </item>
     
     <item>
       <title>goats</title>
-      <link>https://theoceancode.netlify.com/tags/goats/</link>
+      <link>https://theoceancode.netlify.app/tags/goats/</link>
       <pubDate>Mon, 10 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/goats/</guid>
+      <guid>https://theoceancode.netlify.app/tags/goats/</guid>
       <description></description>
     </item>
     
     <item>
       <title>politics</title>
-      <link>https://theoceancode.netlify.com/tags/politics/</link>
+      <link>https://theoceancode.netlify.app/tags/politics/</link>
       <pubDate>Mon, 03 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/politics/</guid>
+      <guid>https://theoceancode.netlify.app/tags/politics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gdp</title>
-      <link>https://theoceancode.netlify.com/tags/gdp/</link>
+      <link>https://theoceancode.netlify.app/tags/gdp/</link>
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/gdp/</guid>
+      <guid>https://theoceancode.netlify.app/tags/gdp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gender</title>
-      <link>https://theoceancode.netlify.com/tags/gender/</link>
+      <link>https://theoceancode.netlify.app/tags/gender/</link>
       <pubDate>Mon, 12 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/gender/</guid>
+      <guid>https://theoceancode.netlify.app/tags/gender/</guid>
       <description></description>
     </item>
     
     <item>
       <title>religion</title>
-      <link>https://theoceancode.netlify.com/tags/religion/</link>
+      <link>https://theoceancode.netlify.app/tags/religion/</link>
       <pubDate>Mon, 15 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/religion/</guid>
+      <guid>https://theoceancode.netlify.app/tags/religion/</guid>
       <description></description>
     </item>
     
     <item>
       <title>sentiment analysis</title>
-      <link>https://theoceancode.netlify.com/tags/sentiment-analysis/</link>
+      <link>https://theoceancode.netlify.app/tags/sentiment-analysis/</link>
       <pubDate>Mon, 15 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/sentiment-analysis/</guid>
+      <guid>https://theoceancode.netlify.app/tags/sentiment-analysis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>text mining</title>
-      <link>https://theoceancode.netlify.com/tags/text-mining/</link>
+      <link>https://theoceancode.netlify.app/tags/text-mining/</link>
       <pubDate>Mon, 15 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/text-mining/</guid>
+      <guid>https://theoceancode.netlify.app/tags/text-mining/</guid>
       <description></description>
     </item>
     
     <item>
       <title>time series analysis</title>
-      <link>https://theoceancode.netlify.com/tags/time-series-analysis/</link>
+      <link>https://theoceancode.netlify.app/tags/time-series-analysis/</link>
       <pubDate>Thu, 15 Dec 2016 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/tags/time-series-analysis/</guid>
+      <guid>https://theoceancode.netlify.app/tags/time-series-analysis/</guid>
       <description></description>
     </item>
     

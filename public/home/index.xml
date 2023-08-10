@@ -2,167 +2,167 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Homes on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/home/</link>
+    <link>https://theoceancode.netlify.app/home/</link>
     <description>Recent content in Homes on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0100</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/home/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.app/home/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>https://theoceancode.netlify.com/home/hero_carousel/</link>
+      <link>https://theoceancode.netlify.app/home/hero_carousel/</link>
       <pubDate>Sun, 15 Oct 2017 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/hero_carousel/</guid>
+      <guid>https://theoceancode.netlify.app/home/hero_carousel/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>https://theoceancode.netlify.com/home/hero/</link>
+      <link>https://theoceancode.netlify.app/home/hero/</link>
       <pubDate>Wed, 22 Aug 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/hero/</guid>
+      <guid>https://theoceancode.netlify.app/home/hero/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>https://theoceancode.netlify.com/home/about/</link>
+      <link>https://theoceancode.netlify.app/home/about/</link>
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/about/</guid>
+      <guid>https://theoceancode.netlify.app/home/about/</guid>
       <description>Biography Robert Schlegel is a data scientist for the FACE-IT project, which has the overarching objective of enabling adaptive co-management of social-ecological fjord systems in the Arctic in the face of rapid cryosphere and biodiversity changes. He is based out of the Institut de la Mer de Villefranche (IMEV), a research outpost for Sorbonne Université. His area of focus is marine heatwaves (MHWs).</description>
     </item>
     
     <item>
       <title>Publications</title>
-      <link>https://theoceancode.netlify.com/home/publications/</link>
+      <link>https://theoceancode.netlify.app/home/publications/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/publications/</guid>
+      <guid>https://theoceancode.netlify.app/home/publications/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Packages</title>
-      <link>https://theoceancode.netlify.com/home/packages/</link>
+      <link>https://theoceancode.netlify.app/home/packages/</link>
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/packages/</guid>
+      <guid>https://theoceancode.netlify.app/home/packages/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Blog Posts</title>
-      <link>https://theoceancode.netlify.com/home/posts/</link>
+      <link>https://theoceancode.netlify.app/home/posts/</link>
       <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/posts/</guid>
+      <guid>https://theoceancode.netlify.app/home/posts/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>https://theoceancode.netlify.com/home/skills/</link>
+      <link>https://theoceancode.netlify.app/home/skills/</link>
       <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/skills/</guid>
+      <guid>https://theoceancode.netlify.app/home/skills/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Talks</title>
-      <link>https://theoceancode.netlify.com/home/talks/</link>
+      <link>https://theoceancode.netlify.app/home/talks/</link>
       <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/talks/</guid>
+      <guid>https://theoceancode.netlify.app/home/talks/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Posters</title>
-      <link>https://theoceancode.netlify.com/home/posters/</link>
+      <link>https://theoceancode.netlify.app/home/posters/</link>
       <pubDate>Mon, 06 May 2019 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/posters/</guid>
+      <guid>https://theoceancode.netlify.app/home/posters/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Projects</title>
-      <link>https://theoceancode.netlify.com/home/projects/</link>
+      <link>https://theoceancode.netlify.app/home/projects/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/projects/</guid>
+      <guid>https://theoceancode.netlify.app/home/projects/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Selected Talks</title>
-      <link>https://theoceancode.netlify.com/home/talks_selected/</link>
+      <link>https://theoceancode.netlify.app/home/talks_selected/</link>
       <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/talks_selected/</guid>
+      <guid>https://theoceancode.netlify.app/home/talks_selected/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Selected Publications</title>
-      <link>https://theoceancode.netlify.com/home/publications_selected/</link>
+      <link>https://theoceancode.netlify.app/home/publications_selected/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/publications_selected/</guid>
+      <guid>https://theoceancode.netlify.app/home/publications_selected/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Teaching</title>
-      <link>https://theoceancode.netlify.com/home/teaching/</link>
+      <link>https://theoceancode.netlify.app/home/teaching/</link>
       <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/teaching/</guid>
+      <guid>https://theoceancode.netlify.app/home/teaching/</guid>
       <description>I am not currently teaching.</description>
     </item>
     
     <item>
       <title>Workshops</title>
-      <link>https://theoceancode.netlify.com/home/workshops/</link>
+      <link>https://theoceancode.netlify.app/home/workshops/</link>
       <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/workshops/</guid>
+      <guid>https://theoceancode.netlify.app/home/workshops/</guid>
       <description>Below please find links to workshops I run:
  Introduction to R  </description>
     </item>
     
     <item>
       <title>Contact</title>
-      <link>https://theoceancode.netlify.com/home/contact/</link>
+      <link>https://theoceancode.netlify.app/home/contact/</link>
       <pubDate>Wed, 22 Aug 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/contact/</guid>
+      <guid>https://theoceancode.netlify.app/home/contact/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tags</title>
-      <link>https://theoceancode.netlify.com/home/tags/</link>
+      <link>https://theoceancode.netlify.app/home/tags/</link>
       <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/tags/</guid>
+      <guid>https://theoceancode.netlify.app/home/tags/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Search</title>
-      <link>https://theoceancode.netlify.com/home/search/</link>
+      <link>https://theoceancode.netlify.app/home/search/</link>
       <pubDate>Mon, 23 Jul 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/home/search/</guid>
+      <guid>https://theoceancode.netlify.app/home/search/</guid>
       <description></description>
     </item>
     

@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>download on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/download/</link>
+    <link>https://theoceancode.netlify.app/tags/download/</link>
     <description>Recent content in download on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Fri, 14 Feb 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/download/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.app/tags/download/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Downloading environmental data in R</title>
-      <link>https://theoceancode.netlify.com/post/dl_env_data_r/</link>
+      <link>https://theoceancode.netlify.app/post/dl_env_data_r/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/dl_env_data_r/</guid>
-      <description>Objective Having been working in environmental science for several years now, entirely using R, I’ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn’t be. Most data hosting organisations do want scientists to use their data and do make it freely available.</description>
+      <guid>https://theoceancode.netlify.app/post/dl_env_data_r/</guid>
+      <description></description>
     </item>
     
     <item>
       <title>Downloading environmental data in R</title>
-      <link>https://theoceancode.netlify.com/post/dl_env_data_r/</link>
+      <link>https://theoceancode.netlify.app/post/dl_env_data_r/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/dl_env_data_r/</guid>
-      <description>Objective Having been working in environmental science for several years now, entirely using R, I&amp;rsquo;ve come to greatly appreciate environmental data sources that are easy to access. If you are reading this text now however, that probably means that you, like me, have found that this often is not the case. The struggle to get data is real. But it shouldn&amp;rsquo;t be. Most data hosting organisations do want scientists to use their data and do make it freely available.</description>
+      <guid>https://theoceancode.netlify.app/post/dl_env_data_r/</guid>
+      <description></description>
     </item>
     
   </channel>

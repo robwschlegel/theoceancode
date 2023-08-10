@@ -6,7 +6,7 @@
 
 # The URL of your website.
 # End your URL with a `/` trailing slash, e.g. `https://example.com/`.
-baseurl = "https://theoceancode.netlify.com/"
+baseurl = "https://theoceancode.netlify.app/"
 
 # Title of your site
 title = "The Ocean Code"
@@ -56,15 +56,15 @@ enableGitInfo = false
 [params]
   # Color theme.
   #   Choose from `default`, `ocean`, `forest`, `coffee`, `dark`, or `1950s`.
-  color_theme = "ocean"
+  color_theme = "1950s"
 
   # Font style.
   #   Choose from `default`, `classic`, or `playfair`.
-  font = "default"
+  font = "classic"
 
   # Your details.
   name = "Robert William Schlegel"
-  role = "Data scientist"
+  role = "Data Scientist"
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
@@ -76,8 +76,8 @@ enableGitInfo = false
   address = "Institut de la Mer de Villefranche (IMEV), 181 Chemin du Lazaret, 06230 Villefranche-sur-Mer, France"
   office_hours = "Monday - Friday 09:00 to 18:00 or email for meeting"
   phone = "+33 6 11 93 37 04"
-  skype = "robert.william.schlegel"
-  telegram = ""
+  # skype = "robert.william.schlegel"
+  # telegram = "+33 6 11 93 37 04"
   twitter = "robwschlegel"
 
   # Enable Keybase in Contact widget by entering your keybase.io username.
@@ -306,13 +306,13 @@ enableGitInfo = false
   weight = 2
 
 [[menu.main]]
-  name = "Blog"
-  url = "#posts"
+  name = "Projects"
+  url = "#projects"
   weight = 3
 
 [[menu.main]]
-  name = "Projects"
-  url = "#projects"
+  name = "Blog"
+  url = "#posts"
   weight = 4
 
 [[menu.main]]

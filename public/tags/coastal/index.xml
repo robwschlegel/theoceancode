@@ -2,58 +2,58 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>coastal on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/coastal/</link>
+    <link>https://theoceancode.netlify.app/tags/coastal/</link>
     <description>Recent content in coastal on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Sat, 14 Dec 2019 00:00:00 +0100</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/coastal/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.app/tags/coastal/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>coastR</title>
-      <link>https://theoceancode.netlify.com/package/coastr/</link>
+      <link>https://theoceancode.netlify.app/package/coastr/</link>
       <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/package/coastr/</guid>
+      <guid>https://theoceancode.netlify.app/package/coastr/</guid>
       <description>An R package with useful functions for coastal oceanography.</description>
     </item>
     
     <item>
       <title>Transects</title>
-      <link>https://theoceancode.netlify.com/post/transects/</link>
+      <link>https://theoceancode.netlify.app/post/transects/</link>
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/transects/</guid>
+      <guid>https://theoceancode.netlify.app/post/transects/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Predominant Atmospheric and Oceanic Patterns during Coastal Marine Heatwaves</title>
-      <link>https://theoceancode.netlify.com/publication/predominant/</link>
+      <link>https://theoceancode.netlify.app/publication/predominant/</link>
       <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/publication/predominant/</guid>
+      <guid>https://theoceancode.netlify.app/publication/predominant/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sequential sites</title>
-      <link>https://theoceancode.netlify.com/post/seq_sites/</link>
+      <link>https://theoceancode.netlify.app/post/seq_sites/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/seq_sites/</guid>
+      <guid>https://theoceancode.netlify.app/post/seq_sites/</guid>
       <description>Preface The rest of the blog post after this preface section is a copy of the vignette I&amp;rsquo;ve written for the first function in the new package I am developing: coastR. This package aims to provide functions that are useful for coastal oceanography but that do not yet exist in the R language. It is not my intention to provide algorithms for physical oceanography as these may already be found elsewhere.</description>
     </item>
     
     <item>
       <title>Nearshore and offshore co-occurrence of marine heatwaves and cold-spells</title>
-      <link>https://theoceancode.netlify.com/publication/cooccurrence/</link>
+      <link>https://theoceancode.netlify.app/publication/cooccurrence/</link>
       <pubDate>Tue, 10 Jan 2017 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/publication/cooccurrence/</guid>
+      <guid>https://theoceancode.netlify.app/publication/cooccurrence/</guid>
       <description></description>
     </item>
     

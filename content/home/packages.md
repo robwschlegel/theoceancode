@@ -8,7 +8,7 @@ title = "Packages"
 subtitle = "The R packages I've created/maintain"
 
 # Order that this section will appear in.
-weight = 15
+weight = 11
 
 # Content.
 # Display content from the following folder.

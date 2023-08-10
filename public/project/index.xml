@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/project/</link>
+    <link>https://theoceancode.netlify.app/project/</link>
     <description>Recent content in Projects on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Mon, 25 Mar 2019 00:00:00 +0100</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/project/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.app/project/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Demo for the MHW definition</title>
-      <link>https://theoceancode.netlify.com/project/demomhw/</link>
+      <link>https://theoceancode.netlify.app/project/demomhw/</link>
       <pubDate>Mon, 25 Mar 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/project/demomhw/</guid>
+      <guid>https://theoceancode.netlify.app/project/demomhw/</guid>
       <description>An interactive application that allows the user to explore the components of the MHW definition.</description>
     </item>
     
     <item>
       <title>Marine heatwave tracker</title>
-      <link>https://theoceancode.netlify.com/project/mhwtracker/</link>
+      <link>https://theoceancode.netlify.app/project/mhwtracker/</link>
       <pubDate>Mon, 25 Mar 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/project/mhwtracker/</guid>
+      <guid>https://theoceancode.netlify.app/project/mhwtracker/</guid>
       <description>A daily updating web application for tracking the occurrence of marine heatwaves around the globe.</description>
     </item>
     

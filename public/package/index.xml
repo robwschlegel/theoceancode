@@ -2,31 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Packages on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/package/</link>
+    <link>https://theoceancode.netlify.app/package/</link>
     <description>Recent content in Packages on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 10 Aug 2023 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/package/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.app/package/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>heatwave3</title>
+      <link>https://theoceancode.netlify.app/package/heatwave3/</link>
+      <pubDate>Thu, 10 Aug 2023 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/package/heatwave3/</guid>
+      <description>An R package for the detection of heatwaves and cold-spells directly on NetCDF files.</description>
+    </item>
+    
+    <item>
       <title>heatwaveR</title>
-      <link>https://theoceancode.netlify.com/package/heatwaver/</link>
+      <link>https://theoceancode.netlify.app/package/heatwaver/</link>
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/package/heatwaver/</guid>
+      <guid>https://theoceancode.netlify.app/package/heatwaver/</guid>
       <description>An R package for the detection of heatwaves and cold-spells.</description>
     </item>
     
     <item>
       <title>coastR</title>
-      <link>https://theoceancode.netlify.com/package/coastr/</link>
+      <link>https://theoceancode.netlify.app/package/coastr/</link>
       <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/package/coastr/</guid>
+      <guid>https://theoceancode.netlify.app/package/coastr/</guid>
       <description>An R package with useful functions for coastal oceanography.</description>
     </item>
     

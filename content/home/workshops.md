@@ -11,7 +11,7 @@ title = "Workshops"
 subtitle = ""
 
 # Order that this section will appear in.
-weight = 61
+weight = 16
 
 +++
 

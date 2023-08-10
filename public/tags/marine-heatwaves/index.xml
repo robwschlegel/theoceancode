@@ -2,76 +2,85 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>marine heatwaves on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/marine-heatwaves/</link>
+    <link>https://theoceancode.netlify.app/tags/marine-heatwaves/</link>
     <description>Recent content in marine heatwaves on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 10 Aug 2023 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/marine-heatwaves/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.app/tags/marine-heatwaves/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>heatwave3</title>
+      <link>https://theoceancode.netlify.app/package/heatwave3/</link>
+      <pubDate>Thu, 10 Aug 2023 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/package/heatwave3/</guid>
+      <description>An R package for the detection of heatwaves and cold-spells directly on NetCDF files.</description>
+    </item>
+    
+    <item>
       <title>Basic detection and categorisation of events</title>
-      <link>https://theoceancode.netlify.com/talk/clivar_2023/</link>
+      <link>https://theoceancode.netlify.app/talk/clivar_2023/</link>
       <pubDate>Mon, 24 Jul 2023 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/talk/clivar_2023/</guid>
+      <guid>https://theoceancode.netlify.app/talk/clivar_2023/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Detecting Marine Heatwaves With Sub-Optimal Data</title>
-      <link>https://theoceancode.netlify.com/publication/detection/</link>
+      <link>https://theoceancode.netlify.app/publication/detection/</link>
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/publication/detection/</guid>
+      <guid>https://theoceancode.netlify.app/publication/detection/</guid>
       <description></description>
     </item>
     
     <item>
       <title>heatwaveR</title>
-      <link>https://theoceancode.netlify.com/package/heatwaver/</link>
+      <link>https://theoceancode.netlify.app/package/heatwaver/</link>
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/package/heatwaver/</guid>
+      <guid>https://theoceancode.netlify.app/package/heatwaver/</guid>
       <description>An R package for the detection of heatwaves and cold-spells.</description>
     </item>
     
     <item>
       <title>Detecting marine heatwaves with sub-optimal data</title>
-      <link>https://theoceancode.netlify.com/poster/mhw_detection_poster/</link>
+      <link>https://theoceancode.netlify.app/poster/mhw_detection_poster/</link>
       <pubDate>Mon, 06 May 2019 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/poster/mhw_detection_poster/</guid>
+      <guid>https://theoceancode.netlify.app/poster/mhw_detection_poster/</guid>
       <description>Research conducted on how sub-optimal a time series may be and still produce comparable marine heatwaves to an optimal time series.</description>
     </item>
     
     <item>
       <title>Demo for the MHW definition</title>
-      <link>https://theoceancode.netlify.com/project/demomhw/</link>
+      <link>https://theoceancode.netlify.app/project/demomhw/</link>
       <pubDate>Mon, 25 Mar 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/project/demomhw/</guid>
+      <guid>https://theoceancode.netlify.app/project/demomhw/</guid>
       <description>An interactive application that allows the user to explore the components of the MHW definition.</description>
     </item>
     
     <item>
       <title>Marine heatwave tracker</title>
-      <link>https://theoceancode.netlify.com/project/mhwtracker/</link>
+      <link>https://theoceancode.netlify.app/project/mhwtracker/</link>
       <pubDate>Mon, 25 Mar 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/project/mhwtracker/</guid>
+      <guid>https://theoceancode.netlify.app/project/mhwtracker/</guid>
       <description>A daily updating web application for tracking the occurrence of marine heatwaves around the globe.</description>
     </item>
     
     <item>
       <title>heatwaveR: A central algorithm for the detection of heatwaves and cold-spells</title>
-      <link>https://theoceancode.netlify.com/publication/heatwaver/</link>
+      <link>https://theoceancode.netlify.app/publication/heatwaver/</link>
       <pubDate>Fri, 31 Aug 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/publication/heatwaver/</guid>
+      <guid>https://theoceancode.netlify.app/publication/heatwaver/</guid>
       <description></description>
     </item>
     

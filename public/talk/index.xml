@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Recent &amp; Upcoming Talks on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/talk/</link>
+    <link>https://theoceancode.netlify.app/talk/</link>
     <description>Recent content in Recent &amp; Upcoming Talks on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/talk/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.app/talk/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Basic detection and categorisation of events</title>
-      <link>https://theoceancode.netlify.com/talk/clivar_2023/</link>
+      <link>https://theoceancode.netlify.app/talk/clivar_2023/</link>
       <pubDate>Mon, 24 Jul 2023 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/talk/clivar_2023/</guid>
+      <guid>https://theoceancode.netlify.app/talk/clivar_2023/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Marine heatwaves: the new normal</title>
-      <link>https://theoceancode.netlify.com/talk/mhw_2019/</link>
+      <link>https://theoceancode.netlify.app/talk/mhw_2019/</link>
       <pubDate>Tue, 19 Mar 2019 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/talk/mhw_2019/</guid>
+      <guid>https://theoceancode.netlify.app/talk/mhw_2019/</guid>
       <description></description>
     </item>
     

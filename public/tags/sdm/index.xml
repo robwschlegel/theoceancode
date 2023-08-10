@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SDM on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/sdm/</link>
+    <link>https://theoceancode.netlify.app/tags/sdm/</link>
     <description>Recent content in SDM on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
     <lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/sdm/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.app/tags/sdm/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Analysis of Bio-Oracle data</title>
-      <link>https://theoceancode.netlify.com/post/bo_analysis/</link>
+      <link>https://theoceancode.netlify.app/post/bo_analysis/</link>
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/bo_analysis/</guid>
+      <guid>https://theoceancode.netlify.app/post/bo_analysis/</guid>
       <description>Objective While running some brief quality control tests on Bio-Oracle layers before using them for a recent project it was detected that some of the layers in the current version of the Bio-Oracle product appear to have very large errors. Specifically the error is that there are layers where the minimum values are greater than the maximum values. It is unclear how this could be possible, so in the following text and code we will look into how we go about investigating these data layers and we will discuss which layers are fine, and which are not.</description>
     </item>
     
     <item>
       <title>Analysis of Bio-Oracle data</title>
-      <link>https://theoceancode.netlify.com/post/bo_analysis/</link>
+      <link>https://theoceancode.netlify.app/post/bo_analysis/</link>
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/bo_analysis/</guid>
+      <guid>https://theoceancode.netlify.app/post/bo_analysis/</guid>
       <description>Objective While running some brief quality control tests on Bio-Oracle layers before using them for a recent project it was detected that some of the layers in the current version of the Bio-Oracle product appear to have very large errors. Specifically the error is that there are layers where the minimum values are greater than the maximum values. It is unclear how this could be possible, so in the following text and code we will look into how we go about investigating these data layers and we will discuss which layers are fine, and which are not.</description>
     </item>
     
