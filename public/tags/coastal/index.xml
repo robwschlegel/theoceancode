@@ -27,7 +27,7 @@
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/transects/</guid>
-      <description>Preface This week I have expanded the coastR package with the inclusion of a function that calculates the angle of the heading for alongshore or shore-normal transects. The rest of this blog post is the vignette that I&amp;rsquo;ve written detailing the set of this function. Next week I&amp;rsquo;ll likely be taking a break from coastR development to finally create a package for the SACTN dataset. That is a project that has been in the works for a loooong time and it will be good to finally see a development release available to the public.</description>
+      <description></description>
     </item>
     
     <item>

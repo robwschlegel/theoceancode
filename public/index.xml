@@ -6,8 +6,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Fri, 21 May 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0200</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Basic detection and categorisation of events</title>
+      <link>https://theoceancode.netlify.com/talk/clivar_2023/</link>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.com/talk/clivar_2023/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>ODV figures in R with bathymetry</title>
@@ -1838,16 +1847,6 @@ survey_city %&amp;gt;%
 &lt;p&gt;There are of course a host of issues with this study. One thing I&amp;rsquo;m wondering about the Eastern Cape scores being significantly faster than the other provinces is if perhaps people in the Eastern Cape have a wider range of idioms for giving someone a time frame? Meaning, perhaps &amp;lsquo;now&amp;rsquo;, &amp;lsquo;just now&amp;rsquo;, and &amp;lsquo;now now&amp;rsquo; are all much faster than other provinces because there is some other popular idiom people use there that denotes a longer time frame. It&amp;rsquo;s also possible that people in other provinces misunderstood the survey. Though I did make it very clear that the answers were in minutes and not seconds, specifically to attempt to prevent people from making that mistake. Lastly, this analysis suffers from a regrettably small sample size. I would have preferred at least 100 responses, rather than 40. It is still wonderful to be able to get some numbers in the game and get a glimpse of the fact that there is little agreement about these time frames.&lt;/p&gt;
 
 &lt;p&gt;Hopefully posting these results will snare a few more people into taking the survey and in another couple of months I can make a follow up post with the additional feedback.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Privacy Policy</title>
-      <link>https://theoceancode.netlify.com/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.com/privacy/</guid>
-      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     

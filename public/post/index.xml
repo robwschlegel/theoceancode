@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 21 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.com/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -63,8 +63,7 @@
       <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/sa_time_survey/</guid>
-      <description>Objective In South Africa there are a range of idioms for different time frames in which someone may (or may not) do something. The most common of these are: &amp;lsquo;now&amp;rsquo;, &amp;lsquo;just now&amp;rsquo;, and &amp;lsquo;now now&amp;rsquo;. If one were to Google these sayings one would find that there is general agreements on how long these time frames are, but that agreement is not absolute.
-This got me to wondering just how much disagreement there may be around the country.</description>
+      <description></description>
     </item>
     
     <item>
@@ -73,7 +72,7 @@ This got me to wondering just how much disagreement there may be around the coun
       <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.com/post/transects/</guid>
-      <description>Preface This week I have expanded the coastR package with the inclusion of a function that calculates the angle of the heading for alongshore or shore-normal transects. The rest of this blog post is the vignette that I&amp;rsquo;ve written detailing the set of this function. Next week I&amp;rsquo;ll likely be taking a break from coastR development to finally create a package for the SACTN dataset. That is a project that has been in the works for a loooong time and it will be good to finally see a development release available to the public.</description>
+      <description></description>
     </item>
     
     <item>

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Source Themes Academic 2.4.0">
-  <meta name="generator" content="Hugo 0.55.5" />
+  <meta name="generator" content="Hugo 0.55.0" />
   <meta name="author" content="Robert William Schlegel">
 
   
@@ -66,7 +66,7 @@
   
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'UA-118123016-2', 'auto');
+      ga('create', 'G-P6C1DFHPRD', 'auto');
       
       ga('require', 'eventTracker');
       ga('require', 'outboundLinkTracker');
@@ -102,7 +102,7 @@
   <meta property="og:description" content="Data scientist">
   <meta property="og:locale" content="en-uk">
   
-  <meta property="og:updated_time" content="2017-01-01T00:00:00&#43;01:00">
+  <meta property="og:updated_time" content="2021-05-21T00:00:00&#43;00:00">
   
 
   
@@ -711,7 +711,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    13 min read
+    0 min read
   </span>
   
 
@@ -743,8 +743,355 @@
   </h3>
   <div class="article-style" itemprop="articleBody">
     
-    Objective In South Africa there are a range of idioms for different time frames in which someone may (or may not) do something. The most common of these are: &lsquo;now&rsquo;, &lsquo;just now&rsquo;, and &lsquo;now now&rsquo;. If one were to Google these sayings one would find that there is general agreements on how long these time frames are, but that agreement is not absolute.
-This got me to wondering just how much disagreement there may be around the country.
+    
+
+<h2 id="objective">Objective</h2>
+
+<p>In South Africa there are a range of idioms for different time frames in which someone may (or may not) do something. The most common of these are: &lsquo;now&rsquo;, &lsquo;just now&rsquo;, and &lsquo;now now&rsquo;. If one were to Google these sayings one would find that there is general agreements on how long these time frames are, but that agreement is not absolute.</p>
+
+<p><img src="/img/just_now.jpeg" alt="Advice from the internet." /></p>
+
+<p>This got me to wondering just how much disagreement there may be around the country. And more specifically I wanted to know how these times changed between specific locations. If one is interested in contributing to the survey, it may be taken <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNyF8XJeLXLoPCfE9VdEMc_SOHkX84KF82OOudVKq6K15YTg/viewform?usp=sf_link" target="_blank">here</a>. To avoid too much confusion with the answers that could be given, specific times were provided to the participants in a multiple choice format. These times (minutes) were: 5, 15, 30, 60, 120, 300.</p>
+
+<h2 id="data-prep">Data prep</h2>
+
+<p>The survey data are downloaded from <a href="https://www.google.com/forms/about/" target="_blank">Google Forms</a> rather easily as a .csv file, so that&rsquo;s nice. Unfortunately, the way in which one sets up the survey for humans is difficult for R to understand so we need quite a bit of processing after we load the data.</p>
+
+<pre><code class="language-r">library(tidyverse)
+library(ggpubr)
+library(broom)
+
+survey &lt;- read_csv(&quot;../../static/data/SA Time Survey.csv&quot;, skip = 1, col_types = &quot;cccccc&quot;,
+                   col_names = c(&quot;time&quot;, &quot;just now&quot;, &quot;now now&quot;, &quot;now&quot;, &quot;province&quot;, &quot;city&quot;)) %&gt;% 
+  select(-time) %&gt;%
+  mutate(`just now` = as.numeric(sapply(strsplit(`just now`, &quot; &quot;), &quot;[[&quot;, 1)),
+         `now now` = as.numeric(sapply(strsplit(`now now`, &quot; &quot;), &quot;[[&quot;, 1)),
+         `now` = as.numeric(sapply(strsplit(`now`, &quot; &quot;), &quot;[[&quot;, 1)),
+         province = gsub(&quot;Kzn&quot;, &quot;KZN&quot;, province),
+         province = gsub(&quot;GP&quot;, &quot;Gauteng&quot;, province),
+         province = as.factor(province),
+         city = as.factor(city))
+
+# Check that city and province names are all lekker
+# levels(survey$province)
+# levels(survey$city)
+
+# Create a long version for easier stats
+survey_long &lt;- survey %&gt;% 
+  gather(key = &quot;saying&quot;, value = &quot;minutes&quot;, -province, -city) %&gt;% 
+  na.omit()
+</code></pre>
+
+<h2 id="participant-locations">Participant locations</h2>
+
+<p>With our data prepared, I first wanted to see from where the surveys were taken. I&rsquo;ve done this by splitting them up into province or city. This is also one of the few situations in which a bar plot is an appropriate visualisation. The columns below that show &lsquo;NA&rsquo; are for participants that declined to share their location.</p>
+
+<pre><code class="language-r">province_plot &lt;- ggplot(data = survey, aes(x = province)) +
+  geom_bar(aes(fill = province), show.legend = F) +
+  ggtitle(&quot;Provinces of participants&quot;) +
+  labs(x = &quot;&quot;)
+# province_plot
+city_plot &lt;- ggplot(data = survey, aes(x = city)) +
+  geom_bar(aes(fill = city), show.legend = F) +
+  ggtitle(&quot;Cities of participants&quot;) +
+  labs(x = &quot;&quot;) +
+  theme(axis.text.x = element_text(angle = 15))
+# city_plot
+ggarrange(province_plot, city_plot, ncol = 1, nrow = 2)
+</code></pre>
+
+<div class="figure">
+<img src="/post/SA_time_survey_files/figure-html/location-bar-1.png" alt="Bar plots showing the total pariticpants by province or city." width="672" />
+<p class="caption"><span id="fig:location-bar"></span>Figure 1: Bar plots showing the total pariticpants by province or city.</p>
+</div>
+
+<h2 id="participant-time-frames">Participant time frames</h2>
+
+<p>With the locations of of our participants visualised we now want to see what sort of time frames people around the country attribute to the three most common idioms.</p>
+
+<pre><code class="language-r">ggplot(data = survey_long, aes(x = saying, y = minutes, fill = saying)) +
+  geom_boxplot(show.legend = FALSE, outlier.colour = NA) +
+  geom_jitter(shape = 21, alpha = 0.6, width = 0.3, height = 0.0, show.legend = FALSE) +
+  scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
+  scale_fill_brewer(palette = &quot;Accent&quot;) +
+  labs(x = &quot;&quot;)
+</code></pre>
+
+<div class="figure">
+<img src="/post/SA_time_survey_files/figure-html/basic-plot-1.png" alt="Boxplots showing the distribution of times (minutes) survey participants gave for the three most common time frame idioms in South Africa." width="672" />
+<p class="caption"><span id="fig:basic-plot"></span>Figure 2: Boxplots showing the distribution of times (minutes) survey participants gave for the three most common time frame idioms in South Africa.</p>
+</div>
+
+<p>As we may see in Figure <a href="#fig:basic-plot">2</a>, &lsquo;just now&rsquo; and &lsquo;now now&rsquo; appear to have similar distributions, whereas &lsquo;now&rsquo; is markedly different. Participants answered the maximum score of 300 minutes for all idioms, but for &lsquo;just now&rsquo; and &lsquo;now now&rsquo; this was infrequent enough that the large scores are considered to be outliers. For &lsquo;now&rsquo;, enough participants answered with longer times that the distribution appears much larger than for the other two idioms. Even though these distributions appear different, let&rsquo;s run the stats on them to make sure. Because we want to compare distributions of scores for three different categories we will be using an ANOVA if the data meet a few basic assumptions.</p>
+
+<p>Just as a quick recap, these assumptions are: homoscedasticity (homogeneity of variance), normality of distribution, random &amp; independently sampled. It is also a good idea to have at least a sample size of ten for each category. Seeing as how this was an Internet survey, we were not able to ensure that the participants are a random representation of the South African populace, nor can we be certain that they submitted their answers independent of one another. I am however just going to go ahead and assume that they did. As for the assumptions of homoscedasticity and the normality of the distributions, we can directly test these. In R, the normality of a distribution is tested with <code>shapiro.test()</code>. Any non-significant result (<em>p</em> &gt; 0.05) means that the data are normally distributed. To test for homoscedasticity we will use <code>bartlett.test()</code>. A non-significant result (<em>p</em> &gt; 0.05) from this test indicates that the variances between the categories are equivalent.</p>
+
+<pre><code class="language-r"># test for normality
+survey_long %&gt;% 
+  group_by(saying) %&gt;% 
+  summarise(noramlity = as.numeric(shapiro.test(minutes)[1]))
+</code></pre>
+
+<pre><code>## # A tibble: 3 × 2
+##   saying   noramlity
+##   &lt;chr&gt;        &lt;dbl&gt;
+## 1 just now     0.565
+## 2 now          0.713
+## 3 now now      0.671
+</code></pre>
+
+<pre><code class="language-r"># Test for homoscedasticity
+survey_long %&gt;% 
+  bartlett.test(minutes ~ saying, data = .)
+</code></pre>
+
+<pre><code>## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  minutes by saying
+## Bartlett's K-squared = 5.227, df = 2, p-value = 0.07328
+</code></pre>
+
+<p>Surprisingly these data meet all of our assumptions so we may perform a simple one-way ANOVA on them to detect any significant differences.</p>
+
+<pre><code class="language-r">glance(aov(minutes ~ saying, data = survey_long))
+</code></pre>
+
+<pre><code>## # A tibble: 1 × 6
+##   logLik   AIC   BIC deviance  nobs r.squared
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
+## 1  -670. 1349. 1360. 1143843.   111    0.0615
+</code></pre>
+
+<p>Less surprisingly, there is a significant difference in the times given for these three idioms. But let&rsquo;s dive just a bit deeper with a post-hoc Tukey (not Turkey) test to see which categories specifically are different from which.</p>
+
+<pre><code class="language-r">TukeyHSD(aov(minutes ~ saying, data = survey_long))
+</code></pre>
+
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = minutes ~ saying, data = survey_long)
+## 
+## $saying
+##                       diff         lwr       upr     p adj
+## now-just now      60.81081    3.949653 117.67197 0.0330869
+## now now-just now  14.18919  -42.671969  71.05035 0.8241544
+## now now-now      -46.62162 -103.482779  10.23954 0.1302148
+</code></pre>
+
+<p>Looking at the names given in the &lsquo;saying&rsquo; column, and the values given in the &lsquo;p adj&rsquo; column we may see which individual idioms are different from which.  Unsurprisingly, judging from Figure <a href="#fig:basic-plot">2</a>, &lsquo;now now&rsquo; and &lsquo;just now&rsquo; are not different. Interesting though is that &lsquo;now&rsquo; is significantly different from &lsquo;just now&rsquo;, but not &lsquo;now now&rsquo;. The initial results made it look as though &lsquo;now&rsquo; would have been significantly different from both.</p>
+
+<h2 id="province-time-frames">Province time frames</h2>
+
+<p>Preferably, many more people would have taken the survey so that we could draw more conclusive results. I&rsquo;m rather certain that should more people take the survey the distributions of the scores for the three idioms would even out more until there were no significant differences between any of them. Enough participants have taken the test however that we may compare the results for a few different provinces.</p>
+
+<pre><code class="language-r"># Remove provinces with fewer than nine entries
+# Ten would be preferable, but at nine we allow the inclusion of KZN
+survey_province &lt;- survey_long %&gt;% 
+  group_by(province) %&gt;% 
+  filter(n() &gt;= 9) %&gt;% 
+  ungroup()
+</code></pre>
+
+<p>And now with the provinces that have only a few answers filtered out, let&rsquo;s see what the data look like as boxplots.</p>
+
+<pre><code class="language-r">ggplot(data = survey_province, aes(x = saying, y = minutes, fill = province)) +
+  geom_boxplot(outlier.colour = NA) +
+  geom_point(shape = 21, position = position_jitterdodge()) +
+  scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
+  scale_fill_brewer(palette = &quot;Set2&quot;) +
+  labs(x = &quot;&quot;)
+</code></pre>
+
+<div class="figure">
+<img src="/post/SA_time_survey_files/figure-html/province-plot-1.png" alt="Boxplots showing the distribution of times by province." width="672" />
+<p class="caption"><span id="fig:province-plot"></span>Figure 3: Boxplots showing the distribution of times by province.</p>
+</div>
+
+<p>Right away for me it appears that the time frames for the Eastern Cape are shorter than for the other three provinces. KZN appears to be the longest, with Gauteng and the Western Cape seeming similar. Because we have multiple independent variables (saying and province) we want a two-way ANOVA. But before we do that, let&rsquo;s again check for normality and homoscedasticity.</p>
+
+<pre><code class="language-r"># test for normality
+survey_province %&gt;% 
+  group_by(saying, province) %&gt;% 
+  summarise(normality = as.numeric(shapiro.test(minutes)[1]))
+</code></pre>
+
+<pre><code>## # A tibble: 12 × 3
+## # Groups:   saying [3]
+##    saying   province     normality
+##    &lt;chr&gt;    &lt;fct&gt;            &lt;dbl&gt;
+##  1 just now Eastern Cape     0.640
+##  2 just now Gauteng          0.867
+##  3 just now KZN              0.865
+##  4 just now Western Cape     0.537
+##  5 now      Eastern Cape     0.766
+##  6 now      Gauteng          0.721
+##  7 now      KZN              0.75 
+##  8 now      Western Cape     0.729
+##  9 now now  Eastern Cape     0.684
+## 10 now now  Gauteng          0.689
+## 11 now now  KZN              0.813
+## 12 now now  Western Cape     0.718
+</code></pre>
+
+<pre><code class="language-r"># Test for homoscedasticity
+survey_province %&gt;% 
+  bartlett.test(minutes ~ interaction(saying, province), data = .)
+</code></pre>
+
+<pre><code>## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  minutes by interaction(saying, province)
+## Bartlett's K-squared = 69.523, df = 11, p-value = 1.505e-10
+</code></pre>
+
+<p>The different groups of time are all normally distributed, but the variances differ. Regardless, we are going to stick to a normal two-way ANOVA as there are no good alternatives to this for non-parametric data and transforming these data is a bother.</p>
+
+<pre><code class="language-r">glance(aov(minutes ~ saying + province, data = survey_province))
+</code></pre>
+
+<pre><code>## # A tibble: 1 × 6
+##   logLik   AIC   BIC deviance  nobs r.squared
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
+## 1  -623. 1261. 1279.  881685.   105     0.204
+</code></pre>
+
+<p>Significant differences are to be had here. So let&rsquo;s break it down and see which groups specifically differ.</p>
+
+<pre><code class="language-r">TukeyHSD(aov(minutes ~ saying + province, data = survey_province))
+</code></pre>
+
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = minutes ~ saying + province, data = survey_province)
+## 
+## $saying
+##                       diff        lwr        upr     p adj
+## now-just now      70.14286   16.46427 123.821448 0.0068600
+## now now-just now  15.42857  -38.25002  69.107162 0.7734013
+## now now-now      -54.71429 -108.39288  -1.035695 0.0447008
+## 
+## $province
+##                                 diff         lwr       upr     p adj
+## Gauteng-Eastern Cape       63.452381  -15.761193 142.66595 0.1624466
+## KZN-Eastern Cape          139.722222   39.043527 240.40092 0.0025348
+## Western Cape-Eastern Cape  73.289474    6.613379 139.96557 0.0252743
+## KZN-Gauteng                76.269841  -21.982505 174.52219 0.1845631
+## Western Cape-Gauteng        9.837093  -53.115472  72.78966 0.9768852
+## Western Cape-KZN          -66.432749 -154.888584  22.02309 0.2092492
+</code></pre>
+
+<p>We may see that by removing some of the answers from the less represented provinces there is now a significant difference between the scores for &lsquo;now&rsquo; and &lsquo;now now&rsquo; as well as &lsquo;just now&rsquo;. Additionally we may see that the scores for Eastern Cape differ significantly from KZN and the Western Cape. One could also look at the interactions between the two independent variables but I&rsquo;m not quite interested in that level of depth here.</p>
+
+<h2 id="city-time-frames">City time frames</h2>
+
+<p>With the breakdown for the province time frames out of the way, we are going to wrap up this analysis by looking at the difference between cities.</p>
+
+<pre><code class="language-r"># Remove provinces with fewer than five entries
+# Ten is preferable, but at five we may include Mthatha
+survey_city &lt;- survey_long %&gt;% 
+  group_by(saying, city) %&gt;% 
+  filter(n() &gt;= 5) %&gt;% 
+  ungroup()
+</code></pre>
+
+<pre><code class="language-r">ggplot(data = survey_city, aes(x = saying, y = minutes, fill = city)) +
+  geom_boxplot(outlier.colour = NA) +
+  geom_point(shape = 21, position = position_jitterdodge()) +
+  scale_y_continuous(breaks = c(5, 15, 30, 60, 120, 300)) +
+  scale_fill_brewer(palette = &quot;Set3&quot;) +
+  labs(x = &quot;&quot;)
+</code></pre>
+
+<div class="figure">
+<img src="/post/SA_time_survey_files/figure-html/city-plot-1.png" alt="Boxplots showing the distribution of times by city." width="672" />
+<p class="caption"><span id="fig:city-plot"></span>Figure 4: Boxplots showing the distribution of times by city.</p>
+</div>
+
+<p>Again with the assumptions&hellip;</p>
+
+<pre><code class="language-r"># test for normality
+survey_city %&gt;% 
+  group_by(saying, city) %&gt;% 
+  summarise(normality = as.numeric(shapiro.test(minutes)[1]))
+</code></pre>
+
+<pre><code>## # A tibble: 9 × 3
+## # Groups:   saying [3]
+##   saying   city         normality
+##   &lt;chr&gt;    &lt;fct&gt;            &lt;dbl&gt;
+## 1 just now Cape Town        0.577
+## 2 just now Johannesburg     0.912
+## 3 just now Mthatha          0.552
+## 4 now      Cape Town        0.739
+## 5 now      Johannesburg     0.757
+## 6 now      Mthatha          0.754
+## 7 now now  Cape Town        0.739
+## 8 now now  Johannesburg     0.741
+## 9 now now  Mthatha          0.552
+</code></pre>
+
+<pre><code class="language-r"># Test for homoscedasticity
+survey_city %&gt;% 
+  bartlett.test(minutes ~ interaction(saying, city), data = .)
+</code></pre>
+
+<pre><code>## 
+## 	Bartlett test of homogeneity of variances
+## 
+## data:  minutes by interaction(saying, city)
+## Bartlett's K-squared = 55.177, df = 8, p-value = 4.078e-09
+</code></pre>
+
+<p>&hellip; and again we see that while normally distributed, the variance of our sample sets differ significantly from one another. Regardless, we&rsquo;ll stick to the two-way ANOVA.</p>
+
+<pre><code class="language-r">glance(aov(minutes ~ saying + city, data = survey_city))
+</code></pre>
+
+<pre><code>## # A tibble: 1 × 6
+##   logLik   AIC   BIC deviance  nobs r.squared
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
+## 1  -481.  973.  987.  674933.    81     0.205
+</code></pre>
+
+<p>As one likely would have deduced from Figure <a href="#fig:city-plot">4</a>, the scores are significantly different from one another.</p>
+
+<pre><code class="language-r">TukeyHSD(aov(minutes ~ saying + city, data = survey_city))
+</code></pre>
+
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = minutes ~ saying + city, data = survey_city)
+## 
+## $saying
+##                       diff        lwr         upr     p adj
+## now-just now      77.96296   16.65151 139.2744119 0.0090081
+## now now-just now  16.85185  -44.45960  78.1633008 0.7889537
+## now now-now      -61.11111 -122.42256   0.2003379 0.0509401
+## 
+## $city
+##                             diff        lwr        upr     p adj
+## Johannesburg-Cape Town -10.72917  -72.99124  51.532904 0.9108240
+## Mthatha-Cape Town      -84.89583 -151.53238 -18.259285 0.0088590
+## Mthatha-Johannesburg   -74.16667 -152.92265   4.589316 0.0691761
+</code></pre>
+
+<p>From the post-hoc test we may see that &lsquo;now&rsquo; differs significantly from &lsquo;just now in these three cities, and if we&rsquo;re feeling generous we may say that &lsquo;now&rsquo; also differs significantly from &lsquo;now now&rsquo;. But like with the rest of the country, &lsquo;now now&rsquo; and &lsquo;just now&rsquo; are not significantly different time frames. Looking at the city breakdown we see that the only significant difference is between Mthatha and Cape Town. Johannesburg and Cape Town do not differ.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The general conclusion I&rsquo;ve drawn from the analysis of the South Africa time survey results is that the understanding people in the Eastern Cape have of the time frames for these idioms is significantly faster than in the other major provinces in South Africa. The numbers don&rsquo;t lie!</p>
+
+<p>Speaking to people about this survey (before the results were out), the general consensus was that Johannesburg people would give significantly faster scores than people in other parts of the country, particularly Cape Town. That does not however appear to be the case. Also surprising from these results was that &lsquo;now&rsquo; tended to be considered to be a significantly longer time frame than &lsquo;just now&rsquo; and &lsquo;now now&rsquo;. Most people I&rsquo;ve talked to about these idioms agree that &lsquo;now&rsquo; is meant to be the fastest&hellip; so I&rsquo;m not sure how that worked out. Unsurprising to me, but perhaps to some South Africans, was that there is no difference between &lsquo;just now&rsquo; and &lsquo;now now&rsquo;. I was not surprised by this because talking with people around the country I very infrequently heard people, even while in the same room, agree on the time frames for these idioms.</p>
+
+<p>There are of course a host of issues with this study. One thing I&rsquo;m wondering about the Eastern Cape scores being significantly faster than the other provinces is if perhaps people in the Eastern Cape have a wider range of idioms for giving someone a time frame? Meaning, perhaps &lsquo;now&rsquo;, &lsquo;just now&rsquo;, and &lsquo;now now&rsquo; are all much faster than other provinces because there is some other popular idiom people use there that denotes a longer time frame. It&rsquo;s also possible that people in other provinces misunderstood the survey. Though I did make it very clear that the answers were in minutes and not seconds, specifically to attempt to prevent people from making that mistake. Lastly, this analysis suffers from a regrettably small sample size. I would have preferred at least 100 responses, rather than 40. It is still wonderful to be able to get some numbers in the game and get a glimpse of the fact that there is little agreement about these time frames.</p>
+
+<p>Hopefully posting these results will snare a few more people into taking the survey and in another couple of months I can make a follow up post with the additional feedback.</p>
+
     
   </div>
   <p class="read-more" itemprop="mainEntityOfPage">
@@ -786,7 +1133,7 @@ This got me to wondering just how much disagreement there may be around the coun
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    8 min read
+    0 min read
   </span>
   
 
@@ -818,7 +1165,183 @@ This got me to wondering just how much disagreement there may be around the coun
   </h3>
   <div class="article-style" itemprop="articleBody">
     
-    Preface This week I have expanded the coastR package with the inclusion of a function that calculates the angle of the heading for alongshore or shore-normal transects. The rest of this blog post is the vignette that I&rsquo;ve written detailing the set of this function. Next week I&rsquo;ll likely be taking a break from coastR development to finally create a package for the SACTN dataset. That is a project that has been in the works for a loooong time and it will be good to finally see a development release available to the public.
+    
+
+<h2 id="preface">Preface</h2>
+
+<p>This week I have expanded the <code>coastR</code> package with the inclusion of a function that calculates the angle of the heading for alongshore or shore-normal transects. The rest of this blog post is the vignette that I&rsquo;ve written detailing the set of this function. Next week I&rsquo;ll likely be taking a break from <code>coastR</code> development to finally create a package for the SACTN dataset. That is a project that has been in the works for a loooong time and it will be good to finally see a development release available to the public.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>There are a number of reasons why one would want to calculate transects along or away from a coastline. Examples include: finding the fetch across an embayment, finding the coordinates of a point 200 km from the coast, finding the appropriate series of SST pixels along/away from the coast, (or if one is feeling particular feisty) the creation of shape files for a given area away from the coast. The function that we will be introducing here does none of these things. What the <code>transects()</code> function does do is calculate the angle of the heading along or away from the coast against true North, which is then the basis for all of the other fancy things one may want to do. Baby steps people. Baby steps.</p>
+
+<pre><code class="language-r"># devtools::install_github(&quot;robwschlegel/coastR&quot;) # Install coastR
+library(coastR)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(geosphere)
+</code></pre>
+
+<h2 id="sample-locations">Sample locations</h2>
+
+<p>For this vignette we will re-use the same coastlines as those created for the sequential sites vignette. The ordering of the sites remains jumbled up to demonstrate that <code>transects()</code> does not require orderly data. Should one want to order ones site list before calculating transect headings it is possible to do so with <code>seq_sites()</code>. This is of course a recommended step in any workflow.</p>
+
+<pre><code class="language-r"># Cape Point, South Africa
+cape_point &lt;- SACTN_site_list %&gt;% 
+  slice(c(31, 22, 26, 17, 19, 21, 30)) %&gt;% 
+  mutate(order = 1:n())
+
+# South Africa
+south_africa &lt;- SACTN_site_list %&gt;% 
+  slice(c(1,34, 10, 20, 50, 130, 90)) %&gt;% 
+  mutate(order = 1:n())
+
+# Baja Peninsula, Mexico
+baja_pen &lt;- data.frame(
+  order = 1:7,
+  lon = c(-116.4435, -114.6800, -109.6574, -111.9503, -112.2537, -113.7918, -114.1881),
+  lat = c(30.9639, 30.7431, 22.9685, 26.9003, 25.0391, 29.4619, 28.0929)
+)
+
+# Bohai Sea, China
+bohai_sea &lt;- data.frame(
+  order = 1:7,
+  lon = c(122.0963, 121.2723, 121.0687, 121.8742, 120.2962, 117.6650, 122.6380),
+  lat = c(39.0807, 39.0086, 37.7842, 40.7793, 40.0691, 38.4572, 37.4494)
+)
+</code></pre>
+
+<h2 id="transects">Transects</h2>
+
+<p>With our site lists created we now want to see what the correct headings for alongshore and shore-normal transects are for our sites. We will also demonstrate what happens when we increase the <code>spread</code> used in the calculation and also how the inclusion of island masks affects the angle of the headings.</p>
+
+<pre><code class="language-r"># Cape Point, South Africa
+cape_point_along &lt;- transects(cape_point, alongshore = T)
+cape_point_away &lt;- transects(cape_point)
+
+# South Africa
+south_africa_along &lt;- transects(south_africa, alongshore = T)
+south_africa_away &lt;- transects(south_africa)
+  # NB: Note here the use of the `spread` argument
+south_africa_along_wide &lt;- transects(south_africa, alongshore = T, spread = 30)
+south_africa_away_wide &lt;- transects(south_africa, spread = 30)
+
+# Baja Peninsula, Mexico
+baja_pen_along &lt;- transects(baja_pen, alongshore = T)
+baja_pen_away &lt;- transects(baja_pen)
+  # NB: Note here the use of the `coast` argument
+baja_pen_island &lt;- transects(baja_pen, coast = FALSE)
+
+# Bohai sea, China
+bohai_sea_along &lt;- transects(bohai_sea, alongshore = T)
+bohai_sea_away &lt;- transects(bohai_sea)
+</code></pre>
+
+<h2 id="visualise">Visualise</h2>
+
+<p>Now that the correct headings have been calculated for our alongshore and shore-normal transects let&rsquo;s visualise them with ggplot. First we will create a function that does this in order to keep the length of this vignette down.</p>
+
+<pre><code class="language-r"># Create base map
+world_map &lt;- ggplot() + 
+  borders(fill = &quot;grey40&quot;, colour = &quot;black&quot;)
+
+# Create titles
+titles &lt;- c(&quot;Alongshore&quot;, &quot;Shore-normal&quot;, &quot;Islands&quot;)
+
+# Plotting function
+plot_sites &lt;- function(site_list, buffer, title_choice, dist){
+  
+  # Find the point 200 km from the site manually to pass to ggplot
+  heading2 &lt;- data.frame(geosphere::destPoint(p = select(site_list, lon, lat),  
+                                              b = site_list$heading, d = dist))
+  
+  # Add the new coordinates tot he site list
+  site_list &lt;- site_list %&gt;% 
+    mutate(lon_dest = heading2$lon,
+           lat_dest = heading2$lat)
+  
+  # Visualise
+  world_map +
+    geom_segment(data = site_list, colour = &quot;red4&quot;, 
+                 aes(x = lon, y = lat, xend = lon_dest, yend = lat_dest)) +
+    geom_point(data = site_list, size = 3, colour = &quot;black&quot;, aes(x = lon, y = lat)) +
+    geom_point(data = site_list, size = 3, colour = &quot;red&quot;, aes(x = lon_dest, y = lat_dest)) +
+    coord_cartesian(xlim = c(min(site_list$lon - buffer), 
+                             max(site_list$lon + buffer)),
+                    ylim = c(min(site_list$lat - buffer), 
+                             max(site_list$lat + buffer))) +
+    labs(x = &quot;&quot;, y = &quot;&quot;, colour = &quot;Site\norder&quot;) +
+    ggtitle(titles[title_choice])
+}
+</code></pre>
+
+<h3 id="cape-point-south-africa">Cape Point, South Africa</h3>
+
+<p>The <code>transect()</code> function is designed to work well at small scales by default. We may see this here with the effortlessness of plotting transects around a peninsula and then across an embayment in one go.</p>
+
+<pre><code class="language-r">cape_point_along_map &lt;- plot_sites(cape_point_along, 0.5, 1, 10000)
+cape_point_away_map &lt;- plot_sites(cape_point_away, 0.5, 2, 10000)
+grid.arrange(cape_point_along_map, cape_point_away_map, nrow = 1)
+</code></pre>
+
+<div class="figure">
+<img src="/post/transects_files/figure-html/cape_point_trans-1.png" alt="Alongshore and shore-normal transects around Cape Point and False Bay, South Africa." width="960" />
+<p class="caption">(\#fig:cape_point_trans)Alongshore and shore-normal transects around Cape Point and False Bay, South Africa.</p>
+</div>
+
+<h3 id="south-africa">South Africa</h3>
+
+<p>The intentions one may have for calculating shore-normal transects will differ depending on ones research question. If one is interested in visualising the convolutions of a coastline at a sub-meso-scale then the default <code>spread</code> of the <code>transect()</code> function is probably the way to go, as shown above. If however one is interested in seeing the shore-normal transects broadly for the coastline of an entire country it is likely that one will want to greatly expand the <code>spread</code> of coastline used to calculate said transects. In the figure below we may see how changing the <code>spread</code> of the coastline considered for the transects changes the results. The top row shows the transects resulting from the narrow default <code>spread</code>, while the bottom row shows the results of using a much wider <code>spread</code> for the calculation. Note particularly how the transect changes at St. Helena Bay and Gansbaai (second and fourth sites from the top left), as well as a general smoothing of all of the other transects. This is due to the sensitivity of the function. The St. Helena Bay and Gansbaai sites lay within embayments; therefore, the shore-normal transects that would come out directly from these sites will not follow the general contour of the coastline of South Africa. Should we be interested in the &ldquo;bigger picture&rdquo; we must increase the <code>spread</code> argument in <code>transects()</code>. This may require some trial and error for particularly difficult coastlines before a satisfactory result is produced, but it is certainly still faster than running the calculations by hand. Should small scale accuracy along part of the coast, and broader accuracy elsewhere be required, one must simply divide the site list into the different sections and run <code>transects()</code> on each subset with the desired <code>spread</code>.</p>
+
+<pre><code class="language-r">south_africa_along_map &lt;- plot_sites(south_africa_along, 1, 1, 100000)
+south_africa_away_map &lt;- plot_sites(south_africa_away, 1, 2, 100000)
+south_africa_along_wide_map &lt;- plot_sites(south_africa_along_wide, 1, 1, 100000)
+south_africa_away_wide_map &lt;- plot_sites(south_africa_away_wide, 1, 2, 100000)
+grid.arrange(south_africa_along_map, south_africa_away_map, 
+             south_africa_along_wide_map, south_africa_away_wide_map, nrow = 2)
+</code></pre>
+
+<div class="figure">
+<img src="/post/transects_files/figure-html/south_africa_trans-1.png" alt="Alongshore and shore-normal transects around all of South Africa." width="864" />
+<p class="caption">(\#fig:south_africa_trans)Alongshore and shore-normal transects around all of South Africa.</p>
+</div>
+
+<h3 id="baja-peninsula-mexico">Baja Peninsula, Mexico</h3>
+
+<p>In the following figure we see how the inclusion of islands affects the results of our transects. The first site up from the tip of the peninsula on the left-hand side is on an island. Note the minor adjustment to the transect when the island mask is used for the calculation. In this case it&rsquo;s not large, but in other instances it may be massive. By default island masks are removed and it is our advice that they not be used unless extreme caution is observed.</p>
+
+<pre><code class="language-r">baja_pen_along_map &lt;- plot_sites(baja_pen_along, 1, 1, 100000)
+baja_pen_away_map &lt;- plot_sites(baja_pen_away, 1, 2, 100000)
+baja_pen_island_map &lt;- plot_sites(baja_pen_island, 1, 3, 100000)
+grid.arrange(baja_pen_along_map, baja_pen_away_map, baja_pen_island_map, nrow = 1)
+</code></pre>
+
+<div class="figure">
+<img src="/post/transects_files/figure-html/baja_pen_trans-1.png" alt="Alongshore and shore-normal transects around the Baja Peninsula." width="960" />
+<p class="caption">(\#fig:baja_pen_trans)Alongshore and shore-normal transects around the Baja Peninsula.</p>
+</div>
+
+<h3 id="bohai-sea-china">Bohai Sea, China</h3>
+
+<p>This figure serves as a good visualisation for just how localised the coastline is that is used to calculate the shore-normal transects. Note how the alongshore transects look a little dodgy, but when shown as shore-normal transects everything works out. This is something to consider if one is interested in calculating alongshore transects rather than shore-normal transects. For alongshore transects that show more fidelity for coastal direction it is advisable to increase the <code>spread</code> argument.</p>
+
+<pre><code class="language-r">bohai_sea_along_map &lt;- plot_sites(bohai_sea_along, 1, 1, 70000)
+bohai_sea_away_map &lt;- plot_sites(bohai_sea_away, 1, 2, 70000)
+grid.arrange(bohai_sea_along_map, bohai_sea_away_map, nrow = 1)
+</code></pre>
+
+<div class="figure">
+<img src="/post/transects_files/figure-html/bohai_sea_trans-1.png" alt="Alongshore and shore-normal transects within the Bohai Sea." width="960" />
+<p class="caption">(\#fig:bohai_sea_trans)Alongshore and shore-normal transects within the Bohai Sea.</p>
+</div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>As we may see in the previous example figures, the <code>transect()</code> function tends to work better by default at smaller scales. This was an intentional decision as it is much more accurate when scaling the function up for larger coastal features than when scaling it down for smaller ones.</p>
+
+<p>The calculation of the heading for alongshore and shore-normal transects is rarely the end goal itself. One then generally wants to find specific points from the coastline along the transects that have been determined. This is done in the code above within the <code>plot_sites()</code> function created within this vignette, but the process is not detailed specifically. How to do more elaborate things with transects will be explained with the following functions to be added to <code>coastR</code>. This will include how to draw coastal polygons based on distance and bathymetry.</p>
+
     
   </div>
   <p class="read-more" itemprop="mainEntityOfPage">
