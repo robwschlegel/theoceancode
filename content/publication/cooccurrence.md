@@ -40,7 +40,7 @@ projects = []
 
 # Tags (optional).
 #   Set `tags = []` for no tags, or use the form `tags = ["A Tag", "Another Tag"]` for one or more tags.
-tags = ["R", "coastal"]
+tags = ["R", "coastal", "marine heatwaves", "marine cold-spells"]
 
 # Links (optional).
 url_pdf = "https://doi.org/10.1016/j.pocean.2017.01.004"
