@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MHW on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/mhw/</link>
+    <link>https://theoceancode.netlify.app/tags/mhw/</link>
     <description>Recent content in MHW on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Fri, 01 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 May 2022 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/mhw/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.app/tags/mhw/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>The Road to Marine Heatwaves</title>
-      <link>https://theoceancode.netlify.com/post/update_2022/</link>
-      <pubDate>Fri, 01 Jul 2022 00:00:00 +0000</pubDate>
+      <title>Marine heatwaves drive recurrent mass mortalities in the Mediterranean Sea</title>
+      <link>https://theoceancode.netlify.app/publication/med_mass/</link>
+      <pubDate>Sun, 15 May 2022 00:00:00 +0200</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/update_2022/</guid>
-      <description> Outline  </description>
+      <guid>https://theoceancode.netlify.app/publication/med_mass/</guid>
+      <description></description>
     </item>
     
   </channel>

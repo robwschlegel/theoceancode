@@ -31,6 +31,87 @@
     </item>
     
     <item>
+      <title>Arctic</title>
+      <link>https://theoceancode.netlify.app/tags/arctic/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/arctic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fjord</title>
+      <link>https://theoceancode.netlify.app/tags/fjord/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/fjord/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>social</title>
+      <link>https://theoceancode.netlify.app/tags/social/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/social/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MHW</title>
+      <link>https://theoceancode.netlify.app/tags/mhw/</link>
+      <pubDate>Sun, 15 May 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/mhw/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>biodiversity</title>
+      <link>https://theoceancode.netlify.app/tags/biodiversity/</link>
+      <pubDate>Sun, 15 May 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/biodiversity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SDM</title>
+      <link>https://theoceancode.netlify.app/tags/sdm/</link>
+      <pubDate>Thu, 31 Mar 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/sdm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>atmosphere</title>
+      <link>https://theoceancode.netlify.app/tags/atmosphere/</link>
+      <pubDate>Thu, 08 Jul 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/atmosphere/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>coastal</title>
+      <link>https://theoceancode.netlify.app/tags/coastal/</link>
+      <pubDate>Thu, 08 Jul 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/coastal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ocean</title>
+      <link>https://theoceancode.netlify.app/tags/ocean/</link>
+      <pubDate>Thu, 08 Jul 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/ocean/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>ODV</title>
       <link>https://theoceancode.netlify.app/tags/odv/</link>
       <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
@@ -67,15 +148,6 @@
     </item>
     
     <item>
-      <title>SDM</title>
-      <link>https://theoceancode.netlify.app/tags/sdm/</link>
-      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/tags/sdm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>data</title>
       <link>https://theoceancode.netlify.app/tags/data/</link>
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
@@ -103,15 +175,6 @@
     </item>
     
     <item>
-      <title>coastal</title>
-      <link>https://theoceancode.netlify.app/tags/coastal/</link>
-      <pubDate>Sat, 14 Dec 2019 00:00:00 +0100</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/tags/coastal/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>statistics</title>
       <link>https://theoceancode.netlify.app/tags/statistics/</link>
       <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
@@ -126,24 +189,6 @@
       <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>https://theoceancode.netlify.app/tags/survey/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>atmosphere</title>
-      <link>https://theoceancode.netlify.app/tags/atmosphere/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/tags/atmosphere/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ocean</title>
-      <link>https://theoceancode.netlify.app/tags/ocean/</link>
-      <pubDate>Tue, 17 Oct 2017 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/tags/ocean/</guid>
       <description></description>
     </item>
     

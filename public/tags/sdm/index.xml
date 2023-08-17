@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 31 Mar 2022 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.app/tags/sdm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sea Ice and Substratum Shape Extensive Kelp Forests in the Canadian Arctic</title>
+      <link>https://theoceancode.netlify.app/publication/sea_ice_kelp/</link>
+      <pubDate>Thu, 31 Mar 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/sea_ice_kelp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kelp in the Eastern Canadian Arctic: Current and Future Predictions of Habitat Suitability and Cover</title>
+      <link>https://theoceancode.netlify.app/publication/eastern_arctic/</link>
+      <pubDate>Thu, 07 Oct 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/eastern_arctic/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Analysis of Bio-Oracle data</title>

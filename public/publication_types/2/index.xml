@@ -7,10 +7,55 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Tue, 09 Mar 2021 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 05 Jan 2023 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.app/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Drivers of change in Arctic fjord socio-ecological systems: Examples from the European Arctic</title>
+      <link>https://theoceancode.netlify.app/publication/drivers_arctic/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/drivers_arctic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marine heatwaves drive recurrent mass mortalities in the Mediterranean Sea</title>
+      <link>https://theoceancode.netlify.app/publication/med_mass/</link>
+      <pubDate>Sun, 15 May 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/med_mass/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sea Ice and Substratum Shape Extensive Kelp Forests in the Canadian Arctic</title>
+      <link>https://theoceancode.netlify.app/publication/sea_ice_kelp/</link>
+      <pubDate>Thu, 31 Mar 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/sea_ice_kelp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kelp in the Eastern Canadian Arctic: Current and Future Predictions of Habitat Suitability and Cover</title>
+      <link>https://theoceancode.netlify.app/publication/eastern_arctic/</link>
+      <pubDate>Thu, 07 Oct 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/eastern_arctic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A novel approach to quantify metrics of upwelling intensity, frequency, and duration</title>
+      <link>https://theoceancode.netlify.app/publication/upwelling_definition/</link>
+      <pubDate>Thu, 08 Jul 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/upwelling_definition/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Drivers of Marine Heatwaves in the Northwest Atlantic: The Role of Air–Sea Interaction During Onset and Decline</title>
@@ -18,6 +63,15 @@
       <pubDate>Tue, 09 Mar 2021 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.app/publication/primary_drivers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Variation and Change of Upwelling Dynamics Detected in the World’s Eastern Boundary Upwelling Systems</title>
+      <link>https://theoceancode.netlify.app/publication/upwelling_detection/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/upwelling_detection/</guid>
       <description></description>
     </item>
     

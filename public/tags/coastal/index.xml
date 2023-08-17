@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Sat, 14 Dec 2019 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 08 Jul 2021 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.app/tags/coastal/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A novel approach to quantify metrics of upwelling intensity, frequency, and duration</title>
+      <link>https://theoceancode.netlify.app/publication/upwelling_definition/</link>
+      <pubDate>Thu, 08 Jul 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/upwelling_definition/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Variation and Change of Upwelling Dynamics Detected in the World’s Eastern Boundary Upwelling Systems</title>
+      <link>https://theoceancode.netlify.app/publication/upwelling_detection/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/upwelling_detection/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>coastR</title>

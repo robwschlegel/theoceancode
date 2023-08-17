@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Arctic on The Ocean Code</title>
-    <link>https://theoceancode.netlify.com/tags/arctic/</link>
+    <link>https://theoceancode.netlify.app/tags/arctic/</link>
     <description>Recent content in Arctic on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Fri, 01 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Jan 2023 00:00:00 +0100</lastBuildDate>
     
-	<atom:link href="https://theoceancode.netlify.com/tags/arctic/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://theoceancode.netlify.app/tags/arctic/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>The Road to Marine Heatwaves</title>
-      <link>https://theoceancode.netlify.com/post/update_2022/</link>
-      <pubDate>Fri, 01 Jul 2022 00:00:00 +0000</pubDate>
+      <title>Drivers of change in Arctic fjord socio-ecological systems: Examples from the European Arctic</title>
+      <link>https://theoceancode.netlify.app/publication/drivers_arctic/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0100</pubDate>
       
-      <guid>https://theoceancode.netlify.com/post/update_2022/</guid>
-      <description> Outline  </description>
+      <guid>https://theoceancode.netlify.app/publication/drivers_arctic/</guid>
+      <description></description>
     </item>
     
   </channel>
