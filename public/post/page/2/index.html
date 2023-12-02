@@ -563,7 +563,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    6 min read
+    0 min read
   </span>
   
 
@@ -595,7 +595,208 @@
   </h3>
   <div class="article-style" itemprop="articleBody">
     
-    Objective Before we begin, I would like to acknowledge that the framework for this analysis was adapted from a blogpost found on the wonderfully interesting R-bloggers website. The objective of this analysis is to use sentiment analysis on different religious texts to visualise the differences/ similarities between them. This concept is of course fraught with a host of issues. Not least of which being detractors who will likely not endeavour to engage in rational debate against the findings of this work.
+    
+
+<h2 id="objective">Objective</h2>
+
+<p>Before we begin, I would like to acknowledge that the framework for this analysis was adapted from a <a href="https://www.r-bloggers.com/parsing-text-for-emotion-terms-analysis-visualization-using-r/" target="_blank">blogpost</a> found on the wonderfully interesting <a href="https://www.r-bloggers.com/" target="_blank">R-bloggers</a> website. The objective of this analysis is to use sentiment analysis on different religious texts to visualise the differences/ similarities between them. This concept is of course fraught with a host of issues. Not least of which being detractors who will likely not endeavour to engage in rational debate against the findings of this work. This is of course beyond the control of the experimental design so I rather focus here on the issue that the translations of the texts used are not modern, and none of them were written (and generally not intended to be read in) English. Therefore a sentiment analysis of these works will be given to a certain amount of inaccuracy because the sentiment database is a recent project and one must assume that the emotions attached to the words in the English language reflect modern sentiment, and not the emotive responses that were necessarily desired at the time of writing/ translation. That being said, the sentiment that these texts would elicit in a reader today (assuming that anyone actually still reads the source material for their faith) would be accurately reflected by the sentiment analysis project and so this issue is arguably a minor one. As a control group (non-religious text), we will be using <em>Pride and Prejudice</em>, by Jane Austen simply because this has already been ported into R and is readily accesible in the package <strong><code>janeaustenr</code></strong>.</p>
+
+<p>For more information on the sentiment analysis project one may find the home page <a href="http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm" target="_blank">here</a>.</p>
+
+<h2 id="text-downloads">Text Downloads</h2>
+
+<p>The following links were used to download the religious texts used in this analysis:</p>
+
+<ul>
+<li><a href="http://www.qurandownload.com/English-Quran(Yusuf-Ali)-WB.pdf" target="_blank">Quran</a></li>
+<li><a href="http://www.christistheway.com/pdfs/KJVnew.pdf" target="_blank">Bible(New Testament)</a></li>
+<li><a href="http://www.ishwar.com/ebooks/judaism.html" target="_blank">Torah</a></li>
+<li><a href="http://www.dlshq.org/download/bgita.pdf" target="_blank">Bhagavad Gita</a></li>
+<li><a href="http://www.holybooks.com/wp-content/uploads/Egyptian-Book-of-the-Dead.pdf" target="_blank">Egyptian Book of the Dead</a></li>
+</ul>
+
+<p>I generally used the first link that DuckDuckGo provided when searching for pdf versions of these books. If anyone knows of better sources for these texts please let me know and I would be happy to update the data source.</p>
+
+<h2 id="packages">Packages</h2>
+
+<p>The packages required to perform the following analysis</p>
+
+<pre><code class="language-r">library(pdftools)
+library(tidyverse)
+library(tidytext)
+library(janeaustenr)
+library(heatwaveR)
+</code></pre>
+
+<h2 id="analysis">Analysis</h2>
+
+<p>First we convert the PDF’s to text and merge them.</p>
+
+<pre><code class="language-r">## Load the texts
+# Pride and Prejudice
+pride &lt;- tibble(txt = prideprejudice, 
+                src = &quot;pride&quot;)
+# Quran
+quran &lt;- tibble(txt = as.character(pdf_text(&quot;../../static/data/EQuran.pdf&quot;)),
+                src = &quot;quran&quot;)
+# Bible
+bible &lt;- tibble(txt = as.character(pdf_text(&quot;../../static/data/KJBNew.pdf&quot;)),
+                src = &quot;bible&quot;)
+# Torah
+torah &lt;- tibble(txt = as.character(pdf_text(&quot;../../static/data/Torah.pdf&quot;)), 
+                src = &quot;torah&quot;)
+# Bhagavad Gita
+gita &lt;- tibble(txt = as.character(pdf_text(&quot;../../static/data/BGita.pdf&quot;)), 
+               src = &quot;gita&quot;)
+# Book of the dead
+dead &lt;- data_frame(txt = as.character(pdf_text(&quot;../../static/data/EBoD.pdf&quot;)),
+                   src = &quot;dead&quot;)
+# Combine
+texts &lt;- rbind(pride, quran, bible, torah, gita, dead)
+</code></pre>
+
+<p>Then we must download the <a href="http://saifmohammad.com/WebPages/lexicons.html" target="_blank">NRC Word-Emotion Association Lexicon</a>(Mohammad and Turney 2013).</p>
+
+<pre><code class="language-r"># Note that this will require you to agree to term of use
+nrc_sentiment &lt;- get_sentiments(&quot;nrc&quot;)
+</code></pre>
+
+<pre><code class="language-r">nrc_sentiment &lt;- readRDS(&quot;../../static/data/nrc_sentiment.Rds&quot;)
+</code></pre>
+
+<p>After loading and merging the texts we want to run some quick word counts on them.</p>
+
+<pre><code class="language-r"># Total relevant words per text
+total_word_count &lt;- texts %&gt;%
+  unnest_tokens(word, txt) %&gt;%  
+  anti_join(stop_words, by = &quot;word&quot;) %&gt;%
+  filter(!grepl('[0-9]', word)) %&gt;%
+  filter(!grepl('www.christistheway.com', word)) %&gt;%
+  left_join(nrc_sentiment, by = &quot;word&quot;) %&gt;%
+  group_by(src) %&gt;%
+  summarise(total = n()) %&gt;%
+  ungroup()
+
+# Total emotive words per text
+emotive_word_count &lt;- texts %&gt;% 
+  unnest_tokens(word, txt) %&gt;%                           
+  anti_join(stop_words, by = &quot;word&quot;) %&gt;%                  
+  filter(!grepl('[0-9]', word)) %&gt;%
+  filter(!grepl('www.christistheway.com', word)) %&gt;%
+  left_join(nrc_sentiment, by = &quot;word&quot;) %&gt;%
+  filter(!(sentiment == &quot;negative&quot; | sentiment == &quot;positive&quot; | sentiment == &quot;NA&quot;)) %&gt;%
+  group_by(src) %&gt;%
+  summarise(emotions = n()) %&gt;%
+  ungroup()
+
+# Positivity proportion
+positivity_word_count &lt;- texts %&gt;% 
+  unnest_tokens(word, txt) %&gt;%                           
+  anti_join(stop_words, by = &quot;word&quot;) %&gt;%                  
+  filter(!grepl('[0-9]', word)) %&gt;%
+  filter(!grepl('www.christistheway.com', word)) %&gt;%
+  left_join(nrc_sentiment, by = &quot;word&quot;) %&gt;%
+  filter(sentiment == &quot;positive&quot; | sentiment == &quot;negative&quot;) %&gt;%
+  group_by(src, sentiment) %&gt;%
+  summarise(emotions = n()) %&gt;%
+  summarise(positivity = emotions[sentiment == &quot;positive&quot;]/ emotions[sentiment == &quot;negative&quot;]) %&gt;% 
+  ungroup()
+
+# Combine
+word_count &lt;- cbind(total_word_count, emotive_word_count[2], positivity_word_count[2]) %&gt;% 
+  mutate(proportion = round(emotions/total, 2))
+
+# Lolliplot
+ggplot(data = word_count, aes(x = as.factor(src), y = proportion)) +
+  geom_lolli(colour = &quot;black&quot;) +
+  geom_point(aes(colour = positivity)) +
+  geom_text(aes(y = 0.45, label = paste0(&quot;n = &quot;, total))) +
+  scale_y_continuous(limits = c(0,0.5), expand = c(0, 0)) +
+  scale_color_continuous(&quot;Proportion of\nPositivity&quot;, low = &quot;navy&quot;, high = &quot;pink&quot;) +
+  labs(x = &quot;Text&quot;, y = &quot;Proportion of Emotive Words&quot;)
+</code></pre>
+
+<div class="figure">
+
+<img src="/post/religious_sentiment_files/figure-html/rs-lolli-1.png" alt="Proportion of emotive words in each text to their total word counts (shown in red)." width="672" />
+<p class="caption">
+<span id="fig:rs-lolli"></span>Figure 1: Proportion of emotive words in each text to their total word counts (shown in red).
+</p>
+
+</div>
+
+<p>I find it somewhat surprising that The Egyptian Book of the Dead would have the highest proportion of positive sentiment to negative sentiment.</p>
+
+<p>But let’s take a more in depth look at the sentiment for each text.</p>
+
+<pre><code class="language-r"># Calculate emotions
+emotions &lt;- texts %&gt;% 
+  unnest_tokens(word, txt) %&gt;%                           
+  anti_join(stop_words, by = &quot;word&quot;) %&gt;%                  
+  filter(!grepl('[0-9]', word)) %&gt;%
+  filter(!grepl('King James Version of the New Testament - ', word)) %&gt;%
+  filter(!grepl('www.christistheway.com', word)) %&gt;% 
+  filter(!grepl('BHAGAVAD GITA', word)) %&gt;%
+  left_join(nrc_sentiment, by = &quot;word&quot;) %&gt;%
+  filter(!(sentiment == &quot;negative&quot; | sentiment == &quot;positive&quot;)) %&gt;%
+  group_by(src, sentiment) %&gt;%
+  summarize(freq = n()) %&gt;%
+  mutate(proportion = round(freq/sum(freq),2)) %&gt;%
+  # select(-freq) %&gt;%
+  ungroup()
+</code></pre>
+
+<pre><code class="language-r"># Boxplot
+ggplot(emotions, aes(x = sentiment, y = proportion)) +
+  geom_boxplot(fill = &quot;grey70&quot;) +
+  geom_point(aes(colour = src), position = &quot;jitter&quot;, size = 2) +
+  labs(x = &quot;Sentiment&quot;, y = &quot;Proportion&quot;, colour = &quot;Text&quot;)
+</code></pre>
+
+<div class="figure">
+
+<img src="/post/religious_sentiment_files/figure-html/rs-box-1.png" alt="Boxplots of emotion for the texts. Individual scores shown as coloured points." width="672" />
+<p class="caption">
+<span id="fig:rs-box"></span>Figure 2: Boxplots of emotion for the texts. Individual scores shown as coloured points.
+</p>
+
+</div>
+
+<pre><code class="language-r">ggplot(emotions, aes(x = sentiment, y = proportion)) +
+  geom_polygon(aes(fill = src, group = src), alpha = 0.8, show.legend = FALSE) +
+  coord_polar() +
+  scale_y_continuous(limits = c(0, 0.3)) +
+  facet_wrap(~src) +
+  labs(x = &quot;&quot;, y = &quot;&quot;)
+</code></pre>
+
+<div class="figure">
+
+<img src="/post/religious_sentiment_files/figure-html/rs-poly-1.png" alt="Frequency polygons of the proportion of emotions for each text shown in facets." width="672" />
+<p class="caption">
+<span id="fig:rs-poly"></span>Figure 3: Frequency polygons of the proportion of emotions for each text shown in facets.
+</p>
+
+</div>
+
+<h2 id="results">Results</h2>
+
+<p>The frequency polygons shown here most notably outline that all of the texts emphasise trust over anything else. Another interesting pattern is the lack of surprise employed in the texts. The Bhagavad Gita seems to have the smoothest distribution of emotion, with the Quran perhaps coming in second. I found it odd that a novel, Pride and Prejudice, would employ a higher proportion of joyous sentiment than the religious texts against which it was compared. The Quran just barely nudges out the Bhagavad Gita to come out on top for angry and fearful sentiment. The Torah stands out from the other texts due to the amount of disgust expressed therein. After Pride and Prejudice, the Bible uses the largest proportion of words that elicited emotions of anticipation.</p>
+
+<p>There is still much more that may or may not be deduced from these cursory results. Most notably lacking from this analysis is any test for significant differences. The reason for that being that I am not interested in supporting any sort of argument for differences between these texts. With <em>n</em> values (word count) in excess of 3,000 significant differences between the different texts is almost guaranteed as well so any use of a <em>p</em>-value here would just be cheap p-hacking anyway.</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-mohammad2013" class="csl-entry">
+
+Mohammad, Saif M., and Peter D. Turney. 2013. “Crowdsourcing a Word-Emotion Association Lexicon.” *Computational Intelligence* 29 (3): 436–65. <https://doi.org/10.1111/j.1467-8640.2012.00460.x>.
+
+</div>
+
+<p></div></p>
+
     
   </div>
   <p class="read-more" itemprop="mainEntityOfPage">
