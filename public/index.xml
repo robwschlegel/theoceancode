@@ -6,8 +6,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Tue, 22 Aug 2023 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0100</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>FjordLight</title>
+      <link>https://theoceancode.netlify.app/package/fjordlight/</link>
+      <pubDate>Sat, 02 Dec 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/package/fjordlight/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>A dataset for investigating socio-ecological changes in Arctic fjords</title>
@@ -590,15 +599,6 @@ BO_test(&amp;quot;BO2_templtX_ss&amp;quot;, scenario = &amp;quot;RCP85&amp;quot;
 - Salinity absolute and long-term at all depths for future projections
 - Temperature absolute and long-term at all depths for future projections&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>What and where? Predicting invasion hotspots in the Arctic marine realm</title>
-      <link>https://theoceancode.netlify.app/publication/what_where/</link>
-      <pubDate>Thu, 14 May 2020 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/publication/what_where/</guid>
-      <description></description>
     </item>
     
   </channel>

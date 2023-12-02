@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Tue, 22 Aug 2023 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>PAR</title>
+      <link>https://theoceancode.netlify.app/tags/par/</link>
+      <pubDate>Sat, 02 Dec 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/par/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>https://theoceancode.netlify.app/tags/r/</link>
+      <pubDate>Sat, 02 Dec 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/tags/r/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Arctic</title>
@@ -18,15 +36,6 @@
       <pubDate>Tue, 22 Aug 2023 00:00:00 +0200</pubDate>
       
       <guid>https://theoceancode.netlify.app/tags/arctic/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>https://theoceancode.netlify.app/tags/r/</link>
-      <pubDate>Tue, 22 Aug 2023 00:00:00 +0200</pubDate>
-      
-      <guid>https://theoceancode.netlify.app/tags/r/</guid>
       <description></description>
     </item>
     

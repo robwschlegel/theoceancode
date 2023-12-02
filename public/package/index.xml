@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Thu, 10 Aug 2023 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.app/package/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>FjordLight</title>
+      <link>https://theoceancode.netlify.app/package/fjordlight/</link>
+      <pubDate>Sat, 02 Dec 2023 00:00:00 +0100</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/package/fjordlight/</guid>
+      <description>An R package to aid in accessing the fjord PAR data product created for the FACE-IT project.</description>
+    </item>
     
     <item>
       <title>heatwave3</title>
