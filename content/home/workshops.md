@@ -18,3 +18,4 @@ weight = 16
 Below please find links to workshops I run:
 
 - [Introduction to R](https://robwschlegel.github.io/Intro_R_Workshop/)
+- [heatwaveR training session](https://theoceancode.netlify.app/files/heatwaveR_workshop_2024.html)
