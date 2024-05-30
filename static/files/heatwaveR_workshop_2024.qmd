@@ -30,14 +30,21 @@ install.packages(setdiff(new_packages, rownames(installed.packages())))
 # We start by loading the full suite of tidyverse packages
 library(tidyverse, quietly = TRUE)
 
-# And a package for tidy NetCDF files
+# Another used to download data
+library(rerddap)
+
+# A package for tidy NetCDF files
 library(tidync)
 
 # Then we load the main package used for detecting MHWs
+# NB: The development version is required for `heatwave3` below
+devtools::install_github("robwschlegel/heatwaveR")
 library(heatwaveR)
 
-# Another used to download data
-library(rerddap)
+# And an package that helps us apply that to NetCDF files
+# NB: This is not available on CRAN
+devtools::install_github("robwschlegel/heatwave3")
+library(heatwave3)
 
 # And finally one that let's us work on multiple cores
 library(doParallel)
@@ -46,7 +53,10 @@ library(doParallel)
 
 ## MHW detection
 
-The `detect_event()` function is the core of the __`heatwaveR`__ package. It expects to be fed the output of the second core function, `ts2clm()`. By default, `ts2clm()` wants to receive a two-column dataframe with one column labelled `t` containing all of the date values, and a second column `temp` containing all of the temperature values. Please note that the date format it expects is "YYYY-MM-DD", e.g.:
+<img src="https://robwschlegel.github.io/heatwaveR/articles/logo.png" width=200 />
+<!-- ![heatwaveR](https://robwschlegel.github.io/heatwaveR/articles/logo.png) -->
+
+The `detect_event()` function is the core of the [__`heatwaveR`__ package](https://robwschlegel.github.io/heatwaveR/). It expects to be fed the output of the second core function, `ts2clm()`. By default, `ts2clm()` wants to receive a two-column dataframe with one column labelled `t` containing all of the date values, and a second column `temp` containing all of the temperature values. Please note that the date format it expects is "YYYY-MM-DD", e.g.:
 
 ```{r file-structure}
 head(heatwaveR::sst_WA)
@@ -77,12 +87,12 @@ mhw$event |>
 One may use `event_line()` and `lolli_plot()` directly on the output of `detect_event()`. For example, the massive Western Australia heatwave of 2011:
 
 ```{r fig-example1, echo = TRUE, eval = TRUE, fig.cap="Default flame plot."}
-event_line(mhw, spread = 180, metric = "intensity_max", 
+event_line(mhw, spread = 180, metric = intensity_max, 
            start_date = "1982-01-01", end_date = "2014-12-31")
 ```
 
 ```{r fig-example2, echo = TRUE, eval = TRUE, fig.cap="Default lolli-plot"}
-lolli_plot(mhw, metric = "intensity_max")
+lolli_plot(mhw, metric = intensity_max)
 ```
 
 >> What are some other ways to use `lolli_plot()`?
@@ -195,12 +205,12 @@ mcs$event |>
 The default MCS plots:
 
 ```{r fig-example8, echo = TRUE, eval = TRUE, fig.cap="Example MCS visual."}
-event_line(mcs, spread = 200, metric = "intensity_cumulative",
+event_line(mcs, spread = 200, metric = intensity_cumulative,
            start_date = "1982-01-01", end_date = "2014-12-31")
 ```
 
 ```{r fig-example9, echo = TRUE, eval = TRUE, fig.cap="Example MCS lolli-plot"}
-lolli_plot(mcs, metric = "intensity_cumulative", xaxis = "event_no")
+lolli_plot(mcs, metric = intensity_cumulative, xaxis = event_no)
 ```
 
 Note that one does not need to specify that MCSs are to be visualised, the functions are able to understand this on their own.
@@ -471,12 +481,13 @@ Should one want to download the full global dataset, each daily global file is a
 
 Before we begin downloading the subsetted data for our study area we need to make sure that they are currently available on an ERDDAP server. The location of the NOAA OISST data has changed in the past so it should not be assumed that the current location will exist in perpetuity. Finding the server on which these data are located can be a cup game at times.
 
-```{r erddap-info}
+```{r erddap-info, eval=FALSE}
 # The information for the NOAA OISST data
-rerddap::info(datasetid = "ncdcOisst21Agg_LonPM180", url = "https://coastwatch.pfeg.noaa.gov/erddap/")
-
-# Note that there is also a version with lon values from 0 to 360
 rerddap::info(datasetid = "ncdcOisst21Agg", url = "https://coastwatch.pfeg.noaa.gov/erddap/")
+
+# Note that there is also a version with lon values from -180 to 180
+# But these are converted in silico so take slightly longer to download
+rerddap::info(datasetid = "ncdcOisst21Agg_LonPM180", url = "https://coastwatch.pfeg.noaa.gov/erddap/")
 ```
 
 With our target dataset identified we may now begin the download with the `rerddap::griddap()` function. Note that the ERDDAP server does not like it when one tries to access more than nine consecutive years of data in one request, regardless of the spatial extent being requested. So before we download our data we are going to make a wrapper function that helps us control the range of times we want to download. This will reduce the amount of redundant coding we would otherwise need to do.
@@ -485,8 +496,10 @@ With our target dataset identified we may now begin the download with the `rerdd
 
 ```{r download-func}
 # This function downloads and prepares data based on user provided start and end dates
+# NB: Can add the argument `fmt = "csv"` to rerddap::griddap() for a minor speed boost
+  # at the cost of a large increase to RAM use
 OISST_sub_dl <- function(time_df, lon_range, lat_range){
-  OISST_dat <- rerddap::griddap(datasetx = "ncdcOisst21Agg_LonPM180",
+  OISST_dat <- rerddap::griddap(datasetx = "ncdcOisst21Agg",
                                 url = "https://coastwatch.pfeg.noaa.gov/erddap/", 
                                 time = c(time_df$start, time_df$end), 
                                 zlev = c(0, 0),
@@ -535,7 +548,7 @@ base::system.time(
                                       lat_range = c(-40, -39))) |> 
     dplyr::ungroup() |> 
     dplyr::select(lon, lat, t, temp)
-) # ~2000 seconds, ~400 seconds per batch
+) # Takes anywhere from 9 to 30+ minutes depending on server load
 ```
 ```{r sub-data-shadow, echo=FALSE}
 OISST_data <- base::readRDS(file = "~/Desktop/OISST_data.Rds")
@@ -701,11 +714,13 @@ It is a little clumsy to use multiple functions at once with the two methods so 
 ```{r detect-func}
 event_only <- function(df){
   # First calculate the climatologies
-  clim <- ts2clm(data = df, climatologyPeriod = c("1982-01-01", "2011-01-01"))
-  # Then the events
-  event <- detect_event(data = clim)
+  clim <- ts2clm(data = df, climatologyPeriod = c("1982-01-01", "2011-12-31"))
+  # Then the events, which are given as a list
+  event_list <- detect_event(data = clim)
+  # So we grab just the event data.frame
+  event_df <- event_list$event
   # Return only the event metric dataframe of results
-  return(event$event)
+  return(event_df)
 }
 ```
 
@@ -721,7 +736,9 @@ MHW_dplyr <- OISST_data |>
   # Then we group the data by the 'lon' and 'lat' columns
   group_by(lon, lat) |> 
   # Then we run our MHW detecting function on each group
-  group_modify(~event_only(.x))
+  group_modify(~event_only(.x)) |> 
+  # Don't forget to ungroup the results
+  ungroup()
 ) # ~7 seconds
 ```
 
@@ -743,6 +760,22 @@ MHW_plyr <- plyr::ddply(.data = OISST_data, .variables = c("lon", "lat"), .fun =
 ```
 
 The __`plyr`__ technique took 3 seconds using seven cores. This technique is not seven times faster because when using multiple cores there is a certain amount of loss in efficiency due to the computer needing to remember which results are meant to go where so that it can stitch everything back together again for you. This takes very little memory, but over large jobs it can start to become problematic. Occasionally 'slippage' can occur as well where an entire task can be forgotten. This is very rare but does happen. This is partly what makes __`dplyr`__ a viable option as it does not have this problem. The other reason is that __`dplyr`__ performs more efficient calculations than __`plyr`__. I'll leave it to the curious investigator to decide for themselves which method to use.
+
+### Bonus third option: __`heatwave3`__
+
+<img src="https://robwschlegel.github.io/heatwave3/logo.png" width=200 />
+<!-- ![heatwave3](https://robwschlegel.github.io/heatwave3/logo.png) -->
+
+There is also the [__`heatwave3`__ package](https://robwschlegel.github.io/heatwave3/), which allows us to apply the __`heatwaveR`__ package directly to NetCDF files.
+
+```{r}
+# Run directly on a file without needing to load it first
+mhw_cube <- detect3(file_in = system.file("extdata/oisst_short.nc", package = "heatwave3"),
+                     return_type = "df", clim_period = c("1982-01-01", "2011-12-31"))
+               
+# Show the first few rows
+head(mhw_cube)
+```
 
 
 ## References
