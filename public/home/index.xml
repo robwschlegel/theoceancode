@@ -6,7 +6,7 @@
     <description>Recent content in Homes on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <copyright>&amp;copy; 2019</copyright>
+    <copyright>&amp;copy; 2024</copyright>
     <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.app/home/index.xml" rel="self" type="application/rss+xml" />
@@ -36,7 +36,7 @@
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0100</pubDate>
       
       <guid>https://theoceancode.netlify.app/home/about/</guid>
-      <description>Biography Robert Schlegel is a data scientist for the FACE-IT project, which has the overarching objective of enabling adaptive co-management of social-ecological fjord systems in the Arctic in the face of rapid cryosphere and biodiversity changes. He is based out of the Institut de la Mer de Villefranche (IMEV), a research outpost for Sorbonne Université. His area of focus is marine heatwaves (MHWs).</description>
+      <description>Biography Robert Schlegel is one of the three co-founders of Ecomonitor, a dMRV company that is developing the next generation of analytics to support nature positive projects with the aim of combating biodiversity loss globally. He is based out of Nice, France.</description>
     </item>
     
     <item>
@@ -100,7 +100,7 @@
       
       <guid>https://theoceancode.netlify.app/home/workshops/</guid>
       <description>Below please find links to workshops I run:
- Introduction to R  </description>
+ Introduction to R heatwaveR training session  </description>
     </item>
     
     <item>
