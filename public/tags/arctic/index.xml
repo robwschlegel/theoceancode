@@ -6,11 +6,29 @@
     <description>Recent content in Arctic on The Ocean Code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <copyright>&amp;copy; 2019</copyright>
-    <lastBuildDate>Tue, 22 Aug 2023 00:00:00 +0200</lastBuildDate>
+    <copyright>&amp;copy; 2024</copyright>
+    <lastBuildDate>Fri, 14 Jun 2024 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://theoceancode.netlify.app/tags/arctic/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>FjordLight</title>
+      <link>https://theoceancode.netlify.app/project/fjordlight/</link>
+      <pubDate>Fri, 14 Jun 2024 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/project/fjordlight/</guid>
+      <description>A methodology, dataset, and accompanying R package to quantify the light environment within the waters of Arctic fjords.</description>
+    </item>
+    
+    <item>
+      <title>Underwater light environment in Arctic fjords</title>
+      <link>https://theoceancode.netlify.app/publication/underwater_light/</link>
+      <pubDate>Fri, 14 Jun 2024 00:00:00 +0200</pubDate>
+      
+      <guid>https://theoceancode.netlify.app/publication/underwater_light/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>A dataset for investigating socio-ecological changes in Arctic fjords</title>

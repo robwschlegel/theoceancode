@@ -3,6 +3,120 @@
     
     <url>
     
+      <loc>https://theoceancode.netlify.app/publication_types/2/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/tags/arctic/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/project/fjordlight/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/project/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/publication_types/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/publication/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/tags/r/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/tags/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/publication/underwater_light/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/tags/dataset/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/tags/fjord/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://theoceancode.netlify.app/tags/light/</loc>
+      <lastmod>2024-06-14T00:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>https://theoceancode.netlify.app/package/fjordlight/</loc>
       <lastmod>2023-12-02T00:00:00+01:00</lastmod>
     </url>
@@ -29,79 +143,8 @@
     
     <url>
     
-      <loc>https://theoceancode.netlify.app/tags/r/</loc>
-      <lastmod>2023-12-02T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.app/tags/</loc>
-      <lastmod>2023-12-02T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.app/</loc>
-      <lastmod>2023-12-02T00:00:00+01:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.app/publication_types/2/</loc>
-      <lastmod>2023-08-22T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>https://theoceancode.netlify.app/publication/drivers_data/</loc>
       <lastmod>2023-08-22T00:00:00+02:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.app/tags/arctic/</loc>
-      <lastmod>2023-08-22T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.app/publication_types/</loc>
-      <lastmod>2023-08-22T00:00:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.app/publication/</loc>
-      <lastmod>2023-08-22T00:00:00+02:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.app/tags/fjord/</loc>
-      <lastmod>2023-08-22T00:00:00+02:00</lastmod>
-      <priority>0</priority>
     </url>
     
   
@@ -448,15 +491,6 @@
     
       <loc>https://theoceancode.netlify.app/project/mhwtracker/</loc>
       <lastmod>2019-03-25T00:00:00+01:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>https://theoceancode.netlify.app/project/</loc>
-      <lastmod>2019-03-25T00:00:00+01:00</lastmod>
-      <priority>0</priority>
     </url>
     
   
