@@ -37,4 +37,4 @@ weight = 5
 
 # Biography
 
-Robert Schlegel is one of the three co-founders of Ecomonitor, a dMRV company that is developing the next generation of analytics to support nature positive projects with the aim of combating biodiversity loss globally. He is based out of Nice, France.
+Robert Schlegel is one of the three co-founders of Ecomonitor, a startup that is developing the next generation of climate analytics to reduce societal risk and support nature positive projects. He is based out of Nice, France.
