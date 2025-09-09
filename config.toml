@@ -64,11 +64,11 @@ enableGitInfo = false
 
   # Your details.
   name = "Robert William Schlegel"
-  role = "Director"
+  role = "Data Scientist"
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-  organizations = [ { name = "Ecomonitor", url = "https://ecomonitor.xyz/" } ]
+  organizations = [ { name = "LOV", url = "https://lov.imev-mer.fr/web/" } ]
 
 # Copy paste this directly into public/index.HTML after office hours list item
 #<!-- Calendly inline widget begin -->
@@ -78,7 +78,7 @@ enableGitInfo = false
 
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
   avatar = "Schlegel_profile_small.JPG"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
-  email = "robert@ecomonitor.info"
+  email = "robwschlegel@gmail.com"
   address = "Nice, France"
   office_hours = "Monday - Friday 09:00 to 18:00 or email for meeting"
   # phone = "+33 6 11 93 37 04"
@@ -264,7 +264,7 @@ enableGitInfo = false
   [[params.social]]
     icon = "envelope"
     icon_pack = "fa"
-    link = "mailto:robert@ecomonitor.info"
+    link = "mailto:robwschlegel@gmail.com"
 
   [[params.social]]
     icon = "twitter"
