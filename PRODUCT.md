@@ -34,7 +34,7 @@ Content types the site serves, each with existing content: home (about/bio, hero
 ## Brand Commitments
 
 - Site title: "The Ocean Code". Owner: Robert William Schlegel, Data Scientist, LOV (Laboratoire d'Océanographie de Villefranche).
-- Confirmed identity/contact channels: email (robwschlegel@gmail.com), Twitter (@robwschlegel), Google Scholar, GitHub (robwschlegel), CV (files/cv.pdf).
+- Confirmed identity/contact channels: email (robwschlegel@gmail.com), Google Scholar, GitHub (robwschlegel), CV (files/cv.pdf). Twitter was dropped by explicit request — not to be promoted anywhere on the site.
 - Existing avatar/profile images: `static/img/Schlegel_profile_small.JPG`, `static/img/Robert_profile_1.JPG`, `static/img/portrait.jpg`.
 
 ## Evidence on Hand

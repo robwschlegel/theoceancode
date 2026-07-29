@@ -40,14 +40,16 @@ website:
     right:
       - text: Email
         href: mailto:robwschlegel@gmail.com
-      - text: Twitter
-        href: https://twitter.com/robwschlegel
+        target: _blank
       - text: Scholar
         href: https://scholar.google.co.za/citations?user=cPHukk8AAAAJ&hl=en
+        target: _blank
       - text: GitHub
         href: https://github.com/robwschlegel
+        target: _blank
       - text: CV
         href: /static/files/cv.pdf
+        target: _blank
   page-footer:
     center: "&copy; 2026 Robert William Schlegel"
 
