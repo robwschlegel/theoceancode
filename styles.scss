@@ -1,0 +1,427 @@
+/*
+ * DIRECTION CONTRACT — The Research Vessel Expedition Log
+ *
+ * THESIS: every entry — publication, package, talk — reads like a logged
+ * voyage record, not a generic academic card grid.
+ *
+ * OWN-WORLD: cool grey-white log paper, navy ink, one verdigris-copper
+ * accent reserved for verified/active states. IBM Plex Mono for structured
+ * fields, IBM Plex Serif for reading, IBM Plex Sans Condensed for stamped
+ * labels. Sharp corners, ruled-line hierarchy, no drop shadows.
+ *
+ * STORY: visitor opens the log's inside cover (the researcher's own entry),
+ * then scans subsequent pages as numbered, dated, type-stamped entries —
+ * fast cross-referencing, not browsing.
+ *
+ * FIRST VIEWPORT: bio as a captain's-entry — corner-stamped portrait,
+ * position-style metadata block, interests/education as structured log
+ * fields.
+ *
+ * FORM: Research Vessel Expedition Log — candidate 4/7, seed key 739d1f52,
+ * assigned index 4; no challenger beat it on audience-identification /
+ * product-clarity; user-confirmed via decision page. See DESIGN.md.
+ */
+
+/*-- scss:defaults --*/
+
+$log-paper: #F3F2ED;
+$log-paper-alt: #EAEAE6;
+$ink: #1A2332;
+$ink-muted: #5B6472;
+$verdigris: #4F7C6E;
+$verdigris-deep: #35594F;
+$verdigris-tint: #A8C4B9;
+$oxide-red: #A33B2E;
+
+$body-bg: $log-paper;
+$body-color: $ink;
+$primary: $verdigris;
+$link-color: $verdigris;
+$link-hover-color: $verdigris-deep;
+$link-decoration: none;
+
+$font-family-serif: "IBM Plex Serif", Georgia, serif;
+$font-family-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+$font-family-condensed: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+
+$font-family-base: $font-family-serif;
+$font-family-monospace: $font-family-mono;
+$headings-font-family: $font-family-condensed;
+$headings-font-weight: 600;
+$headings-color: $ink;
+
+$border-radius: 2px;
+$border-radius-sm: 2px;
+$border-radius-lg: 2px;
+$btn-border-radius: 2px;
+$input-border-radius: 2px;
+
+$table-border-color: rgba($ink, .18);
+
+/*-- scss:rules --*/
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap');
+
+// ---------------------------------------------------------------------
+// Global rhythm: flat, ruled, no drop-shadow elevation
+// ---------------------------------------------------------------------
+
+* {
+  box-shadow: none !important;
+}
+
+body {
+  letter-spacing: 0.01em;
+}
+
+a {
+  text-underline-offset: 0.15em;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+// ---------------------------------------------------------------------
+// Navbar — ruled seam instead of shadow, condensed sans, verdigris active
+// ---------------------------------------------------------------------
+
+.navbar {
+  background-color: $log-paper !important;
+  border-bottom: 2px solid $ink;
+  font-family: $font-family-condensed;
+}
+
+.navbar-title {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $ink !important;
+}
+
+.navbar .nav-link {
+  color: $ink !important;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: $verdigris !important;
+}
+
+.navbar .nav-link.active {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+#quarto-search input,
+.aa-Input {
+  border-radius: 2px !important;
+  font-family: $font-family-mono;
+}
+
+// ---------------------------------------------------------------------
+// Title block / entry header — the stamped log-entry header
+// ---------------------------------------------------------------------
+
+.entry-type-stamp {
+  display: inline-block;
+  font-family: $font-family-mono;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $verdigris-deep;
+  border: 1px solid $verdigris;
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 0.75rem;
+}
+.entry-type-stamp::before {
+  content: "◆ ";
+  font-size: 0.65em;
+}
+
+.quarto-title-block {
+  border: 1px solid rgba($ink, .25);
+  border-left: 4px solid $verdigris;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  background-color: rgba($log-paper-alt, .6);
+}
+
+.quarto-title-block .title {
+  font-family: $font-family-condensed;
+  font-weight: 700;
+}
+
+.quarto-title-block .subtitle {
+  font-family: $font-family-serif;
+  font-style: italic;
+  color: $ink-muted;
+  opacity: 1;
+}
+
+// The homepage masthead: a deliberate, singular Committed-color moment —
+// the one place verdigris fills a whole surface rather than accenting a
+// neutral one. Scoped to .quarto-about-solana only; every content-page
+// entry header stays the quiet Restrained treatment above.
+.quarto-about-solana #title-block-header {
+  border: none;
+  background-color: $verdigris-deep;
+  background-image:
+    linear-gradient(rgba($log-paper, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($log-paper, .07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  padding: 2.5rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.quarto-about-solana #title-block-header .title {
+  font-family: $font-family-condensed;
+  font-size: 2.7rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: $log-paper;
+}
+
+.quarto-about-solana #title-block-header .subtitle {
+  font-family: $font-family-mono;
+  font-style: normal;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $verdigris-tint;
+  margin-top: 0.6rem;
+  opacity: 1;
+}
+
+.quarto-title-meta-heading {
+  font-family: $font-family-condensed;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $verdigris-deep;
+  margin-bottom: 0.15rem;
+}
+
+.quarto-title-meta-contents,
+.quarto-title-meta-contents p {
+  font-family: $font-family-mono;
+  font-size: 0.9rem;
+  color: $ink;
+}
+
+.quarto-title-meta-contents .date {
+  font-family: $font-family-mono;
+}
+
+// Categories/tags rendered as small bordered signal-flag markers
+.quarto-categories {
+  margin-top: 0.75rem;
+}
+.quarto-category,
+.quarto-listing-category {
+  font-family: $font-family-mono;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background-color: transparent;
+  color: $verdigris-deep;
+  border: 1px solid $verdigris-tint;
+  border-radius: 0;
+  padding: 0.15rem 0.5rem;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 6px 100%, 0 65%);
+}
+.quarto-category:hover {
+  background-color: $verdigris-tint;
+}
+
+// ---------------------------------------------------------------------
+// Listings — log-entry rows, ruled dividers, no card shadow
+// ---------------------------------------------------------------------
+
+.quarto-listing-container-default .quarto-post {
+  border-bottom: 1px solid rgba($ink, .18);
+  padding: 1.25rem 0;
+}
+.quarto-listing-container-default .quarto-post:first-of-type {
+  border-top: 2px solid $ink;
+}
+
+.listing-title {
+  font-family: $font-family-condensed;
+  font-weight: 600;
+}
+
+.listing-subtitle {
+  font-family: $font-family-serif;
+  font-style: italic;
+  color: $ink-muted;
+}
+
+.listing-date {
+  font-family: $font-family-mono;
+  font-size: 0.82rem;
+  color: $verdigris-deep;
+  font-weight: 500;
+}
+
+.listing-author,
+.listing-description {
+  font-family: $font-family-serif;
+  color: $ink-muted;
+  font-size: 0.9rem;
+}
+
+// Grid listings (packages/projects/posters): sharp-cornered, ruled, no lift
+.quarto-grid-item.card {
+  border: 1px solid rgba($ink, .25) !important;
+  border-radius: 0 !important;
+  background-color: $log-paper;
+  transition: border-color 0.15s ease;
+}
+.quarto-grid-item.card:hover {
+  border-color: $verdigris !important;
+}
+.card-img-top,
+.thumbnail-image {
+  border-radius: 0 !important;
+  border-bottom: 1px solid rgba($ink, .18);
+  object-position: top;
+}
+
+// Listing category filter pills along the sidebar/toolbar
+.quarto-listing-category .category {
+  font-family: $font-family-mono;
+  font-size: 0.82rem;
+}
+.category.active {
+  color: $verdigris-deep;
+  font-weight: 600;
+}
+
+// ---------------------------------------------------------------------
+// Central column width — wider reading measure than Quarto's default
+// article column (was capped ~850px; widened to give the homepage's
+// two-up bio/photo layout room to breathe).
+// ---------------------------------------------------------------------
+
+#quarto-content.page-columns {
+  grid-template-columns: [screen-start] 1.5em [screen-start-inset] 5fr [page-start page-start-inset] 35px [body-start-outset] 35px [body-start] 1.5em [body-content-start] minmax(500px, calc(1100px - 3em)) [body-content-end] 1.5em [body-end] 35px [body-end-outset] minmax(75px, 145px) [page-end-inset] 35px [page-end] 5fr [screen-end-inset] 1.5em [screen-end];
+}
+
+// ---------------------------------------------------------------------
+// Homepage structured log fields (Position / Interests / Education)
+// ---------------------------------------------------------------------
+
+.log-fields {
+  border-top: 2px solid $ink;
+  margin-top: 2rem;
+}
+
+.log-field {
+  border-bottom: 1px solid rgba($ink, .18);
+  padding: 1rem 0;
+}
+
+.log-field h4 {
+  font-family: $font-family-condensed;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $verdigris-deep;
+  margin-bottom: 0.35rem;
+}
+
+.log-field p {
+  font-family: $font-family-mono;
+  font-size: 0.92rem;
+  color: $ink;
+  margin-bottom: 0;
+  line-height: 1.7;
+}
+
+// ---------------------------------------------------------------------
+// About block (homepage) — captain's-entry treatment
+// ---------------------------------------------------------------------
+
+.quarto-about-solana .about-entity {
+  gap: 3.5rem;
+}
+
+.quarto-about-solana .about-image {
+  border-radius: 50% !important;
+  border: 3px double $verdigris;
+  padding: 6px;
+  margin-left: 1.5rem;
+  flex-shrink: 0;
+}
+
+.about-entity .about-links .about-link {
+  border: 1px solid $ink;
+  border-radius: 0 !important;
+  font-family: $font-family-condensed;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: $ink !important;
+  padding: 0.4rem 0.9rem;
+}
+.about-entity .about-links .about-link:hover {
+  background-color: $verdigris;
+  border-color: $verdigris;
+  color: $log-paper !important;
+}
+.about-entity .about-links .about-link i,
+.about-entity .about-links .about-link svg {
+  display: none;
+}
+
+// ---------------------------------------------------------------------
+// Buttons / inputs — sharp, no gloss
+// ---------------------------------------------------------------------
+
+.btn {
+  border-radius: 2px;
+  font-family: $font-family-condensed;
+  letter-spacing: 0.02em;
+}
+.btn-primary {
+  background-color: $verdigris;
+  border-color: $verdigris;
+}
+.btn-primary:hover {
+  background-color: $verdigris-deep;
+  border-color: $verdigris-deep;
+}
+
+// ---------------------------------------------------------------------
+// Footer — ruled seam, not a soft fade
+// ---------------------------------------------------------------------
+
+#quarto-header ~ * .nav-footer,
+.page-footer {
+  border-top: 2px solid $ink;
+  font-family: $font-family-mono;
+  font-size: 0.8rem;
+  color: $ink-muted;
+}
+
+// ---------------------------------------------------------------------
+// Disabled-execution notice (mapping_with_ggplot2) — the one reserved
+// oxide-red use, styled like a chart-annotation flag, not a UI alert.
+// ---------------------------------------------------------------------
+
+blockquote {
+  border-left: 3px solid $oxide-red;
+  font-family: $font-family-mono;
+  font-size: 0.88rem;
+  color: $ink-muted;
+  background-color: rgba($oxide-red, .05);
+  padding: 0.75rem 1rem;
+}

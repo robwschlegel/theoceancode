@@ -1,209 +1,112 @@
+<!-- SEED: established with the user before implementation; re-run /impeccable document once there's code to capture the actual tokens and components. -->
+
 ---
 name: The Ocean Code
 description: Personal academic portfolio for a marine heatwave researcher and data scientist
-colors:
-  primary: "#3f51b5"
-  primary-light: "#757de8"
-  primary-dark: "#002984"
-  menu-text-active: "#8c9eff"
-  neutral-surface: "#ffffff"
-  neutral-surface-alt: "#f7f7f7"
-  neutral-heading: "#313131"
-  neutral-title: "#151515"
-  neutral-body: "rgba(0,0,0,0.8)"
-  neutral-muted: "#888888"
-  neutral-border: "rgba(0,0,0,0.09)"
-  neutral-divider: "rgba(0,0,0,0.05)"
-typography:
-  display:
-    fontFamily: "Lato, sans-serif"
-    fontSize: "2.7rem"
-    fontWeight: 400
-    lineHeight: 1
-    letterSpacing: "normal"
-  headline:
-    fontFamily: "Lato, sans-serif"
-    fontSize: "2.25rem"
-    fontWeight: 400
-    lineHeight: 1.25
-    letterSpacing: "normal"
-  title:
-    fontFamily: "Lato, sans-serif"
-    fontSize: "1.75rem"
-    fontWeight: 400
-    lineHeight: 1.25
-    letterSpacing: "normal"
-  body:
-    fontFamily: "Merriweather, serif"
-    fontSize: "1rem"
-    fontWeight: 400
-    lineHeight: 1.65
-    letterSpacing: "normal"
-  label:
-    fontFamily: "Lato, sans-serif"
-    fontSize: "0.9rem"
-    fontWeight: 700
-    lineHeight: 1.5
-    letterSpacing: "0.03em"
-  mono:
-    fontFamily: "Roboto Mono, monospace"
-    fontSize: "0.875em"
-    fontWeight: 400
-    lineHeight: 1.4
-    letterSpacing: "normal"
-rounded:
-  sm: "3px"
-  lg: "10px"
-  pill: "1rem"
-  full: "50%"
-spacing:
-  xs: "8px"
-  sm: "16px"
-  md: "20px"
-  lg: "60px"
-  xl: "110px"
-components:
-  button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "#ffffff"
-    rounded: "4px"
-    padding: "6px 12px"
-  button-light:
-    backgroundColor: "#ffffff"
-    textColor: "{colors.primary}"
-    rounded: "4px"
-    padding: "6px 12px"
-  card:
-    backgroundColor: "{colors.neutral-surface}"
-    rounded: "{rounded.sm}"
-    padding: "0.75rem 1rem 0.75rem"
-  card-simple:
-    backgroundColor: "{colors.neutral-surface}"
-    rounded: "{rounded.sm}"
-    padding: "15px 20px"
 ---
 
 # Design System: The Ocean Code
 
 ## Overview
 
-**Creative North Star: "The Tide Chart"**
+**Creative North Star: "The Research Vessel Expedition Log"**
 
-The site behaves like a navigational reference, not a brochure: dense, real information (papers, code, credentials) laid out to be scanned and cross-referenced quickly by people who already know what they're looking for. Confirmed direction is oceanic, but the current implementation hasn't fully arrived there yet — the "Ocean" theme's primary color is a royal indigo (`#3f51b5`) inherited from Hugo Academic's built-in preset, not a literal ocean hue. It's the working primary for now and stays structurally load-bearing (links, buttons, active nav), but it's provisional: a future pass may shift it toward an oceanic teal/cyan register without touching layout, type, or the rest of the system.
+Chosen via the impeccable new-work direction process (concept-seed.mjs, mode `read`, seed key `739d1f52`): 7 grounded directions drawn from the audience's own working world (nautical charts, oceanographic instrument panels, field-guide specimen plates, expedition logs, journal typesetting, R package documentation, chart-plotter UI) were ordered by resonance, and the seed assigned candidate 4 of 7 — the expedition log — not the top-ranked pick, refusing the model's own ranking rut. Six catalog challengers (an endurance-racing livery, a children's cutaway illustration, a risograph print system, broadcast teletext, a wax-print market wall, hand-cranked paper automata) were weighed against it on audience identification and product clarity; none had a legitimate tie to marine science strong enough to beat it. The user confirmed the assigned direction directly (no re-roll, no standing "play it straight" exit taken).
 
-The voice is restrained and credible without being sterile. Body copy sits in a serif (Merriweather) at an unusually generous size — 20px on desktop, 16px on mobile, around a quarter larger than a typical web default — which gives long-form writing (posts, abstracts, the bio) the unhurried, page-like register of a printed research notebook rather than a typical web app. Headings, navigation, and labels switch to a brisk sans-serif (Lato) for contrast and wayfinding.
+The thesis: every publication, package, project, poster, and talk is logged like a voyage entry — numbered, dated, stamped by type, a structured metadata header before the narrative body — refusing the generic "academic Bootstrap card grid" every templated researcher site (including this one's own Hugo predecessor) ships by default. This is confirmed **reference-first**: scanability and fast cross-referencing lead throughout, including the homepage, matching the confirmed audience behavior (peers, prospective students, employers cross-checking specific facts against Scholar/GitHub/a CV, not browsing for pleasure).
 
 **Key Characteristics:**
-- Serif body text at a generous base size; sans-serif for headings, nav, and labels
-- One accent color (indigo, provisional) used sparingly — links, primary buttons, active nav state, icon accents — never as a large fill
-- Alternating white / pale-gray banded sections stack down the one-page homepage instead of container borders
-- Two uncoordinated radius languages: a tight 3px on cards and tags, full circles on avatars and icon links, plus two one-off exceptions (pill search field, 10px alerts)
-- Flat surfaces at rest; an inherited Bootstrap shadow-lift on grid-card hover that is documented here, not treated as a deliberate rule
+- Cool grey-white "log paper" ground (not warm cream/parchment — a working document, not a keepsake), deep navy fountain-pen-ink text
+- One accent only: a weathered verdigris-copper, reserved for verified/active states, links, and entry stamps — never a large fill (Restrained color strategy, confirmed default for a Read-mode surface)
+- Three coordinated type registers from one family (IBM Plex): Mono for structured fields (dates, entry numbers, position-style metadata), Serif for reading body copy, Sans Condensed for stamped/stenciled labels
+- Sharp corners, ruled-line hierarchy — no drop-shadow elevation; a logbook page has ink weight and rule lines, not card shadows
+- Explicit anti-goal, confirmed by the user: avoid generic SaaS/startup gloss, sterile corporate flatness, *and* overly-academic dryness — the log framing must stay disciplined and instrument-grade (typographic and structural materiality: stamps, coordinates, numbered entries) and never tip into costume-nautical decoration (no rope borders, anchor clipart, or "ahoy" language)
 
 ## Colors
 
-A single-accent system: one working indigo, a wide neutral scale for text and surfaces, and a handful of Bootstrap-inherited semantic colors for buttons and alerts.
+A single-accent system on a cool neutral "paper" scale — no warm cream, no generic SaaS blue.
 
 ### Primary
-- **Ocean Indigo** (#3f51b5): links, primary buttons, navbar background, featurette icons. Provisional per the confirmed "Tide Chart" direction — treat as the current, not final, brand color.
-- **Ocean Indigo Light** (#757de8): active/pressed state on toolbar buttons.
-- **Ocean Indigo Dark** (#002984): hover state on toolbar buttons.
+- **Verdigris** (`oklch` mid-tone weathered copper-green, ~`#4F7C6E`): links, active/verified entry stamps, active nav state. Never a large fill.
+- **Verdigris Deep** (~`#35594F`): hover/pressed state.
+- **Verdigris Tint** (~`#A8C4B9`): subtle borders, unselected/inactive stamp outlines.
 
 ### Neutral
-- **Active Indigo** (#8c9eff): nav link hover/active text against the solid-indigo navbar — the one place a lighter tint of the accent carries text instead of the base indigo.
-- **Paper White** (#ffffff): default page background, odd-numbered home sections, card backgrounds.
-- **Pale Gray** (#f7f7f7): even-numbered home sections — sections alternate every block down the homepage.
-- **Heading Charcoal** (#313131): default h1–h6 color.
-- **Title Ink** (#151515): article and post titles specifically, darker than generic headings.
-- **Body** (rgba(0,0,0,0.8)): base running text.
-- **Muted** (#888888): metadata, dates, bylines.
-- **Border** (rgba(0,0,0,0.09)): `.card-simple` borders.
-- **Divider** (rgba(0,0,0,0.05)): `hr-light` rules.
+- **Log Paper** (~`#F3F2ED`): default page background — cool, slightly grey, not warm-cream.
+- **Log Paper Alt** (~`#EAEAE6`): secondary surface for banding/cards.
+- **Ink** (~`#1A2332`): primary text — near-black navy, not pure black.
+- **Ink Muted** (~`#5B6472`): metadata, dates, secondary text.
+
+### Reserved
+- **Oxide Red** (~`#A33B2E`): sparing use only — an alert/flag color for the rare "important" marker (e.g. a disabled-execution note), styled like a chart-annotation flag, not a UI-red CTA.
 
 ### Named Rules
-**The One-Accent Rule.** Indigo is the only brand color used with intent, and only for interactive/wayfinding purposes — links, primary buttons, active nav, icon accents. It never fills a large surface.
-
-### Inherited, not canonical
-A few colors appear outside this palette: publication-author bylines in blue (#3170A5), publication-venue names in green (#090), and search-match highlighting in amber (#FFE0B2 background / #E65100 text). These predate the deliberate system and are not confirmed as intentional signal colors — document them as legacy, don't extend the pattern into new work.
+**The One-Accent Rule.** Verdigris is the only brand color used with intent — links, active state, entry stamps. It never fills a large surface. (Carried forward from the prior direction's own rule — it held up under a fresh workshop, not reused by default.)
 
 ## Typography
 
-**Display Font:** Lato (with sans-serif fallback)
-**Body Font:** Merriweather (with serif fallback)
-**Label/Mono Font:** Roboto Mono for code, Lato for nav and labels
+**Structured/Data Font:** IBM Plex Mono — dates, entry numbers, position-style metadata, tags-as-signal-flags.
+**Body Font:** IBM Plex Serif — reading copy (abstracts, bio, post text).
+**Label Font:** IBM Plex Sans Condensed — stamped/stenciled headers and labels.
 
-**Character:** A sans/serif split doing real work: Lato carries headings, navigation, and labels with brisk, upright authority, while Merriweather sets body copy at a generous size, giving longer writing the unhurried register of a printed page rather than a typical web app.
+**Character:** One coordinated superfamily carrying three real registers this system actually needs — structure, reading, and labeling — not three unrelated faces stitched together, and not a single reflexive display face doing everything.
 
 ### Hierarchy
-- **Display** (400, 2.7rem, line-height 1): hero title only.
-- **Headline** (400, 2.25rem, line-height 1.25): h1.
-- **Title** (400, 1.75rem, line-height 1.25): article and post titles.
-- **Body** (400, 1rem — 20px desktop / 16px mobile base, line-height 1.65): running text; noticeably larger than a typical 16px web default.
-- **Label** (700, 0.9rem, uppercase, letter-spacing 0.03em): card titles, nav brand wordmark.
-
-### Named Rules
-**The Large-Print Rule.** Base body font-size is 20px on screens ≥58em (16px below that). It's roughly 25% larger than a typical web default and is load-bearing for the "printed page" register the serif body font is chosen for — don't shrink it back toward 16px.
+- **Title** (700, browser default h1 scale, Plex Sans Condensed): page/entry titles, inside the stamped title-block.
+- **Subtitle** (400 italic, Plex Serif): venue/event line under a title, muted ink.
+- **Label** (700, 0.72rem, uppercase, letter-spacing 0.08em, Plex Sans Condensed, verdigris-deep): field headings inside the entry header ("Authors", "Published").
+- **Data field** (500, ~0.82–0.9rem, Plex Mono): dates, listing metadata, category tags.
+- **Body** (400, Plex Serif, Bootstrap base scale): running text — abstracts, bio, post copy.
 
 ## Layout
 
-Container: `.universal-wrapper` caps at 1000px, centered, with 15px side padding below its 1001px breakpoint.
-Reading measure: `.article-container` narrows further to 760px for post/article copy.
-Homepage: a vertical stack of full-width `.home-section` blocks, alternating white/pale-gray backgrounds, each with heavy vertical padding — 110px top/bottom on desktop, 60px on mobile (the first section is 50px/40px). This banding is how the one-page site segments Publications / Packages / Projects / Blog / Talks / Posters / Workshops / Contact without any container borders.
-Navbar: fixed-height bar (70px desktop, 50px mobile below a separate 1200px breakpoint) that offsets body content via a top margin.
-Grid content (projects, publications): a filtered/masonry card grid (isotope.js).
+Implemented via CSS against Quarto's own generated structures, not custom templating:
+- **Entry header** (`.quarto-title-block`): every detail page's existing Quarto title-block (title/subtitle/authors/date/categories) is bordered (1px rule, 4px verdigris left rule) and given a `log-paper-alt` tint — reads as a stamped log entry using real, semantic Quarto markup, no per-file editing or custom Lua filter needed.
+- **Listings** (`.quarto-listing-container-default .quarto-post`): ruled dividers between entries (bottom-border rows, a heavier top rule on the first entry) instead of card shadows; dates in Plex Mono.
+- **Grid listings** (`.quarto-grid-item.card`, used by package/project/poster): sharp-cornered bordered cards, border brightens to verdigris on hover, no shadow-lift.
+- **Homepage** (`.quarto-about-solana`): unchanged Quarto `about: template: solana` structure, restyled — see Shapes for the portrait treatment.
 
 ## Elevation & Depth
 
-Mostly flat: surfaces sit directly on the white/pale-gray section backgrounds with no shadow at rest. Two exceptions carry real shadow: the fixed navbar (a faint seam) and grid cards, which jump from a light rest shadow to a noticeably heavier one on hover. That hover-lift is an inherited Bootstrap-card default, not a deliberately designed interaction — document it as current behavior, don't extend it as a philosophy into new components.
-
-### Shadow Vocabulary
-- **Navbar seam** (`box-shadow: 0 0.125rem 0.25rem 0 rgba(0,0,0,.11)`): separates the fixed nav from scrolled content.
-- **Card rest** (`box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2)`): default grid-card state.
-- **Card hover** (`box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)`): inherited default, not a confirmed rule.
+Flat, ruled-line hierarchy — no drop shadows anywhere (`* { box-shadow: none !important; }`, deliberately blunt). A logbook page conveys structure through ink weight, rule lines, and stamps, not card elevation. Hover states move via border-color shift (to verdigris) rather than any lift/shadow.
 
 ## Shapes
 
-Two radius languages coexist without a clear bridge: a tight 3px on content surfaces (cards, tags/labels) that reads almost square, versus full circles (50%) on avatars and icon-link buttons. Two one-off exceptions sit outside both — the search field is pill-shaped (1rem radius) and alert boxes use a wider 10px radius. This is the system as observed, not a resolved rule; a future pass should converge on fewer radius values rather than carry all four forward.
+Sharp corners throughout UI chrome (buttons: 2px, inputs: 2px, cards: 0) — logbooks and ledgers are ruled and rectilinear, not soft/pill-shaped (the confirmed anti-goal: no SaaS gloss). The one deliberate exception is the homepage portrait: circular, with a double-ring verdigris border (`border: 3px double`) — a genuine seal/stamp device, not a site-wide rounding language. Category/tag markers use a small clipped notch (`clip-path`) evoking a signal flag rather than a rounded pill.
 
 ## Components
 
-### Buttons
-- **Shape:** 4px radius — a Bootstrap 3.3.7 default, not overridden by theme CSS.
-- **Primary:** solid indigo fill (`background`/`border-color: #3f51b5`), white text.
-- **Light:** white fill, used on dark hero overlays.
-- **Hover/Focus:** inconsistent across contexts. Toolbar buttons darken to Ocean Indigo Dark on hover and lighten to Ocean Indigo Light when active, but the standalone `.btn-primary` hover rule reassigns the same base indigo — outside the toolbar, hovering a primary button currently produces no visible color change. Documented as a real gap, not a pattern to replicate.
-- **Outline variants:** transparent fill, colored border and text (primary indigo plus inherited Bootstrap semantic colors for success/info/warning/danger), filling to solid color on hover.
+### Navbar
+Log-paper background, 2px solid ink bottom rule (not a shadow seam). Condensed sans nav text; active/hover state turns verdigris with an underline, not a background fill.
 
-### Cards
-Two variants serve different jobs:
-- **`.card-simple`** — bordered and minimal: 1px `rgba(0,0,0,.09)` border, 3px radius, faint shadow, white background, 15px/20px padding. Used for simple content blocks.
-- **`.card`** (grid/image cards) — image-forward, with an uppercase bold 0.9rem title and muted 0.75rem body copy; hover reveals an overlay icon on the image and lifts the shadow (see Elevation).
+### Entry type stamp
+A small bordered `◆ PUBLICATION` / `◆ PACKAGE` / `◆ PROJECT` / `◆ POSTER` / `◆ TALK` / `◆ POST` kicker line above the title, on every detail page. Driven by a per-directory `content/<type>/_metadata.yml` (`entry-type: ...`) plus one shared `_partials/type-stamp.html` include (`{{< meta entry-type >}}`) — no per-file front matter needed. Deliberately **not** repeated on listing pages (every row on e.g. `publication.qmd` is already a publication; the stamp is redundant there and only earns its keep where a visitor might land without that surrounding context — search results, RSS, a direct link).
 
-### Tags / Labels
-- **Style:** translucent black background/text (`rgba(0,0,0,.05)` / `rgba(0,0,0,.68)`), 3px radius, 5px/10px padding. Used for post tags and categories.
+### Entry header (title-block)
+Bordered box, verdigris left rule, log-paper-alt tint. Field labels ("Authors", "Published") in small uppercase Plex Sans Condensed; field values in Plex Mono. Categories render as small bordered, notch-clipped flags in verdigris-deep.
 
-### Search Input
-- **Style:** pill-shaped (1rem radius), 1px `#dedede` border, left-padded for an inline search icon.
-- **Match highlight:** amber background/text on matched terms (a legacy accent — see Colors).
+### Homepage structured fields
+Position / Interests / Education render as `.log-fields` &rarr; `.log-field` blocks (ruled top/bottom, condensed-sans uppercase field labels, Plex Mono values) — the "position-style metadata block" the direction contract promised, not a generic bulleted bio.
 
-### Navigation
-Fixed top bar filled solid indigo, white nav text that shifts to Active Indigo on hover/active, bold uppercase brand wordmark. Collapses to a hamburger menu below the 1200px breakpoint.
+### Listings
+Default (publication/talk/blog): ruled rows, Plex Mono dates, serif-italic subtitle (venue/event), muted serif author/description line.
+Grid (package/project/poster): sharp bordered cards, border-only hover state (no lift), sharp-cornered thumbnail images.
 
-### Alerts
-- **Style:** solid color fill (info: #03A9F4, warning: #f44336), white text, 10px radius, left-inset icon.
+### Buttons / links (about-block)
+Bordered rectangles (not pills), condensed sans uppercase label, ink border at rest, solid verdigris fill with log-paper text on hover. Icons suppressed (text-only labels) to avoid Bootstrap's generic icon glyphs breaking the instrument-label register.
 
-### Avatar
-- **Shape:** a perfect circle (50% radius), single portrait image, centered — the one place circular form appears outside icon buttons.
+### Disabled-execution notice
+The one place Oxide Red appears: a left-ruled blockquote (verdigris-rule pattern reused in red), Plex Mono, styled like a chart-annotation flag rather than a generic Bootstrap alert box. Used once, on `mapping_with_ggplot2.qmd`'s maptools note.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep the accent color singular and sparing — indigo appears only on links, primary buttons, active nav state, and icon accents, never as a large fill (**The One-Accent Rule**).
-- **Do** set body copy in the serif body font at the current oversized base, 20px desktop / 16px mobile — it's what gives long-form writing its notebook-like register (**The Large-Print Rule**).
-- **Do** use the alternating white/pale-gray section banding to segment homepage content, instead of adding borders or container backgrounds.
+- **Do** keep verdigris as the only accent color, reserved for links/active-state/stamps (**The One-Accent Rule**).
+- **Do** build every content type's detail page and listing on the same log-entry structure (numbered, dated, stamped) — one system, not per-type ad hoc styling.
+- **Do** keep the nautical/log materiality typographic and structural (stamps, coordinates, rule lines), never illustrative (no anchor/rope/wave clipart).
 
 ### Don't:
-- **Don't** extend the legacy accent colors (publication-author blue, publication-venue green, search-highlight amber) into new components; they predate the deliberate palette.
-- **Don't** treat the card hover shadow-lift as a confirmed interaction pattern to replicate elsewhere — it's an inherited Bootstrap default, not a chosen rule.
-- **Don't** add a fifth radius value. The system already carries four uncoordinated ones (3px / 1rem / 50% / 10px); resolve toward fewer, don't add another.
-- **Don't** treat the current indigo as permanent. Per the confirmed "Tide Chart" direction, a future pass may shift the primary toward an oceanic teal/cyan — don't build new components that assume indigo is final.
+- **Don't** use a warm cream/parchment ground — the confirmed palette is cool grey-white "log paper," not a keepsake-journal aesthetic.
+- **Don't** add drop-shadow card elevation — hierarchy comes from ink weight and rule lines.
+- **Don't** let the log framing become twee or costume-nautical ("ahoy" copy, decorative rope/anchor icons) — instrument-grade discipline is the confirmed anti-goal boundary.
+- **Don't** treat this as the final token set — spacing, exact type scale, and component specifics are placeholders pending the first real implementation pass.
