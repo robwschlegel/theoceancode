@@ -1,0 +1,20 @@
+---
+title: Variation and Change of Upwelling Dynamics Detected in the World’s Eastern
+  Boundary Upwelling Systems
+date: '2021-02-03'
+author:
+  - A Abrahams
+  - RW Schlegel
+  - AJ Smit
+subtitle: '*Frontiers in Marine Science*.'
+type: Journal article
+categories:
+  - R
+  - coastal
+  - atmosphere
+  - ocean
+---
+
+Global increases in temperature are altering land-sea temperature gradients. Bakun (1990) hypothesized that changes within these gradients will directly affect atmospheric pressure cells associated with the development of winds and will consequently impact upwelling patterns within ecologically important Eastern Boundary Upwelling Systems (EBUS). In this study we used daily time series of NOAA Optimally Interpolated sea surface temperature (SST) and ERA 5 reanalysis wind products to calculate a series novel of metrics related to upwelling dynamics. We then use these to objectively describe upwelling signals in terms of their frequency, intensity and duration throughout the four EBUS during summer months over the last 37 years (1982–2019). We found that a decrease (increase) in SST is associated with an increase (decrease) in the number of upwelling “events,” a decrease (increase) in the intensity of upwelling, and an increase (decrease) in the cumulative intensity of upwelling, with differences between EBUS and regions within EBUS. The Humboldt Current is the only EBUS that shows a consistent response from north to south with a general intensification of upwelling. However, we could not provide clear evidence for associated changes in the wind dynamics hypothesized to drive the upwelling dynamics.
+
+**Links:** [PDF](https://www.frontiersin.org/articles/10.3389/fmars.2021.626411/full) &middot; [Code](https://github.com/AmierohAbrahams/EBUS)

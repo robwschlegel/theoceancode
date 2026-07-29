@@ -1,0 +1,13 @@
+---
+title: coastR
+date: '2019-12-14'
+description: An R package with useful functions for coastal oceanography.
+categories:
+  - coastal
+  - R
+image: /static/img/coastR.png
+---
+
+An R package with useful functions for coastal oceanography.
+
+**Links:** [Link](https://github.com/robwschlegel/coastR)

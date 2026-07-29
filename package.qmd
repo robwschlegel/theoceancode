@@ -1,0 +1,11 @@
+---
+title: "Packages"
+listing:
+  contents: content/package
+  type: grid
+  sort: "date desc"
+  categories: true
+  fields: [title, description, image]
+page-layout: full
+title-block-banner: false
+---

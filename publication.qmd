@@ -1,0 +1,12 @@
+---
+title: "Publications"
+listing:
+  contents: content/publication
+  type: default
+  sort: "date desc"
+  categories: true
+  feed: true
+  fields: [date, title, author, subtitle]
+page-layout: full
+title-block-banner: false
+---

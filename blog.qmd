@@ -1,0 +1,12 @@
+---
+title: "Blog"
+listing:
+  contents: content/post
+  type: default
+  sort: "date desc"
+  categories: true
+  feed: true
+  fields: [date, title, author, description, reading-time]
+page-layout: full
+title-block-banner: false
+---

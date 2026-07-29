@@ -1,0 +1,14 @@
+---
+title: FjordLight
+date: '2023-12-02'
+description: An R package to aid in accessing the fjord PAR data product created for
+  the FACE-IT project.
+categories:
+  - R
+  - PAR
+image: /static/img/FjordLight.png
+---
+
+An R package to aid in accessing the fjord PAR data product created for the FACE-IT project.
+
+**Links:** [Link](https://face-it-project.github.io/FjordLight/index.html)

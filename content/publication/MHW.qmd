@@ -1,0 +1,22 @@
+---
+title: Marine Heatwaves
+date: '2021-01-03'
+author:
+  - ECJ Oliver
+  - JA Benthuysen
+  - S Darmaraki
+  - MG Donat
+  - AJ Hobday
+  - NJ Holbrook
+  - RW Schlegel
+  - A Sen Gupta
+subtitle: In *Annual Review of Marine Science*.
+type: Journal article
+categories:
+  - R
+  - marine heatwaves
+---
+
+Marine heatwaves (MHWs) are increasing in duration and intensity at a global scale and are projected to continue to increase due to the anthropogenic warming of the climate. Because MHWs may have drastic impacts on fisheries and other marine goods and services, there is a growing interest in understanding the predictability and developing practical predictions of these events. A necessary step toward prediction is to develop a better understanding of the drivers and processes responsible for the development of MHWs. Prior research has shown that air–sea heat flux and ocean advection across sharp thermal gradients are common physical processes governing these anomalous events. In this study we apply various statistical analyses and employ the self-organizing map (SOM) technique to determine specifically which of the many candidate physical processes, informed by a theoretical mixed-layer heat budget, have the most pronounced effect on the onset and/or decline of MHWs on the Northwest Atlantic continental shelf. It was found that latent heat flux is the most common driver of the onset of MHWs. Mixed layer depth (MLD) also strongly modulates the onset of MHWs. During the decay of MHWs, atmospheric forcing does not explain the evolution of the MHWs well, suggesting that oceanic processes are important in the decay of MHWs. The SOM analysis revealed three primary synoptic scale patterns during MHWs: low-pressure cyclonic Autumn-Winter systems, high-pressure anti-cyclonic Spring-Summer blocking, and mild but long-lasting Summer blocking. Our results show that nearly half of past MHWs on the Northwest Atlantic shelf are initiated by positive heat flux anomaly into the ocean, but less than one fifth of MHWs decay due to this process, suggesting that oceanic processes, e.g., advection and mixing are the primary driver for the decay of most MHWs.
+
+**Links:** [PDF](https://figshare.utas.edu.au/articles/journal_contribution/Marine_heatwaves/22992626/1/files/40741712.pdf) &middot; [Source](https://www.annualreviews.org/doi/abs/10.1146/annurev-marine-032720-095144)

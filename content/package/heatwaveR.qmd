@@ -1,0 +1,13 @@
+---
+title: heatwaveR
+date: '2019-12-15'
+description: An R package for the detection of heatwaves and cold-spells.
+categories:
+  - marine heatwaves
+  - R
+image: /static/img/heatwaveR.png
+---
+
+An R package for the detection of heatwaves and cold-spells.
+
+**Links:** [Link](https://robwschlegel.github.io/heatwaveR/index.html)

@@ -1,0 +1,13 @@
+---
+title: Demo for the MHW definition
+date: '2019-03-25'
+description: An interactive application that allows the user to explore the components
+  of the MHW definition.
+categories:
+  - marine heatwaves
+image: /static/img/MHW_def.png
+---
+
+An interactive application that allows the user to explore the components of the MHW definition.
+
+**Links:** [Link](http://193.50.85.71:3838/demoMHW/)

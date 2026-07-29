@@ -1,0 +1,17 @@
+---
+title: FjordLight
+date: '2024-06-14'
+description: A methodology, dataset, and accompanying R package to quantify the light
+  environment within the waters of Arctic fjords.
+categories:
+  - Arctic
+  - fjord
+  - light
+  - dataset
+  - R
+image: /static/img/essd-16-2773-2024-f05-web.png
+---
+
+A methodology, dataset, and accompanying R package to quantify the light environment within the waters of Arctic fjords.
+
+**Links:** [Link](https://doi.pangaea.de/10.1594/PANGAEA.962895)

@@ -1,0 +1,23 @@
+---
+title: Marine heatwaves drive recurrent mass mortalities in the Mediterranean Sea
+date: '2022-05-15'
+author:
+  - J Garrabou
+  - D Gómez-Gras
+  - A Medrano
+  - C Cerrano
+  - M Ponti
+  - RW Schlegel
+  - N Bensoussan
+  - E Turicchia
+  - '... +62'
+subtitle: '*Global Change Biology*.'
+type: Journal article
+categories:
+  - MHW
+  - biodiversity
+---
+
+Climate change is causing an increase in the frequency and intensity of marine heatwaves (MHWs) and mass mortality events (MMEs) of marine organisms are one of their main ecological impacts. Here, we show that during the 2015–2019 period, the Mediterranean Sea has experienced exceptional thermal conditions resulting in the onset of five consecutive years of widespread MMEs across the basin. These MMEs affected thousands of kilometers of coastline from the surface to 45 m, across a range of marine habitats and taxa (50 taxa across 8 phyla). Significant relationships were found between the incidence of MMEs and the heat exposure associated with MHWs observed both at the surface and across depths. Our findings reveal that the Mediterranean Sea is experiencing an acceleration of the ecological impacts of MHWs which poses an unprecedented threat to its ecosystems' health and functioning. Overall, we show that increasing the resolution of empirical observation is critical to enhancing our ability to more effectively understand and manage the consequences of climate change.
+
+**Links:** [PDF](https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/gcb.16301) &middot; [Code](https://github.com/robwschlegel/MHWmed)

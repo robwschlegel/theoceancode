@@ -1,0 +1,14 @@
+---
+title: heatwave3
+date: '2023-08-10'
+description: An R package for the detection of heatwaves and cold-spells directly
+  on NetCDF files.
+categories:
+  - marine heatwaves
+  - R
+image: /static/img/heatwave3.png
+---
+
+An R package for the detection of heatwaves and cold-spells directly on NetCDF files.
+
+**Links:** [Link](https://robwschlegel.github.io/heatwave3/index.html)

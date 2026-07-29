@@ -1,0 +1,12 @@
+---
+title: "Talks"
+listing:
+  contents: content/talk
+  type: default
+  sort: "date desc"
+  categories: true
+  feed: true
+  fields: [date, title, subtitle]
+page-layout: full
+title-block-banner: false
+---

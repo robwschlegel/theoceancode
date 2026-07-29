@@ -1,0 +1,14 @@
+---
+title: Detecting marine heatwaves with sub-optimal data
+date: '2019-05-06'
+description: Research conducted on how sub-optimal a time series may be and still
+  produce comparable marine heatwaves to an optimal time series.
+categories:
+  - marine heatwaves
+  - R
+image: /static/img/fig_1.jpg
+---
+
+Research conducted on how sub-optimal a time series may be and still produce comparable marine heatwaves to an optimal time series.
+
+**Links:** [Link](https://robwschlegel.github.io/MHWdetection/portrait.pdf)

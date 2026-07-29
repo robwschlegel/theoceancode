@@ -1,0 +1,13 @@
+---
+title: Marine heatwave tracker
+date: '2019-03-25'
+description: A daily updating web application for tracking the occurrence of marine
+  heatwaves around the globe.
+categories:
+  - marine heatwaves
+image: /static/img/MHW_Tracker_2023_11_26.png
+---
+
+A daily updating web application for tracking the occurrence of marine heatwaves around the globe.
+
+**Links:** [Link](http://www.marineheatwaves.org/tracker.html)

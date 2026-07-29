@@ -1,0 +1,25 @@
+---
+title: 'Kelp in the Eastern Canadian Arctic: Current and Future Predictions of Habitat
+  Suitability and Cover'
+date: '2021-10-07'
+author:
+  - J Goldsmit
+  - RW Schlegel
+  - K Filbee-Dexter
+  - KA MacGregor
+  - LE Johnson
+  - CJ Mundy
+  - AM Savoie
+  - CW McKindsey
+  - KL Howland
+  - P Archambault
+subtitle: '*Frontiers in Marine Science*.'
+type: Journal article
+categories:
+  - R
+  - SDM
+---
+
+Climate change is transforming marine ecosystems through the expansion and contraction of species’ ranges. Sea ice loss and warming temperatures are expected to expand habitat availability for macroalgae along long stretches of Arctic coastlines. To better understand the current distribution of kelp forests in the Eastern Canadian Arctic, kelps were sampled along the coasts for species identifications and percent cover. The sampling effort was supplemented with occurrence records from global biodiversity databases, searches in the literature, and museum records. Environmental information and occurrence records were used to develop ensemble models for predicting habitat suitability and a Random Forest model to predict kelp cover for the dominant kelp species in the region – Agarum clathratum, Alaria esculenta, and Laminariaceae species (Laminaria solidungula and Saccharina latissima). Ice thickness, sea temperature and salinity explained the highest percentage of kelp distribution. Both modeling approaches showed that the current extent of arctic kelps is potentially much greater than the available records suggest. These modeling approaches were projected into the future using predicted environmental data for 2050 and 2100 based on the most extreme emission scenario (RCP 8.5). The models agreed that predicted distribution of kelp in the Eastern Canadian Arctic is likely to expand to more northern locations under future emissions scenarios, with the exception of the endemic arctic kelp L. solidungula, which is more likely to lose a significant proportion of suitable habitat. However, there were differences among species regarding predicted cover for both current and future projections. Notwithstanding model-specific variation, it is evident that kelps are widespread throughout the area and likely contribute significantly to the functioning of current Arctic ecosystems. Our results emphasize the importance of kelp in Arctic ecosystems and the underestimation of their potential distribution there.
+
+**Links:** [Code](https://github.com/robwschlegel/ArcticKelp) &middot; [Source](https://www.frontiersin.org/articles/10.3389/fmars.2021.742209/full)

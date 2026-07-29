@@ -1,0 +1,30 @@
+---
+title: "The Ocean Code"
+image: /static/img/portrait.jpg
+about:
+  template: solana
+  image-shape: round
+  links:
+    - text: Email
+      href: mailto:robwschlegel@gmail.com
+    - text: Twitter
+      href: https://twitter.com/robwschlegel
+    - text: Google Scholar
+      href: https://scholar.google.co.za/citations?user=cPHukk8AAAAJ&hl=en
+    - text: GitHub
+      href: https://github.com/robwschlegel
+    - text: CV
+      href: /static/files/cv.pdf
+---
+
+Robert Schlegel is a Data Scientist on the OMTAB team at the Laboratoire d'Océanographie de Villefranche, working on the RiOMar and HYPERNETS projects.
+
+## Interests
+
+Marine heatwaves &middot; Climate change &middot; Biodiversity &middot; Machine learning &middot; Data science
+
+## Education
+
+- **PhD in Biodiversity**, University of the Western Cape, 2018
+- **MPhil in Marine Science**, University of Cape Town, 2014
+- **BA in Animal Behaviour**, University of Washington, 2008
