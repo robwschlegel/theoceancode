@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-29T12:09:18Z",
+  "title": "Design System: The Ocean Code",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Ocean Indigo",
+        "canonical": "oklch(47.8% 0.159 271.4)",
+        "tonalRamp": ["oklch(15% 0.159 271.4)", "oklch(28% 0.159 271.4)", "oklch(40% 0.159 271.4)", "oklch(52% 0.159 271.4)", "oklch(64% 0.159 271.4)", "oklch(75% 0.159 271.4)", "oklch(85% 0.159 271.4)", "oklch(95% 0.159 271.4)"]
+      },
+      "primary-light": {
+        "role": "primary",
+        "displayName": "Ocean Indigo Light",
+        "canonical": "oklch(63.4% 0.159 277.6)",
+        "tonalRamp": ["oklch(15% 0.159 277.6)", "oklch(28% 0.159 277.6)", "oklch(40% 0.159 277.6)", "oklch(52% 0.159 277.6)", "oklch(64% 0.159 277.6)", "oklch(75% 0.159 277.6)", "oklch(85% 0.159 277.6)", "oklch(95% 0.159 277.6)"]
+      },
+      "primary-dark": {
+        "role": "primary",
+        "displayName": "Ocean Indigo Dark",
+        "canonical": "oklch(32.9% 0.158 262.4)",
+        "tonalRamp": ["oklch(15% 0.158 262.4)", "oklch(28% 0.158 262.4)", "oklch(40% 0.158 262.4)", "oklch(52% 0.158 262.4)", "oklch(64% 0.158 262.4)", "oklch(75% 0.158 262.4)", "oklch(85% 0.158 262.4)", "oklch(95% 0.158 262.4)"]
+      },
+      "menu-text-active": {
+        "role": "accent",
+        "displayName": "Active Indigo",
+        "canonical": "oklch(72.6% 0.142 274.4)",
+        "tonalRamp": ["oklch(15% 0.142 274.4)", "oklch(28% 0.142 274.4)", "oklch(40% 0.142 274.4)", "oklch(52% 0.142 274.4)", "oklch(64% 0.142 274.4)", "oklch(75% 0.142 274.4)", "oklch(85% 0.142 274.4)", "oklch(95% 0.142 274.4)"]
+      },
+      "neutral-surface": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "oklch(100% 0.000 89.9)",
+        "tonalRamp": ["oklch(15% 0.000 89.9)", "oklch(28% 0.000 89.9)", "oklch(40% 0.000 89.9)", "oklch(52% 0.000 89.9)", "oklch(64% 0.000 89.9)", "oklch(75% 0.000 89.9)", "oklch(85% 0.000 89.9)", "oklch(95% 0.000 89.9)"]
+      },
+      "neutral-surface-alt": {
+        "role": "neutral",
+        "displayName": "Pale Gray",
+        "canonical": "oklch(97.6% 0.000 89.9)",
+        "tonalRamp": ["oklch(15% 0.000 89.9)", "oklch(28% 0.000 89.9)", "oklch(40% 0.000 89.9)", "oklch(52% 0.000 89.9)", "oklch(64% 0.000 89.9)", "oklch(75% 0.000 89.9)", "oklch(85% 0.000 89.9)", "oklch(95% 0.000 89.9)"]
+      },
+      "neutral-heading": {
+        "role": "neutral",
+        "displayName": "Heading Charcoal",
+        "canonical": "oklch(31.3% 0.000 89.9)",
+        "tonalRamp": ["oklch(15% 0.000 89.9)", "oklch(28% 0.000 89.9)", "oklch(40% 0.000 89.9)", "oklch(52% 0.000 89.9)", "oklch(64% 0.000 89.9)", "oklch(75% 0.000 89.9)", "oklch(85% 0.000 89.9)", "oklch(95% 0.000 89.9)"]
+      },
+      "neutral-title": {
+        "role": "neutral",
+        "displayName": "Title Ink",
+        "canonical": "#151515"
+      },
+      "neutral-body": {
+        "role": "neutral",
+        "displayName": "Body",
+        "canonical": "rgba(0,0,0,0.8)"
+      },
+      "neutral-muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "oklch(62.7% 0.000 89.9)",
+        "tonalRamp": ["oklch(15% 0.000 89.9)", "oklch(28% 0.000 89.9)", "oklch(40% 0.000 89.9)", "oklch(52% 0.000 89.9)", "oklch(64% 0.000 89.9)", "oklch(75% 0.000 89.9)", "oklch(85% 0.000 89.9)", "oklch(95% 0.000 89.9)"]
+      },
+      "neutral-border": {
+        "role": "neutral",
+        "displayName": "Border",
+        "canonical": "rgba(0,0,0,0.09)"
+      },
+      "neutral-divider": {
+        "role": "neutral",
+        "displayName": "Divider",
+        "canonical": "rgba(0,0,0,0.05)"
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero widget title only." },
+      "headline": { "displayName": "Headline", "purpose": "Top-level page/section headings (h1)." },
+      "title": { "displayName": "Title", "purpose": "Article and post titles." },
+      "body": { "displayName": "Body", "purpose": "Running text: posts, abstracts, bio, all long-form copy." },
+      "label": { "displayName": "Label", "purpose": "Card titles and the nav brand wordmark; short, uppercase, bold." },
+      "mono": { "displayName": "Mono", "purpose": "Inline code and code blocks." }
+    },
+    "shadows": [
+      { "name": "navbar-seam", "value": "0 0.125rem 0.25rem 0 rgba(0,0,0,.11)", "purpose": "Separates the fixed navbar from scrolled content." },
+      { "name": "card-rest", "value": "0 2px 4px 0 rgba(0,0,0,0.2)", "purpose": "Default grid-card shadow at rest." },
+      { "name": "card-hover", "value": "0 8px 16px 0 rgba(0,0,0,0.2)", "purpose": "Grid-card hover lift. Inherited Bootstrap default, documented not prescribed." }
+    ],
+    "motion": [
+      { "name": "link-hover", "value": "color 0.6s ease", "purpose": "Link and article-title hover/focus color transitions." },
+      { "name": "card-hover", "value": "all 0.2s ease-out", "purpose": "Card shadow and image-overlay transitions on hover." }
+    ],
+    "breakpoints": [
+      { "name": "container", "value": "1001px" },
+      { "name": "nav-collapse", "value": "1200px" },
+      { "name": "type-scale-up", "value": "58em" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid indigo call-to-action button.",
+      "html": "<button class=\"ds-btn-primary\">View Publication</button>",
+      "css": ".ds-btn-primary { background: #3f51b5; border: 1px solid #3f51b5; color: #ffffff; border-radius: 4px; padding: 6px 12px; font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 400; cursor: pointer; transition: background 0.6s ease, border-color 0.6s ease; } .ds-btn-primary:hover { background: #002984; border-color: #002984; } .ds-btn-primary:focus-visible { outline: 2px solid #757de8; outline-offset: 2px; } .ds-btn-primary:active { background: #757de8; border-color: #757de8; }"
+    },
+    {
+      "name": "Light Button",
+      "kind": "button",
+      "refersTo": "button-light",
+      "description": "White button for use on dark hero overlays.",
+      "html": "<button class=\"ds-btn-light\">Learn More</button>",
+      "css": ".ds-btn-light { background: #ffffff; border: 1px solid #ffffff; color: #3f51b5; border-radius: 4px; padding: 6px 12px; font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 400; cursor: pointer; transition: background 0.6s ease; } .ds-btn-light:hover { background: rgba(0,0,0,0.4); color: #ffffff; } .ds-btn-light:focus-visible { outline: 2px solid #3f51b5; outline-offset: 2px; }"
+    },
+    {
+      "name": "Grid Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Image-forward card used in the project/publication masonry grid.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-image\"></div><div class=\"ds-card-text\"><h4><a href=\"#\">Marine Heatwave Tracker</a></h4><p>An interactive dashboard for real-time marine heatwave monitoring.</p></div></div>",
+      "css": ".ds-card { background: #ffffff; overflow: hidden; box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2); transition: box-shadow 0.2s ease-out; } .ds-card:hover { box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); } .ds-card-image { position: relative; min-height: 100px; background: #cfd3e8 center/cover no-repeat; } .ds-card-text { padding: 0.75rem 1rem 0.75rem; } .ds-card-text h4 { margin: 0 0 4px; font-family: 'Lato', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; line-height: 1.5; } .ds-card-text h4 a { color: #000000; text-decoration: none; border-bottom: 1px solid transparent; } .ds-card-text h4 a:hover, .ds-card-text h4 a:focus-visible { border-bottom-color: #000000; } .ds-card-text p { margin: 0; color: #999999; font-family: 'Merriweather', serif; font-size: 0.75rem; }"
+    },
+    {
+      "name": "Simple Card",
+      "kind": "card",
+      "refersTo": "card-simple",
+      "description": "Bordered, minimal card for simple content blocks.",
+      "html": "<div class=\"ds-card-simple\"><p>A short note or callout lives here.</p></div>",
+      "css": ".ds-card-simple { background: #ffffff; border: 1px solid rgba(0,0,0,.09); border-radius: 3px; box-shadow: 0 1px 4px rgba(0,0,0,.04); padding: 15px 20px; font-family: 'Merriweather', serif; }"
+    },
+    {
+      "name": "Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Post tag / category label.",
+      "html": "<a class=\"ds-tag\" href=\"#\">marine-heatwaves</a>",
+      "css": ".ds-tag { display: inline-block; background: rgba(0,0,0,.05); color: rgba(0,0,0,.68); border-radius: 3px; padding: 5px 10px; margin: 0 8px 8px 0; font-family: 'Lato', sans-serif; font-size: 0.85rem; text-decoration: none; transition: background 0.2s ease; } .ds-tag:hover, .ds-tag:focus-visible { background: rgba(0,0,0,.1); }"
+    },
+    {
+      "name": "Search Input",
+      "kind": "input",
+      "refersTo": "search-input",
+      "description": "Pill-shaped search field with inline icon.",
+      "html": "<div class=\"ds-search\"><svg class=\"ds-search-icon\" viewBox=\"0 0 16 16\" width=\"14\" height=\"14\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0\"/></svg><input class=\"ds-search-input\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\"/></div>",
+      "css": ".ds-search { position: relative; display: inline-block; } .ds-search-icon { position: absolute; left: 0.7rem; top: 50%; transform: translateY(-50%); opacity: 0.25; pointer-events: none; } .ds-search-input { border: 1px solid #dedede; border-radius: 1rem; padding: 1rem 1rem 1rem 2rem; width: 250px; font-family: 'Lato', sans-serif; font-size: 0.8rem; } .ds-search-input:focus, .ds-search-input:focus-visible { outline: 2px solid #3f51b5; outline-offset: 2px; border-color: #3f51b5; }"
+    },
+    {
+      "name": "Avatar",
+      "kind": "custom",
+      "refersTo": "avatar",
+      "description": "Circular profile portrait, the signature circular form used outside icon buttons.",
+      "html": "<div class=\"ds-avatar\" role=\"img\" aria-label=\"Profile portrait\"></div>",
+      "css": ".ds-avatar { width: 200px; height: 200px; border-radius: 50%; margin: 0 auto; background: #cfd3e8 center/cover no-repeat; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Tide Chart",
+    "overview": "The site behaves like a navigational reference, not a brochure: dense, real information (papers, code, credentials) laid out to be scanned and cross-referenced quickly by people who already know what they're looking for. Confirmed direction is oceanic, but the current implementation hasn't fully arrived there yet — the \"Ocean\" theme's primary color is a royal indigo (#3f51b5) inherited from Hugo Academic's built-in preset, not a literal ocean hue. It's the working primary for now and stays structurally load-bearing (links, buttons, active nav), but it's provisional: a future pass may shift it toward an oceanic teal/cyan register without touching layout, type, or the rest of the system.\n\nThe voice is restrained and credible without being sterile. Body copy sits in a serif (Merriweather) at an unusually generous size — 20px on desktop, 16px on mobile, around a quarter larger than a typical web default — which gives long-form writing (posts, abstracts, the bio) the unhurried, page-like register of a printed research notebook rather than a typical web app. Headings, navigation, and labels switch to a brisk sans-serif (Lato) for contrast and wayfinding.",
+    "keyCharacteristics": [
+      "Serif body text at a generous base size; sans-serif for headings, nav, and labels",
+      "One accent color (indigo, provisional) used sparingly — links, primary buttons, active nav state, icon accents — never as a large fill",
+      "Alternating white / pale-gray banded sections stack down the one-page homepage instead of container borders",
+      "Two uncoordinated radius languages: a tight 3px on cards and tags, full circles on avatars and icon links, plus two one-off exceptions (pill search field, 10px alerts)",
+      "Flat surfaces at rest; an inherited Bootstrap shadow-lift on grid-card hover that is documented here, not treated as a deliberate rule"
+    ],
+    "rules": [
+      { "name": "The One-Accent Rule", "body": "Indigo is the only brand color used with intent, and only for interactive/wayfinding purposes — links, primary buttons, active nav, icon accents. It never fills a large surface.", "section": "colors" },
+      { "name": "The Large-Print Rule", "body": "Base body font-size is 20px on screens ≥58em (16px below that). It's roughly 25% larger than a typical web default and is load-bearing for the \"printed page\" register the serif body font is chosen for — don't shrink it back toward 16px.", "section": "typography" }
+    ],
+    "dos": [
+      "Do keep the accent color singular and sparing — indigo appears only on links, primary buttons, active nav state, and icon accents, never as a large fill (The One-Accent Rule).",
+      "Do set body copy in the serif body font at the current oversized base, 20px desktop / 16px mobile — it's what gives long-form writing its notebook-like register (The Large-Print Rule).",
+      "Do use the alternating white/pale-gray section banding to segment homepage content, instead of adding borders or container backgrounds."
+    ],
+    "donts": [
+      "Don't extend the legacy accent colors (publication-author blue, publication-venue green, search-highlight amber) into new components; they predate the deliberate palette.",
+      "Don't treat the card hover shadow-lift as a confirmed interaction pattern to replicate elsewhere — it's an inherited Bootstrap default, not a chosen rule.",
+      "Don't add a fifth radius value. The system already carries four uncoordinated ones (3px / 1rem / 50% / 10px); resolve toward fewer, don't add another.",
+      "Don't treat the current indigo as permanent. Per the confirmed \"Tide Chart\" direction, a future pass may shift the primary toward an oceanic teal/cyan — don't build new components that assume indigo is final."
+    ]
+  }
+}
