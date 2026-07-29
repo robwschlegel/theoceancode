@@ -1,0 +1,8 @@
+{
+  "name": "theoceancode",
+  "private": true,
+  "description": "Netlify build dependency only: installs Quarto on the Netlify build server. No app code here.",
+  "dependencies": {
+    "@quarto/netlify-plugin-quarto": "^0.0.5"
+  }
+}

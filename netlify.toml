@@ -1,19 +1,5 @@
 [build]
-command = 'hugo'
-context = 'production'
-publish = 'public'
+publish = '_site'
 
-[build.environment]
-HUGO_VERSION = '0.55.0'
-
-[context]
-[context.branch-deploy]
-command = 'hugo -F -b $DEPLOY_PRIME_URL'
-
-[context.deploy-preview]
-command = 'hugo -F -b $DEPLOY_PRIME_URL'
-
-[context.production]
-[context.production.environment]
-HUGO_VERSION = '0.55.0'
-HUGO_ENV = 'production'
+[[plugins]]
+package = "@quarto/netlify-plugin-quarto"
