@@ -23,19 +23,20 @@ Research focus: marine heatwaves, climate change, biodiversity, machine learning
 
 ## Operating Context
 
-Content types the site serves, each with existing content: home (about/bio, hero, contact, skills, tags, search), posts (31 entries), publications (18 entries), projects (3: FjordLight, MHWtracker, demoMHW), packages (4: heatwaveR, coastR, FjordLight, heatwave3), talks (2 + index), posters, teaching, workshops.
+Content types the site serves, each with existing content: home (about/bio + contact, on `index.qmd`/`contact.qmd`), publications (18 entries), packages (4: heatwaveR, coastR, FjordLight, heatwave3), projects (3: FjordLight, MHWtracker, demoMHW), posters (1), talks (2), blog posts (14, one with code execution disabled — see Capabilities and Constraints). Each content type has its own listing page (`publication.qmd`, `package.qmd`, `project.qmd`, `poster.qmd`, `talk.qmd`, `blog.qmd`) with built-in tag filtering, search, and RSS. The old Hugo-era "teaching"/"workshops"/"skills" home widgets were inactive placeholder content and were dropped during the Quarto migration, not carried forward.
 
 ## Capabilities and Constraints
 
-- Deployed via Netlify (netlify.toml) — deploy process must keep working. Confirmed as the one binding constraint by the user.
-- Currently built with Hugo static site generator on the `hugo-academic` theme (config.toml `theme = "hugo-academic"`), with content partly authored in R Markdown and knit to Markdown (`ignoreFiles` in config.toml excludes `.Rmd`/`.knit.md`). These are recorded as current implementation facts, not user-confirmed must-preserve constraints — the user did not flag the theme or the R/Rmd pipeline as binding, so future design work is not restricted to them unless stated otherwise.
-- Current theme params: color_theme = "ocean", font = "classic".
+- Deployed via Netlify (netlify.toml), building through the official `@quarto/netlify-plugin-quarto` plugin — deploy process must keep working. Confirmed as the one binding constraint by the user.
+- Built with [Quarto](https://quarto.org)'s website project type (`_quarto.yml`), replacing the former Hugo/hugo-academic/blogdown stack entirely (see CLAUDE.md for the full rationale). Content is native `.qmd` with YAML front matter; posts with R code execute via Quarto's own knitr engine, with `_freeze/` caching results since Netlify's build servers can't execute R.
+- No bespoke visual theme currently — the site ships on Quarto's stock `cosmo` theme. This is the open item the current design pass addresses.
+- One post (`content/post/mapping_with_ggplot2.qmd`) has code execution disabled — its dependency (`maptools`) was archived from CRAN in 2023 and no longer compiles against current R.
 
 ## Brand Commitments
 
 - Site title: "The Ocean Code". Owner: Robert William Schlegel, Data Scientist, LOV (Laboratoire d'Océanographie de Villefranche).
 - Confirmed identity/contact channels: email (robwschlegel@gmail.com), Google Scholar, GitHub (robwschlegel), CV (files/cv.pdf). Twitter was dropped by explicit request — not to be promoted anywhere on the site.
-- Existing avatar/profile images: `static/img/Schlegel_profile_small.JPG`, `static/img/Robert_profile_1.JPG`, `static/img/portrait.jpg`.
+- Real profile photos: `static/img/lov-member-robert-schlegel.jpg` (current homepage photo), plus alternates `static/img/Schlegel_profile_small.JPG` and `static/img/Robert_profile_1.JPG`. `static/img/portrait.jpg` is **not** a real photo — it's an unused generic-avatar placeholder that shipped with the original hugo-academic theme scaffold (present since the repo's first commit); do not use it as an avatar source.
 
 ## Evidence on Hand
 

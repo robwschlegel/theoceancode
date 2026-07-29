@@ -47,6 +47,9 @@ website:
       - text: GitHub
         href: https://github.com/robwschlegel
         target: _blank
+      - text: LinkedIn
+        href: https://www.linkedin.com/in/robert-schlegel
+        target: _blank
       - text: CV
         href: /static/files/cv.pdf
         target: _blank

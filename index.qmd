@@ -1,6 +1,7 @@
 ---
 title: "The Ocean Code"
-image: static/img/portrait.jpg
+subtitle: "43.70°N 7.26°E &middot; LOV, Villefranche-sur-Mer"
+image: static/img/lov-member-robert-schlegel.jpg
 about:
   template: solana
   image-shape: round
@@ -14,19 +15,33 @@ about:
     - text: GitHub
       href: https://github.com/robwschlegel
       target: _blank
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/robert-schlegel
+      target: _blank
     - text: CV
       href: /static/files/cv.pdf
       target: _blank
 ---
 
-Robert Schlegel is a Data Scientist on the OMTAB team at the Laboratoire d'Océanographie de Villefranche, working on the RiOMar and HYPERNETS projects.
+Robert Schlegel studies how the ocean is changing, from the mechanics of marine heatwaves to Arctic fjord ecosystems. His path ran through animal behaviour in Seattle, followed by marine science in Cape Town before landing in oceanographic data science on the Mediterranean coast. Alongside a body of published research spanning heatwave detection, upwelling dynamics, and Arctic light environments, he builds and maintains the R packages other researchers use to do the same work: `coastR`, `FjordLight`, `heatwaveR` and `heatwave3`. The result is a career split evenly between asking the questions and building the tools to answer them.
 
-## Interests
+::: {.log-fields}
 
+::: {.log-field}
+#### Position
+Data Scientist, OMTAB team, Laboratoire d'Océanographie de Villefranche
+:::
+
+::: {.log-field}
+#### Interests
 Marine heatwaves &middot; Climate change &middot; Biodiversity &middot; Machine learning &middot; Data science
+:::
 
-## Education
+::: {.log-field}
+#### Education
+2018 &nbsp;PhD in Biodiversity, University of the Western Cape\
+2014 &nbsp;MPhil in Marine Science, University of Cape Town\
+2008 &nbsp;BA in Animal Behaviour, University of Washington
+:::
 
-- **PhD in Biodiversity**, University of the Western Cape, 2018
-- **MPhil in Marine Science**, University of Cape Town, 2014
-- **BA in Animal Behaviour**, University of Washington, 2008
+:::
