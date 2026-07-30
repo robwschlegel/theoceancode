@@ -6,14 +6,41 @@
 # 3. Draw the elements in ggplot2
 ## NB: This script was copied from: http://editerna.free.fr/wp/?p=76
 ## DEPENDS ON:
-library(maps)
-library(maptools)
 library(ggplot2)
 library(grid)
 ## USED BY:
 # "figures.R"
 ## CREATES:
 # A wonderful scale bat in ggplot
+#############################################################################
+
+#############################################################################
+## 0. Great-circle destination point (bearing + distance from a start point)
+#--------#
+# Direct replacement for maptools::gcDestination(), archived from CRAN in
+# 2023. sf has no equivalent convenience function for this (it's a geodesy/
+# navigation calculation, not a geometry operation), so it's implemented
+# directly here -- standard spherical direct-geodetic-problem formula, no
+# extra package required. Returns a one-row matrix with "long"/"lat"
+# columns, matching gcDestination()'s original interface exactly so nothing
+# else in this script needs to change.
+gcDestination <- function(lon, lat, bearing, dist, dist.units = "km", model = "WGS84") {
+  earth_radius <- switch(dist.units,
+                          km = 6371.0088,
+                          nm = 3440.065,
+                          mi = 3958.7613,
+                          stop("dist.units must be one of 'km', 'nm', 'mi'"))
+  lat1 <- lat * pi / 180
+  lon1 <- lon * pi / 180
+  brng <- bearing * pi / 180
+  delta <- dist / earth_radius
+
+  lat2 <- asin(sin(lat1) * cos(delta) + cos(lat1) * sin(delta) * cos(brng))
+  lon2 <- lon1 + atan2(sin(brng) * sin(delta) * cos(lat1),
+                        cos(delta) - sin(lat1) * sin(lat2))
+
+  cbind(long = lon2 * 180 / pi, lat = lat2 * 180 / pi)
+}
 #############################################################################
 
 #############################################################################

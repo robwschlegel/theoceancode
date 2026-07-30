@@ -30,7 +30,7 @@ Content types the site serves, each with existing content: home (about/bio + con
 - Deployed via Netlify (netlify.toml), building through the official `@quarto/netlify-plugin-quarto` plugin — deploy process must keep working. Confirmed as the one binding constraint by the user.
 - Built with [Quarto](https://quarto.org)'s website project type (`_quarto.yml`), replacing the former Hugo/hugo-academic/blogdown stack entirely (see CLAUDE.md for the full rationale). Content is native `.qmd` with YAML front matter; posts with R code execute via Quarto's own knitr engine, with `_freeze/` caching results since Netlify's build servers can't execute R.
 - No bespoke visual theme currently — the site ships on Quarto's stock `cosmo` theme. This is the open item the current design pass addresses.
-- One post (`content/post/mapping_with_ggplot2.qmd`) has code execution disabled — its dependency (`maptools`) was archived from CRAN in 2023 and no longer compiles against current R.
+- All 14 blog posts execute their R code normally, including `mapping_with_ggplot2.qmd` — its one dependency on the archived `maptools` package (a single great-circle-destination function used by a sourced scale-bar helper) was replaced with a small self-contained implementation, not routed around.
 
 ## Brand Commitments
 

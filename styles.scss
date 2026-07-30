@@ -413,15 +413,19 @@ a:hover {
 }
 
 // ---------------------------------------------------------------------
-// Disabled-execution notice (mapping_with_ggplot2) — the one reserved
-// oxide-red use, styled like a chart-annotation flag, not a UI alert.
+// Blockquotes — plain citation/quote style. Oxide Red stays reserved in
+// the palette for a genuine future alert/flag use, but isn't wired to
+// the generic <blockquote> element: mapping_with_ggplot2's disabled-
+// execution note (its one intended use) no longer exists now that the
+// post executes normally, and other posts use blockquote for ordinary
+// citations (see content/post/gender_gdp.qmd) that shouldn't read as
+// an alert.
 // ---------------------------------------------------------------------
 
 blockquote {
-  border-left: 3px solid $oxide-red;
-  font-family: $font-family-mono;
-  font-size: 0.88rem;
+  border-left: 3px solid $verdigris-tint;
+  font-family: $font-family-serif;
+  font-style: italic;
   color: $ink-muted;
-  background-color: rgba($oxide-red, .05);
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
 }

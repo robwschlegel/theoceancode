@@ -38,7 +38,7 @@ A single-accent system on a cool neutral "paper" scale — no warm cream, no gen
 - **Ink Muted** (~`#5B6472`): metadata, dates, secondary text.
 
 ### Reserved
-- **Oxide Red** (~`#A33B2E`): sparing use only — an alert/flag color for the rare "important" marker (e.g. a disabled-execution note), styled like a chart-annotation flag, not a UI-red CTA.
+- **Oxide Red** (~`#A33B2E`): reserved for a genuine future alert/flag marker, styled like a chart-annotation flag, not a UI-red CTA. Not currently wired to any live element — see Do's and Don'ts.
 
 ### Named Rules
 **The One-Accent Rule.** Verdigris is the only brand color used with intent — links, active state, entry stamps. It never fills a large surface. (Carried forward from the prior direction's own rule — it held up under a fresh workshop, not reused by default.)
@@ -95,8 +95,8 @@ Grid (package/project/poster): sharp bordered cards, border-only hover state (no
 ### Buttons / links (about-block)
 Bordered rectangles (not pills), condensed sans uppercase label, ink border at rest, solid verdigris fill with log-paper text on hover. Icons suppressed (text-only labels) to avoid Bootstrap's generic icon glyphs breaking the instrument-label register.
 
-### Disabled-execution notice
-The one place Oxide Red appears: a left-ruled blockquote (verdigris-rule pattern reused in red), Plex Mono, styled like a chart-annotation flag rather than a generic Bootstrap alert box. Used once, on `mapping_with_ggplot2.qmd`'s maptools note.
+### Blockquotes
+Plain citation style: a thin verdigris-tint left rule, italic Plex Serif. Used for ordinary source quotations (e.g. `content/post/gender_gdp.qmd`). Not an alert treatment — Oxide Red is reserved but currently unused (see Colors).
 
 ## Do's and Don'ts
 
@@ -110,3 +110,4 @@ The one place Oxide Red appears: a left-ruled blockquote (verdigris-rule pattern
 - **Don't** add drop-shadow card elevation — hierarchy comes from ink weight and rule lines.
 - **Don't** let the log framing become twee or costume-nautical ("ahoy" copy, decorative rope/anchor icons) — instrument-grade discipline is the confirmed anti-goal boundary.
 - **Don't** treat this as the final token set — spacing, exact type scale, and component specifics are placeholders pending the first real implementation pass.
+- **Don't** wire Oxide Red to the generic `blockquote` element — ordinary citation quotes (e.g. `content/post/gender_gdp.qmd`) would incorrectly read as alerts. It's reserved for a real, specifically-flagged use, not a default.
