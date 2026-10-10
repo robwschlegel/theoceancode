@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Robert Schlegel CV</title>
+<!-- Source for static/files/cv.pdf. Rebuild with cv/build.sh (Chrome headless, A4, one page). -->
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --blue: #367da2;
+    --rule: #81adbb;
+    --grey: #606060;
+    --head: #5e5e5e;
+    --text: #333333;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 210mm; height: 297mm; background: #fff; }
+  body {
+    font-family: "Inter", sans-serif;
+    font-size: 9.4pt;
+    line-height: 13pt;
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Header band: rules span the text block, photo sits flush right */
+  .header {
+    position: absolute; left: 43pt; top: 42.5pt; width: 393pt; height: 117pt;
+    border-top: 3pt solid var(--rule); border-bottom: 3pt solid var(--rule);
+    padding: 4pt 0 0 4pt;
+  }
+  .name { font-size: 29pt; line-height: 38pt; font-weight: 600; color: var(--blue); letter-spacing: -0.2pt; }
+  .role { font-size: 17pt; line-height: 23pt; font-weight: 700; color: var(--grey); }
+  .contact { font-size: 11.5pt; line-height: 16pt; color: var(--grey); margin-top: 3pt; }
+  .icons { position: absolute; left: 232pt; top: 78pt; display: flex; gap: 5pt; }
+  .icons img { width: 25pt; height: 25pt; object-fit: contain; display: block; }
+  .icons .scholar { background: #fff; box-shadow: 1pt 1.5pt 2pt rgba(0,0,0,.45); }
+  .photo { position: absolute; left: 436pt; top: 44pt; width: 113.5pt; height: 113.5pt; object-fit: cover; }
+
+  h2 { font-size: 9.4pt; line-height: 13pt; font-weight: 700; color: var(--head); letter-spacing: 0.2pt; }
+  .profile { position: absolute; left: 47pt; top: 177pt; width: 500pt; }
+  .profile p { margin-top: 6pt; line-height: 15.5pt; }
+
+  ul { list-style: none; }
+  li { position: relative; padding-left: 9pt; }
+  li::before { content: "•"; position: absolute; left: 0; }
+
+  .left { position: absolute; left: 47pt; top: 270pt; width: 132pt; }
+  .left ul { margin: 4pt 0 0; }
+  .left li { margin-bottom: 4pt; }
+  .left li::before { color: var(--blue); }
+  .left h2 + ul { margin-top: 4pt; }
+  .left .gap { margin-top: 16pt; }
+
+  .right { position: absolute; left: 188pt; top: 270pt; width: 360pt; }
+  .job { margin-top: 4pt; }
+  .job h3 { font-size: 9.4pt; line-height: 13pt; font-weight: 600; color: var(--blue); }
+  .job .when { color: var(--blue); margin: 4pt 0 4pt; }
+  .job li { margin-bottom: 4pt; }
+  .additional { margin-top: 14pt; }
+  .additional ul { margin-top: 4pt; }
+
+  .bottom-rule { position: absolute; left: 57pt; top: 772pt; width: 482pt; border-top: 3pt solid var(--rule); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="name">ROBERT SCHLEGEL, PhD</div>
+  <div class="role">Environmental Data Scientist</div>
+  <div class="contact">+33 6 11 93 37 04<br>Toulouse, France</div>
+  <div class="icons">
+    <a href="mailto:robwschlegel@gmail.com"><img src="img/email.png" alt="Email"></a>
+    <a href="http://theoceancode.netlify.app"><img src="img/web.png" alt="Website"></a>
+    <a href="http://linkedin.com/in/robert-schlegel"><img src="img/linkedin.png" alt="LinkedIn"></a>
+    <a href="http://github.com/robwschlegel"><img src="img/github.png" alt="GitHub"></a>
+    <a href="http://scholar.google.com/citations?user=cPHukk8AAAAJ"><img class="scholar" src="img/scholar.png" alt="Google Scholar"></a>
+  </div>
+</div>
+<img class="photo" src="img/photo.jpg" alt="Robert Schlegel">
+
+<section class="profile">
+  <h2>PROFILE</h2>
+  <p>Results-oriented professional with over a decade of experience on international projects at the nexus of climate and ecology. As a resourceful problem solver, I draw upon my robust academic research background to develop practical solutions based on science and technology to support resilience against the adverse effects of climate change on both human communities and the environment.</p>
+</section>
+
+<section class="left">
+  <h2>CORE SKILLS</h2>
+  <ul>
+    <li>R + Python programming languages</li>
+    <li>Shiny, Quarto, HTML, SQL</li>
+    <li>Full-stack app development</li>
+    <li>Data acquisition pipelines</li>
+    <li>Spatial and temporal analyses of big data</li>
+    <li>Management, development, and publication of datasets</li>
+    <li>Machine learning algorithm development</li>
+    <li>Project management</li>
+    <li>Curriculum development</li>
+    <li>Teaching - Instructing - Demonstrating</li>
+    <li>Mentoring</li>
+    <li>Certified PADI diving instructor</li>
+  </ul>
+  <h2 class="gap">CORE KNOWLEDGE</h2>
+  <ul>
+    <li>Marine heatwaves (MHW)</li>
+    <li>Coastal ecology - kelp forests</li>
+    <li>Species distribution modelling (SDM)</li>
+    <li>Climate change</li>
+    <li>Biodiversity</li>
+    <li>Languages: English, French, German</li>
+  </ul>
+</section>
+
+<section class="right">
+  <h2>EXPERIENCE</h2>
+
+  <div class="job">
+    <h3>Oceanographer – Validation Protocols | Mercator Ocean International</h3>
+    <div class="when">Toulouse - FR - Oct 2026 – Present</div>
+    <ul>
+      <li>Develop and document validation protocols for Copernicus Marine ocean forecasting and reanalysis products</li>
+      <li>Assess model skill against <i>in situ</i> and satellite observations to support product quality information</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <h3>Research Engineer | Sorbonne University</h3>
+    <div class="when">Villefranche-sur-Mer - FR - Oct 2025 – Sep 2026</div>
+    <ul>
+      <li>Built and maintained data acquisition and QC pipelines for high-resolution multi-/hyper-spectral <i>in situ</i> and satellite data across two large projects</li>
+      <li>Developed and published open-source ML algorithms to autonomously detect anomalous surface features in coastal waters via satellite imagery</li>
+      <li>Sourced and integrated <i>in situ</i> observations to validate high-dimensional model/reanalysis data products</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <h3>Co-Founder, Director | Ecomonitor</h3>
+    <div class="when">Nice - FR - Jul 2024 – Sep 2025</div>
+    <ul>
+      <li>Co-founded and ran an environmental data analytics startup, translating academic climate/biodiversity science into client-facing tools</li>
+      <li>Built a library of Python/R workflows automating environmental dataset sourcing, analysis, and report generation</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <h3>Lead Data Scientist | FACE-IT</h3>
+    <div class="when">Villefranche-sur-Mer - FR - Nov 2020 – Jul 2024</div>
+    <ul>
+      <li>Led daily operations of a multi-institution EU work package studying climate change impacts on Arctic fjord socio-ecological systems</li>
+      <li>Sourced, harmonised, and published thousands of disparate datasets; authored the open FjordLight dataset and companion R package</li>
+    </ul>
+  </div>
+
+  <div class="additional">
+    <h2>ADDITIONAL</h2>
+    <ul>
+      <li>Contributing author, WMO and NOAA annual climate reports</li>
+      <li>Member, CLIVAR and Ilico marine heatwave research groups</li>
+      <li>Steering committee, North-Heat project</li>
+    </ul>
+  </div>
+</section>
+
+<div class="bottom-rule"></div>
+</body>
+</html>
