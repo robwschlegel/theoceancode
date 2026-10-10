@@ -36,7 +36,7 @@ Content types the site serves, each with existing content: home (about/bio + con
 
 - Site title: "The Ocean Code". Owner: Robert William Schlegel, Oceanographer – Validation Protocols, Mercator Ocean International.
 - Confirmed identity/contact channels: email (robwschlegel@gmail.com), Google Scholar, GitHub (robwschlegel), CV (files/cv.pdf). Twitter was dropped by explicit request — not to be promoted anywhere on the site.
-- Real profile photos: `static/img/robert-schlegel.jpg` (current homepage photo), plus alternates `static/img/Schlegel_profile_small.JPG` and `static/img/Robert_profile_1.JPG`.
+- Profile photo: `static/img/robert-schlegel.jpg` (homepage); the CV uses its own copy in `cv/img/photo.jpg`.
 
 ## Evidence on Hand
 
