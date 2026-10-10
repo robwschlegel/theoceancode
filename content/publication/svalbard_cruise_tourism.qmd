@@ -1,0 +1,23 @@
+---
+title: 'Putting brakes on Expedition Cruise Tourism in Svalbard: exercising power
+  at the expense of legitimacy?'
+date: '2025-05-25'
+author:
+  - K Loseth
+  - H Dannevig
+  - AG Sveinsdottir
+  - GK Hovelsrud
+  - RW Schlegel
+  - S Descamps
+subtitle: '*Polar Geography*.'
+type: Journal article
+categories:
+  - Arctic
+  - tourism
+  - environmental governance
+  - Svalbard
+---
+
+This article examines the use of the precautionary principle in the regulation of expedition cruise tourism in Svalbard. Combining ship positional data with a discussion of environmental governance, it evaluates whether recent regulatory amendments achieved an appropriate balance between precautionary management of Arctic wildlife and the legitimacy that depends on transparent and inclusive policy processes.
+
+**Links:** [PDF](https://www.tandfonline.com/doi/pdf/10.1080/1088937X.2025.2506374) &middot; [Source](https://www.tandfonline.com/doi/full/10.1080/1088937X.2025.2506374)

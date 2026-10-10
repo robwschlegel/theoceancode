@@ -10,4 +10,6 @@ image: /static/img/MHW_Tracker_2023_11_26.png
 
 A daily updating web application for tracking the occurrence of marine heatwaves around the globe.
 
-**Links:** [Link](http://www.marineheatwaves.org/tracker.html)
+The Marine Heatwave Tracker is an operational web application for monitoring where marine heatwaves are occurring around the world. It brings together near-real-time event detection, historical context, and multiple environmental layers in a single public-facing interface.
+
+**Links:** [Link](https://www.marineheatwaves.org/tracker.html)

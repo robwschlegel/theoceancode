@@ -1,0 +1,32 @@
+---
+title: Predicting potential Arctic kelp distribution and lower-depth biomass from
+  seafloor irradiance
+date: '2025-12-01'
+author:
+  - LC de la Guardia
+  - I Bartsch
+  - H Hop
+  - S Niedzwiedz
+  - L Dusedau
+  - N Diehl
+  - D Krause-Jensen
+  - MK Sejr
+  - TG Ager
+  - J-P Gattuso
+  - RW Schlegel
+  - CA Miller
+  - K Filbee-Dexter
+  - P Duarte
+subtitle: '*Limnology and Oceanography: Methods*.'
+type: Journal article
+categories:
+  - Arctic
+  - fjord
+  - kelp
+  - light
+  - biodiversity
+---
+
+This paper develops a framework for estimating potential Arctic kelp distribution and lower-depth biomass from seafloor irradiance. Using fjord-specific empirical relationships, it links standing stock estimates to light availability and its drivers, providing a baseline for tracking how changing coastal light environments may alter Arctic kelp biomass under ongoing environmental change.
+
+**Links:** [PDF](https://aslopubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/lom3.70018) &middot; [Source](https://aslopubs.onlinelibrary.wiley.com/doi/10.1002/lom3.70018)

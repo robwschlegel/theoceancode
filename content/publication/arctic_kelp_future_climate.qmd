@@ -1,0 +1,25 @@
+---
+title: Productivity of mixed kelp communities in an Arctic fjord exhibit tolerance
+  to a future climate
+date: '2024-06-20'
+author:
+  - CA Miller
+  - F Gazeau
+  - A Lebrun
+  - J-P Gattuso
+  - S Alliouane
+  - P Urrutti
+  - RW Schlegel
+  - S Comeau
+subtitle: '*Science of The Total Environment*.'
+type: Journal article
+categories:
+  - Arctic
+  - kelp
+  - climate change
+  - biodiversity
+---
+
+This study evaluates how mixed kelp communities in an Arctic fjord respond to combined future stressors associated with climate change, including warming, freshening, and reduced light. Using a two-month mesocosm experiment, it shows that summer net productivity remains comparatively tolerant across treatment conditions, while light availability exerts the strongest control on net community production.
+
+**Links:** [PDF](https://www.sciencedirect.com/science/article/pii/S0048969724027177/pdfft?isDTMRedir=true&download=true) &middot; [Dataset](https://doi.pangaea.de/10.1594/PANGAEA.967056) &middot; [Source](https://www.sciencedirect.com/science/article/pii/S0048969724027177)

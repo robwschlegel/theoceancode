@@ -1,0 +1,41 @@
+---
+title: Biodiversity changes in Arctic coastal ecosystems under borealization
+date: '2026-01-09'
+author:
+  - S Descamps
+  - S Jungblut
+  - NG Yoccoz
+  - RW Schlegel
+  - KM Kovacs
+  - F Merkel
+  - PE Renaud
+  - A Sen
+  - JE Soreide
+  - A Vader
+  - A Bailey
+  - J Berge
+  - L Dusedau
+  - GW Gabrielsen
+  - SA Hanssen
+  - H Hop
+  - LL Jorgensen
+  - C Lydersen
+  - M Marnela
+  - L Merillet
+  - B Moe
+  - C Sauser
+  - GH Systad
+  - A Wold
+  - K Bischof
+subtitle: '*PNAS Nexus*.'
+type: Journal article
+categories:
+  - Arctic
+  - biodiversity
+  - coastal
+  - climate change
+---
+
+This study combines three decades of abundance data across multiple animal groups and regions in the European Arctic and Greenland to assess biodiversity change in Arctic coastal communities. The results support widespread borealization, with Arctic endemic species generally declining while boreal species increase, alongside an average rise in biodiversity that may nevertheless mask uncertain long-term consequences for Arctic ecosystem functioning and services.
+
+**Links:** [Source](https://academic.oup.com/pnasnexus/article/5/2/pgag004/8417727)

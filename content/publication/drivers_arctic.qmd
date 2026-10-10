@@ -1,7 +1,7 @@
 ---
 title: 'Drivers of change in Arctic fjord socio-ecological systems: Examples from
   the European Arctic'
-date: '2023-01-05'
+date: '2023-01-13'
 author:
   - RW Schlegel
   - I Bartsch

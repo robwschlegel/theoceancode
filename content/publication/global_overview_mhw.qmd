@@ -1,0 +1,34 @@
+---
+title: A global overview of marine heatwaves in a changing climate
+date: '2024-11-20'
+author:
+  - A Capotondi
+  - RR Rodrigues
+  - A Sen Gupta
+  - JA Benthuysen
+  - C Deser
+  - TL Frolicher
+  - NS Lovenduski
+  - DJ Amaya
+  - N Le Grix
+  - T Xu
+  - J Hermes
+  - NJ Holbrook
+  - C Martinez-Villalobos
+  - S Masina
+  - MK Roxy
+  - A Schaeffer
+  - RW Schlegel
+  - KE Smith
+  - C Wang
+subtitle: '*Communications Earth & Environment*.'
+type: Journal article
+categories:
+  - marine heatwaves
+  - climatology
+  - ocean
+---
+
+This review synthesizes recent advances in marine heatwave research, covering their three-dimensional structure, physical drivers, links with other extremes, future change, and present-day predictability. It highlights the need for stronger mechanistic understanding across the full ocean depth, improved observing systems, and models capable of representing the processes that control marine heatwaves and their impacts in a warming climate.
+
+**Links:** [PDF](https://www.nature.com/articles/s43247-024-01806-9.pdf) &middot; [Source](https://www.nature.com/articles/s43247-024-01806-9)

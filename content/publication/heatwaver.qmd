@@ -1,6 +1,6 @@
 ---
 title: 'heatwaveR: A central algorithm for the detection of heatwaves and cold-spells'
-date: '2018-08-31'
+date: '2018-07-31'
 author:
   - RW Schlegel
   - AJ Smit
@@ -11,6 +11,6 @@ categories:
   - marine heatwaves
 ---
 
+heatwaveR is an R package that implements a consistent workflow for detecting and characterising marine heatwaves and cold-spells from temperature time series. The package provides the core algorithms, helper functions, and reproducible tooling needed to apply the Hobday et al. framework in research and operational settings.
 
-
-**Links:** [PDF](http://joss.theoj.org/papers/10.21105/joss.00821) &middot; [Code](https://robwschlegel.github.io/heatwaveR/index.html)
+**Links:** [PDF](https://joss.theoj.org/papers/10.21105/joss.00821) &middot; [Code](https://robwschlegel.github.io/heatwaveR/index.html)

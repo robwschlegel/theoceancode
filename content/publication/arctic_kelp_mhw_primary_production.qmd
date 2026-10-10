@@ -1,0 +1,25 @@
+---
+title: Summer primary production of Arctic kelp communities is more affected by duration
+  than magnitude of simulated marine heatwaves
+date: '2024-09-29'
+author:
+  - CA Miller
+  - F Gazeau
+  - A Lebrun
+  - S Alliouane
+  - P Urrutti
+  - RW Schlegel
+  - J-P Gattuso
+  - S Comeau
+subtitle: '*Ecology and Evolution*.'
+type: Journal article
+categories:
+  - Arctic
+  - kelp
+  - marine heatwaves
+  - biodiversity
+---
+
+This study examines how mixed Arctic kelp communities respond to simulated marine heatwaves that vary in duration and magnitude. A mesocosm experiment showed that prolonged heatwave exposure reduced accumulated net community production more strongly than shorter, more intense events, highlighting the importance of duration when assessing marine heatwave impacts on fjord kelp ecosystems.
+
+**Links:** [PDF](https://onlinelibrary.wiley.com/doi/pdf/10.1002/ece3.70183) &middot; [Dataset](https://doi.org/10.1594/PANGAEA.967060) &middot; [Source](https://onlinelibrary.wiley.com/doi/10.1002/ece3.70183)

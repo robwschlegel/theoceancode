@@ -14,4 +14,6 @@ image: /static/img/essd-16-2773-2024-f05-web.png
 
 A methodology, dataset, and accompanying R package to quantify the light environment within the waters of Arctic fjords.
 
+FjordLight provides access to a high-resolution Arctic fjord light dataset and the accompanying R package used to download, explore, and analyse it. The project connects the published dataset, the software tooling, and downstream ecological applications around underwater light conditions in Arctic fjords.
+
 **Links:** [Link](https://doi.pangaea.de/10.1594/PANGAEA.962895)

@@ -1,0 +1,24 @@
+---
+title: The detection of marine heatwaves and marine cold-spells
+date: '2026-04-07'
+subtitle: Workshop VOG — Université de Bordeaux, Bordeaux, France
+categories:
+  - marine heatwaves
+  - marine cold-spells
+---
+
+An overview of marine heatwave and marine cold-spell detection, including definitions, available software, data sources, databases, and emerging extensions such as Lagrangian and depth-resolved detection.
+
+It covers:
+
+- the classic and adapted event definitions,
+- software tools and code resources,
+- observational and model data sources,
+- marine heatwave databases and products,
+- and methodological extensions for moving and depth-resolved events.
+
+**Event:** Workshop VOG
+
+**Location:** Université de Bordeaux, Bordeaux, France
+
+**Links:** [Slides](/static/files/Bordeaux_VOG_2026.pdf)

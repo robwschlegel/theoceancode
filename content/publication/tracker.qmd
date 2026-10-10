@@ -10,6 +10,6 @@ categories:
   - marine heatwaves
 ---
 
-The Marine Heatwave Tracker software provides all of the tools necessary to download, process, and visualise marine heatwaves (MHWs) globally. This web application may be set up to show the occurrence of MHWs around the world in near-real-time (roughly a one-two day delay) with the use of a cron job that runs a bash script calling 'MHW_daily.R'. The Tracker also show the historic records for the entire planet going back to January 1st, 1982. There are several other data layers offered in the Tracker. Please see the 'How do I use this?' section on the app for further details (http://www.marineheatwaves.org/tracker.html).
+The Marine Heatwave Tracker software provides all of the tools necessary to download, process, and visualise marine heatwaves (MHWs) globally. This web application may be set up to show the occurrence of MHWs around the world in near-real-time (roughly a one-to-two day delay) using a cron job that runs a bash script calling 'MHW_daily.R'. The Tracker also shows the historic records for the entire planet going back to January 1, 1982. Several additional data layers are offered in the Tracker. Further details are available through the app documentation.
 
-**Links:** [Code](https://github.com/robwschlegel/MHWapp) &middot; [Project](http://www.marineheatwaves.org/tracker.html)
+**Links:** [Code](https://github.com/robwschlegel/MHWapp) &middot; [Project](https://www.marineheatwaves.org/tracker.html)
