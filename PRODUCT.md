@@ -15,7 +15,7 @@ Three confirmed audiences, all visiting to evaluate Robert William Schlegel and 
 
 ## Product Purpose
 
-A personal academic portfolio site ("The Ocean Code") for Robert William Schlegel, Data Scientist on the OMTAB team at the Laboratoire d'Océanographie de Villefranche, working on the RiOMar and HYPERNETS projects. It is a general reference hub — publications, projects, R packages, talks, posts, CV — that visitors self-serve from. Confirmed: there is no single call-to-action the site should drive toward; it stays a broad profile/CV rather than a funnel.
+A personal academic portfolio site ("The Ocean Code") for Robert William Schlegel, Oceanographer – Validation Protocols at Mercator Ocean International (Toulouse). It is a general reference hub — publications, projects, R packages, talks, posts, CV — that visitors self-serve from. Confirmed: there is no single call-to-action the site should drive toward; it stays a broad profile/CV rather than a funnel.
 
 ## Positioning
 
@@ -23,7 +23,7 @@ Research focus: marine heatwaves, climate change, biodiversity, machine learning
 
 ## Operating Context
 
-Content types the site serves, each with existing content: home (about/bio + contact, on `index.qmd`/`contact.qmd`), publications (18 entries), packages (4: heatwaveR, coastR, FjordLight, heatwave3), projects (3: FjordLight, MHWtracker, demoMHW), posters (1), talks (2), blog posts (14, one with code execution disabled — see Capabilities and Constraints). Each content type has its own listing page (`publication.qmd`, `package.qmd`, `project.qmd`, `poster.qmd`, `talk.qmd`, `blog.qmd`) with built-in tag filtering, search, and RSS. The old Hugo-era "teaching"/"workshops"/"skills" home widgets were inactive placeholder content and were dropped during the Quarto migration, not carried forward.
+Content types the site serves, each with existing content: home (about/bio + contact, on `index.qmd`/`contact.qmd`), publications (24 entries), packages (4: heatwaveR, coastR, FjordLight, heatwave3), projects (3: FjordLight, MHWtracker, demoMHW), posters (1), talks (3), blog posts (14, one with code execution disabled — see Capabilities and Constraints). Each content type has its own listing page (`publication.qmd`, `package.qmd`, `project.qmd`, `poster.qmd`, `talk.qmd`, `blog.qmd`) with built-in tag filtering, search, and RSS. The old Hugo-era "teaching"/"workshops"/"skills" home widgets were inactive placeholder content and were dropped during the Quarto migration, not carried forward.
 
 ## Capabilities and Constraints
 
@@ -34,9 +34,9 @@ Content types the site serves, each with existing content: home (about/bio + con
 
 ## Brand Commitments
 
-- Site title: "The Ocean Code". Owner: Robert William Schlegel, Data Scientist, LOV (Laboratoire d'Océanographie de Villefranche).
+- Site title: "The Ocean Code". Owner: Robert William Schlegel, Oceanographer – Validation Protocols, Mercator Ocean International.
 - Confirmed identity/contact channels: email (robwschlegel@gmail.com), Google Scholar, GitHub (robwschlegel), CV (files/cv.pdf). Twitter was dropped by explicit request — not to be promoted anywhere on the site.
-- Real profile photos: `static/img/lov-member-robert-schlegel.jpg` (current homepage photo), plus alternates `static/img/Schlegel_profile_small.JPG` and `static/img/Robert_profile_1.JPG`. `static/img/portrait.jpg` is **not** a real photo — it's an unused generic-avatar placeholder that shipped with the original hugo-academic theme scaffold (present since the repo's first commit); do not use it as an avatar source.
+- Real profile photos: `static/img/robert-schlegel.jpg` (current homepage photo), plus alternates `static/img/Schlegel_profile_small.JPG` and `static/img/Robert_profile_1.JPG`. `static/img/portrait.jpg` is **not** a real photo — it's an unused generic-avatar placeholder that shipped with the original hugo-academic theme scaffold (present since the repo's first commit); do not use it as an avatar source.
 
 ## Evidence on Hand
 

@@ -1,7 +1,7 @@
 ---
 title: "The Ocean Code"
-subtitle: "43.70°N 7.26°E &middot; LOV, Villefranche-sur-Mer"
-image: static/img/lov-member-robert-schlegel.jpg
+subtitle: "43.60°N 1.44°E &middot; Mercator Ocean International, Toulouse"
+image: static/img/robert-schlegel.jpg
 about:
   template: solana
   image-shape: round
@@ -23,13 +23,13 @@ about:
       target: _blank
 ---
 
-Robert Schlegel studies how the ocean is changing, from the mechanics of marine heatwaves to Arctic fjord ecosystems. His path ran through animal behaviour in Seattle, followed by marine science in Cape Town before landing in oceanographic data science on the Mediterranean coast. Alongside a body of published research spanning heatwave detection, upwelling dynamics, and Arctic light environments, he builds and maintains the R packages other researchers use to do the same work: `coastR`, `FjordLight`, `heatwaveR` and `heatwave3`. The result is a career split evenly between asking the questions and building the tools to answer them.
+Robert Schlegel studies how the ocean is changing, from the mechanics of marine heatwaves to Arctic fjord ecosystems. His path ran through animal behaviour in Seattle, followed by marine science in Cape Town and oceanographic data science on the Mediterranean coast, before joining Mercator Ocean International in Toulouse to develop protocols for validating ocean forecasting products. Alongside a body of published research spanning heatwave detection, upwelling dynamics, and Arctic light environments, he builds and maintains the R packages other researchers use to do the same work: `coastR`, `FjordLight`, `heatwaveR` and `heatwave3`. The result is a career split evenly between asking the questions and building the tools to answer them.
 
 ::: {.log-fields}
 
 ::: {.log-field}
 #### Position
-Data Scientist, OMTAB team, Laboratoire d'Océanographie de Villefranche
+Oceanographer – Validation Protocols, Mercator Ocean International
 :::
 
 ::: {.log-field}
