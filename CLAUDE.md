@@ -8,7 +8,7 @@ A personal academic portfolio site ("The Ocean Code") for Robert William Schlege
 
 ## Build & serve — direct Quarto, no blogdown
 
-The site is edited on more than one machine. On the Mac, Quarto CLI is a manual tarball install at `~/opt/quarto/bin`, on `PATH` via `~/.zprofile` and re-asserted in `.Rprofile` for R sessions that don't inherit shell PATH (e.g. RStudio.app launched from Finder). On the Linux machine it is `/usr/local/bin/quarto` (1.5.57), where a full `quarto render` stops on `static/files/heatwaveR_workshop_2024.qmd` (its R chunks call `devtools::install_github`) despite the `!static/**` render exclusion; render individual pages there (`quarto render index.qmd`). Netlify builds the full site without this problem.
+The site is edited on more than one machine. On the Mac, Quarto CLI is a manual tarball install at `~/opt/quarto/bin`, on `PATH` via `~/.zprofile` and re-asserted in `.Rprofile` for R sessions that don't inherit shell PATH (e.g. RStudio.app launched from Finder). On the Linux machine it is `/usr/local/bin/quarto` (1.5.57). Quarto renders `static/files/heatwaveR_workshop_2024.qmd` despite the `!static/**` exclusion, so its chunks are set to `eval = FALSE`; the published workshop page is the committed `static/files/heatwaveR_workshop_2024.html`, which keeps its original output.
 
 - **Rebuild the whole site**: `quarto render` (terminal) or `quarto::quarto_render()` (R/RStudio console).
 - **Live preview while editing**: `quarto preview` (terminal) or `quarto::quarto_preview()` (R/RStudio console) — file-watching, live-reloading dev server.
