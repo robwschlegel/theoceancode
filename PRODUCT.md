@@ -29,14 +29,14 @@ Content types the site serves, each with existing content: home (about/bio + con
 
 - Deployed via Netlify (netlify.toml), building through the official `@quarto/netlify-plugin-quarto` plugin — deploy process must keep working. Confirmed as the one binding constraint by the user.
 - Built with [Quarto](https://quarto.org)'s website project type (`_quarto.yml`), replacing the former Hugo/hugo-academic/blogdown stack entirely (see CLAUDE.md for the full rationale). Content is native `.qmd` with YAML front matter; posts with R code execute via Quarto's own knitr engine, with `_freeze/` caching results since Netlify's build servers can't execute R.
-- No bespoke visual theme currently — the site ships on Quarto's stock `cosmo` theme. This is the open item the current design pass addresses.
+- Visual identity: the "Research Vessel Expedition Log" system documented in DESIGN.md, implemented in `styles.scss` over Quarto's `cosmo` theme.
 - All 14 blog posts execute their R code normally, including `mapping_with_ggplot2.qmd` — its one dependency on the archived `maptools` package (a single great-circle-destination function used by a sourced scale-bar helper) was replaced with a small self-contained implementation, not routed around.
 
 ## Brand Commitments
 
 - Site title: "The Ocean Code". Owner: Robert William Schlegel, Oceanographer – Validation Protocols, Mercator Ocean International.
 - Confirmed identity/contact channels: email (robwschlegel@gmail.com), Google Scholar, GitHub (robwschlegel), CV (files/cv.pdf). Twitter was dropped by explicit request — not to be promoted anywhere on the site.
-- Real profile photos: `static/img/robert-schlegel.jpg` (current homepage photo), plus alternates `static/img/Schlegel_profile_small.JPG` and `static/img/Robert_profile_1.JPG`. `static/img/portrait.jpg` is **not** a real photo — it's an unused generic-avatar placeholder that shipped with the original hugo-academic theme scaffold (present since the repo's first commit); do not use it as an avatar source.
+- Real profile photos: `static/img/robert-schlegel.jpg` (current homepage photo), plus alternates `static/img/Schlegel_profile_small.JPG` and `static/img/Robert_profile_1.JPG`.
 
 ## Evidence on Hand
 
